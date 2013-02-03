@@ -27,19 +27,21 @@
       RNDr. Tomáš Pitner, Ph.D.</fi:advisor>
     </author>
 
-    <fi:thanks
-    xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Díky</fi:thanks>
+    <fi:thanks xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Thanks to
+    everyone... TODO</fi:thanks>
 
     <pubdate>2013</pubdate>
 
     <abstract>
-      <para>Abstrakt, if any</para>
+      <para>Abstrakt, if any TODO</para>
     </abstract>
 
     <keywordset>
       <keyword>keyword 1</keyword>
 
       <keyword>keyword 2</keyword>
+
+      <keyword>TODO</keyword>
     </keywordset>
   </bookinfo>
 
@@ -48,130 +50,123 @@
   <chapter id="uvod">
     <title>Introduction</title>
 
-    <para>Miliony, miliardy, biliony. Tolik a ještě více je záznamů, které
-    každým dnem lidstvo vytváří pomocí nejrůznějších senzorů, čidel a měřicích
-    zařízení. Informace v nich obsažené jsou pro nás velmi důležité, je ovšem
-    problém s takovým množstvím dat rozumně nakládat. Často je také problém
-    dohledat a spojit informace různého druhu, zdánlivě spolu nesouvisející,
-    jejichž kombinace je ovšem v danou chvíli klíčová. Za účelem zpracovávání
-    velkého množství různorodých dat proto vznikl koncept nazývaný anglicky
-    Complex Event Processing<footnote>
-        <para>Místo názvu Complex Event Processing se často používá jen
-        zkratka CEP, v češtině vyslovována většinou jednoslabičně jako
-        <quote>cep</quote>.</para>
-      </footnote>, do češtiny obvykle překládán jako komplexní zpracování
-    událostí. Pomocí různých metod třídění, filtrování a agregace dat je možné
-    touto technikou důležité informace získat v kvalitní podobě a včas. Z
-    nepřeberného množství nízkoúrovňových událostí tak dostaneme několik
-    klíčových informací. Blíže jsou principy Complex Event Processingu popsány
-    v kapitole <xref linkend="chapter-cep" />.</para>
+    <para>Thesis introduction, motivation.</para>
 
-    <para>Existuje velké množství výkonných a pro programátora pohodlných
-    nástrojů na tvorbu uživatelských rozhraní, byla proto otázka, jakou
-    platformu nebo rámec pro vytvoření aplikace použít. Nakonec byla zvolena
-    platforma NetBeans, jednak díky své propracovanosti a připravenosti na
-    řešení úkolů spojených se správou softwarového projektu, jednak kvůli
-    možnému propojení s dalšími nástroji týkajícími se problematiky CEP, které
-    jsou na této platformě postaveny a současně s aplikací EsperLab vyvíjeny
-    na Fakultě informatiky Masarykovy univerzity. Jedná se o bakalářské práce
-    Rastislava Wágnera a Jakuba Niedermertla
-    <citation>niedermertlbp</citation><citation>wagnerbp</citation>. Kromě
-    spouštění aplikace EsperLab jako samostatného programu umožňuje platforma
-    NetBeans také integraci veškeré funkcionality přímo do vývojového
-    prostředí, takže uživatel může spravovat projekty CEP zároveň s jinými
-    programy, na kterých aktuálně pracuje, a přitom využívat veškeré
-    funkcionality, kterou vývojové prostředí NetBeans nabízí.</para>
+    <para>The thesis should embrace the topics of text chat in web browsers,
+    interprocess communication and the possibilities of multimedia content
+    transfer (audio/video) - including the current options of capturing
+    multimedia directly from the web browser.</para>
 
-    <para>Při vývoji aplikace byly použity standardní nástroje a postupy
-    nabízené platformou NetBeans, popsané v kapitole <xref
-    linkend="chapter-nb" />. Aplikace dodržuje modulární architekturu
-    <quote>rich client</quote> platformy (RCP) a rozdělení funkcionality do
-    logických celků. Sestává ze 3 hlavních modulů: EsperProject, Template a
-    Engine. Funkcionalita těchto modulů je dále popsána v kapitole <xref
-    linkend="chapter-esperlab" />. Každý modul je identifikován tzv.
-    manifestem, souborem čítajícím několik řádků základních informací.
-    Podrobnější údaje specifikujeme ve struktuře layer.xml, která abstrahuje
-    pomyslný souborový systém popisující vlastnosti modulu. Práci se zmíněnými
-    objekty usnadňuje vývojové prostředí NetBeans IDE. Umožňuje jejich
-    pohodlnou editaci přes dialogová okna, zajišťování závislostí na ostatních
-    modulech a správu verzí. Podobně pomáhá i při vytváření zdrojových kódů v
-    jazyce Java, které tvoří hlavní část celé aplikace.</para>
-
-    <para>V současné době je dokončena základní funkcionalita aplikace a tato
-    je nyní nasazena ve zkušebním provozu ve firmě MycroftMind. Pokud se
-    nevyskytnou větší potíže, budou komponenty tvořící aplikaci EsperLab spolu
-    s dalšími dvěma souvisejícími moduly vydány jako doplněk vývojového
-    prostředí. Stále zůstává otevřena možnost dalšího vylepšování a
-    obohacování o novou funkcionalitu z oblasti CEP. Pokud se aplikace
-    EsperLab osvědčí v praxi, mohla by být nasazena i při výuce principů CEP
-    na Fakultě informatiky Masarykovy univerzity.</para>
+    <para>Describe the need for browser chat application in Celebrio, also the
+    business cases.</para>
   </chapter>
 
   <chapter>
-    <title></title>
+    <title>XMPP Protocol</title>
 
-    <para></para>
+    <para>At first, this chapter should describe the important parts of XMPP
+    protocol (mostly just picking the appropriate references).</para>
+
+    <para>Later on, description of BOSH extension, including the advantages
+    and limitations. Describe also the connection to HTTP protocol.</para>
+
+    <para>Jingle extension - multimedia. Does this deserve complete
+    chapter???</para>
+
+    <para>Pub-sub extensions for interprocess communication.</para>
   </chapter>
 
   <chapter>
-    <title></title>
+    <title>Tools</title>
 
-    <para></para>
+    <para>Describe the tools that can be used to implement RTC in WB (and
+    which were used to implement Celebrio Talker)</para>
+
+    <para>JS + Ember.js</para>
+
+    <para>Strophe (simple XMPP in Javascript)</para>
+
+    <para>Strophe plugins</para>
+
+    <para>Possible server-side implementations (JAXL, XMPPHP, ...)</para>
+
+    <para>Google hangouts API</para>
+
+    <para>OpenTok</para>
+
+    <para>WebRTC (http://www.webrtc.org/)</para>
   </chapter>
 
   <chapter>
-    <title></title>
+    <title>Talker</title>
 
-    <para></para>
+    <para>Describe the Talker application in Celebrio.</para>
+
+    <para>Mention what we expected from the app (value proposition)</para>
+
+    <para>Then, application analysis, design and implmementation.</para>
   </chapter>
 
   <chapter>
-    <title></title>
+    <title>Inter-process Communication Framework</title>
 
-    <para></para>
+    <para>Implement and describe framework for IPC in Celebrio.</para>
+
+    <para>First, the lightweight one (which we already have), then implement
+    the "heavy" one, if there's enough time.</para>
   </chapter>
 
   <chapter>
     <title>Conclusion</title>
 
-    <para>závěr</para>
+    <para>conclusion</para>
 
     <sect1>
-      <title>další část závěru</title>
+      <title>Another part of the conclusion</title>
 
-      <para>další část závěru</para>
+      <para>Another part of the conclusion... just to have subchapter
+      here</para>
     </sect1>
   </chapter>
 
   <bibliography>
     <biblioentry>
-      <abbrev>event-proc-in-action</abbrev>
+      <abbrev>xmpp-the-definitive-guide</abbrev>
 
       <authorgroup>
         <author>
-          <firstname>Opher</firstname>
+          <firstname>Peter</firstname>
 
-          <surname>Etzion</surname>
+          <surname>Saint-Andre</surname>
         </author>
 
         <author>
-          <firstname>Peter</firstname>
+          <firstname>Kevin</firstname>
 
-          <surname>Niblett</surname>
+          <surname>Smith</surname>
+        </author>
+
+        <author>
+          <firstname>Remko</firstname>
+
+          <surname>Tronçon</surname>
         </author>
       </authorgroup>
 
-      <title>Event Processing in Action</title>
+      <title>XMPP: The Definitive Guide</title>
+
+      <subtitle>Building Real-Time Applications with Jabber
+      Technologies</subtitle>
 
       <publisher>
-        <publishername>Greenwich: Manning</publishername>
+        <publishername>Sebastopol: O'Reilly</publishername>
       </publisher>
 
-      <pubdate>2011</pubdate>
+      <pubdate>2009</pubdate>
 
-      <isbn>9781935182214</isbn>
+      <isbn>978-0-596-52126-4</isbn>
 
-      <pagenums>360</pagenums>
+      <pagenums>320</pagenums>
     </biblioentry>
   </bibliography>
 

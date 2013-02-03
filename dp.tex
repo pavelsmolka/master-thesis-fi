@@ -24,7 +24,7 @@
 \thesisadvisor{doc.
       RNDr. Tomá¹ Pitner, Ph.D.}
 % --------------------------------------------
-\label{idp275440}% --------------------------------------------
+\label{idp283328}% --------------------------------------------
 % Load graphicx package with pdf if needed 
 % --------------------------------------------
 \ifdblatexpdf
@@ -350,24 +350,24 @@
 % Thanks 
 % --------------------------------------------
 \begin{ThesisThanks}
-Díky\end{ThesisThanks}
+Thanks to everyone... TODO\end{ThesisThanks}
 
 % --------------------------------------------
 % Abstract 
 % --------------------------------------------
 \begin{ThesisAbstract}
 
-Abstrakt, if any
+Abstrakt, if any TODO
 \end{ThesisAbstract}
 
 % --------------------------------------------
 % KeyWords 
 % --------------------------------------------
 \begin{ThesisKeyWords}
-keyword 1, keyword 2\end{ThesisKeyWords}
+keyword 1, keyword 2, TODO\end{ThesisKeyWords}
 
 \makeatletter
-\def\dbtolatex@contentsid{idp4578832}
+\def\dbtolatex@contentsid{idp4586880}
 \def\dbtolatex@@contentsname{\latex@@contentsname}
 \let\latex@@contentsname\contentsname
 \newif\ifdocbooktolatexcontentsname\docbooktolatexcontentsnametrue
@@ -390,71 +390,101 @@ keyword 1, keyword 2\end{ThesisKeyWords}
 \chapter{Introduction}
 \label{uvod}\hypertarget{uvod}{}%
 
-Miliony, miliardy, biliony. Tolik a je¹tì více je záznamù, které ka¾dým dnem lidstvo vytváøí pomocí nejrùznìj¹ích senzorù, èidel a mìøicích zaøízení. Informace v~nich obsa¾ené jsou pro nás velmi dùle¾ité, je ov¹em problém s~takovým mno¾stvím dat rozumnì nakládat. Èasto je také problém dohledat a spojit informace rùzného druhu, zdánlivì spolu nesouvisející, jejich¾ kombinace je ov¹em v~danou chvíli klíèová. Za úèelem zpracovávání velkého mno¾ství rùznorodých dat proto vznikl koncept nazývaný anglicky Complex Event Processing\label{idp2362656}\begingroup\catcode`\#=12\footnote{
-Místo názvu Complex Event Processing se èasto pou¾ívá jen zkratka CEP, v~èe¹tinì vyslovována vìt¹inou jednoslabiènì jako {``}cep{''}.
-}\endgroup\docbooktolatexmakefootnoteref{idp2362656}, do èe¹tiny obvykle pøekládán jako komplexní zpracování událostí. Pomocí rùzných metod tøídìní, filtrování a agregace dat je mo¾né touto technikou dùle¾ité informace získat v~kvalitní podobì a vèas. Z~nepøeberného mno¾ství nízkoúrovòových událostí tak dostaneme nìkolik klíèových informací. Blí¾e jsou principy Complex Event Processingu popsány v~kapitole XrefId[??].
+Thesis introduction, motivation.
 
-Existuje velké mno¾ství výkonných a pro programátora pohodlných nástrojù na tvorbu u¾ivatelských rozhraní, byla proto otázka, jakou platformu nebo rámec pro vytvoøení aplikace pou¾ít. Nakonec byla zvolena platforma NetBeans, jednak díky své propracovanosti a pøipravenosti na øe¹ení úkolù spojených se správou softwarového projektu, jednak kvùli mo¾nému propojení s~dal¹ími nástroji týkajícími se problematiky CEP, které jsou na této platformì postaveny a souèasnì s~aplikací EsperLab vyvíjeny na Fakultì informatiky Masarykovy univerzity. Jedná se o~bakaláøské práce Rastislava Wágnera a Jakuba Niedermertla \docbooktolatexcite{niedermertlbp}{}\docbooktolatexcite{wagnerbp}{}. Kromì spou¹tìní aplikace EsperLab jako samostatného programu umo¾òuje platforma NetBeans také integraci ve¹keré funkcionality pøímo do vývojového prostøedí, tak¾e u¾ivatel mù¾e spravovat projekty CEP zároveò s~jinými programy, na kterých aktuálnì pracuje, a pøitom vyu¾ívat ve¹keré funkcionality, kterou vývojové prostøedí NetBeans nabízí.
+The thesis should embrace the topics of text chat in web browsers, interprocess communication and the possibilities of multimedia content transfer (audio/video) - including the current options of capturing multimedia directly from the web browser.
 
-Pøi vývoji aplikace byly pou¾ity standardní nástroje a postupy nabízené platformou NetBeans, popsané v~kapitole XrefId[??]. Aplikace dodr¾uje modulární architekturu {``}rich client{''} platformy (RCP) a rozdìlení funkcionality do logických celkù. Sestává ze 3 hlavních modulù: EsperProject, Template a Engine. Funkcionalita tìchto modulù je dále popsána v~kapitole XrefId[??]. Ka¾dý modul je identifikován tzv. manifestem, souborem èítajícím nìkolik øádkù základních informací. Podrobnìj¹í údaje specifikujeme ve struktuøe layer.xml, která abstrahuje pomyslný souborový systém popisující vlastnosti modulu. Práci se zmínìnými objekty usnadòuje vývojové prostøedí NetBeans IDE. Umo¾òuje jejich pohodlnou editaci pøes dialogová okna, zaji¹»ování závislostí na ostatních modulech a správu verzí. Podobnì pomáhá i pøi vytváøení zdrojových kódù v~jazyce Java, které tvoøí hlavní èást celé aplikace.
-
-V~souèasné dobì je dokonèena základní funkcionalita aplikace a tato je nyní nasazena ve zku¹ebním provozu ve firmì MycroftMind. Pokud se nevyskytnou vìt¹í potí¾e, budou komponenty tvoøící aplikaci EsperLab spolu s~dal¹ími dvìma souvisejícími moduly vydány jako doplnìk vývojového prostøedí. Stále zùstává otevøena mo¾nost dal¹ího vylep¹ování a obohacování o~novou funkcionalitu z~oblasti CEP. Pokud se aplikace EsperLab osvìdèí v~praxi, mohla by být nasazena i pøi výuce principù CEP na Fakultì informatiky Masarykovy univerzity.
+Describe the need for browser chat application in Celebrio, also the business cases.
 
 % -------------------------------------------------------------
-% Chapter chapter 
+% Chapter XMPP Protocol 
 % ------------------------------------------------------------- 	
-\chapter{chapter}
-\label{idp4436352}\hypertarget{idp4436352}{}%
+\chapter{XMPP Protocol}
+\label{idp4589104}\hypertarget{idp4589104}{}%
+
+At first, this chapter should describe the important parts of XMPP protocol (mostly just picking the appropriate references).
+
+Later on, description of BOSH extension, including the advantages and limitations. Describe also the connection to HTTP protocol.
+
+Jingle extension - multimedia. Does this deserve complete chapter???
+
+Pub-sub extensions for interprocess communication.
 
 % -------------------------------------------------------------
-% Chapter chapter 
+% Chapter Tools 
 % ------------------------------------------------------------- 	
-\chapter{chapter}
-\label{idp3122032}\hypertarget{idp3122032}{}%
+\chapter{Tools}
+\label{idp209632}\hypertarget{idp209632}{}%
+
+Describe the tools that can be used to implement RTC in WB (and which were used to implement Celebrio Talker)
+
+JS + Ember.js
+
+Strophe (simple XMPP in Javascript)
+
+Strophe plugins
+
+Possible server-side implementations (JAXL, XMPPHP, ...)
+
+Google hangouts API
+
+OpenTok
+
+WebRTC (http://www.webrtc.org/)
 
 % -------------------------------------------------------------
-% Chapter chapter 
+% Chapter Talker 
 % ------------------------------------------------------------- 	
-\chapter{chapter}
-\label{idp4060272}\hypertarget{idp4060272}{}%
+\chapter{Talker}
+\label{idp136976}\hypertarget{idp136976}{}%
+
+Describe the Talker application in Celebrio.
+
+Mention what we expected from the app (value proposition)
+
+Then, application analysis, design and implmementation.
 
 % -------------------------------------------------------------
-% Chapter chapter 
+% Chapter Inter-process Communication Framework 
 % ------------------------------------------------------------- 	
-\chapter{chapter}
-\label{idp4237104}\hypertarget{idp4237104}{}%
+\chapter{Inter-process Communication Framework}
+\label{idp138928}\hypertarget{idp138928}{}%
+
+Implement and describe framework for IPC in Celebrio.
+
+First, the lightweight one (which we already have), then implement the "heavy" one, if there's enough time.
 
 % -------------------------------------------------------------
 % Chapter Conclusion 
 % ------------------------------------------------------------- 	
 \chapter{Conclusion}
-\label{idp4361264}\hypertarget{idp4361264}{}%
+\label{idp140640}\hypertarget{idp140640}{}%
 
-závìr
+conclusion
 
 % ------------------------   
 % Section 
-\section{dal¹í èást závìru}
-\label{idp4624864}\hypertarget{idp4624864}{}%
+\section{Another part of the conclusion}
+\label{idp141728}\hypertarget{idp141728}{}%
 
-dal¹í èást závìru
+Another part of the conclusion... just to have subchapter here
 % ------------------------------------------- 
 %
 %  Bibliography - chapter
 %
 % ------------------------------------------- 
-\begin{thebibliography}{123}\hypertarget{idp2911488}{}
+\begin{thebibliography}{123}\hypertarget{idp143056}{}
 
 % ............. biblioentry 
-\bibitem{event-proc-in-action}\docbooktolatexbibaux{idp2692752}{event-proc-in-action}
-\hypertarget{idp2692752}
-Etzion, O. and Niblett, P.: \emph{Event Processing in Action}, Greenwich: Manning, 2011, 9781935182214, 360. 
+\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp143312}{xmpp-the-definitive-guide}
+\hypertarget{idp143312}
+Saint-Andre, P. and Smith, K. and Tronçon, R.: \emph{XMPP: The Definitive Guide}, Sebastopol: O'Reilly, 2009, 978-0-596-52126-4, 320. 
 
 \end{thebibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \setlength\saveparskip\parskip
 \setlength\saveparindent\parindent
-\begin{dbtolatexindex}{idp143216}{}
+\begin{dbtolatexindex}{idp151216}{}
 \setlength\tempparskip\parskip \setlength\tempparindent\parindent
 \parskip\saveparskip \parindent\saveparindent
 \noindent \indexspace
