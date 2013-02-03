@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<!--[
+<!ENTITY % fithesis SYSTEM "http://www.fi.muni.cz/~xpavlov/fithesis.mod">
+%fithesis;
+]>
+-->
+<book lang="en">
+  <bookinfo>
+    <title>Realtime communication between web browsers</title>
+
+    <subtitle>Master thesis</subtitle>
+
+    <author>
+      <firstname>Pavel</firstname>
+
+      <surname>Smolka</surname>
+
+      <fi:woman
+      xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">false</fi:woman>
+
+      <fi:faculty
+      xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">fi</fi:faculty>
+
+      <fi:advisor xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">doc.
+      RNDr. Tomáš Pitner, Ph.D.</fi:advisor>
+    </author>
+
+    <fi:thanks
+    xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Díky</fi:thanks>
+
+    <pubdate>2013</pubdate>
+
+    <abstract>
+      <para>Abstrakt, if any</para>
+    </abstract>
+
+    <keywordset>
+      <keyword>keyword 1</keyword>
+
+      <keyword>keyword 2</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <toc></toc>
+
+  <chapter id="uvod">
+    <title>Introduction</title>
+
+    <para>Miliony, miliardy, biliony. Tolik a ještě více je záznamů, které
+    každým dnem lidstvo vytváří pomocí nejrůznějších senzorů, čidel a měřicích
+    zařízení. Informace v nich obsažené jsou pro nás velmi důležité, je ovšem
+    problém s takovým množstvím dat rozumně nakládat. Často je také problém
+    dohledat a spojit informace různého druhu, zdánlivě spolu nesouvisející,
+    jejichž kombinace je ovšem v danou chvíli klíčová. Za účelem zpracovávání
+    velkého množství různorodých dat proto vznikl koncept nazývaný anglicky
+    Complex Event Processing<footnote>
+        <para>Místo názvu Complex Event Processing se často používá jen
+        zkratka CEP, v češtině vyslovována většinou jednoslabičně jako
+        <quote>cep</quote>.</para>
+      </footnote>, do češtiny obvykle překládán jako komplexní zpracování
+    událostí. Pomocí různých metod třídění, filtrování a agregace dat je možné
+    touto technikou důležité informace získat v kvalitní podobě a včas. Z
+    nepřeberného množství nízkoúrovňových událostí tak dostaneme několik
+    klíčových informací. Blíže jsou principy Complex Event Processingu popsány
+    v kapitole <xref linkend="chapter-cep" />.</para>
+
+    <para>Existuje velké množství výkonných a pro programátora pohodlných
+    nástrojů na tvorbu uživatelských rozhraní, byla proto otázka, jakou
+    platformu nebo rámec pro vytvoření aplikace použít. Nakonec byla zvolena
+    platforma NetBeans, jednak díky své propracovanosti a připravenosti na
+    řešení úkolů spojených se správou softwarového projektu, jednak kvůli
+    možnému propojení s dalšími nástroji týkajícími se problematiky CEP, které
+    jsou na této platformě postaveny a současně s aplikací EsperLab vyvíjeny
+    na Fakultě informatiky Masarykovy univerzity. Jedná se o bakalářské práce
+    Rastislava Wágnera a Jakuba Niedermertla
+    <citation>niedermertlbp</citation><citation>wagnerbp</citation>. Kromě
+    spouštění aplikace EsperLab jako samostatného programu umožňuje platforma
+    NetBeans také integraci veškeré funkcionality přímo do vývojového
+    prostředí, takže uživatel může spravovat projekty CEP zároveň s jinými
+    programy, na kterých aktuálně pracuje, a přitom využívat veškeré
+    funkcionality, kterou vývojové prostředí NetBeans nabízí.</para>
+
+    <para>Při vývoji aplikace byly použity standardní nástroje a postupy
+    nabízené platformou NetBeans, popsané v kapitole <xref
+    linkend="chapter-nb" />. Aplikace dodržuje modulární architekturu
+    <quote>rich client</quote> platformy (RCP) a rozdělení funkcionality do
+    logických celků. Sestává ze 3 hlavních modulů: EsperProject, Template a
+    Engine. Funkcionalita těchto modulů je dále popsána v kapitole <xref
+    linkend="chapter-esperlab" />. Každý modul je identifikován tzv.
+    manifestem, souborem čítajícím několik řádků základních informací.
+    Podrobnější údaje specifikujeme ve struktuře layer.xml, která abstrahuje
+    pomyslný souborový systém popisující vlastnosti modulu. Práci se zmíněnými
+    objekty usnadňuje vývojové prostředí NetBeans IDE. Umožňuje jejich
+    pohodlnou editaci přes dialogová okna, zajišťování závislostí na ostatních
+    modulech a správu verzí. Podobně pomáhá i při vytváření zdrojových kódů v
+    jazyce Java, které tvoří hlavní část celé aplikace.</para>
+
+    <para>V současné době je dokončena základní funkcionalita aplikace a tato
+    je nyní nasazena ve zkušebním provozu ve firmě MycroftMind. Pokud se
+    nevyskytnou větší potíže, budou komponenty tvořící aplikaci EsperLab spolu
+    s dalšími dvěma souvisejícími moduly vydány jako doplněk vývojového
+    prostředí. Stále zůstává otevřena možnost dalšího vylepšování a
+    obohacování o novou funkcionalitu z oblasti CEP. Pokud se aplikace
+    EsperLab osvědčí v praxi, mohla by být nasazena i při výuce principů CEP
+    na Fakultě informatiky Masarykovy univerzity.</para>
+  </chapter>
+
+  <chapter>
+    <title></title>
+
+    <para></para>
+  </chapter>
+
+  <chapter>
+    <title></title>
+
+    <para></para>
+  </chapter>
+
+  <chapter>
+    <title></title>
+
+    <para></para>
+  </chapter>
+
+  <chapter>
+    <title></title>
+
+    <para></para>
+  </chapter>
+
+  <chapter>
+    <title>Conclusion</title>
+
+    <para>závěr</para>
+
+    <sect1>
+      <title>další část závěru</title>
+
+      <para>další část závěru</para>
+    </sect1>
+  </chapter>
+
+  <bibliography>
+    <biblioentry>
+      <abbrev>event-proc-in-action</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Opher</firstname>
+
+          <surname>Etzion</surname>
+        </author>
+
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Niblett</surname>
+        </author>
+      </authorgroup>
+
+      <title>Event Processing in Action</title>
+
+      <publisher>
+        <publishername>Greenwich: Manning</publishername>
+      </publisher>
+
+      <pubdate>2011</pubdate>
+
+      <isbn>9781935182214</isbn>
+
+      <pagenums>360</pagenums>
+    </biblioentry>
+  </bibliography>
+
+  <index></index>
+
+  <appendix id="my-appendix">
+    <title>Appendix, if any...</title>
+
+    <para>appendix content</para>
+  </appendix>
+</book>
