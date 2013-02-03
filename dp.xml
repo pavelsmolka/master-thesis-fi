@@ -8,7 +8,7 @@
 -->
 <book lang="en">
   <bookinfo>
-    <title>Realtime communication between web browsers</title>
+    <title>Real-time Communication between Web Browsers</title>
 
     <subtitle>Master thesis</subtitle>
 
@@ -33,13 +33,19 @@
     <pubdate>2013</pubdate>
 
     <abstract>
-      <para>Abstrakt, if any TODO</para>
+      <para>TODO</para>
     </abstract>
 
     <keywordset>
-      <keyword>keyword 1</keyword>
+      <keyword>XMPP</keyword>
 
-      <keyword>keyword 2</keyword>
+      <keyword>real-time communication</keyword>
+
+      <keyword>RTC</keyword>
+
+      <keyword>Celebrio</keyword>
+
+      <keyword>web browser</keyword>
 
       <keyword>TODO</keyword>
     </keywordset>
@@ -62,7 +68,7 @@
   </chapter>
 
   <chapter>
-    <title>XMPP Protocol</title>
+    <title>Extensible Messaging and Presence Protocol</title>
 
     <para>At first, this chapter should describe the important parts of XMPP
     protocol (mostly just picking the appropriate references).</para>
@@ -73,28 +79,37 @@
     <para>Jingle extension - multimedia. Does this deserve complete
     chapter???</para>
 
-    <para>Pub-sub extensions for interprocess communication.</para>
+    <para>Pub-sub extensions for inter-process communication.</para>
   </chapter>
 
   <chapter>
-    <title>Tools</title>
+    <title>Other approaches to RTC</title>
+
+    <para>Describe other approaches to RTC in WB than XMPP. Tell why we didn't
+    use them (or that we used - OpenTok).</para>
+
+    <para>Mention:</para>
+
+    <para>WebSockets</para>
+
+    <para>OpenTok</para>
+
+    <para>WebRTC (http://www.webrtc.org/)</para>
+
+    <para>Google hangouts API</para>
+  </chapter>
+
+  <chapter>
+    <title>XMPP client in Javascript</title>
 
     <para>Describe the tools that can be used to implement RTC in WB (and
     which were used to implement Celebrio Talker)</para>
-
-    <para>JS + Ember.js</para>
 
     <para>Strophe (simple XMPP in Javascript)</para>
 
     <para>Strophe plugins</para>
 
     <para>Possible server-side implementations (JAXL, XMPPHP, ...)</para>
-
-    <para>Google hangouts API</para>
-
-    <para>OpenTok</para>
-
-    <para>WebRTC (http://www.webrtc.org/)</para>
   </chapter>
 
   <chapter>
@@ -105,12 +120,16 @@
     <para>Mention what we expected from the app (value proposition)</para>
 
     <para>Then, application analysis, design and implmementation.</para>
+
+    <para>Describe the architecture and used tools&amp;frameworks: JS +
+    Ember.js, OpenTok, WebSockets in new OpenTok</para>
   </chapter>
 
   <chapter>
     <title>Inter-process Communication Framework</title>
 
-    <para>Implement and describe framework for IPC in Celebrio.</para>
+    <para>Implement and describe framework for inter-process communication in
+    Celebrio.</para>
 
     <para>First, the lightweight one (which we already have), then implement
     the "heavy" one, if there's enough time.</para>
@@ -173,8 +192,8 @@
   <index></index>
 
   <appendix id="my-appendix">
-    <title>Appendix, if any...</title>
+    <title>Screenshots of the application</title>
 
-    <para>appendix content</para>
+    <para>Some screenshots from Celebrio Talker</para>
   </appendix>
 </book>
