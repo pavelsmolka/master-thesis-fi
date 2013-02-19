@@ -14,7 +14,7 @@
 % --------------------------------------------
 % Load fithesis param 
 % --------------------------------------------
-\thesistitle{Realtime Communication between Web Browsers}
+\thesistitle{Real-time Communication between Web Browsers}
 \thesissubtitle{Master thesis}
 \thesisstudent{Pavel Smolka}
 \thesiswoman{false}
@@ -24,7 +24,7 @@
 \thesisadvisor{doc.
       RNDr. Tomá¹ Pitner, Ph.D.}
 % --------------------------------------------
-\label{idp234304}% --------------------------------------------
+\label{idp228464}% --------------------------------------------
 % Load graphicx package with pdf if needed 
 % --------------------------------------------
 \ifdblatexpdf
@@ -326,7 +326,7 @@
 \newcommand{\docbooktolatexalignrr}{}
 \ifx\captionswapskip\@undefined\newcommand{\captionswapskip}{}\fi
 \makeatother
-\title{\bfseries Realtime Communication between Web Browsers\\[12pt]\normalsize Master thesis}
+\title{\bfseries Real-time Communication between Web Browsers\\[12pt]\normalsize Master thesis}
 \author{Pavel Smolka}
 % --------------------------------------------
 \makeglossary
@@ -364,10 +364,10 @@ TODO
 % KeyWords 
 % --------------------------------------------
 \begin{ThesisKeyWords}
-XMPP, real-time communication, TODO\end{ThesisKeyWords}
+XMPP, real-time communication, RTC, Celebrio, web browser, TODO\end{ThesisKeyWords}
 
 \makeatletter
-\def\dbtolatex@contentsid{idp4586928}
+\def\dbtolatex@contentsid{idp4582304}
 \def\dbtolatex@@contentsname{\latex@@contentsname}
 \let\latex@@contentsname\contentsname
 \newif\ifdocbooktolatexcontentsname\docbooktolatexcontentsnametrue
@@ -390,17 +390,25 @@ XMPP, real-time communication, TODO\end{ThesisKeyWords}
 \chapter{Introduction}
 \label{uvod}\hypertarget{uvod}{}%
 
-Thesis introduction, motivation.
+Millions, billions, trillions. That many and even more messages are exchanged every day between various people over the world. The Internet created brand new way to communicate and collaborate, even if you are located on the opposite parts of the world. Since the age of Alexander Graham Bell, the accesibility to the communication devices and their simplicity incredibly enhanced. Nowadays, almost 2.5 billion people over the world have access to the Internet and therefore they are able to use almost limitless communication possibilities it provides. \docbooktolatexcite{internet-usage}{}
 
-The thesis should embrace the topics of text chat in web browsers, interprocess communication and the possibilities of multimedia content transfer (audio/video) - including the current options of capturing multimedia directly from the web browser.
+However, the manner of Internet usage essentially changed during the first decade of 21st century. Using the Internet and using the web browser became almost synonyms. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it's not even possible to use the other internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp4608160}\begingroup\catcode`\#=12\footnote{
+Two examples of such behavior. Wi-fi network in the Student Agency coaches forces the user to visit the entry page in the web browser. The second example, very well known to the students of the Faculty of Informatics at Masaryk University, is the faculty wireless network called wlan\_fi. Every user has to open the web browser and log in with her credentials. It's not possible just to open the terminal or e-mail client and start working online.
+}\endgroup\docbooktolatexmakefootnoteref{idp4608160} Considering the mentioned fact, web browsers became also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there is the need of common rich applications running withing web browser - rich internet application. So popular social networks are built on top of the web browser platform and they are used by more than billion people over the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from the other people. By the beginning of the year 2013, I~would say that static web is dead - users prefer interactivity.
 
-Describe the need for browser chat application in Celebrio, also the business cases.
+This thesis embraces the topic of real-time application in web browsers, especially the text communication tools and the technologies being used to develop them. It also describes the problem of "inter-process" communication between various web pages which need to cooperate and exchange information as quickly as possible. Finally, the possibilities of multimedia content transfer (audio and video) and the current options of capturing multimedia directly from the web browser are described as well.
+
+As mentioned above, the web browser became one of the most popular platforms. Celebrio, simple software for the elderly simulating the operating system interface, is typical example of rich internet application. \docbooktolatexcite{celebrio-system}{} All the topics mentioned in the previous paragraph appeared to be very important in the system. When questioning the elderly people in the Czech Republic, it appeared that almost 90 \% of the elderly computer users use the real-time communication applications. \docbooktolatexcite{elderly-questionnaires}{} Interaction with their loved ones is the most desired benefit they expect from the computer. Therefore, creating real-time application, text messenger supporting video calling, became not only programming challenge but also a business goal.
+
+In the first chapter, there is .... TODO
+
+The programming part of the thesis comprises the implementation of real-time text chat application, video calling application and simple "inter-process" communication tool for Celebrio.
 
 % -------------------------------------------------------------
-% Chapter XMPP 
+% Chapter Extensible Messaging and Presence Protocol 
 % ------------------------------------------------------------- 	
-\chapter{XMPP}
-\label{idp2123072}\hypertarget{idp2123072}{}%
+\chapter{Extensible Messaging and Presence Protocol}
+\label{idp2542592}\hypertarget{idp2542592}{}%
 
 At first, this chapter should describe the important parts of XMPP protocol (mostly just picking the appropriate references).
 
@@ -414,7 +422,7 @@ Pub-sub extensions for inter-process communication.
 % Chapter Other approaches to RTC 
 % ------------------------------------------------------------- 	
 \chapter{Other approaches to RTC}
-\label{idp4563152}\hypertarget{idp4563152}{}%
+\label{idp2294128}\hypertarget{idp2294128}{}%
 
 Describe other approaches to RTC in WB than XMPP. Tell why we didn't use them (or that we used - OpenTok).
 
@@ -432,7 +440,7 @@ Google hangouts API
 % Chapter XMPP client in Javascript 
 % ------------------------------------------------------------- 	
 \chapter{XMPP client in Javascript}
-\label{idp1821216}\hypertarget{idp1821216}{}%
+\label{idp2241680}\hypertarget{idp2241680}{}%
 
 Describe the tools that can be used to implement RTC in WB (and which were used to implement Celebrio Talker)
 
@@ -442,11 +450,19 @@ Strophe plugins
 
 Possible server-side implementations (JAXL, XMPPHP, ...)
 
+% ------------------------   
+% Section 
+\section{Ember.js}
+\label{idp2705104}\hypertarget{idp2705104}{}%
+
+\subsection{Section}
+\label{idp2753824}\hypertarget{idp2753824}{}%
+
 % -------------------------------------------------------------
 % Chapter Talker 
 % ------------------------------------------------------------- 	
 \chapter{Talker}
-\label{idp3323952}\hypertarget{idp3323952}{}%
+\label{idp3794336}\hypertarget{idp3794336}{}%
 
 Describe the Talker application in Celebrio.
 
@@ -460,7 +476,7 @@ Describe the architecture and used tools\&frameworks: JS + Ember.js, OpenTok, We
 % Chapter Inter-process Communication Framework 
 % ------------------------------------------------------------- 	
 \chapter{Inter-process Communication Framework}
-\label{idp4433968}\hypertarget{idp4433968}{}%
+\label{idp130288}\hypertarget{idp130288}{}%
 
 Implement and describe framework for inter-process communication in Celebrio.
 
@@ -470,14 +486,14 @@ First, the lightweight one (which we already have), then implement the "heavy" o
 % Chapter Conclusion 
 % ------------------------------------------------------------- 	
 \chapter{Conclusion}
-\label{idp4042112}\hypertarget{idp4042112}{}%
+\label{idp132096}\hypertarget{idp132096}{}%
 
 conclusion
 
 % ------------------------   
 % Section 
 \section{Another part of the conclusion}
-\label{idp4443296}\hypertarget{idp4443296}{}%
+\label{idp133184}\hypertarget{idp133184}{}%
 
 Another part of the conclusion... just to have subchapter here
 % ------------------------------------------- 
@@ -485,18 +501,44 @@ Another part of the conclusion... just to have subchapter here
 %  Bibliography - chapter
 %
 % ------------------------------------------- 
-\begin{thebibliography}{123}\hypertarget{idp3887968}{}
+\begin{thebibliography}{123}\hypertarget{idp134512}{}
 
 % ............. biblioentry 
-\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp3557680}{xmpp-the-definitive-guide}
-\hypertarget{idp3557680}
+\bibitem{celebrio-system}\docbooktolatexbibaux{idp155536}{celebrio-system}
+\hypertarget{idp155536}
+Donko, P. and Kunc, P. and Novák, M. and Smolka, P. and Volmut, J.: \emph{Celebrio System}, 2013 [retrieved 2/19/2013], from {\textless}\url{http://www.celebriosoftware.com/celebrio-system}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp5409680}{elderly-questionnaires}
+\hypertarget{idp5409680}
+Smolka, P. and Novák, M.: \emph{Elderly people and the computers}, 2/11/2013 [retrieved 2/19/2013], from {\textless}\url{http://infogr.am/Seniori-a-pocitace}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{facebook-usage}\docbooktolatexbibaux{idp146624}{facebook-usage}
+\hypertarget{idp146624}
+Olanoff, D.: \emph{Facebook Announces Monthly Active Users Were At 1.01 Billion As
+      Of September 30th}, TechCrunch, 10/23/2012 [retrieved 2/19/2013], from http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion X -as-of-september-30th/ {\textless}\url{http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{internet-usage}\docbooktolatexbibaux{idp142544}{internet-usage}
+\hypertarget{idp142544}
+Miniwatts Marketing Group: \emph{Internet Users in the World - 2012 Q2}, Internet World Stats, 2/17/2013 [retrieved 2/19/2013], from {\textless}\url{http://www.internetworldstats.com/stats.htm}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{ria}\docbooktolatexbibaux{idp151536}{ria}
+\hypertarget{idp151536}
+Ward, J.: \emph{What is a Rich Internet Application?}, 10/17/2007 [retrieved 2/19/2013], from {\textless}\url{http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp134768}{xmpp-the-definitive-guide}
+\hypertarget{idp134768}
 Saint-Andre, P. and Smith, K. and Tronçon, R.: \emph{XMPP: The Definitive Guide}, Sebastopol: O'Reilly, 2009, 978-0-596-52126-4, 320. 
 
 \end{thebibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \setlength\saveparskip\parskip
 \setlength\saveparindent\parindent
-\begin{dbtolatexindex}{idp135008}{}
+\begin{dbtolatexindex}{idp5414912}{}
 \setlength\tempparskip\parskip \setlength\tempparindent\parindent
 \parskip\saveparskip \parindent\saveparindent
 \noindent \indexspace

@@ -56,15 +56,69 @@
   <chapter id="uvod">
     <title>Introduction</title>
 
-    <para>Thesis introduction, motivation.</para>
+    <para>Millions, billions, trillions. That many and even more messages are
+    exchanged every day between various people over the world. The Internet
+    created brand new way to communicate and collaborate, even if you are
+    located on the opposite parts of the world. Since the age of Alexander
+    Graham Bell, the accesibility to the communication devices and their
+    simplicity incredibly enhanced. Nowadays, almost 2.5 billion people over
+    the world have access to the Internet and therefore they are able to use
+    almost limitless communication possibilities it provides.
+    <citation>internet-usage</citation></para>
 
-    <para>The thesis should embrace the topics of text chat in web browsers,
-    interprocess communication and the possibilities of multimedia content
-    transfer (audio/video) - including the current options of capturing
-    multimedia directly from the web browser.</para>
+    <para>However, the manner of Internet usage essentially changed during the
+    first decade of 21st century. Using the Internet and using the web browser
+    became almost synonyms. People use the web browser as the primary platform
+    to do every single task on the Internet. Sometimes it's not even possible
+    to use the other internet services without visiting certain web page in
+    the web browser and performing the authentication there.<footnote>
+        <para>Two examples of such behavior. Wi-fi network in the Student
+        Agency coaches forces the user to visit the entry page in the web
+        browser. The second example, very well known to the students of the
+        Faculty of Informatics at Masaryk University, is the faculty wireless
+        network called wlan_fi. Every user has to open the web browser and log
+        in with her credentials. It's not possible just to open the terminal
+        or e-mail client and start working online.</para>
+      </footnote> Considering the mentioned fact, web browsers became also the
+    basic platform for the communication tools. Even though the purpose of the
+    world wide web and HTTP protocol was completely different at first
+    (displaying single documents connected via hypertext links), it appeared
+    that there is the need of common rich applications running withing web
+    browser - rich internet application. So popular social networks are built
+    on top of the web browser platform and they are used by more than billion
+    people over the world. <citation>facebook-usage</citation> And the main
+    reason why the social networks are so popular is the real-time stream of
+    news and messages from the other people. By the beginning of the year
+    2013, I would say that static web is dead - users prefer
+    interactivity.</para>
 
-    <para>Describe the need for browser chat application in Celebrio, also the
-    business cases.</para>
+    <para>This thesis embraces the topic of real-time application in web
+    browsers, especially the text communication tools and the technologies
+    being used to develop them. It also describes the problem of
+    "inter-process" communication between various web pages which need to
+    cooperate and exchange information as quickly as possible. Finally, the
+    possibilities of multimedia content transfer (audio and video) and the
+    current options of capturing multimedia directly from the web browser are
+    described as well.</para>
+
+    <para>As mentioned above, the web browser became one of the most popular
+    platforms. Celebrio, simple software for the elderly simulating the
+    operating system interface, is typical example of rich internet
+    application. <citation>celebrio-system</citation> All the topics mentioned
+    in the previous paragraph appeared to be very important in the system.
+    When questioning the elderly people in the Czech Republic, it appeared
+    that almost 90 % of the elderly computer users use the real-time
+    communication applications. <citation>elderly-questionnaires</citation>
+    Interaction with their loved ones is the most desired benefit they expect
+    from the computer. Therefore, creating real-time application, text
+    messenger supporting video calling, became not only programming challenge
+    but also a business goal.</para>
+
+    <para>In the first chapter, there is .... TODO</para>
+
+    <para>The programming part of the thesis comprises the implementation of
+    real-time text chat application, video calling application and simple
+    "inter-process" communication tool for Celebrio.</para>
   </chapter>
 
   <chapter>
@@ -102,6 +156,8 @@
   <chapter>
     <title>XMPP client in Javascript</title>
 
+    <para></para>
+
     <para>Describe the tools that can be used to implement RTC in WB (and
     which were used to implement Celebrio Talker)</para>
 
@@ -110,6 +166,20 @@
     <para>Strophe plugins</para>
 
     <para>Possible server-side implementations (JAXL, XMPPHP, ...)</para>
+
+    <para></para>
+
+    <sect1>
+      <title>Ember.js</title>
+
+      <para></para>
+
+      <sect2>
+        <title></title>
+
+        <para></para>
+      </sect2>
+    </sect1>
   </chapter>
 
   <chapter>
@@ -186,6 +256,132 @@
       <isbn>978-0-596-52126-4</isbn>
 
       <pagenums>320</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>internet-usage</abbrev>
+
+      <author>
+        <surname>Miniwatts Marketing Group</surname>
+      </author>
+
+      <title>Internet Users in the World - 2012 Q2</title>
+
+      <publisher>
+        <publishername>Internet World Stats</publishername>
+      </publisher>
+
+      <pubdate>2/17/2013 [retrieved 2/19/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.internetworldstats.com/stats.htm">http://www.internetworldstats.com/stats.htm</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>facebook-usage</abbrev>
+
+      <author>
+        <firstname>Drew</firstname>
+
+        <surname>Olanoff</surname>
+      </author>
+
+      <title>Facebook Announces Monthly Active Users Were At 1.01 Billion As
+      Of September 30th</title>
+
+      <publisher>
+        <publishername>TechCrunch</publishername>
+      </publisher>
+
+      <pubdate>10/23/2012 [retrieved 2/19/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/">http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ria</abbrev>
+
+      <author>
+        <firstname>James</firstname>
+
+        <surname>Ward</surname>
+      </author>
+
+      <title>What is a Rich Internet Application?</title>
+
+      <pubdate>10/17/2007 [retrieved 2/19/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/">http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>celebrio-system</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Pavol</firstname>
+
+          <surname>Donko</surname>
+        </author>
+
+        <author>
+          <firstname>Petr</firstname>
+
+          <surname>Kunc</surname>
+        </author>
+
+        <author>
+          <firstname>Martin</firstname>
+
+          <surname>Novák</surname>
+        </author>
+
+        <author>
+          <firstname>Pavel</firstname>
+
+          <surname>Smolka</surname>
+        </author>
+
+        <author>
+          <firstname>Jan</firstname>
+
+          <surname>Volmut</surname>
+        </author>
+      </authorgroup>
+
+      <title>Celebrio System</title>
+
+      <pubdate>2013 [retrieved 2/19/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.celebriosoftware.com/celebrio-system">http://www.celebriosoftware.com/celebrio-system</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>elderly-questionnaires</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Pavel</firstname>
+
+          <surname>Smolka</surname>
+        </author>
+
+        <author>
+          <firstname>Martin</firstname>
+
+          <surname>Novák</surname>
+        </author>
+      </authorgroup>
+
+      <title>Elderly people and the computers</title>
+
+      <pubdate>2/11/2013 [retrieved 2/19/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://infogr.am/Seniori-a-pocitace">http://infogr.am/Seniori-a-pocitace</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
