@@ -95,11 +95,11 @@
     <para>This thesis embraces the topic of real-time application in web
     browsers, especially the text communication tools and the technologies
     being used to develop them. It also describes the problem of
-    "inter-process" communication between various web pages which need to
-    cooperate and exchange information as quickly as possible. Finally, the
-    possibilities of multimedia content transfer (audio and video) and the
-    current options of capturing multimedia directly from the web browser are
-    described as well.</para>
+    <quote>inter-process</quote> communication between various web pages which
+    need to cooperate and exchange information as quickly as possible.
+    Finally, the possibilities of multimedia content transfer (audio and
+    video) and the current options of capturing multimedia directly from the
+    web browser are described as well.</para>
 
     <para>As mentioned above, the web browser became one of the most popular
     platforms. Celebrio, simple software for the elderly simulating the
@@ -108,35 +108,130 @@
     in the previous paragraph appeared to be very important in the system.
     When questioning the elderly people in the Czech Republic, it appeared
     that almost 90 % of the elderly computer users use the real-time
-    communication applications. <citation>elderly-questionnaires</citation>
-    Interaction with their loved ones is the most desired benefit they expect
-    from the computer. Therefore, creating real-time application, text
-    messenger supporting video calling, became not only programming challenge
-    but also a business goal.</para>
+    communication (RTC) applications.
+    <citation>elderly-questionnaires</citation> Interaction with their loved
+    ones is the most desired benefit they expect from the computer. Therefore,
+    creating real-time application, text messenger supporting video calling,
+    became not only programming challenge but also a business goal.</para>
 
-    <para>In the first chapter, there is .... TODO</para>
+    <para>Considering the fact the people like real-time communication while
+    using web browser brings us the question what the currently available
+    solutions are. There are <quote>big players</quote> providing their own
+    services as closed-source, without the possibility to use them. To name
+    the most important, it's Google Talk web browser client and Facebook chat,
+    using XMPP protocol.<citation>gtalk</citation><citation>fb-chat</citation>
+    Even though Facebook chat service is not pure XMPP server implementation,
+    they provide the possibility to connect to the <quote>world of Facebook
+    Chat</quote> via XMPP as proxy. Combination of the facts that XMPP is open
+    technology with open-sourced client and server implementations
+    <citation>xmpp-history</citation> and the big internet companies also use
+    it persuaded us to use it in our communication application too. XMPP
+    itself and its usage in web applications is described in <xref
+    linkend="chap-xmpp" />. Other approaches to RTC are covered in <xref
+    linkend="chap-rtc" />.</para>
+
+    <para>There are many existing real-time chat-based applications over the
+    Internet we could have used. However, none of them suited our needs
+    perfectly. Celebrio has very specific graphical user interface (GUI) and
+    there is a need to integrate both text-based chat and video calling. Just
+    to mention, there is commercial chat module Cometchat or even open project
+    Jappix. <citation></citation><citation></citation> Video calling web
+    browser applications are provided for example by TokBox Inc.
+    <citation></citation> Nevertheless, following the rule that <quote>If you
+    have to customize 1/5 of a reusable component, its likely better to write
+    it from scratch</quote>, <citation></citation> only existing libraries
+    (Strophe.js) and APIs (OpenTok) were used for building brand new
+    application. The general approaches when building web browser based chat
+    application are mentioned in <xref linkend="chap-xmpp-in-javascript" />.
+    The Celebrio Talker application itself, its architecture and the specific
+    procedures used to create it are described in <xref
+    linkend="chap-talker" />. TODO: mention skype - we couldnt use it directly
+    from web app.</para>
+
+    <para>Finally, there are several notes about <quote>inter-process
+    communication</quote> between different applications running separately in
+    various browser frames, tabs or even windows. <xref
+    linkend="chap-inter-process" /> covers this topic and describes the issues
+    we came accross when implementing such functionality for Celebrio, where
+    every application runs in separate iframe.</para>
 
     <para>The programming part of the thesis comprises the implementation of
     real-time text chat application, video calling application and simple
-    "inter-process" communication tool for Celebrio.</para>
+    <quote>inter-process</quote> communication tool for Celebrio.</para>
   </chapter>
 
-  <chapter>
+  <chapter id="chap-xmpp">
     <title>Extensible Messaging and Presence Protocol</title>
 
     <para>At first, this chapter should describe the important parts of XMPP
     protocol (mostly just picking the appropriate references).</para>
 
-    <para>Later on, description of BOSH extension, including the advantages
-    and limitations. Describe also the connection to HTTP protocol.</para>
+    <para>Extensible Messaging and Presence Protocol (XMPP) technologies were
+    invented by Jeremie Miller in 1998.
+    <citation>xmpp-the-definitive-guide</citation> It is one of the most
+    widespread technologies for instant messaging (IM),<footnote>
+        <para>Acutally, the IM client or even the techology itself is
+        sometimes called <quote>Instant Messenger</quote>. This term is
+        registered as a trademark by AOL company.
+        <citation>aol-trademarks</citation></para>
+      </footnote> i.e. exchanging the text or multimedia data between several
+    endpoints. The very essence of every instant messaging is bidirectional
+    stream where so that both sides can immediately <emphasis>push</emphasis>
+    new data and the other side (or other sides, respectively) is promptly
+    notified without the need to perform any manual <emphasis>pull</emphasis>
+    (update) action. The best transport protocol for such use case is
+    Transmission Controll Protocol (TCP) and the <quote>native</quote>
+    implementation of XMPP works right on top of TCP protocol: XMPP endpoint
+    (called client as it represents the first actor in client-server
+    architecture) opens long-lived TCP connection. Then, both the client and
+    the server negotiate and open XML streams so there is one stream in each
+    direction. <citation>xmpp-the-definitive-guide</citation> </para>
 
-    <para>Jingle extension - multimedia. Does this deserve complete
-    chapter???</para>
+    <para>When the connection is established, both client and server can push
+    any changes as XML elements to the stream and the other side obtains them
+    immediately. However, such implementation is unavailable when implementing
+    web application, unless HTML5 technology called
+    <emphasis>WebSockets</emphasis> is used. That is the reason why the
+    bidirectional stream emulation is frequently used in many rich internet
+    applications in order to assure interactivity and freshness of the data.
+    Such emulation is called BOSH and it is described closely in <xref
+    linkend="chap-bosh" />.</para>
 
-    <para>Pub-sub extensions for inter-process communication.</para>
+    <sect1>
+      <title>Fundamental bulding blocks in XMPP</title>
+
+      <para>Mention the terms as stanza, roster, describe the subscription
+      mechanism.</para>
+    </sect1>
+
+    <sect1 id="chap-bosh">
+      <title>XMPP and Bidirectional-streams Over Synchronous HTTP</title>
+
+      <para>Describe BOSH (http://xmpp.org/extensions/xep-0124.html) and XMPP
+      Over BOSH (http://xmpp.org/extensions/xep-0206.html). </para>
+
+      <para>Later on, description of BOSH extension, including the advantages
+      and limitations. Describe also the connection to HTTP protocol.</para>
+    </sect1>
+
+    <sect1>
+      <title>Jingle</title>
+
+      <para>Jingle extension - multimedia.</para>
+
+      <para>http://xmpp.org/extensions/xep-0166.html</para>
+    </sect1>
+
+    <sect1>
+      <title>Inter-process communication</title>
+
+      <para>Pub-sub extensions for inter-process communication.</para>
+
+      <para>http://xmpp.org/extensions/xep-0060.html</para>
+    </sect1>
   </chapter>
 
-  <chapter>
+  <chapter id="chap-rtc">
     <title>Other approaches to RTC</title>
 
     <para>Describe other approaches to RTC in WB than XMPP. Tell why we didn't
@@ -153,36 +248,23 @@
     <para>Google hangouts API</para>
   </chapter>
 
-  <chapter>
+  <chapter id="chap-xmpp-in-javascript">
     <title>XMPP client in Javascript</title>
-
-    <para></para>
 
     <para>Describe the tools that can be used to implement RTC in WB (and
     which were used to implement Celebrio Talker)</para>
 
     <para>Strophe (simple XMPP in Javascript)</para>
 
+    <para>Strophe connecting/attaching - security issues. TODO
+    programming</para>
+
     <para>Strophe plugins</para>
 
     <para>Possible server-side implementations (JAXL, XMPPHP, ...)</para>
-
-    <para></para>
-
-    <sect1>
-      <title>Ember.js</title>
-
-      <para></para>
-
-      <sect2>
-        <title></title>
-
-        <para></para>
-      </sect2>
-    </sect1>
   </chapter>
 
-  <chapter>
+  <chapter id="chap-talker">
     <title>Talker</title>
 
     <para>Describe the Talker application in Celebrio.</para>
@@ -193,9 +275,25 @@
 
     <para>Describe the architecture and used tools&amp;frameworks: JS +
     Ember.js, OpenTok, WebSockets in new OpenTok</para>
+
+    <para>Don't forget to use UML: use case diagram, class diagram (if any),
+    sequence/action diagram</para>
+
+    <sect1>
+      <title>Ember.js</title>
+
+      <para>Describe Javascript client-side MVC frameworks overall, compare,
+      tell why we used Ember</para>
+
+      <sect2>
+        <title>Subsection about Ember...</title>
+
+        <para></para>
+      </sect2>
+    </sect1>
   </chapter>
 
-  <chapter>
+  <chapter id="chap-inter-process">
     <title>Inter-process Communication Framework</title>
 
     <para>Implement and describe framework for inter-process communication in
@@ -255,7 +353,7 @@
 
       <isbn>978-0-596-52126-4</isbn>
 
-      <pagenums>320</pagenums>
+      <pagenums>310 (7, 16, ...)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -382,6 +480,74 @@
 
       <releaseinfo>from <ulink
       url="http://infogr.am/Seniori-a-pocitace">http://infogr.am/Seniori-a-pocitace</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>aol-trademarks</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>AOL Inc.</surname>
+        </author>
+      </authorgroup>
+
+      <title>AOL Trademark List</title>
+
+      <pubdate>3/15/2011 [retrieved 2/20/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://legal.aol.com/trademarks/">http://legal.aol.com/trademarks/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xmpp-history</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>The XMPP Standards Foundation</surname>
+        </author>
+      </authorgroup>
+
+      <title>History of XMPP</title>
+
+      <pubdate>1/27/2010 [retrieved 2/20/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://legal.aol.com/trademarks/">http://xmpp.org/about-xmpp/history/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>gtalk</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>Google Developers</surname>
+        </author>
+      </authorgroup>
+
+      <title>Google Talk Developer Documentation </title>
+
+      <pubdate>3/23/2012 [retrieved 2/20/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://developers.google.com/talk/talk_developers_home">https://developers.google.com/talk/talk_developers_home</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>fb-chat</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>Facebook Developers</surname>
+        </author>
+      </authorgroup>
+
+      <title>Facebook Chat API</title>
+
+      <pubdate>2/12/2013 [retrieved 2/20/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://legal.aol.com/trademarks/">http://xmpp.org/about-xmpp/history/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
