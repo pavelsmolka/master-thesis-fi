@@ -28,7 +28,8 @@
     </author>
 
     <fi:thanks xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Thanks to
-    everyone... TODO</fi:thanks>
+    everyone... TODO: Petr Kunc (help with OpenTok &amp; RealTime
+    communication,</fi:thanks>
 
     <pubdate>2013</pubdate>
 
@@ -59,7 +60,7 @@
     <para>Millions, billions, trillions. That many and even more messages are
     exchanged every day between various people over the world. The Internet
     created brand new way to communicate and collaborate, even if you are
-    located on the opposite parts of the world. Since the age of Alexander
+    located on the opposite parts of the world. Since the times of Alexander
     Graham Bell, the accesibility to the communication devices and their
     simplicity incredibly enhanced. Nowadays, almost 2.5 billion people over
     the world have access to the Internet and therefore they are able to use
@@ -108,7 +109,7 @@
     in the previous paragraph appeared to be very important in the system.
     When questioning the elderly people in the Czech Republic, it appeared
     that almost 90 % of the elderly computer users use the real-time
-    communication (RTC) applications.
+    communication (RTC) applications, mostly Skype.
     <citation>elderly-questionnaires</citation> Interaction with their loved
     ones is the most desired benefit they expect from the computer. Therefore,
     creating real-time application, text messenger supporting video calling,
@@ -119,10 +120,13 @@
     solutions are. There are <quote>big players</quote> providing their own
     services as closed-source, without the possibility to use them. To name
     the most important, it's Google Talk web browser client and Facebook chat,
-    using XMPP protocol.<citation>gtalk</citation><citation>fb-chat</citation>
-    Even though Facebook chat service is not pure XMPP server implementation,
-    they provide the possibility to connect to the <quote>world of Facebook
-    Chat</quote> via XMPP as proxy. Combination of the facts that XMPP is open
+    using XMPP protocol.
+    <citation>gtalk</citation><citation>fb-chat</citation> Even though
+    Facebook chat service is not pure XMPP server implementation (the message
+    and presence engine is proprietary system of Facebook implemented mostly
+    in C++ and Erlang), they provide the possibility to connect to the
+    <quote>world of Facebook Chat</quote> via XMPP as proxy.
+    <citation>fb-erlang</citation> Combination of the facts that XMPP is open
     technology with open-sourced client and server implementations
     <citation>xmpp-history</citation> and the big internet companies also use
     it persuaded us to use it in our communication application too. XMPP
@@ -134,19 +138,38 @@
     Internet we could have used. However, none of them suited our needs
     perfectly. Celebrio has very specific graphical user interface (GUI) and
     there is a need to integrate both text-based chat and video calling. Just
-    to mention, there is commercial chat module Cometchat or even open project
-    Jappix. <citation></citation><citation></citation> Video calling web
-    browser applications are provided for example by TokBox Inc.
-    <citation></citation> Nevertheless, following the rule that <quote>If you
-    have to customize 1/5 of a reusable component, its likely better to write
-    it from scratch</quote>, <citation></citation> only existing libraries
-    (Strophe.js) and APIs (OpenTok) were used for building brand new
-    application. The general approaches when building web browser based chat
-    application are mentioned in <xref linkend="chap-xmpp-in-javascript" />.
-    The Celebrio Talker application itself, its architecture and the specific
-    procedures used to create it are described in <xref
-    linkend="chap-talker" />. TODO: mention skype - we couldnt use it directly
-    from web app.</para>
+    to mention, there is commercial chat module Cometchat<footnote>
+        <para>http://www.cometchat.com/</para>
+      </footnote> or even open project Jappix.<footnote>
+        <para>https://project.jappix.com/</para>
+      </footnote> Video calling web browser applications are provided for
+    example by TokBox Inc.<footnote>
+        <para>http://www.tokbox.com/</para>
+      </footnote> Nevertheless, following the rule that <quote>If you have to
+    customize 1/5 of a reusable component, its likely better to write it from
+    scratch</quote>, <citation>brian-stats-tweet</citation> just very generic
+    existing libraries (Strophe.js) and APIs (OpenTok) were used for
+    implementing brand new application called <emphasis>Celebrio
+    Talker</emphasis>. The general approaches when building web browser based
+    chat application are mentioned in <xref
+    linkend="chap-xmpp-in-javascript" />. Within the programming part of the
+    thesis, the real-time text chat application, video calling application and
+    simple <quote>inter-process</quote> communication tool for Celebrio has
+    been implemented. Celebrio Talker application itself, its architecture and
+    the specific procedures used to create it are described in <xref
+    linkend="chap-talker" />. </para>
+
+    <para>It has been said that Skype<footnote>
+        <para>http://www.skype.com/</para>
+      </footnote> is the most favorite communication tool among the target
+    audience. If it had been implemented, the existing customer base could be
+    used and converted to our messaging application. However, there is one big
+    pitfall in this approach. Skype license strictly prohibits incorporating
+    their software into mobile devices. <citation>skype-license</citation>
+    They support only prompting the official Skype client to be opened via
+    Skype URI, which is insufficient for Celebrio since the messaging client
+    has to be built in the system, with the corresponding user
+    interface.</para>
 
     <para>Finally, there are several notes about <quote>inter-process
     communication</quote> between different applications running separately in
@@ -154,17 +177,10 @@
     linkend="chap-inter-process" /> covers this topic and describes the issues
     we came accross when implementing such functionality for Celebrio, where
     every application runs in separate iframe.</para>
-
-    <para>The programming part of the thesis comprises the implementation of
-    real-time text chat application, video calling application and simple
-    <quote>inter-process</quote> communication tool for Celebrio.</para>
   </chapter>
 
   <chapter id="chap-xmpp">
     <title>Extensible Messaging and Presence Protocol</title>
-
-    <para>At first, this chapter should describe the important parts of XMPP
-    protocol (mostly just picking the appropriate references).</para>
 
     <para>Extensible Messaging and Presence Protocol (XMPP) technologies were
     invented by Jeremie Miller in 1998.
@@ -185,17 +201,20 @@
     (called client as it represents the first actor in client-server
     architecture) opens long-lived TCP connection. Then, both the client and
     the server negotiate and open XML streams so there is one stream in each
-    direction. <citation>xmpp-the-definitive-guide</citation> </para>
+    direction. <citation>xmpp-the-definitive-guide</citation> When the
+    connection is established, both client and server can push any changes as
+    XML elements to the stream and the other side obtains them immediately.
+    </para>
 
-    <para>When the connection is established, both client and server can push
-    any changes as XML elements to the stream and the other side obtains them
-    immediately. However, such implementation is unavailable when implementing
-    web application, unless HTML5 technology called
-    <emphasis>WebSockets</emphasis> is used. That is the reason why the
-    bidirectional stream emulation is frequently used in many rich internet
-    applications in order to assure interactivity and freshness of the data.
-    Such emulation is called BOSH and it is described closely in <xref
-    linkend="chap-bosh" />.</para>
+    <para>Nevertheless, the implementation described in the previous paragraph
+    is unavailable when creating common web application. That is the reason
+    why the bidirectional stream emulation is frequently used in many rich
+    internet applications in order to assure interactivity and freshness of
+    the data. Such emulation is called BOSH and it is described closely in
+    <xref linkend="chap-bosh" />. The other approach utilizes HTML5 technology
+    called <emphasis>WebSockets</emphasis> and the common XMPP servers support
+    it via various plugins. This approach is covered in <xref
+    linkend="chap-ws" />. </para>
 
     <sect1>
       <title>Fundamental bulding blocks in XMPP</title>
@@ -205,13 +224,26 @@
     </sect1>
 
     <sect1 id="chap-bosh">
-      <title>XMPP and Bidirectional-streams Over Synchronous HTTP</title>
+      <title>Bidirectional-streams Over Synchronous HTTP</title>
 
-      <para>Describe BOSH (http://xmpp.org/extensions/xep-0124.html) and XMPP
-      Over BOSH (http://xmpp.org/extensions/xep-0206.html). </para>
+      <para>Describe BOSH (http://xmpp.org/extensions/xep-0124.html)</para>
+
+      <para>and XMPP Over BOSH
+      (http://xmpp.org/extensions/xep-0206.html).</para>
 
       <para>Later on, description of BOSH extension, including the advantages
       and limitations. Describe also the connection to HTTP protocol.</para>
+    </sect1>
+
+    <sect1 id="chap-ws">
+      <title>XMPP over WebSockets</title>
+
+      <para>luajit - lua jit compiler</para>
+
+      <para>It was neccessary to install: apt balíky luajit +
+      liblua5.1-bitop0</para>
+
+      <para></para>
     </sect1>
 
     <sect1>
@@ -239,9 +271,9 @@
 
     <para>Mention:</para>
 
-    <para>WebSockets</para>
-
     <para>OpenTok</para>
+
+    <para>SignalR (.NET)</para>
 
     <para>WebRTC (http://www.webrtc.org/)</para>
 
@@ -525,7 +557,7 @@
         </author>
       </authorgroup>
 
-      <title>Google Talk Developer Documentation </title>
+      <title>Google Talk Developer Documentation</title>
 
       <pubdate>3/23/2012 [retrieved 2/20/2013]</pubdate>
 
@@ -548,6 +580,60 @@
 
       <releaseinfo>from <ulink
       url="http://legal.aol.com/trademarks/">http://xmpp.org/about-xmpp/history/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>brian-stats-tweet</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>Staatss, B. (Brianstaats)</surname>
+        </author>
+      </authorgroup>
+
+      <title><quote>If you have to customize 1/5 of a reusable component, its
+      likely better to write it from scratch @trek at
+      #embercamp</quote></title>
+
+      <pubdate>2/15/2013 [retrieved 2/23/2013]</pubdate>
+
+      <releaseinfo>Tweet</releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>fb-erlang</abbrev>
+
+      <author>
+        <firstname>Eugene</firstname>
+
+        <surname>Letuchy</surname>
+      </author>
+
+      <title>Facebook Chat</title>
+
+      <pubdate>5/14/2008 [retrieved 2/23/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://www.facebook.com/note.php?note_id=14218138919">https://www.facebook.com/note.php?note_id=14218138919</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>skype-license</abbrev>
+
+      <author>
+        <firstname>Allen</firstname>
+
+        <surname>Smith</surname>
+      </author>
+
+      <title>Does SkypeKit work on Android?</title>
+
+      <subtitle>Forum post</subtitle>
+
+      <pubdate>8/7/2012 [retrieved 2/23/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://devforum.skype.com/t5/SkypeKit-FAQs/Does-SkypeKit-work-on-Android/m-p/16490/thread-id/78">http://devforum.skype.com/t5/SkypeKit-FAQs/Does-SkypeKit-work-on-Android/m-p/16490/thread-id/78</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
