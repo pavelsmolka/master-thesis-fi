@@ -24,7 +24,7 @@
 \thesisadvisor{doc.
       RNDr. Tomá¹ Pitner, Ph.D.}
 % --------------------------------------------
-\label{idp227136}% --------------------------------------------
+\label{idp236000}% --------------------------------------------
 % Load graphicx package with pdf if needed 
 % --------------------------------------------
 \ifdblatexpdf
@@ -367,7 +367,7 @@ TODO
 XMPP, real-time communication, RTC, Celebrio, web browser, TODO\end{ThesisKeyWords}
 
 \makeatletter
-\def\dbtolatex@contentsid{idp4579328}
+\def\dbtolatex@contentsid{idp4293856}
 \def\dbtolatex@@contentsname{\latex@@contentsname}
 \let\latex@@contentsname\contentsname
 \newif\ifdocbooktolatexcontentsname\docbooktolatexcontentsnametrue
@@ -392,17 +392,19 @@ XMPP, real-time communication, RTC, Celebrio, web browser, TODO\end{ThesisKeyWor
 
 Millions, billions, trillions. That many and even more messages are exchanged every day between various people over the world. The Internet created brand new way to communicate and collaborate, even if you are located on the opposite parts of the world. Since the age of Alexander Graham Bell, the accesibility to the communication devices and their simplicity incredibly enhanced. Nowadays, almost 2.5 billion people over the world have access to the Internet and therefore they are able to use almost limitless communication possibilities it provides. \docbooktolatexcite{internet-usage}{}
 
-However, the manner of Internet usage essentially changed during the first decade of 21st century. Using the Internet and using the web browser became almost synonyms. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it's not even possible to use the other internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp2732528}\begingroup\catcode`\#=12\footnote{
+However, the manner of Internet usage essentially changed during the first decade of 21st century. Using the Internet and using the web browser became almost synonyms. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it's not even possible to use the other internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp2648576}\begingroup\catcode`\#=12\footnote{
 Two examples of such behavior. Wi-fi network in the Student Agency coaches forces the user to visit the entry page in the web browser. The second example, very well known to the students of the Faculty of Informatics at Masaryk University, is the faculty wireless network called wlan\_fi. Every user has to open the web browser and log in with her credentials. It's not possible just to open the terminal or e-mail client and start working online.
-}\endgroup\docbooktolatexmakefootnoteref{idp2732528} Considering the mentioned fact, web browsers became also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there is the need of common rich applications running withing web browser - rich internet application. So popular social networks are built on top of the web browser platform and they are used by more than billion people over the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from the other people. By the beginning of the year 2013, I~would say that static web is dead - users prefer interactivity.
+}\endgroup\docbooktolatexmakefootnoteref{idp2648576} Considering the mentioned fact, web browsers became also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there is the need of common rich applications running withing web browser - rich internet application. So popular social networks are built on top of the web browser platform and they are used by more than billion people over the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from the other people. By the beginning of the year 2013, I~would say that static web is dead - users prefer interactivity.
 
 This thesis embraces the topic of real-time application in web browsers, especially the text communication tools and the technologies being used to develop them. It also describes the problem of {``}inter-process{''} communication between various web pages which need to cooperate and exchange information as quickly as possible. Finally, the possibilities of multimedia content transfer (audio and video) and the current options of capturing multimedia directly from the web browser are described as well.
 
-As mentioned above, the web browser became one of the most popular platforms. Celebrio, simple software for the elderly simulating the operating system interface, is typical example of rich internet application. \docbooktolatexcite{celebrio-system}{} All the topics mentioned in the previous paragraph appeared to be very important in the system. When questioning the elderly people in the Czech Republic, it appeared that almost 90 \% of the elderly computer users use the real-time communication applications. \docbooktolatexcite{elderly-questionnaires}{} Interaction with their loved ones is the most desired benefit they expect from the computer. Therefore, creating real-time application, text messenger supporting video calling, became not only programming challenge but also a business goal.
+As mentioned above, the web browser became one of the most popular platforms. Celebrio, simple software for the elderly simulating the operating system interface, is typical example of rich internet application. \docbooktolatexcite{celebrio-system}{} All the topics mentioned in the previous paragraph appeared to be very important in the system. When questioning the elderly people in the Czech Republic, it appeared that almost 90 \% of the elderly computer users use the real-time communication (RTC) applications. \docbooktolatexcite{elderly-questionnaires}{} Interaction with their loved ones is the most desired benefit they expect from the computer. Therefore, creating real-time application, text messenger supporting video calling, became not only programming challenge but also a business goal.
 
-What's the current state? TODO: Existing IM web messengers, inability to connect from web app to skype.
+Considering the fact the people like real-time communication while using web browser brings us the question what the currently available solutions are. There are {``}big players{''} providing their own services as closed-source, without the possibility to use them. To name the most important, it's Google Talk web browser client and Facebook chat, using XMPP protocol.\docbooktolatexcite{gtalk}{}\docbooktolatexcite{fb-chat}{} Even though Facebook chat service is not pure XMPP server implementation, they provide the possibility to connect to the {``}world of Facebook Chat{''} via XMPP as proxy. Combination of the facts that XMPP is open technology with open-sourced client and server implementations \docbooktolatexcite{xmpp-history}{} and the big internet companies also use it persuaded us to use it in our communication application too. XMPP itself and its usage in web applications is described in \hyperlink{chap-xmpp}{Chapter {\ref{chap-xmpp}}, {``}Extensible Messaging and Presence Protocol{''}}. Other approaches to RTC are covered in \hyperlink{chap-rtc}{Chapter {\ref{chap-rtc}}, {``}Other approaches to RTC{''}}.
 
-In the first chapter, there is .... TODO: describe content
+There are many existing real-time chat-based applications over the Internet we could have used. However, none of them suited our needs perfectly. Celebrio has very specific graphical user interface (GUI) and there is a need to integrate both text-based chat and video calling. Just to mention, there is commercial chat module Cometchat or even open project Jappix. \docbooktolatexcite{}{}\docbooktolatexcite{}{} Video calling web browser applications are provided for example by TokBox Inc. \docbooktolatexcite{}{} Nevertheless, following the rule that {``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch{''}, \docbooktolatexcite{}{} only existing libraries (Strophe.js) and APIs (OpenTok) were used for building brand new application. The general approaches when building web browser based chat application are mentioned in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}XMPP client in Javascript{''}}. The Celebrio Talker application itself, its architecture and the specific procedures used to create it are described in \hyperlink{chap-talker}{Chapter {\ref{chap-talker}}, {``}Talker{''}}. TODO: mention skype - we couldnt use it directly from web app.
+
+Finally, there are several notes about {``}inter-process communication{''} between different applications running separately in various browser frames, tabs or even windows. \hyperlink{chap-inter-process}{Chapter {\ref{chap-inter-process}}, {``}Inter-process Communication Framework{''}} covers this topic and describes the issues we came accross when implementing such functionality for Celebrio, where every application runs in separate iframe.
 
 The programming part of the thesis comprises the implementation of real-time text chat application, video calling application and simple {``}inter-process{''} communication tool for Celebrio.
 
@@ -410,20 +412,20 @@ The programming part of the thesis comprises the implementation of real-time tex
 % Chapter Extensible Messaging and Presence Protocol 
 % ------------------------------------------------------------- 	
 \chapter{Extensible Messaging and Presence Protocol}
-\label{idp4745824}\hypertarget{idp4745824}{}%
+\label{chap-xmpp}\hypertarget{chap-xmpp}{}%
 
 At first, this chapter should describe the important parts of XMPP protocol (mostly just picking the appropriate references).
 
-Extensible Messaging and Presence Protocol (XMPP) technologies were invented by Jeremie Miller in 1998. \docbooktolatexcite{xmpp-the-definitive-guide}{} It is one of the most widespread technologies for instant messaging (IM),\label{idp2380336}\begingroup\catcode`\#=12\footnote{
+Extensible Messaging and Presence Protocol (XMPP) technologies were invented by Jeremie Miller in 1998. \docbooktolatexcite{xmpp-the-definitive-guide}{} It is one of the most widespread technologies for instant messaging (IM),\label{idp154176}\begingroup\catcode`\#=12\footnote{
 Acutally, the IM client or even the techology itself is sometimes called {``}Instant Messenger{''}. This term is registered as a trademark by AOL company. \docbooktolatexcite{aol-trademarks}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp2380336} i.e. exchanging the text or multimedia data between several endpoints. The very essence of every instant messaging is bidirectional stream where so that both sides can immediately {\em{push}} new data and the other side (or other sides, respectively) is promptly notified without the need to perform any manual {\em{pull}} (update) action. The best transport protocol for such use case is Transmission Controll Protocol (TCP) and the {``}native{''} implementation of XMPP works right on top of TCP protocol: XMPP endpoint (called client as it represents the first actor in client-server architecture) opens long-lived TCP connection. Then, both the client and the server negotiate and open XML streams so there is one stream in each direction. \docbooktolatexcite{xmpp-the-definitive-guide}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp154176} i.e. exchanging the text or multimedia data between several endpoints. The very essence of every instant messaging is bidirectional stream where so that both sides can immediately {\em{push}} new data and the other side (or other sides, respectively) is promptly notified without the need to perform any manual {\em{pull}} (update) action. The best transport protocol for such use case is Transmission Controll Protocol (TCP) and the {``}native{''} implementation of XMPP works right on top of TCP protocol: XMPP endpoint (called client as it represents the first actor in client-server architecture) opens long-lived TCP connection. Then, both the client and the server negotiate and open XML streams so there is one stream in each direction. \docbooktolatexcite{xmpp-the-definitive-guide}{}
 
-When the connection is established, both client and server can push any changes as XML elements to the stream and the other side obtains them immediately. However, such implementation is unavailable when implementing web application, unless HTML5 technology called {\em{WebSockets}} is used. That is the reason why the bidirectional stream emulation is frequently used in many rich internet applications in order to assure interactivity and freshness of the data. Such emulation is called BOSH and it is described closely in the \hyperlink{chap-bosh}{Section {\ref{chap-bosh}}}.
+When the connection is established, both client and server can push any changes as XML elements to the stream and the other side obtains them immediately. However, such implementation is unavailable when implementing web application, unless HTML5 technology called {\em{WebSockets}} is used. That is the reason why the bidirectional stream emulation is frequently used in many rich internet applications in order to assure interactivity and freshness of the data. Such emulation is called BOSH and it is described closely in \hyperlink{chap-bosh}{Section {\ref{chap-bosh}}}.
 
 % ------------------------   
 % Section 
 \section{Fundamental bulding blocks in XMPP}
-\label{idp3343680}\hypertarget{idp3343680}{}%
+\label{idp160352}\hypertarget{idp160352}{}%
 
 Mention the terms as stanza, roster, describe the subscription mechanism.
 
@@ -439,7 +441,7 @@ Later on, description of BOSH extension, including the advantages and limitation
 % ------------------------   
 % Section 
 \section{Jingle}
-\label{idp140160}\hypertarget{idp140160}{}%
+\label{idp163776}\hypertarget{idp163776}{}%
 
 Jingle extension - multimedia.
 
@@ -448,7 +450,7 @@ http://xmpp.org/extensions/xep-0166.html
 % ------------------------   
 % Section 
 \section{Inter-process communication}
-\label{idp141744}\hypertarget{idp141744}{}%
+\label{idp165360}\hypertarget{idp165360}{}%
 
 Pub-sub extensions for inter-process communication.
 
@@ -458,7 +460,7 @@ http://xmpp.org/extensions/xep-0060.html
 % Chapter Other approaches to RTC 
 % ------------------------------------------------------------- 	
 \chapter{Other approaches to RTC}
-\label{idp143456}\hypertarget{idp143456}{}%
+\label{chap-rtc}\hypertarget{chap-rtc}{}%
 
 Describe other approaches to RTC in WB than XMPP. Tell why we didn't use them (or that we used - OpenTok).
 
@@ -476,7 +478,7 @@ Google hangouts API
 % Chapter XMPP client in Javascript 
 % ------------------------------------------------------------- 	
 \chapter{XMPP client in Javascript}
-\label{idp146832}\hypertarget{idp146832}{}%
+\label{chap-xmpp-in-javascript}\hypertarget{chap-xmpp-in-javascript}{}%
 
 Describe the tools that can be used to implement RTC in WB (and which were used to implement Celebrio Talker)
 
@@ -492,7 +494,7 @@ Possible server-side implementations (JAXL, XMPPHP, ...)
 % Chapter Talker 
 % ------------------------------------------------------------- 	
 \chapter{Talker}
-\label{idp149776}\hypertarget{idp149776}{}%
+\label{chap-talker}\hypertarget{chap-talker}{}%
 
 Describe the Talker application in Celebrio.
 
@@ -507,17 +509,17 @@ Don't forget to use UML: use case diagram, class diagram (if any), sequence/acti
 % ------------------------   
 % Section 
 \section{Ember.js}
-\label{idp152800}\hypertarget{idp152800}{}%
+\label{idp5419072}\hypertarget{idp5419072}{}%
 
 Describe Javascript client-side MVC frameworks overall, compare, tell why we used Ember
 \subsection{Subsection about Ember...}
-\label{idp153968}\hypertarget{idp153968}{}%
+\label{idp5420208}\hypertarget{idp5420208}{}%
 
 % -------------------------------------------------------------
 % Chapter Inter-process Communication Framework 
 % ------------------------------------------------------------- 	
 \chapter{Inter-process Communication Framework}
-\label{idp155344}\hypertarget{idp155344}{}%
+\label{chap-inter-process}\hypertarget{chap-inter-process}{}%
 
 Implement and describe framework for inter-process communication in Celebrio.
 
@@ -527,14 +529,14 @@ First, the lightweight one (which we already have), then implement the "heavy" o
 % Chapter Conclusion 
 % ------------------------------------------------------------- 	
 \chapter{Conclusion}
-\label{idp157152}\hypertarget{idp157152}{}%
+\label{idp5423488}\hypertarget{idp5423488}{}%
 
 conclusion
 
 % ------------------------   
 % Section 
 \section{Another part of the conclusion}
-\label{idp158240}\hypertarget{idp158240}{}%
+\label{idp5424512}\hypertarget{idp5424512}{}%
 
 Another part of the conclusion... just to have subchapter here
 % ------------------------------------------- 
@@ -542,49 +544,64 @@ Another part of the conclusion... just to have subchapter here
 %  Bibliography - chapter
 %
 % ------------------------------------------- 
-\begin{thebibliography}{123}\hypertarget{idp5400192}{}
+\begin{thebibliography}{123}\hypertarget{idp5425792}{}
 
 % ............. biblioentry 
-\bibitem{aol-trademarks}\docbooktolatexbibaux{idp5433888}{aol-trademarks}
-\hypertarget{idp5433888}
+\bibitem{aol-trademarks}\docbooktolatexbibaux{idp5459408}{aol-trademarks}
+\hypertarget{idp5459408}
 AOL Inc.: \emph{AOL Trademark List}, 3/15/2011 [retrieved 2/20/2013], from {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{celebrio-system}\docbooktolatexbibaux{idp5420224}{celebrio-system}
-\hypertarget{idp5420224}
+\bibitem{celebrio-system}\docbooktolatexbibaux{idp5445744}{celebrio-system}
+\hypertarget{idp5445744}
 Donko, P. and Kunc, P. and Novák, M. and Smolka, P. and Volmut, J.: \emph{Celebrio System}, 2013 [retrieved 2/19/2013], from {\textless}\url{http://www.celebriosoftware.com/celebrio-system}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp5428784}{elderly-questionnaires}
-\hypertarget{idp5428784}
+\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp5454304}{elderly-questionnaires}
+\hypertarget{idp5454304}
 Smolka, P. and Novák, M.: \emph{Elderly people and the computers}, 2/11/2013 [retrieved 2/19/2013], from {\textless}\url{http://infogr.am/Seniori-a-pocitace}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{facebook-usage}\docbooktolatexbibaux{idp5411776}{facebook-usage}
-\hypertarget{idp5411776}
+\bibitem{facebook-usage}\docbooktolatexbibaux{idp5437296}{facebook-usage}
+\hypertarget{idp5437296}
 Olanoff, D.: \emph{Facebook Announces Monthly Active Users Were At 1.01 Billion As
       Of September 30th}, TechCrunch, 10/23/2012 [retrieved 2/19/2013], from {\textless}\url{http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{internet-usage}\docbooktolatexbibaux{idp5407824}{internet-usage}
-\hypertarget{idp5407824}
+\bibitem{fb-chat}\docbooktolatexbibaux{idp5470112}{fb-chat}
+\hypertarget{idp5470112}
+Facebook Developers: \emph{Facebook Chat API}, 2/12/2013 [retrieved 2/20/2013], from http://xmpp.org/about-xmpp/history/ {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{gtalk}\docbooktolatexbibaux{idp5466544}{gtalk}
+\hypertarget{idp5466544}
+Google Developers: \emph{Google Talk Developer Documentation }, 3/23/2012 [retrieved 2/20/2013], from {\textless}\url{https://developers.google.com/talk/talk_developers_home}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{internet-usage}\docbooktolatexbibaux{idp5433344}{internet-usage}
+\hypertarget{idp5433344}
 Miniwatts Marketing Group: \emph{Internet Users in the World - 2012 Q2}, Internet World Stats, 2/17/2013 [retrieved 2/19/2013], from {\textless}\url{http://www.internetworldstats.com/stats.htm}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ria}\docbooktolatexbibaux{idp5416464}{ria}
-\hypertarget{idp5416464}
+\bibitem{ria}\docbooktolatexbibaux{idp5441984}{ria}
+\hypertarget{idp5441984}
 Ward, J.: \emph{What is a Rich Internet Application?}, 10/17/2007 [retrieved 2/19/2013], from {\textless}\url{http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp5400448}{xmpp-the-definitive-guide}
-\hypertarget{idp5400448}
+\bibitem{xmpp-history}\docbooktolatexbibaux{idp5462976}{xmpp-history}
+\hypertarget{idp5462976}
+The XMPP Standards Foundation: \emph{History of XMPP}, 1/27/2010 [retrieved 2/20/2013], from http://xmpp.org/about-xmpp/history/ {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
+
+% ............. biblioentry 
+\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp5426048}{xmpp-the-definitive-guide}
+\hypertarget{idp5426048}
 Saint-Andre, P. and Smith, K. and Tronçon, R.: \emph{XMPP: The Definitive Guide}, Sebastopol: O'Reilly, 2009, 978-0-596-52126-4, 310 (7, 16, ...). 
 
 \end{thebibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \setlength\saveparskip\parskip
 \setlength\saveparindent\parindent
-\begin{dbtolatexindex}{idp5437584}{}
+\begin{dbtolatexindex}{idp5473808}{}
 \setlength\tempparskip\parskip \setlength\tempparindent\parindent
 \parskip\saveparskip \parindent\saveparindent
 \noindent \indexspace
