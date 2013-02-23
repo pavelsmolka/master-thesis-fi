@@ -8,7 +8,7 @@
 -->
 <book lang="en">
   <bookinfo>
-    <title>Real-time Communication between Web Browsers</title>
+    <title>Real-time Communication in Web Browser</title>
 
     <subtitle>Master thesis</subtitle>
 
@@ -47,6 +47,8 @@
       <keyword>Celebrio</keyword>
 
       <keyword>web browser</keyword>
+
+      <keyword>Comet</keyword>
 
       <keyword>TODO</keyword>
     </keywordset>
@@ -93,7 +95,7 @@
     2013, I would say that static web is dead - users prefer
     interactivity.</para>
 
-    <para>This thesis embraces the topic of real-time application in web
+    <para>This thesis embraces the topic of real-time applications in web
     browsers, especially the text communication tools and the technologies
     being used to develop them. It also describes the problem of
     <quote>inter-process</quote> communication between various web pages which
@@ -107,7 +109,7 @@
     operating system interface, is typical example of rich internet
     application. <citation>celebrio-system</citation> All the topics mentioned
     in the previous paragraph appeared to be very important in the system.
-    When questioning the elderly people in the Czech Republic, it appeared
+    When interviewing the elderly people in the Czech Republic, it appeared
     that almost 90 % of the elderly computer users use the real-time
     communication (RTC) applications, mostly Skype.
     <citation>elderly-questionnaires</citation> Interaction with their loved
@@ -131,8 +133,15 @@
     <citation>xmpp-history</citation> and the big internet companies also use
     it persuaded us to use it in our communication application too. XMPP
     itself and its usage in web applications is described in <xref
-    linkend="chap-xmpp" />. Other approaches to RTC are covered in <xref
-    linkend="chap-rtc" />.</para>
+    linkend="chap-xmpp" />. </para>
+
+    <para>Since the web browser was designed to perform simple
+    requests/response interaction, it is not a typical platform for building
+    real-time application. Thus, there is a need for an extra layer enhancing
+    or even completely replacing the common way HTTP communicates. Within the
+    scope of this thesis, namely the WebSockets and HTTP long polling
+    approaches are used. The two of them and basic infromation about several
+    others are covered in <xref linkend="chap-rtc" />.</para>
 
     <para>There are many existing real-time chat-based applications over the
     Internet we could have used. However, none of them suited our needs
@@ -157,7 +166,7 @@
     simple <quote>inter-process</quote> communication tool for Celebrio has
     been implemented. Celebrio Talker application itself, its architecture and
     the specific procedures used to create it are described in <xref
-    linkend="chap-talker" />. </para>
+    linkend="chap-talker" />.</para>
 
     <para>It has been said that Skype<footnote>
         <para>http://www.skype.com/</para>
@@ -179,6 +188,84 @@
     every application runs in separate iframe.</para>
   </chapter>
 
+  <chapter id="chap-rtc">
+    <title>Bidirectional communication</title>
+
+    <para>The very essence of every instant messaging is the bidirectional
+    stream where both sides can immediately <emphasis>push</emphasis> new data
+    and the other side (or more other sides, respectively) is promptly
+    notified without the need to perform any manual <emphasis>pull</emphasis>
+    (update) action<indexterm>
+        <primary>pull &amp; push communication</primary>
+      </indexterm>.<footnote>
+        <para>In this thesis, this behaviour is commonly refered as RTC. The
+        <quote>real-time part</quote> relates mostly to the server part since
+        the application running in the web browser can perform the AJAX
+        request on background anytime and the server receives the request
+        instantly. Before AJAX became the essential part of every web app,
+        ifram</para>
+      </footnote> Such use case requires appropriate transport layer on top
+    which the application can send the messages via any other protocol. When
+    using HTTP, there is a TCP connection opened by the client (web browser)
+    through which the data is sent. However, according to the HTTP protocol,
+    the communication is strictly initiated by the client - HTTP is a
+    request/response protocol. <citation>rfc-http</citation> So, when one
+    needs the web browser application to communicate in both directions, HTTP
+    protocol must be hacked somehow or another communication channel has to be
+    used. This chapter covers both. </para>
+
+    <sect1>
+      <title>Using HTTP requests</title>
+
+      <para>Historicaly the first approach, for a very long time the only one,
+      is hacking HTTP to achieve RTC. The idea is very simple, depicted in
+      TODO figure. Generally, the client sends an extra request and it is not
+      awaiting the response immediately. Instead, the server keeps the request
+      for some time </para>
+
+      <para>The other way how to succesfully implement XMPP communication
+      between web browser and the client (and of course, communication between
+      two clients, since it is always mediated by certain server) is emulating
+      the connection with mechanisms overally called
+      <emphasis>Comet</emphasis><indexterm>
+          <primary>Comet</primary>
+        </indexterm>.</para>
+    </sect1>
+
+    <sect1>
+      <title>WebSockets</title>
+
+      <para>Unless HTML5 technology called <emphasis>WebSockets</emphasis> is
+      used, neither the client nor the server can establish permanent TCP
+      connection. Usually if the WebSockets are used, the XMPP server needs
+      one extra layer, usually implemented as the server plugin, to be able to
+      communicate directly with the web browser. This approach is covered in
+      <xref linkend="chap-ws" />.</para>
+    </sect1>
+
+    <sect1>
+      <title>Existing RTC frameworks</title>
+
+      <para>Actually, there are other options such as using various browser
+      plugins (e.g. Adobe Flash) to provide the base layer for TCP
+      connections, but such tools has not been used within this thesis and are
+      not further dealt with.</para>
+
+      <para>Describe other approaches to RTC in WB than XMPP. Tell why we
+      didn't use them (or that we used - OpenTok).</para>
+
+      <para>Mention:</para>
+
+      <para>OpenTok</para>
+
+      <para>SignalR (.NET)</para>
+
+      <para>WebRTC (http://www.webrtc.org/)</para>
+
+      <para>Google hangouts API</para>
+    </sect1>
+  </chapter>
+
   <chapter id="chap-xmpp">
     <title>Extensible Messaging and Presence Protocol</title>
 
@@ -191,30 +278,16 @@
         registered as a trademark by AOL company.
         <citation>aol-trademarks</citation></para>
       </footnote> i.e. exchanging the text or multimedia data between several
-    endpoints. The very essence of every instant messaging is bidirectional
-    stream where so that both sides can immediately <emphasis>push</emphasis>
-    new data and the other side (or other sides, respectively) is promptly
-    notified without the need to perform any manual <emphasis>pull</emphasis>
-    (update) action. The best transport protocol for such use case is
-    Transmission Controll Protocol (TCP) and the <quote>native</quote>
-    implementation of XMPP works right on top of TCP protocol: XMPP endpoint
-    (called client as it represents the first actor in client-server
-    architecture) opens long-lived TCP connection. Then, both the client and
-    the server negotiate and open XML streams so there is one stream in each
-    direction. <citation>xmpp-the-definitive-guide</citation> When the
-    connection is established, both client and server can push any changes as
-    XML elements to the stream and the other side obtains them immediately.
-    </para>
-
-    <para>Nevertheless, the implementation described in the previous paragraph
-    is unavailable when creating common web application. That is the reason
-    why the bidirectional stream emulation is frequently used in many rich
-    internet applications in order to assure interactivity and freshness of
-    the data. Such emulation is called BOSH and it is described closely in
-    <xref linkend="chap-bosh" />. The other approach utilizes HTML5 technology
-    called <emphasis>WebSockets</emphasis> and the common XMPP servers support
-    it via various plugins. This approach is covered in <xref
-    linkend="chap-ws" />. </para>
+    endpoints. The <quote>native</quote> implementation of XMPP works right on
+    top of TCP protocol: XMPP endpoint (called client as it represents the
+    first actor in client-server architecture) opens long-lived TCP
+    connection. Then, both the client and the server negotiate and open XML
+    streams so there is one stream in each direction.
+    <citation>xmpp-the-definitive-guide</citation> When the connection is
+    established, both client and server can push any changes as XML elements
+    to the stream and the other side obtains them immediately. Usual XMPP
+    clients are standalone applications able to open TCP connection and listen
+    to the stream opened by the server.</para>
 
     <sect1>
       <title>Fundamental bulding blocks in XMPP</title>
@@ -224,7 +297,7 @@
     </sect1>
 
     <sect1 id="chap-bosh">
-      <title>Bidirectional-streams Over Synchronous HTTP</title>
+      <title>XMPP over BOSH</title>
 
       <para>Describe BOSH (http://xmpp.org/extensions/xep-0124.html)</para>
 
@@ -243,7 +316,8 @@
       <para>It was neccessary to install: apt balíky luajit +
       liblua5.1-bitop0</para>
 
-      <para></para>
+      <para>TODO create diagram here (XMPP server - plugin - incoming
+      connection vs xmpp server - standard connection).</para>
     </sect1>
 
     <sect1>
@@ -261,23 +335,6 @@
 
       <para>http://xmpp.org/extensions/xep-0060.html</para>
     </sect1>
-  </chapter>
-
-  <chapter id="chap-rtc">
-    <title>Other approaches to RTC</title>
-
-    <para>Describe other approaches to RTC in WB than XMPP. Tell why we didn't
-    use them (or that we used - OpenTok).</para>
-
-    <para>Mention:</para>
-
-    <para>OpenTok</para>
-
-    <para>SignalR (.NET)</para>
-
-    <para>WebRTC (http://www.webrtc.org/)</para>
-
-    <para>Google hangouts API</para>
   </chapter>
 
   <chapter id="chap-xmpp-in-javascript">
@@ -634,6 +691,65 @@
 
       <releaseinfo>from <ulink
       url="http://devforum.skype.com/t5/SkypeKit-FAQs/Does-SkypeKit-work-on-Android/m-p/16490/thread-id/78">http://devforum.skype.com/t5/SkypeKit-FAQs/Does-SkypeKit-work-on-Android/m-p/16490/thread-id/78</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>rfc-http</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Roy</firstname>
+
+          <othername>Thomas</othername>
+
+          <surname>Fielding</surname>
+        </author>
+
+        <author>
+          <firstname>James</firstname>
+
+          <surname>Gettis</surname>
+        </author>
+
+        <author>
+          <firstname>Jeffrey</firstname>
+
+          <surname>Mogul</surname>
+        </author>
+
+        <author>
+          <firstname>Henrik</firstname>
+
+          <surname>Frystyk</surname>
+        </author>
+
+        <author>
+          <firstname>Larry</firstname>
+
+          <surname>Masinter</surname>
+        </author>
+
+        <author>
+          <firstname>Paul</firstname>
+
+          <surname>Leach</surname>
+        </author>
+
+        <author>
+          <firstname>Tim</firstname>
+
+          <surname>Berners-Lee</surname>
+        </author>
+      </authorgroup>
+
+      <title>Hypertext Transfer Protocol -- HTTP/1.1</title>
+
+      <subtitle>Request for Comments: 2616</subtitle>
+
+      <pubdate>6/1999 [retrieved 2/23/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.w3.org/Protocols/rfc2616/rfc2616.html">http://www.w3.org/Protocols/rfc2616/rfc2616.html</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
