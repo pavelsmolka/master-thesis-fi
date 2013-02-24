@@ -133,7 +133,7 @@
     <citation>xmpp-history</citation> and the big internet companies also use
     it persuaded us to use it in our communication application too. XMPP
     itself and its usage in web applications is described in <xref
-    linkend="chap-xmpp" />. </para>
+    linkend="chap-xmpp" />.</para>
 
     <para>Since the web browser was designed to perform simple
     requests/response interaction, it is not a typical platform for building
@@ -244,10 +244,10 @@
       is very useful for delivering various resources (stylesheets, scripts,
       images, etc.) to the client without the unnecessary overhead of creating
       multiple streams. However, every single transmission within the TCP
-      connection has to be in form request/response. On no account is the
-      server allowed to push any data without respective request from the
-      client. Therefore, such TCP connection is of no use for RTC. TODO
-      figure.</para>
+      connection has to be in form of separate HTTP request/response, always
+      initiated by the client. On no account is the server allowed to push any
+      data without respective request from the client. Therefore, such TCP
+      connection is of no use for RTC. TODO figure.</para>
 
       <sect2>
         <title>HTTP long polling</title>
@@ -281,27 +281,82 @@
         the response to the client, there is a <quote>blind window</quote>
         when the server cannot notify the client. Whole push system is blocked
         until the response is received by the client, processed and new
-        request is delivered back to the server. Let δ be the network latency.
-        In the worst case, the new message is delayed asymptotically by
-        2δ.</para>
+        request is delivered back to the server. Considering also the possible
+        packet loss and required retransmission in TCP protocol, the delay can
+        be even longer than double bandwidth latency.
+        <citation>rfc-bidirectional-http</citation></para>
       </sect2>
 
-      <sect2>
+      <sect2 id="chap-http-streaming">
         <title>HTTP streaming</title>
 
-        <para></para>
+        <para>HTTP streaming is slightly different method than long polling,
+        although they are confused one with the other very often. What is
+        mutual for both of the approaches is the client initializing the
+        communication with HTTP request. The server also sends the update as
+        the part of the HTTP response. The main difference is that once the
+        server initializes the response and sends the data, it does not
+        terminate the response and keeps the HTTP connection opened.
+        Meanwhile, the client listens to the response stream and reads the
+        data pushed from the server. When any new data springs up on the
+        server side, it is concatenated to the one existing response stream.
+        <citation>rfc-bidirectional-http</citation> See the schema on TODO
+        figure.</para>
+
+        <para>It is very important not to confuse HTTP streaming with the
+        <quote>persistent</quote> HTTP requests. As said at the beginning of
+        this chapter, declaring <type>Connection: Keep-Alive</type> does not
+        allow the server to issue multiple responses to a single request. Such
+        behaviour would be serious violation of HTTP protocol. Instead, the
+        server can declare <type>Transfer-Encoding: chunked</type> status in
+        the response header and send the response split into separate pieces,
+        as show below (chunk of zero length stands for the end of the
+        response): <citation>rfc-bidirectional-http</citation></para>
+
+        <programlisting>HTTP/1.1 200 OK
+Content-Type: text/plain
+Transfer-Encoding: chunked
+
+25
+This is the data in the first chunk
+
+1C
+and this is the second one
+
+0</programlisting>
+
+        <para>The main drawback of HTTP streaming can be generally called
+        buffering. There is no requirement for both the client and any
+        intermediary (proxies, gateways, etc.) to handle the incoming data
+        until whole response is sent. Therefore, all parts of the response
+        could be kept by the proxy and the messages (single HTTP response
+        chunks) are not delivered to the client until whole response is sent.
+        Similarly, when the response consists of JavaScript statements, the
+        browser does not have to execute them before whole response is
+        obtained (yet, most of the browsers execute it immediately). In such
+        cases, HTTP streaming will not work.
+        <citation>rfc-bidirectional-http</citation></para>
       </sect2>
     </sect1>
 
     <sect1 id="chap-ws">
       <title>WebSockets</title>
 
-      <para>Unless HTML5 technology called <emphasis>WebSockets</emphasis> is
-      used, neither the client nor the server can establish permanent TCP
-      connection. Usually if the WebSockets are used, the XMPP server needs
-      one extra layer, usually implemented as the server plugin, to be able to
-      communicate directly with the web browser. This approach is covered in
-      <xref linkend="chap-ws" />.</para>
+      <para>Although the World Wide Web with HTTP request/response schema has
+      never been intended to server as RTC platform, the contemporary
+      applications require such functionality and the developers started to
+      bend the protocol in the undesirable way. Most of the patterns described
+      in <xref linkend="chap-http-streaming" /> do their jobs and one can
+      achieve sufficient two-way communication, but there are certain
+      performance issues and drawbacks which make them difficult to use.
+      Therefore, brand new standard for creating full-duplex communication
+      channels between the web browser and the server has been created. The
+      technology is called <emphasis>WebSockets</emphasis><indexterm>
+          <primary>WebSockets</primary>
+        </indexterm> and it stands for a communication protocol layered over
+      TCP along with the browser API for web developers.</para>
+
+      <para></para>
     </sect1>
 
     <sect1>
@@ -316,6 +371,8 @@
       didn't use them (or that we used - OpenTok).</para>
 
       <para>Mention:</para>
+
+      <para>Bayeux: http://svn.cometd.org/trunk/bayeux/bayeux.html</para>
 
       <para>OpenTok</para>
 
@@ -369,8 +426,14 @@
       and limitations. Describe also the connection to HTTP protocol.</para>
     </sect1>
 
-    <sect1 id="chap-ws">
+    <sect1 id="chap-xmpp-ws">
       <title>XMPP over WebSockets</title>
+
+      <para> Usually if the WebSockets are used, the XMPP server needs one
+      extra layer, usually implemented as the server plugin, to be able to
+      communicate directly with the web browser. </para>
+
+      <para>http://blog.superfeedr.com/xmpp-over-websockets/</para>
 
       <para>luajit - lua jit compiler</para>
 
@@ -900,13 +963,46 @@
         </author>
       </authorgroup>
 
-      <title>HTML5 Web Sockets: A Quantum Leap in Scalability for the Web
-      </title>
+      <title>HTML5 Web Sockets: A Quantum Leap in Scalability for the
+      Web</title>
 
       <pubdate>2012 [retrieved 2/23/2013]</pubdate>
 
       <releaseinfo>from <ulink
       url="http://www.websocket.org/quantum.html">http://www.websocket.org/quantum.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>rfc-ws</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Ian</firstname>
+
+          <surname>Fette</surname>
+        </author>
+
+        <author>
+          <firstname>Alexey</firstname>
+
+          <surname>Melnikov</surname>
+        </author>
+      </authorgroup>
+
+      <title>The WebSocket Protocol</title>
+
+      <subtitle>Request for Comments: 6455</subtitle>
+
+      <pubdate>12/2011 [retrieved 2/24/2013]</pubdate>
+
+      <publisher>
+        <publishername>Internet Engineering Task Force (IETF)</publishername>
+      </publisher>
+
+      <issn>2070-1721</issn>
+
+      <releaseinfo>from <ulink
+      url="http://tools.ietf.org/html/rfc6455">http://tools.ietf.org/html/rfc6455</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
