@@ -91,13 +91,13 @@
     world wide web and HTTP protocol was completely different at first
     (displaying single documents connected via hypertext links), it appeared
     that there is the need of common rich applications running withing web
-    browser - rich internet application. So popular social networks are built
-    on top of the web browser platform and they are used by more than billion
-    people over the world. <citation>facebook-usage</citation> And the main
-    reason why the social networks are so popular is the real-time stream of
-    news and messages from the other people. By the beginning of the year
-    2013, I would say that static web is dead - users prefer
-    interactivity.</para>
+    browser - rich internet application sprung up. <citation>ria</citation> So
+    popular social networks are built on top of the web browser platform and
+    they are used by more than billion people over the world.
+    <citation>facebook-usage</citation> And the main reason why the social
+    networks are so popular is the real-time stream of news and messages from
+    the other people. By the beginning of the year 2013, I would say that
+    static web is dead - users prefer interactivity.</para>
 
     <para>This thesis embraces the topic of real-time applications in web
     browsers, especially the text communication tools and the technologies
@@ -537,13 +537,103 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
       </sect2>
 
       <sect2>
-        <title>JavaScript API</title>
+        <title>JavaScript API<indexterm>
+            <primary>WebSocket</primary>
+
+            <secondary>API</secondary>
+          </indexterm></title>
 
         <para>Since WebSocket technology is intended to be used particularly
         from the browser applications, there is need of an API web developers
         can use. The most widespread programming language of web browser
-        client applications is JavaScript and so is the WebSockets API created
-        for.</para>
+        client applications is JavaScript and so is the WebSocket API created
+        for. The API consists of one relatively simple JavaScript interface
+        called <computeroutput>WebSocket</computeroutput>,<footnote>
+            <para>In the older versions of some browsers, the interface was
+            called differently due to the immaturity of the technology. For
+            instance, Firefox from version 6 to 10 supports WebSockets only as
+            <computeroutput>MozWebSocket</computeroutput>. Interesting fact is
+            that Firefox 4 and 5 provides
+            <computeroutput>WebSocket</computeroutput> interface as it is,
+            just implementing different WebSocket protocol version. Since
+            Firefox 11.0, current (RFC 6455) WS protocol version is accessible
+            via interface <computeroutput>WebSocket</computeroutput>.
+            <citation>mozilla-ws</citation></para>
+          </footnote> <citation>ws-api</citation> placed as the property of
+        <computeroutput>window</computeroutput> object.<footnote>
+            <para>Properties of window are accessible in JavaScript directly.
+            Simple test <computeroutput>window.WebSocket ===
+            WebSocket</computeroutput> returning
+            <computeroutput>true</computeroutput> proves it.</para>
+          </footnote> It wraps the WebSocket client functionality performed by
+        the user agent (web browser). Using the API is very simple - the
+        object, which handles all the WS functionality, is created by calling
+        <computeroutput>WebSocket()</computeroutput> constructor:
+        <citation>ws-html5rocks</citation></para>
+
+        <programlisting>var connection = new WebSocket(
+        'ws://html5rocks.websocket.org/echo', 
+        ['soap', 'xmpp']
+);</programlisting>
+
+        <para>The first (mandatory) argument stands for the WebSocket URI the
+        client attempts to connect to. It can either begin with
+        <type>ws://</type> prefix or <type>wss://</type>, depending whether
+        TLS layer is used or not. The second parameter is optional - specific
+        WS subprotocols can be demanded there. Since there are only a few
+        subprotocols recorded by IANA registry, it is of a little use so far.
+        <citation>ws-iana</citation></para>
+
+        <para><computeroutput>WebSocket</computeroutput> interface provides at
+        least four event handlers, to each of them a custom callback can be
+        attached. <citation>ws-api</citation> Those are
+        <computeroutput>onopen</computeroutput>,
+        <computeroutput>onmessage</computeroutput>,
+        <computeroutput>onerror</computeroutput> and
+        <computeroutput>onclose</computeroutput>. The names are quite
+        self-explanatory, they serve as the event listeners watching the
+        incoming activity. The callback registration can look as
+        follows:</para>
+
+        <programlisting>connection.onmessage = function (message) {
+  console.log('We got a message: ' + message.data);
+};</programlisting>
+
+        <para>In addition, there is a property
+        <computeroutput>readyState</computeroutput> (it would be
+        <computeroutput>connection.readyState</computeroutput> in the previous
+        example) keeping current WebSocket status all the time. The status can
+        be retrieved by testing the property against one of the
+        <computeroutput>WebSocket</computeroutput> property constants
+        <computeroutput>CONNECTING</computeroutput>,
+        <computeroutput>OPEN</computeroutput>,
+        <computeroutput>CLOSING</computeroutput> or
+        <computeroutput>CLOSED</computeroutput>. </para>
+
+        <para>Sending the data to the server is also quite straightforward.
+        Either <computeroutput>DOMString</computeroutput>,
+        <computeroutput>ArrayBuffer</computeroutput>,
+        <computeroutput>ArrayBufferView</computeroutput> or
+        <computeroutput>Blob</computeroutput> can be sent via
+        <computeroutput>send()</computeroutput> method. See the examples
+        below: <citation>ws-html5rocks</citation></para>
+
+        <programlisting>// Sending String
+connection.send('string message');
+
+// Sending canvas ImageData as ArrayBuffer
+var img = canvas_context.getImageData(0, 0, 400, 320);
+var binary = new Uint8Array(img.data.length);
+for (var i = 0; i &lt; img.data.length; i++) {
+  binary[i] = img.data[i];
+}
+connection.send(binary.buffer);
+
+// Sending file as Blob
+var file = document.querySelector('input[type="file"]').files[0];
+connection.send(file);</programlisting>
+
+        <para></para>
       </sect2>
     </sect1>
 
@@ -1372,6 +1462,84 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
 
       <releaseinfo>from <ulink
       url="http://tools.ietf.org/html/rfc6455">http://tools.ietf.org/html/rfc6455</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ws-api</abbrev>
+
+      <author>
+        <firstname>Ian</firstname>
+
+        <surname>Hickson</surname>
+      </author>
+
+      <title>The WebSocket API</title>
+
+      <subtitle>Editor's Draft</subtitle>
+
+      <pubdate>2/9/2013 [retrieved 2/24/2013]</pubdate>
+
+      <publisher>
+        <publishername>W3C</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://dev.w3.org/html5/websockets/">http://dev.w3.org/html5/websockets/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>mozilla-ws</abbrev>
+
+      <author>
+        <surname>Mozilla Developers</surname>
+      </author>
+
+      <title>WebSockets</title>
+
+      <pubdate>2/4/2013 [retrieved 2/25/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://developer.mozilla.org/en-US/docs/WebSockets">https://developer.mozilla.org/en-US/docs/WebSockets</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ws-html5rocks</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Malte</firstname>
+
+          <surname>Ubl</surname>
+        </author>
+
+        <author>
+          <firstname>Eiji</firstname>
+
+          <surname>Kitamura</surname>
+        </author>
+      </authorgroup>
+
+      <title>Introducing WebSockets: Bringing Sockets to the Web</title>
+
+      <pubdate>2/13/2012 [retrieved 2/25/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.html5rocks.com/en/tutorials/websockets/basics/">http://www.html5rocks.com/en/tutorials/websockets/basics/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ws-iana</abbrev>
+
+      <author>
+        <surname>IANA</surname>
+      </author>
+
+      <title>WebSocket Protocol Registries</title>
+
+      <pubdate>11/13/2012 [retrieved 2/25/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.iana.org/assignments/websocket/websocket.xml">http://www.iana.org/assignments/websocket/websocket.xml</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
