@@ -48,7 +48,11 @@
 
       <keyword>web browser</keyword>
 
+      <keyword>HTTP</keyword>
+
       <keyword>Comet</keyword>
+
+      <keyword>JavaScript</keyword>
 
       <keyword>TODO</keyword>
     </keywordset>
@@ -117,16 +121,17 @@
     creating real-time application, text messenger supporting video calling,
     became not only programming challenge but also a business goal.</para>
 
-    <para>Considering the fact the people like real-time communication while
-    using web browser brings us the question what the currently available
-    solutions are. There are <quote>big players</quote> providing their own
-    services as closed-source, without the possibility to use them. To name
-    the most important, it's Google Talk web browser client and Facebook chat,
-    using XMPP protocol.
-    <citation>gtalk</citation><citation>fb-chat</citation> Even though
-    Facebook chat service is not pure XMPP server implementation (the message
-    and presence engine is proprietary system of Facebook implemented mostly
-    in C++ and Erlang), they provide the possibility to connect to the
+    <para>Considering the fact the people like real-time communication (not
+    only direct messaging but also real-time cooperation, simultaneous
+    document editing or playing multiplayer games) while using web browser
+    brings us the question what the currently available solutions are. There
+    are <quote>big players</quote> providing their own services as
+    closed-source, without the possibility to use them. To name the most
+    important, it's Google Talk web browser client and Facebook chat, using
+    XMPP protocol. <citation>gtalk</citation><citation>fb-chat</citation> Even
+    though Facebook chat service is not pure XMPP server implementation (the
+    message and presence engine is proprietary system of Facebook implemented
+    mostly in C++ and Erlang), they provide the possibility to connect to the
     <quote>world of Facebook Chat</quote> via XMPP as proxy.
     <citation>fb-erlang</citation> Combination of the facts that XMPP is open
     technology with open-sourced client and server implementations
@@ -236,21 +241,30 @@
       requests. Since HTTP 1.1 (acutally implemented even before, but not
       covered in the RFC specification), there is a possibility for the client
       to claim persistent TCP connection to the server declaring
-      <type>Connection: Keep-Alive</type> in the request header. Actually, all
-      connections are considered persistent unless declared otherwise.
-      <citation>rfc-http</citation> Even though the default timeout after
-      which the server closes the connection is only a few seconds,
-      <citation>apache-core-features</citation> the persistent TCP connection
-      is very useful for delivering various resources (stylesheets, scripts,
-      images, etc.) to the client without the unnecessary overhead of creating
-      multiple streams. However, every single transmission within the TCP
-      connection has to be in form of separate HTTP request/response, always
-      initiated by the client. On no account is the server allowed to push any
-      data without respective request from the client. Therefore, such TCP
-      connection is of no use for RTC. TODO figure.</para>
+      <computeroutput>Connection: Keep-Alive</computeroutput> in the request
+      header.<indexterm>
+          <primary>HTTP</primary>
+
+          <secondary>Keep-Alive</secondary>
+        </indexterm> Actually, all connections are considered persistent
+      unless declared otherwise. <citation>rfc-http</citation> Even though the
+      default timeout after which the server closes the connection is only a
+      few seconds, <citation>apache-core-features</citation> the persistent
+      TCP connection is very useful for delivering various resources
+      (stylesheets, scripts, images, etc.) to the client without the
+      unnecessary overhead of creating multiple streams. However, every single
+      transmission within the TCP connection has to be in form of separate
+      HTTP request/response, always initiated by the client. On no account is
+      the server allowed to push any data without respective request from the
+      client. Therefore, such TCP connection is of no use for RTC. TODO
+      figure.</para>
 
       <sect2>
-        <title>HTTP long polling</title>
+        <title>HTTP long polling<indexterm>
+            <primary>HTTP</primary>
+
+            <secondary>long polling</secondary>
+          </indexterm></title>
 
         <para>The essence of HTTP long polling springs from the idea of
         prolonging the time span between two poll requests. In traditional
@@ -273,9 +287,31 @@
         Every chunk of data in RTC applications is usually very short, for
         example some text message of minimal length. However, each update is
         served by full HTTP request/response with the header easily reaching
-        800 characters. <citation>ws-http-overhead</citation> In case the
+        800 characters. <citation>pro-html5-programming</citation> In case the
         payload is a message 20 characters long, the header constitutes 4000%
-        overhead!</para>
+        overhead!<indexterm>
+            <primary>HTTP</primary>
+
+            <secondary>header overhead</secondary>
+          </indexterm> This drawback has even bigger impact as the number of
+        clients increases. <xref linkend="fig-http-overhead" /> shows the
+        comparsion of 1000 (A), 10000 (B) and 100000 (C) clients polling the
+        server every second with the message 20 characters long, both using
+        classic HTTP requests and WebSockets technology (mentioned in <xref
+        linkend="chap-ws" />). <citation>pro-html5-programming</citation>
+        </para>
+
+        <figure id="fig-http-overhead">
+          <title>Comparison of the unnecessary network overhead between the
+          HTTP polling and using WebSockets
+          <citation>pro-html5-programming</citation></title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="img/http-overhead.png" width="420pt" />
+            </imageobject>
+          </mediaobject>
+        </figure>
 
         <para>Furthermore, in case the server just received the data and sent
         the response to the client, there is a <quote>blind window</quote>
@@ -288,7 +324,11 @@
       </sect2>
 
       <sect2 id="chap-http-streaming">
-        <title>HTTP streaming</title>
+        <title>HTTP streaming<indexterm>
+            <primary>HTTP</primary>
+
+            <secondary>streaming</secondary>
+          </indexterm></title>
 
         <para>HTTP streaming is slightly different method than long polling,
         although they are confused one with the other very often. What is
@@ -305,13 +345,18 @@
 
         <para>It is very important not to confuse HTTP streaming with the
         <quote>persistent</quote> HTTP requests. As said at the beginning of
-        this chapter, declaring <type>Connection: Keep-Alive</type> does not
-        allow the server to issue multiple responses to a single request. Such
-        behaviour would be serious violation of HTTP protocol. Instead, the
-        server can declare <type>Transfer-Encoding: chunked</type> status in
-        the response header and send the response split into separate pieces,
-        as show below (chunk of zero length stands for the end of the
-        response): <citation>rfc-bidirectional-http</citation></para>
+        this chapter, declaring <computeroutput>Connection:
+        Keep-Alive</computeroutput> does not allow the server to issue
+        multiple responses to a single request. Such behaviour would be
+        serious violation of HTTP protocol. Instead, the server can declare
+        <computeroutput>Transfer-Encoding: chunked</computeroutput><indexterm>
+            <primary>HTTP</primary>
+
+            <secondary>chunked response</secondary>
+          </indexterm> status in the response header and send the response
+        split into separate pieces, as show below (chunk of zero length stands
+        for the end of the response):
+        <citation>rfc-bidirectional-http</citation></para>
 
         <programlisting>HTTP/1.1 200 OK
 Content-Type: text/plain
@@ -348,15 +393,158 @@ and this is the second one
       bend the protocol in the undesirable way. Most of the patterns described
       in <xref linkend="chap-http-streaming" /> do their jobs and one can
       achieve sufficient two-way communication, but there are certain
-      performance issues and drawbacks which make them difficult to use.
-      Therefore, brand new standard for creating full-duplex communication
-      channels between the web browser and the server has been created. The
-      technology is called <emphasis>WebSockets</emphasis><indexterm>
-          <primary>WebSockets</primary>
-        </indexterm> and it stands for a communication protocol layered over
-      TCP along with the browser API for web developers.</para>
+      performance issues and drawbacks which make them difficult to use. At
+      least, those techniques carry HTTP header overhead which is unnecessary
+      for standard bidirectional streams. Therefore, brand new standard for
+      creating full-duplex communication channels between the web browser and
+      the server has been created. The technology is called
+      <emphasis>WebSockets</emphasis><indexterm>
+          <primary>WebSocket</primary>
+        </indexterm> (sometimes shortened as WS) and it stands for a
+      communication protocol layered over TCP along with the browser API for
+      web developers. Anyway, not even WebSockets are allowed to access wider
+      network, the connection possibilities are limited only to the dedicated
+      WS servers (usually HTTP servers with additional module for WS support
+      attached). <citation>js-definitive-guide</citation></para>
 
-      <para></para>
+      <para>Similarly as in HTTP, there is an unencrypted version of
+      WebSockets working directly on top of TCP connection. The simpliest way
+      to recognize such connection is WebSocket URI<indexterm>
+          <primary>WebSocket</primary>
+
+          <secondary>URI</secondary>
+        </indexterm> beginning with <computeroutput>ws://</computeroutput>. It
+      should not be used on account of two reasons. The first one, quite
+      obvious, is security - the communication can be captured during the
+      transmission. Transparent proxy servers are the second reason. If an
+      unencrypted WebSocket connection is used, the browser is unaware of the
+      transparent proxy and as a result, the WebSocket connection is most
+      likely to fail.
+      <citation>ws-proxy</citation><citation>definitive-guide-to-ws</citation>
+      As opposite, there is a secure way how to use WebSockets. WebSockets
+      Secure (WSS)<indexterm>
+          <primary>WebSocket</primary>
+
+          <secondary>Secure</secondary>
+        </indexterm> protocol is standard WS wrapped in TLS tunnel, similarly
+      as HTTP can be transmitted over TLS layer. When using WSS, the URI
+      begins with <computeroutput>wss://</computeroutput> and it uses port 443
+      by default. <citation>definitive-guide-to-ws</citation></para>
+
+      <sect2>
+        <title>Handshake<indexterm>
+            <primary>WebSocket</primary>
+
+            <secondary>handshake</secondary>
+          </indexterm></title>
+
+        <para>Alike any other multilateral protocol WebSockets need to perform
+        a handshake before actual transmission can take place. During the
+        handshake, the connection is established and both peers acknowledge
+        the properties of the communication.</para>
+
+        <para>Since WebSockets emerged as HTTP supplement, the handshake is
+        initialized by HTTP request<footnote>
+            <para>According to RFC6455, the protocol is designed to work over
+            HTTP ports 80 and 443 as well to support HTTP proxies. However,
+            the design is not limited to HTTP and the future implementations
+            can use simplier handshake over a dedicated port.
+            <citation>rfc-ws</citation></para>
+          </footnote> initialized by the client. The client sends the request
+        as follows: <citation>rfc-ws</citation></para>
+
+        <programlisting>GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Origin: http://example.com
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13</programlisting>
+
+        <para>Let us have a look what each of the lines means. The first two
+        lines are obvious, they represent typical HTTP GET request. Specifying
+        <computeroutput>Host</computeroutput> is important for the server to
+        be able to handle multiple virtual hosts on single IP address. The
+        following two lines, <computeroutput>Upgrade:
+        websocket</computeroutput> and <computeroutput>Connection:
+        Upgrade</computeroutput>, are the most important. The client informs
+        the server about the desire to use WS. The rest of the request stands
+        for additional information for the server to be able to respond
+        correctly - RFC 6455 describes them in detail.</para>
+
+        <para>The server should send HTTP response looking similar as this
+        example: <citation>rfc-ws</citation></para>
+
+        <programlisting>HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
+
+        <para>Number 101 on the first line of the response stands for HTTP
+        status code <computeroutput>Switching Protocols</computeroutput>,
+        <citation>rfc-http</citation> which means the server supports
+        WebSockets and the connection can be established. Any status code
+        other than 101 indicates that the WebSocket handshake has not
+        completed and that the semantics of HTTP still apply.
+        <citation>rfc-ws</citation></para>
+
+        <para><computeroutput>Sec-WebSocket-Key</computeroutput> is random
+        secret issued by the client and added to the initial
+        protocol-switching request. The server is supposed to concatenate the
+        secret with Globally Unique Identifier (GUID)<indexterm>
+            <primary>GUID</primary>
+          </indexterm> "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and hash the
+        result with SHA-1 algorithm. The resultis returned as
+        <computeroutput>Sec-WebSocket-Accept</computeroutput> header field,
+        base64-encoded. <citation>rfc-ws</citation> However, there seems to be
+        a security issue here. If the initial request is not sent over
+        encrypted HTTP connection (HTTPS), it can be caught by a third party.
+        Since the server does not authenticate in any way and the algorithm
+        does not contain any server secret, the third party attacker could
+        fake the response and pretend to be the server.</para>
+      </sect2>
+
+      <sect2>
+        <title>Frames and masking</title>
+
+        <para>All the data sent via WebSockets protocol is chunked into
+        frames<indexterm>
+            <primary>frames</primary>
+          </indexterm>, working similarly as TCP frames. All the transmission
+        features are handled by the WebSocket API and the transmission is
+        transparent for the application layer above (for example JavaScript
+        API) so that that every message appears in the same state as it was
+        sent. </para>
+
+        <para>There are several special features concerning WS frames, one of
+        the interesting is masking<indexterm>
+            <primary>masking</primary>
+          </indexterm>. The payload data of every frame sent from the client
+        is XORed by the masking key of 32-bit size. The purpose of masking is
+        to prevent any third party from picking any part of the payload and
+        reading it. The other goal might be distinguishing the server stream
+        from the client stream instantly since client-to-server frames always
+        <emphasis>must</emphasis> be masked and server-to-client frames
+        <emphasis>must not</emphasis> be masked under any circumstances. In
+        addition, WS peers have to use masking even if the communication is
+        running on top of TLS layer so the <quote>encryption</quote> function
+        is pointless. <citation>rfc-ws</citation> The security function of
+        masking is also questionable because the masking key is included in
+        the frame header. The only reason is preventing from random
+        cross-protocol attacks.
+        <citation>pro-html5-programming</citation></para>
+      </sect2>
+
+      <sect2>
+        <title>JavaScript API</title>
+
+        <para>Since WebSocket technology is intended to be used particularly
+        from the browser applications, there is need of an API web developers
+        can use. The most widespread programming language of web browser
+        client applications is JavaScript and so is the WebSockets API created
+        for.</para>
+      </sect2>
     </sect1>
 
     <sect1>
@@ -462,7 +650,7 @@ and this is the second one
   </chapter>
 
   <chapter id="chap-xmpp-in-javascript">
-    <title>XMPP client in Javascript</title>
+    <title>XMPP client in JavaScript</title>
 
     <para>Describe the tools that can be used to implement RTC in WB (and
     which were used to implement Celebrio Talker)</para>
@@ -566,7 +754,189 @@ and this is the second one
 
       <isbn>978-0-596-52126-4</isbn>
 
-      <pagenums>310 (7, 16, ...)</pagenums>
+      <pagenums>310 (7, 16, )</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>definitive-guide-to-ws</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Vanessa</firstname>
+
+          <surname>Wang</surname>
+        </author>
+
+        <author>
+          <firstname>Frank</firstname>
+
+          <surname>Salim</surname>
+        </author>
+
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Moskovits</surname>
+        </author>
+      </authorgroup>
+
+      <title>The Definitive Guide to HTML5 WebSocket</title>
+
+      <subtitle>Build real-time web applications with HTML5</subtitle>
+
+      <publisher>
+        <publishername>Apress</publishername>
+      </publisher>
+
+      <pubdate>2012</pubdate>
+
+      <isbn>978-1430247401</isbn>
+
+      <pagenums>210 (140, 156, )</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>definitive-guide-to-html5</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Adam</firstname>
+
+          <surname>Freeman</surname>
+        </author>
+      </authorgroup>
+
+      <title>The Definitive Guide to HTML5 - TODO cite from page 873
+      multimedia chapter</title>
+
+      <publisher>
+        <publishername>Apress</publishername>
+      </publisher>
+
+      <pubdate>2011</pubdate>
+
+      <isbn>978-1-4302-3960-4</isbn>
+
+      <pagenums>1080</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>js-definitive-guide</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>David</firstname>
+
+          <surname>Flanagan</surname>
+        </author>
+      </authorgroup>
+
+      <title>JavaScript: The Definitive Guide</title>
+
+      <publisher>
+        <publishername>O'Reilly Media</publishername>
+      </publisher>
+
+      <pubdate>2011</pubdate>
+
+      <isbn>978-0-596-80552-4</isbn>
+
+      <pagenums>1100 (333)</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>async-javascript</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Trevor</firstname>
+
+          <surname>Burnham</surname>
+        </author>
+      </authorgroup>
+
+      <title>Async JavaScript</title>
+
+      <subtitle>Build More Responsive Apps with Less Code</subtitle>
+
+      <publisher>
+        <publishername>The Pragmatic Programmers</publishername>
+      </publisher>
+
+      <pubdate>2012</pubdate>
+
+      <isbn>978-1-93778-527-7</isbn>
+
+      <pagenums>104</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>realtime-web-apps</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jason</firstname>
+
+          <surname>Lengstorf</surname>
+        </author>
+
+        <author>
+          <firstname>Phil</firstname>
+
+          <surname>Leggetter</surname>
+        </author>
+      </authorgroup>
+
+      <title>Realtime Web Apps</title>
+
+      <subtitle>HTML5 WebSocket, Pusher, And The Web's Next Big
+      Thing</subtitle>
+
+      <publisher>
+        <publishername>Apress</publishername>
+      </publisher>
+
+      <pubdate>2013</pubdate>
+
+      <isbn>978-1430246206</isbn>
+
+      <pagenums>400</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>pro-html5-programming</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Lubbers</surname>
+        </author>
+
+        <author>
+          <firstname>Frank</firstname>
+
+          <surname>Salim</surname>
+        </author>
+
+        <author>
+          <firstname>Brian</firstname>
+
+          <surname>Albers</surname>
+        </author>
+      </authorgroup>
+
+      <title>Pro HTML5 Programming</title>
+
+      <publisher>
+        <publishername>Apress</publishername>
+      </publisher>
+
+      <pubdate>2011</pubdate>
+
+      <isbn>978-1-4302-3864-5</isbn>
+
+      <pagenums>352 (165, ...)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -892,7 +1262,7 @@ and this is the second one
     </biblioentry>
 
     <biblioentry>
-      <abbrev>skype-license</abbrev>
+      <abbrev>apache-core-features</abbrev>
 
       <author>
         <surname>The Apache Software Foundation</surname>
@@ -947,32 +1317,6 @@ and this is the second one
     </biblioentry>
 
     <biblioentry>
-      <abbrev>ws-http-overhead</abbrev>
-
-      <authorgroup>
-        <author>
-          <firstname>Frank</firstname>
-
-          <surname>Greco</surname>
-        </author>
-
-        <author>
-          <firstname>Peter</firstname>
-
-          <surname>Lubbers</surname>
-        </author>
-      </authorgroup>
-
-      <title>HTML5 Web Sockets: A Quantum Leap in Scalability for the
-      Web</title>
-
-      <pubdate>2012 [retrieved 2/23/2013]</pubdate>
-
-      <releaseinfo>from <ulink
-      url="http://www.websocket.org/quantum.html">http://www.websocket.org/quantum.html</ulink></releaseinfo>
-    </biblioentry>
-
-    <biblioentry>
       <abbrev>rfc-ws</abbrev>
 
       <authorgroup>
@@ -997,6 +1341,31 @@ and this is the second one
 
       <publisher>
         <publishername>Internet Engineering Task Force (IETF)</publishername>
+      </publisher>
+
+      <issn>2070-1721</issn>
+
+      <releaseinfo>from <ulink
+      url="http://tools.ietf.org/html/rfc6455">http://tools.ietf.org/html/rfc6455</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ws-proxy</abbrev>
+
+      <author>
+        <firstname>Peter</firstname>
+
+        <surname>Lubbers</surname>
+      </author>
+
+      <title>How HTML5 Web Sockets Interact With Proxy Servers</title>
+
+      <subtitle>Request for Comments: 6455</subtitle>
+
+      <pubdate>3/16/2011 [retrieved 2/24/2013]</pubdate>
+
+      <publisher>
+        <publishername>InfoQ</publishername>
       </publisher>
 
       <issn>2070-1721</issn>
