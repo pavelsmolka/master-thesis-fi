@@ -298,8 +298,8 @@
         comparsion of 1000 (A), 10000 (B) and 100000 (C) clients polling the
         server every second with the message 20 characters long, both using
         classic HTTP requests and WebSockets technology (mentioned in <xref
-        linkend="chap-ws" />). <citation>pro-html5-programming</citation>
-        </para>
+        linkend="chap-ws" />).
+        <citation>pro-html5-programming</citation></para>
 
         <figure id="fig-http-overhead">
           <title>Comparison of the unnecessary network overhead between the
@@ -515,7 +515,7 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         features are handled by the WebSocket API and the transmission is
         transparent for the application layer above (for example JavaScript
         API) so that that every message appears in the same state as it was
-        sent. </para>
+        sent.</para>
 
         <para>There are several special features concerning WS frames, one of
         the interesting is masking<indexterm>
@@ -592,8 +592,9 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <computeroutput>onerror</computeroutput> and
         <computeroutput>onclose</computeroutput>. The names are quite
         self-explanatory, they serve as the event listeners watching the
-        incoming activity. The callback registration can look as
-        follows:</para>
+        incoming activity - anytime the websocket obtains a message, its
+        status changes or an error occurs, the respective callback is fired.
+        The callback registration can look as follows:</para>
 
         <programlisting>connection.onmessage = function (message) {
   console.log('We got a message: ' + message.data);
@@ -608,7 +609,7 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <computeroutput>CONNECTING</computeroutput>,
         <computeroutput>OPEN</computeroutput>,
         <computeroutput>CLOSING</computeroutput> or
-        <computeroutput>CLOSED</computeroutput>. </para>
+        <computeroutput>CLOSED</computeroutput>.</para>
 
         <para>Sending the data to the server is also quite straightforward.
         Either <computeroutput>DOMString</computeroutput>,
@@ -633,12 +634,30 @@ connection.send(binary.buffer);
 var file = document.querySelector('input[type="file"]').files[0];
 connection.send(file);</programlisting>
 
-        <para></para>
+        <para>To sum it up, using WebSockets became a very simple and elegant
+        way to provide real-time communication channel between web browser and
+        WS server. The main drawback of WS is lack of support not only in the
+        older versions of web browsers but also in the mobile platform
+        browsers. Currently less than 60 % of users can make use of WebSocket
+        full support. <citation>ws-caniuse</citation> Particularly, all
+        versions of Internet Explorer below 10 (which means more than 98 % of
+        IE users in November 2012) <citation>ie-statistics</citation> does not
+        implement WebSockets JavaScript API. There are two favourable aspects
+        in favour of WebSockets. Firstly, more and more web browsers add
+        JavaScript API to support WebSockets. Secondly, the ratio of clients
+        who use old version of the web browser without WS support tends to
+        diminish. Anyway, if the real-time functionality constitutes the
+        application core functionality, there is a strong need to offer
+        fallback technology that every browser supports - usually represented
+        by HTTP long polling or streaming mechanism, described in <xref
+        linkend="chap-http-requests" />.</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Existing RTC frameworks</title>
+
+      <para>TODO</para>
 
       <para>Actually, there are other options such as using various browser
       plugins (e.g. Adobe Flash) to provide the base layer for TCP
@@ -707,9 +726,9 @@ connection.send(file);</programlisting>
     <sect1 id="chap-xmpp-ws">
       <title>XMPP over WebSockets</title>
 
-      <para> Usually if the WebSockets are used, the XMPP server needs one
+      <para>Usually if the WebSockets are used, the XMPP server needs one
       extra layer, usually implemented as the server plugin, to be able to
-      communicate directly with the web browser. </para>
+      communicate directly with the web browser.</para>
 
       <para>http://blog.superfeedr.com/xmpp-over-websockets/</para>
 
@@ -1540,6 +1559,36 @@ connection.send(file);</programlisting>
 
       <releaseinfo>from <ulink
       url="http://www.iana.org/assignments/websocket/websocket.xml">http://www.iana.org/assignments/websocket/websocket.xml</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ws-caniuse</abbrev>
+
+      <author>
+        <surname>StatCounter GlobalStats</surname>
+      </author>
+
+      <title>Can I use Web Sockets?</title>
+
+      <pubdate>2/2013 [retrieved 3/3/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://caniuse.com/websockets">http://caniuse.com/websockets</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ie-statistics</abbrev>
+
+      <author>
+        <surname>Terabyte Media</surname>
+      </author>
+
+      <title>Web Browser Usage Statistics</title>
+
+      <pubdate>12/2012 [retrieved 3/3/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.statowl.com/web_browser_usage_by_version.php?limit%5B%5D=ie">http://www.statowl.com/web_browser_usage_by_version.php?limit%5B%5D=ie</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
