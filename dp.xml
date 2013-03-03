@@ -704,15 +704,175 @@ connection.send(file);</programlisting>
     clients are standalone applications able to open TCP connection and listen
     to the stream opened by the server.</para>
 
-    <sect1>
-      <title>Fundamental bulding blocks in XMPP</title>
+    <para>XMPP stands for communication protocol handling not only sending and
+    receiving the messages, but also presence notification, contact list
+    (roster) management and others. The architecture is distributed and
+    decentralized. There is no central or top level XMPP server. Anyone can
+    run XMPP server, very similarly as HTTP or FTP server. Identification and
+    recognition on the network is also similar - XMPP relies on Domain Name
+    System (DNS) so that every server is identified via string domain name
+    with arbitrary subdomain level (e.g. xmpp.example.com or just
+    example.org). <citation>xmpp-the-definitive-guide</citation></para>
 
-      <para>Mention the terms as stanza, roster, describe the subscription
-      mechanism.</para>
+    <para>The user names have the same structure as e-mail addresses so the
+    user name is followed by at sign and the server domain name. This rule
+    also guarantees that every XMPP user is registered at the certain server.
+    If there is any message or notification for the given user, her
+    <quote>home</quote> server is looked up first, the message is transferred
+    to that server first and then, the respective server (that the user
+    belongs to) is responsible for delivering the message to the user or
+    saving it until the user logs in. Therefore, two possible connection types
+    take place in XMPP. Client-to-server communication is the first one, when
+    the clients can talk only to their <quote>home</quote> server. Then,
+    server-to-server communication is designed for delivering the messages to
+    the users at different domains. When two servers are exchanging any data,
+    direct connection to the target server is established. This approach is
+    dissimilar to the way SMTP servers exchange e-mail messages. It helps to
+    prevent address spoofing or spamming.
+    <citation>xmpp-the-definitive-guide</citation></para>
+
+    <para>XMPP has been chosen as the communication protocol for this thesis
+    topic - Talker application. XMPP has been verified by big companies such
+    as Google or Facebook. In addition, the openness of the protocol allows
+    very easy connection to existing wide communication networks, using their
+    server infrastructure, client software and existing user base.</para>
+
+    <sect1>
+      <title>XML Stanzas</title>
+
+      <para>As mentioned in the introduction to this chapter, when XMPP
+      connection is established, two streams are opened and both the client
+      and the server can send any XML elements at any time. The meanings of
+      various pieces of XML are described in this section.</para>
+
+      <para>There are three three basic XML elements that every XMPP
+      communication consists of. Those are
+      <computeroutput>&lt;message/&gt;</computeroutput>,
+      <computeroutput>&lt;presence/&gt;</computeroutput> and
+      <computeroutput>&lt;iq/&gt;</computeroutput> (which stands for
+      Info/Query), altogether called
+      <computeroutput>Stanza</computeroutput><indexterm>
+          <primary>stanza</primary>
+        </indexterm>s. <citation>xmpp-the-definitive-guide</citation> Each
+      stanza element usually contains several attributes which specify the
+      exact meaning of it. The actual content is usually placed in the element
+      body. Example message<indexterm>
+          <primary>XMPP</primary>
+
+          <secondary>message</secondary>
+        </indexterm> stanza can look like this:</para>
+
+      <programlisting>&lt;message from="pavel.smolka@celebrio.cz/talker"
+         to="tomas.pitner@celebrio.cz"
+         type="chat"&gt;
+    &lt;body&gt;Hello, how are you?&lt;/body&gt;
+&lt;/message&gt;</programlisting>
+
+      <para>The attributes <computeroutput>from</computeroutput> and
+      <computeroutput>to</computeroutput> stand for the sender and recipient
+      of the message. Actually, the value the sender sets to the
+      <computeroutput>from</computeroutput> attribute (or whether she entirely
+      leaves it out) does not matter. The <quote>home</quote> XMPP server the
+      sender is registered at (in this example, it would be the one running at
+      <computeroutput>celebrio.cz</computeroutput>) has to set the from
+      attribute according to the real user name and domain name. This is one
+      of the interesting defensive mechanisms distinguishing XMPP from other
+      communication protocols as SMTP.</para>
+
+      <para>You might have noticed that <computeroutput>from</computeroutput>
+      field does not contain only the XMPP address. There is a
+      <emphasis>resource</emphasis><indexterm>
+          <primary>XMPP</primary>
+
+          <secondary>resource</secondary>
+        </indexterm> identifier after the domain name. Since it is possible to
+      connect multiple times with the same user name, the resource makes a
+      difference between the sessions of the same user. In addition, it is
+      useful information for other peers the user might communicate with. It
+      is usual to set the resource field according to the place the user logs
+      from or the device she uses.</para>
+
+      <para>Message stanza receiving is not acknowledged so the sender has no
+      information whether it has been delivered successfulIy or not. On the
+      contrary, IQ stanza <indexterm>
+          <primary>XMPP</primary>
+
+          <secondary>IQ</secondary>
+        </indexterm> can be used in case the sender requires the answer - it
+      is usually a <emphasis>query</emphasis>. The best example is obtaining
+      the contact list - in XMPP terms called
+      <emphasis>Roster</emphasis><indexterm>
+          <primary>XMPP</primary>
+
+          <secondary>roster</secondary>
+        </indexterm>:</para>
+
+      <programlisting>&lt;iq id="123456789" type="get"&gt;
+  &lt;query xmlns="<emphasis>jabber:iq:roster</emphasis>"/&gt;
+&lt;/iq&gt;</programlisting>
+
+      <para>Then, the server sends the result as another IQ stanza (notice
+      that <computeroutput>id</computeroutput> attribute remains the same
+      while the <computeroutput>type</computeroutput> attribute changed):
+      <citation>xmpp-the-definitive-guide</citation></para>
+
+      <programlisting>&lt;iq id="123456789" type="result"&gt;
+  &lt;query xmlns="jabber:iq:roster"&gt;
+    &lt;item jid="whiterabbit@wonderland.lit"/&gt;
+    &lt;item jid="lory@wonderland.lit"/&gt;
+    &lt;item jid="mouse@wonderland.lit"/&gt;
+    &lt;item jid="sister@realworld.lit"/&gt;
+  &lt;/query&gt;
+&lt;/iq&gt;</programlisting>
+
+      <sect2>
+        <title>Subscription mechanism</title>
+
+        <para>The third letter in the abbreviation XMPP stands for
+        <emphasis>presence</emphasis><indexterm>
+            <primary>XMPP</primary>
+
+            <secondary>presence</secondary>
+          </indexterm>, practically represented by sending
+        <computeroutput>presence</computeroutput> stanzas. It is one of the
+        important signs of real-time communication (not only in XMPP but
+        overall) that the peers can see each other presence - whether the
+        other side is online, alternatively whether it is available or busy.
+        However this functionality is desired, it might slip to a huge privacy
+        breach when anyone could see your presence status.</para>
+
+        <para>XMPP solves the privacy problem with the subscription mechanism.
+        Each user has full control over the peers who can monitor her online
+        status. If anyone else wants to track the presence status, the
+        subscription request must be sent. When received, the user decides
+        whether the permission will be granted or not. Unfortunatelly, the
+        subscription request can be blocked by the respective
+        <quote>home</quote> XMPP server of the user we try to reach. To be
+        tangible: there are two widely used XMPP providers -
+        <computeroutput>jappix.com</computeroutput> and
+        <computeroutput>gmail.com</computeroutput>. If the user of the former
+        sends the subscription to another user registered at the latter, it is
+        never delivered. It is one of the drawbacks of the opened protocol
+        that one can never be sure that the other party co-operates.</para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Prosody server</title>
+
+      <para>TODO</para>
+
+      <para>mention other possibilities</para>
+
+      <para>describe configuration, modules</para>
+
+      <para>mention LUA</para>
     </sect1>
 
     <sect1 id="chap-bosh">
       <title>XMPP over BOSH</title>
+
+      <para>TODO</para>
 
       <para>Describe BOSH (http://xmpp.org/extensions/xep-0124.html)</para>
 
@@ -750,7 +910,7 @@ connection.send(file);</programlisting>
     </sect1>
 
     <sect1>
-      <title>Inter-process communication</title>
+      <title>Pub-sub extensions</title>
 
       <para>Pub-sub extensions for inter-process communication.</para>
 
@@ -794,12 +954,12 @@ connection.send(file);</programlisting>
 
       <para>Describe Javascript client-side MVC frameworks overall, compare,
       tell why we used Ember</para>
+    </sect1>
 
-      <sect2>
-        <title>Subsection about Ember...</title>
+    <sect1>
+      <title>Contact list</title>
 
-        <para></para>
-      </sect2>
+      <para></para>
     </sect1>
   </chapter>
 
@@ -863,7 +1023,7 @@ connection.send(file);</programlisting>
 
       <isbn>978-0-596-52126-4</isbn>
 
-      <pagenums>310 (7, 16, )</pagenums>
+      <pagenums>310 (7, 13, 14, 16, )</pagenums>
     </biblioentry>
 
     <biblioentry>
