@@ -903,16 +903,44 @@ connection.send(file);</programlisting>
       an error. So, the XMPP part of the communication is separated from BOSH
       quite well: the former is represented by payload elements inside the
       <computeroutput>body</computeroutput>, the latter consists of
-      <computeroutput>body</computeroutput> attributes.</para>
+      <computeroutput>body</computeroutput> attributes. Have a look at example
+      of BOSH request: <citation>xep-0124</citation></para>
+
+      <programlisting>POST /webclient HTTP/1.1
+Host: httpcm.example.com
+Accept-Encoding: gzip, deflate
+Content-Type: text/xml; charset=utf-8
+Content-Length: 188
+
+&lt;body rid='1249243562'
+      sid='SomeSID'
+      xmlns='http://jabber.org/protocol/httpbind'&gt;
+  &lt;message to='contact@example.com'
+           xmlns='jabber:client'&gt;
+    &lt;body&gt;Good morning!&lt;/body&gt;
+  &lt;/message&gt;
+  &lt;message to='friend@example.com'
+           xmlns='jabber:client'&gt;
+    &lt;body&gt;Hey, what&amp;apos;s up?&lt;/body&gt;
+  &lt;/message&gt;
+&lt;/body&gt;</programlisting>
+
+      <para>As you can see, the request header is ordinary HTTP header. So
+      much for the HTTP part. The request body consists of
+      <computeroutput>body</computeroutput> element which represents BOSH
+      layer, along with the element attributes (plus namespace). Ultimately,
+      the child nodes of the <computeroutput>body</computeroutput> represent
+      two XMPP stanzas (both of message type). It is obvious that multiple
+      XMPP stanzas can be transmitted via single BOSH request.</para>
 
       <para>BOSH protocol is an important part of the Talker application
-      implemented as a programming part of the thesis. It bears the
-      disadvantages of HTTP bidirectional communication, as described before.
-      However, it is the only reliable technology nowadays. There are several
-      mature client-side libraries using BOSH (such as Strophe.js we used) and
-      it is also easy to install, configure and run BOSH extension at the
-      server side. HTTP server usually hands over the BOSH HTTP request to
-      XMPP server with relevant module enabled, as described in
+      implemented as a programming part of the thesis. Despite it bears the
+      disadvantages of HTTP bidirectional communication, as described before,
+      it is the only reliable technology nowadays. There are several mature
+      client-side libraries using BOSH (such as Strophe.js we used) and it is
+      also easy to install, configure and run BOSH extension at the server
+      side. HTTP server usually hands over the BOSH HTTP request to XMPP
+      server with relevant module enabled, as described in
       <citation>setting-up-bosh</citation>. However, the server side XMPP is
       not the topic of this thesis so it is not further discussed.</para>
     </sect1>
