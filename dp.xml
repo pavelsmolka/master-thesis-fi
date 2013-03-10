@@ -259,7 +259,7 @@
       client. Therefore, such TCP connection is of no use for RTC. TODO
       figure.</para>
 
-      <sect2>
+      <sect2 id="chap-http-long-polling">
         <title>HTTP long polling<indexterm>
             <primary>HTTP</primary>
 
@@ -857,30 +857,64 @@ connection.send(file);</programlisting>
       </sect2>
     </sect1>
 
-    <sect1>
-      <title>Prosody server</title>
-
-      <para>TODO</para>
-
-      <para>mention other possibilities</para>
-
-      <para>describe configuration, modules</para>
-
-      <para>mention LUA</para>
-    </sect1>
-
     <sect1 id="chap-bosh">
       <title>XMPP over BOSH</title>
 
-      <para>TODO</para>
+      <para>Having described XMPP as communication protocol over TCP, it might
+      be unclear how it is related to the thesis topic. XMPP is nice and
+      mature technology and it would be nice to use it in web browser but it
+      does not support communication over HTTP. Fortunately, XMPP offers many
+      extensions (indeed, the first letter X stands for
+      <quote>extensible</quote>) providing additional functionality. In fact,
+      those are XMPP extension <emphasis>protocols</emphasis> and so they are
+      called XEPs<indexterm>
+          <primary>XEP</primary>
+        </indexterm>.</para>
 
-      <para>Describe BOSH (http://xmpp.org/extensions/xep-0124.html)</para>
+      <para>This section briefly describes one of XEP exensions called
+      BOSH<indexterm>
+          <primary>BOSH</primary>
+        </indexterm> (XEP-0124) designed for transferring XMPP over
+      HTTP.<footnote>
+          <para>In fact, there are two more XEPs related to HTTP. First of
+          them, XEP-0025: Jabber HTTP Polling, has been replaced by BOSH. It
+          is obsolete and recommended not to be used any longer.
+          <citation>xep-0025</citation> The other one is XEP-0206: XMPP Over
+          BOSH. It is currently used standard but it constitutes just a
+          supplement for BOSH. XEP-0206 describes mainly the session creation
+          and authentication in BOSH. <citation>xep-0206</citation></para>
+        </footnote> <citation>xep-0124</citation> The idea behind this
+      extension is very simple: BOSH uses HTTP long polling technique
+      (described in <xref linkend="chap-http-long-polling" />) to imitate
+      bidirectional TCP communication necessary for XMPP. We can imagine BOSH
+      (it is a protocol itself) as a middle layer protocol or wrapper protocol
+      between HTTP (only capable of sending requests from client to server)
+      and XMPP (understanding only the XML stanzas). BOSH requests and
+      responses are subset of all conceivable HTTP requests or responses (they
+      include all HTTP features such as HTTP method in request or status code
+      in the response). The constraint defined by BOSH protocol restricts the
+      body part to have a specific structure.</para>
 
-      <para>and XMPP Over BOSH
-      (http://xmpp.org/extensions/xep-0206.html).</para>
+      <para>Each BOSH request or response body is valid XML, which wraps up
+      XMPP stanzas in special <computeroutput>&lt;body /&gt;</computeroutput>
+      element. For the purposes of the protocol itself, it is also possible to
+      send just the <computeroutput>body</computeroutput> element with no
+      child (XMPP) nodes - for example when starting the session or reporting
+      an error. So, the XMPP part of the communication is separated from BOSH
+      quite well: the former is represented by payload elements inside the
+      <computeroutput>body</computeroutput>, the latter consists of
+      <computeroutput>body</computeroutput> attributes.</para>
 
-      <para>Later on, description of BOSH extension, including the advantages
-      and limitations. Describe also the connection to HTTP protocol.</para>
+      <para>BOSH protocol is an important part of the Talker application
+      implemented as a programming part of the thesis. It bears the
+      disadvantages of HTTP bidirectional communication, as described before.
+      However, it is the only reliable technology nowadays. There are several
+      mature client-side libraries using BOSH (such as Strophe.js we used) and
+      it is also easy to install, configure and run BOSH extension at the
+      server side. HTTP server usually hands over the BOSH HTTP request to
+      XMPP server with relevant module enabled, as described in
+      <citation>setting-up-bosh</citation>. However, the server side XMPP is
+      not the topic of this thesis so it is not further discussed.</para>
     </sect1>
 
     <sect1 id="chap-xmpp-ws">
@@ -1749,6 +1783,127 @@ connection.send(file);</programlisting>
 
       <releaseinfo>from <ulink
       url="http://www.statowl.com/web_browser_usage_by_version.php?limit%5B%5D=ie">http://www.statowl.com/web_browser_usage_by_version.php?limit%5B%5D=ie</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xep-0124</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Ian</firstname>
+
+          <surname>Paterson</surname>
+        </author>
+
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Saint-Andre</surname>
+        </author>
+
+        <author>
+          <firstname>Dave</firstname>
+
+          <surname>Smith</surname>
+        </author>
+
+        <author>
+          <firstname>Jack</firstname>
+
+          <surname>Moffit</surname>
+        </author>
+      </authorgroup>
+
+      <title>XEP-0124: Bidirectional-streams Over Synchronous HTTP
+      (BOSH)</title>
+
+      <publisher>
+        <publishername>XMPP Standards Foundation</publishername>
+      </publisher>
+
+      <pubdate>2010 [retrieved 3/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://xmpp.org/extensions/xep-0124.html">http://xmpp.org/extensions/xep-0124.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xep-0025</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Joe</firstname>
+
+          <surname>Hildebrand</surname>
+        </author>
+
+        <author>
+          <firstname>Craig</firstname>
+
+          <surname>Kaes</surname>
+        </author>
+
+        <author>
+          <firstname>David</firstname>
+
+          <surname>Waite</surname>
+        </author>
+      </authorgroup>
+
+      <title>XEP-0025: Jabber HTTP Polling</title>
+
+      <publisher>
+        <publishername>XMPP Standards Foundation</publishername>
+      </publisher>
+
+      <pubdate>2009 [retrieved 3/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://xmpp.org/extensions/xep-0025.html">http://xmpp.org/extensions/xep-0025.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xep-0206</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Ian</firstname>
+
+          <surname>Paterson</surname>
+        </author>
+
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Saint-Andre</surname>
+        </author>
+      </authorgroup>
+
+      <title>XEP-0206: XMPP Over BOSH</title>
+
+      <publisher>
+        <publishername>XMPP Standards Foundation</publishername>
+      </publisher>
+
+      <pubdate>2010 [retrieved 3/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://xmpp.org/extensions/xep-0206.html">http://xmpp.org/extensions/xep-0206.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>setting-up-bosh</abbrev>
+
+      <author>
+        <surname>Prosody</surname>
+      </author>
+
+      <title>Setting up a BOSH server </title>
+
+      <pubdate>[retrieved 3/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://prosody.im/doc/setting_up_bosh">http://prosody.im/doc/setting_up_bosh</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
