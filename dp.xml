@@ -515,7 +515,8 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         features are handled by the WebSocket API and the transmission is
         transparent for the application layer above (for example JavaScript
         API) so that that every message appears in the same state as it was
-        sent.</para>
+        sent. This means the message, single portion of WS communication, can
+        be fragmented during the transmission.</para>
 
         <para>There are several special features concerning WS frames, one of
         the interesting is masking<indexterm>
@@ -904,9 +905,7 @@ connection.send(file);</programlisting>
       quite well: the former is represented by payload elements inside the
       <computeroutput>body</computeroutput>, the latter consists of
       <computeroutput>body</computeroutput> attributes. Have a look at example
-      of BOSH request: <citation>xep-0124</citation></para>
-
-      <programlisting>POST /webclient HTTP/1.1
+      of BOSH request: <citation>xep-0124</citation><programlisting>POST /webclient HTTP/1.1
 Host: httpcm.example.com
 Accept-Encoding: gzip, deflate
 Content-Type: text/xml; charset=utf-8
@@ -915,23 +914,24 @@ Content-Length: 188
 &lt;body rid='1249243562'
       sid='SomeSID'
       xmlns='http://jabber.org/protocol/httpbind'&gt;
-  &lt;message to='contact@example.com'
+  &lt;message to='tomp@example.com'
            xmlns='jabber:client'&gt;
     &lt;body&gt;Good morning!&lt;/body&gt;
   &lt;/message&gt;
-  &lt;message to='friend@example.com'
+  &lt;message to='pavel@example.com'
            xmlns='jabber:client'&gt;
     &lt;body&gt;Hey, what&amp;apos;s up?&lt;/body&gt;
   &lt;/message&gt;
-&lt;/body&gt;</programlisting>
-
-      <para>As you can see, the request header is ordinary HTTP header. So
-      much for the HTTP part. The request body consists of
+&lt;/body&gt;</programlisting> As you can see, the request header is ordinary
+      HTTP header. So much for the HTTP part. The request body consists of
       <computeroutput>body</computeroutput> element which represents BOSH
-      layer, along with the element attributes (plus namespace). Ultimately,
-      the child nodes of the <computeroutput>body</computeroutput> represent
-      two XMPP stanzas (both of message type). It is obvious that multiple
-      XMPP stanzas can be transmitted via single BOSH request.</para>
+      layer, along with the element attributes (plus namespace).
+      <computeroutput>sid</computeroutput> attribute represents the session ID
+      while <computeroutput>rid</computeroutput> stands for request ID and
+      gets incremented with each request. Ultimately, the child nodes of the
+      <computeroutput>body</computeroutput> represent two XMPP stanzas (both
+      of message type). It is obvious that multiple XMPP stanzas can be
+      transmitted via single BOSH request.</para>
 
       <para>BOSH protocol is an important part of the Talker application
       implemented as a programming part of the thesis. Despite it bears the
@@ -948,19 +948,71 @@ Content-Length: 188
     <sect1 id="chap-xmpp-ws">
       <title>XMPP over WebSockets</title>
 
-      <para>Usually if the WebSockets are used, the XMPP server needs one
-      extra layer, usually implemented as the server plugin, to be able to
-      communicate directly with the web browser.</para>
+      <para>Since there is possibility to transmit any data from the web
+      browser application to the server via WebSockets, it could be handy to
+      transfer XMPP stanzas using WS as well. Using WebSockets saves a lot of
+      overhead and fixes some issues that can happen with BOSH (for example
+      unreliability of HTTP). Generally it works, yet the programmer should be
+      wary of several pitfalls that WebSockets bring. First, the server side
+      must accept WebSockets connection. Usually, the XMPP servers does
+      provide such functionality through addons or modules.<footnote>
+          <para>Additional module for Prosody server has been used as well
+          when implementing Talker application. The process of installation
+          includes downloading the module, adding it to the path that Prosody
+          searches for modules. Then, it must be enabled in the configuration
+          file. Moreover, <computeroutput>luajit</computeroutput> and
+          <computeroutput>liblua5.1-bitop0</computeroutput> packages had to be
+          downloaded for the module to work correctly (assuming Debian/Ubuntu
+          on the server side).</para>
+        </footnote> Provided that the WebSocket extension to the XMPP server
+      is running on localhost, using WS to connect to the server is as simple
+      as follows:</para>
 
-      <para>http://blog.superfeedr.com/xmpp-over-websockets/</para>
+      <programlisting>var ws = new WebSocket("ws://localhost:5280/xmpp-websocket/", "xmpp");
+// XMPP handshake takes place here, omitting in the example
+ws.send(
+ "&lt;message to='lasaris@example.com' xmlns='jabber:client'&gt; \
+    &lt;body&gt;Hello, lab!&lt;/body&gt; \
+  &lt;/message&gt;"
+);</programlisting>
 
-      <para>luajit - lua jit compiler</para>
+      <para>Probably the most important difference compared to BOSH is that
+      every WebSocket message (i.e. one chunk of incoming or outcoming
+      communication - can be compared to BOSH request) can contain only one
+      XMPP stanza. <citation>xmpp-over-websockets</citation> It means that the
+      peer cannot send more WS messages together, even if they are available
+      by the time the WS message is sent.</para>
 
-      <para>It was neccessary to install: apt balíky luajit +
-      liblua5.1-bitop0</para>
+      <para>The main drawback of using XMPP over WebSockets is still partial
+      lack of support both in the web browsers (which includes WS support
+      itself and the JavaScript XMPP libraries) and on the XMPP servers.
+      Nevertheless, there is huge trend of implementing it at all
+      sides.<footnote>
+          <para>You might want to have a look at some of the current
+          discussions concerning client-side (i.e. JavaScript)
+          libraries:</para>
+
+          <para><itemizedlist>
+              <listitem>
+                <para><ulink
+                url="https://github.com/metajack/strophejs/issues/68">https://github.com/metajack/strophejs/issues/68</ulink></para>
+              </listitem>
+
+              <listitem>
+                <para><ulink
+                url="https://github.com/metajack/strophejs/pull/95">https://github.com/metajack/strophejs/pull/95</ulink></para>
+              </listitem>
+
+              <listitem>
+                <para><ulink
+                url="http://stackoverflow.com/questions/1850162/">http://stackoverflow.com/questions/1850162/</ulink></para>
+              </listitem>
+            </itemizedlist></para>
+        </footnote></para>
 
       <para>TODO create diagram here (XMPP server - plugin - incoming
-      connection vs xmpp server - standard connection).</para>
+      connection vs xmpp server - standard connection). Probably for both BOSH
+      and WS.</para>
     </sect1>
 
     <sect1>
@@ -972,7 +1024,7 @@ Content-Length: 188
     </sect1>
 
     <sect1>
-      <title>Pub-sub extensions</title>
+      <title>Pub-sub extensions - Vynechat? zatím ano</title>
 
       <para>Pub-sub extensions for inter-process communication.</para>
 
@@ -992,6 +1044,8 @@ Content-Length: 188
     programming</para>
 
     <para>Strophe plugins</para>
+
+    <para>JSJaC - https://github.com/sstrigler/JSJaC/</para>
 
     <para>Possible server-side implementations (JAXL, XMPPHP, ...)</para>
   </chapter>
@@ -1932,6 +1986,23 @@ Content-Length: 188
 
       <releaseinfo>from <ulink
       url="http://prosody.im/doc/setting_up_bosh">http://prosody.im/doc/setting_up_bosh</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xmpp-over-websockets</abbrev>
+
+      <author>
+        <firstname>Jack</firstname>
+
+        <surname>Moffit</surname>
+      </author>
+
+      <title>An XMPP Sub-protocol for WebSocket</title>
+
+      <pubdate>2/25/2013 [retrieved 3/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://datatracker.ietf.org/doc/draft-moffitt-xmpp-over-websocket/">http://datatracker.ietf.org/doc/draft-moffitt-xmpp-over-websocket/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
