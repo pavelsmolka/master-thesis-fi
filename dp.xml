@@ -54,6 +54,10 @@
 
       <keyword>JavaScript</keyword>
 
+      <keyword>WebSockets</keyword>
+
+      <keyword>BOSH</keyword>
+
       <keyword>TODO</keyword>
     </keywordset>
   </bookinfo>
@@ -229,11 +233,12 @@
       <title>Using HTTP requests</title>
 
       <para>Historicaly the first approach, for a very long time the only one,
-      is hacking HTTP to achieve RTC. The idea is very simple, depicted in
-      TODO figure. Generally, the client sends an extra request and it is not
-      awaiting the response immediately. Instead, the server keeps the request
-      for some time. There are several techniques to achieve such behaviour,
-      in general called <emphasis>Comet</emphasis><indexterm>
+      is hacking HTTP to achieve RTC. The idea is very simple. Generally, the
+      client sends an extra request and it is not awaiting the response
+      immediately. Instead, the server keeps the request for some time and
+      sends the data as it comes in the response. There are several techniques
+      to achieve such behaviour, in general called
+      <emphasis>Comet</emphasis><indexterm>
           <primary>Comet</primary>
         </indexterm>.</para>
 
@@ -267,12 +272,12 @@
           </indexterm></title>
 
         <para>The essence of HTTP long polling springs from the idea of
-        prolonging the time span between two poll requests. In traditional
-        <quote>short polling</quote>, a client sends regular requests to the
-        server and each request attempts to <quote>pull</quote> the available
-        data. If no data is available, an empty reponse is sent.
-        <citation>rfc-bidirectional-http</citation> That generates unnecessary
-        overhead for both client and server.</para>
+        prolonging the time span between two poll requests, depicted at figure
+        TODO. In traditional <quote>short polling</quote>, a client sends
+        regular requests to the server and each request attempts to
+        <quote>pull</quote> the available data. If no data is available, an
+        empty reponse is sent. <citation>rfc-bidirectional-http</citation>
+        That generates unnecessary overhead for both client and server.</para>
 
         <para>On the contrary, long polling tries to reduce this load. After
         receiving the request, the server does not answer immediately and
@@ -738,7 +743,7 @@ connection.send(file);</programlisting>
     very easy connection to existing wide communication networks, using their
     server infrastructure, client software and existing user base.</para>
 
-    <sect1>
+    <sect1 id="chap-xmpp-stanzas">
       <title>XML Stanzas</title>
 
       <para>As mentioned in the introduction to this chapter, when XMPP
@@ -826,7 +831,7 @@ connection.send(file);</programlisting>
   &lt;/query&gt;
 &lt;/iq&gt;</programlisting>
 
-      <sect2>
+      <sect2 id="chap-xmpp-subscriptions">
         <title>Subscription mechanism</title>
 
         <para>The third letter in the abbreviation XMPP stands for
@@ -853,8 +858,10 @@ connection.send(file);</programlisting>
         <computeroutput>jappix.com</computeroutput> and
         <computeroutput>gmail.com</computeroutput>. If the user of the former
         sends the subscription to another user registered at the latter, it is
-        never delivered. It is one of the drawbacks of the opened protocol
-        that one can never be sure that the other party co-operates.</para>
+        not guaranteed it will be delivered (actually, it isn't, see <xref
+        linkend="chap-interoperability-problems" /> for details). It is one of
+        the drawbacks of the opened protocol that one can never be sure that
+        the other party co-operates.</para>
       </sect2>
     </sect1>
 
@@ -1016,24 +1023,86 @@ ws.send(
     </sect1>
 
     <sect1>
-      <title>Jingle</title>
+      <title>Jingle<indexterm>
+          <primary>Jingle</primary>
+        </indexterm><indexterm>
+          <primary>XEP</primary>
+        </indexterm></title>
 
-      <para>Jingle extension - multimedia.</para>
+      <para>Not only can XMPP send text messages but it also supports
+      transferring various multimedia streams. Audio and video above all, yet
+      it is also possible to send raw binary files. All the functionality
+      related to those <quote>advanced</quote> transfers is being managed by
+      XMPP extension called Jingle. According to the protocol extension, the
+      two parties negotiate the data stream using standard IQ stanzas
+      (described in <xref linkend="chap-xmpp-stanzas" />). Then, the stream is
+      established according to the prearranged entries.
+      <citation>xep-0166</citation> </para>
 
-      <para>http://xmpp.org/extensions/xep-0166.html</para>
+      <para>Although Jingle is relatively old and mature XMPP extension, it
+      has not been used in web browsers for a long time. Web browsers had not
+      supported multimedia transfers due to the troublesome bidirectional
+      communication and difficult access to multimedia devices (microphone and
+      webcam). Ergo Jingle has not been used in Talker application either -
+      the main reason for not using Jingle in Talker application is lack of
+      JavaScript libraries supporting it. There is just unofficial
+      Strophe.js<indexterm>
+          <primary>Strophe.js</primary>
+        </indexterm> plugin for Jingle published by Michael Weibel, not very
+      well maintained and relying on the WebRTC technology<indexterm>
+          <primary>WebRTC</primary>
+        </indexterm>.<footnote>
+          <para>See <ulink
+          url="http://candy-chat.github.com/candy-webrtc/">http://candy-chat.github.com/candy-webrtc/</ulink>
+          and <ulink
+          url="https://github.com/mweibel/strophejs-plugins/tree/jingle">https://github.com/mweibel/strophejs-plugins/tree/jingle</ulink>
+          for the references.</para>
+        </footnote> Therefore, Jingle is not described further in the thesis,
+      it is mentioned here just as an option for the future.</para>
+
+      <para>Anyway, C/C++ Jingle libraries seem to be quite mature and ready
+      to be used in the desktop client applications. Above all, there is
+      library developed by Google called libjingle<indexterm>
+          <primary>libjingle</primary>
+        </indexterm>, supporting multi-user audio/video/file transfers.
+      <citation>libjingle</citation> Google seems to beleive that Jingle is
+      the right protocol for developing multimedia client that can be used by
+      everyone. They even sidelined original Google Talk VOIP protocol and
+      switched to Jingle as their <quote>primary signalling protocol for voice
+      calls</quote>, in Gmail, iGoogle and Orkut.
+      <citation>jingle-is-the-future</citation></para>
     </sect1>
 
-    <sect1>
-      <title>Pub-sub extensions - Vynechat? zatím ano</title>
+    <sect1 id="chap-interoperability-problems">
+      <title>Interoperability problems</title>
 
-      <para>Pub-sub extensions for inter-process communication.</para>
+      <para>Google Talk has been the biggest XMPP provider for a long time.
+      Smaller XMPP networks, including Celebrio, took advantage of the
+      distributed environment and interoperability within various XMPP
+      domains. It seems, however, that Google starts to prevent the users
+      registered at other server from contacting Google users. More precisely,
+      the subscription requests (described in <xref
+      linkend="chap-xmpp-subscriptions" />) from other domains are not
+      delivered to Google users. <citation>google-closing-xmpp</citation> It
+      is very unexpected and unpleasant for all - smaller XMPP providers,
+      their users and for the Google users too, after all. Google confirmed
+      that throwing the subscription requests away is an attempt to reduce the
+      amount of spam delivered to Google users.
+      <citation>spammy-invites</citation> The issue is still opened by the
+      time this thesis is submitted.</para>
 
-      <para>http://xmpp.org/extensions/xep-0060.html</para>
+      <para>If Google closes its network for the people from other domains, it
+      would be the second huge social network, along with Facebook, which does
+      provide XMPP to its users but does not allow them to fully collaborate
+      with everyone else. Unlike Facebook, Google users can still send the
+      subscription requests and therefore initiate the connection (in the
+      long-term meaning), but this option can be disabled in the future too.
+      </para>
     </sect1>
   </chapter>
 
   <chapter id="chap-xmpp-in-javascript">
-    <title>XMPP client in JavaScript</title>
+    <title>JavaScript XMPP client</title>
 
     <para>Describe the tools that can be used to implement RTC in WB (and
     which were used to implement Celebrio Talker)</para>
@@ -1077,16 +1146,6 @@ ws.send(
 
       <para></para>
     </sect1>
-  </chapter>
-
-  <chapter id="chap-inter-process">
-    <title>Inter-process Communication Framework</title>
-
-    <para>Implement and describe framework for inter-process communication in
-    Celebrio.</para>
-
-    <para>First, the lightweight one (which we already have), then implement
-    the "heavy" one, if there's enough time.</para>
   </chapter>
 
   <chapter>
@@ -1980,7 +2039,7 @@ ws.send(
         <surname>Prosody</surname>
       </author>
 
-      <title>Setting up a BOSH server </title>
+      <title>Setting up a BOSH server</title>
 
       <pubdate>[retrieved 3/10/2013]</pubdate>
 
@@ -2003,6 +2062,126 @@ ws.send(
 
       <releaseinfo>from <ulink
       url="http://datatracker.ietf.org/doc/draft-moffitt-xmpp-over-websocket/">http://datatracker.ietf.org/doc/draft-moffitt-xmpp-over-websocket/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>google-closing-xmpp</abbrev>
+
+      <author>
+        <firstname>John</firstname>
+
+        <surname>Sullivan</surname>
+      </author>
+
+      <title>Google backslides on federated instant messaging, on
+      purpose?</title>
+
+      <pubdate>3/15/2013 [retrieved 3/31/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://www.fsf.org/blogs/sysadmin/google-backslides-on-federated-instant-messaging-on-purpose">https://www.fsf.org/blogs/sysadmin/google-backslides-on-federated-instant-messaging-on-purpose</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>spammy-invites</abbrev>
+
+      <author>
+        <firstname>Per</firstname>
+
+        <surname>Gustafsson</surname>
+      </author>
+
+      <title>Spammy invites</title>
+
+      <pubdate>2/13/2013 [retrieved 3/31/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://mail.jabber.org/pipermail/operators/2013-February/001571.html">http://mail.jabber.org/pipermail/operators/2013-February/001571.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xep-0166</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Scott</firstname>
+
+          <surname>Ludwig</surname>
+        </author>
+
+        <author>
+          <firstname>Joe</firstname>
+
+          <surname>Beda</surname>
+        </author>
+
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Saint-Andre</surname>
+        </author>
+
+        <author>
+          <firstname>Robert</firstname>
+
+          <surname>McQueen</surname>
+        </author>
+
+        <author>
+          <firstname>Sean</firstname>
+
+          <surname>Egan</surname>
+        </author>
+
+        <author>
+          <firstname>Joe</firstname>
+
+          <surname>Hildebrand</surname>
+        </author>
+      </authorgroup>
+
+      <title>XEP-0166: Jingle</title>
+
+      <publisher>
+        <publishername>XMPP Standards Foundation</publishername>
+      </publisher>
+
+      <pubdate>2009 [retrieved 3/31/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://xmpp.org/extensions/xep-0166.html">http://xmpp.org/extensions/xep-0166.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>libjingle</abbrev>
+
+      <author>
+        <surname>Google Developers</surname>
+      </author>
+
+      <title>About libjingle</title>
+
+      <pubdate>3/23/2012 [retrieved 3/31/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://developers.google.com/talk/libjingle/">https://developers.google.com/talk/libjingle/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>jingle-is-the-future</abbrev>
+
+      <author>
+        <firstname>Dave</firstname>
+
+        <surname>Cridland</surname>
+      </author>
+
+      <title>Google: <quote>The Future is Jingle</quote></title>
+
+      <pubdate>6/23/2011 [retrieved 3/31/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://xmpp.org/2011/06/the-future-is-jingle/">http://xmpp.org/2011/06/the-future-is-jingle/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
