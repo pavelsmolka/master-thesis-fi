@@ -261,8 +261,46 @@
       transmission within the TCP connection has to be in form of separate
       HTTP request/response, always initiated by the client. On no account is
       the server allowed to push any data without respective request from the
-      client. Therefore, such TCP connection is of no use for RTC. TODO
-      figure.</para>
+      client. Therefore, such TCP connection is of no use for RTC.</para>
+
+      <para>The situation is depicted at <xref linkend="fig-http-polling" />
+      and <xref linkend="fig-http-polling-wrong" />. In the former case, a
+      valid sequence of HTTP requests and responses is shown. Nevertheless,
+      there is a delay between the moment the server gets (either generates or
+      receives from third party) the data (2) and the following request (3).
+      Yet it is possible to reduce the latency by shortening the polling time
+      (the time between Response (1.1) and Request (3)), it is still trade-off
+      between the delay and overhead caused by frequent empty request/response
+      pairs.</para>
+
+      <figure id="fig-http-polling">
+        <title>Correct HTTP polling with delay</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="vp/http-polling.pdf" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <figure id="fig-http-polling-wrong">
+        <title>Forbidden HTTP response without respective request</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="vp/http-polling-wrong.pdf" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>On the other hand, <xref linkend="fig-http-polling-wrong" />
+      depicts the forbidden situation of generating HTTP response without
+      request immediately. When the server gets the data (2) it is not allowed
+      to initiate the connection and send HTTP response without appropriate
+      preceding request (2.1). Even though the delay, mentioned in the
+      previous paragraph, can be minimized in this situation, HTTP servers
+      cannot use such technique. To sum it up, response (2.1) is forbidden by
+      HTTP protocol and this situation solution is not valid.</para>
 
       <sect2 id="chap-http-long-polling">
         <title>HTTP long polling<indexterm>
@@ -272,21 +310,34 @@
           </indexterm></title>
 
         <para>The essence of HTTP long polling springs from the idea of
-        prolonging the time span between two poll requests, depicted at figure
-        TODO. In traditional <quote>short polling</quote>, a client sends
-        regular requests to the server and each request attempts to
-        <quote>pull</quote> the available data. If no data is available, an
-        empty reponse is sent. <citation>rfc-bidirectional-http</citation>
-        That generates unnecessary overhead for both client and server.</para>
+        prolonging the time span between two poll requests. In traditional
+        <quote>short polling</quote>, a client sends regular requests to the
+        server and each request attempts to <quote>pull</quote> the available
+        data. If no data is available, an empty reponse is sent.
+        <citation>rfc-bidirectional-http</citation> That generates unnecessary
+        overhead for both client and server.</para>
 
         <para>On the contrary, long polling tries to reduce this load. After
-        receiving the request, the server does not answer immediately and
-        holds the connection. When the server receives (or even makes up by
-        oneself) new data, it carries out the response with the respective
-        content. As soon the client obtains the response, it usually issues a
-        new request immediately so the process can repeat endlessly. If no
-        data appears on the server for certain amount of time, it usually
-        responds with empty data field just to renew the connection.</para>
+        receiving the request, the server <emphasis>does not</emphasis> answer
+        immediately and holds the connection opened. When the server receives
+        (or even makes up by itself) new data, it carries out the response
+        with the respective content, as depicted at <xref
+        linkend="fig-http-long-polling" />.</para>
+
+        <figure id="fig-http-long-polling">
+          <title>HTTP long polling</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/http-long-polling.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>As soon the client obtains the response, it usually issues a new
+        request immediately so the process can repeat endlessly. If no data
+        appears on the server for certain amount of time, it usually responds
+        with empty data field just to renew the connection.</para>
 
         <para>One of the main drawbacks of long polling is header overhead.
         Every chunk of data in RTC applications is usually very short, for
@@ -335,18 +386,28 @@
             <secondary>streaming</secondary>
           </indexterm></title>
 
-        <para>HTTP streaming is slightly different method than long polling,
-        although they are confused one with the other very often. What is
-        mutual for both of the approaches is the client initializing the
-        communication with HTTP request. The server also sends the update as
+        <para>HTTP streaming is slightly different technique than long
+        polling, although they are confused one with the other very often.
+        What is mutual for both of the approaches is the client initializing
+        the communication by HTTP request. The server also sends the update as
         the part of the HTTP response. The main difference is that once the
         server initializes the response and sends the data, it does not
         terminate the response and keeps the HTTP connection opened.
         Meanwhile, the client listens to the response stream and reads the
         data pushed from the server. When any new data springs up on the
         server side, it is concatenated to the one existing response stream.
-        <citation>rfc-bidirectional-http</citation> See the schema on TODO
-        figure.</para>
+        <citation>rfc-bidirectional-http</citation> See the schema at <xref
+        linkend="fig-http-streaming" />.</para>
+
+        <figure id="fig-http-streaming">
+          <title>HTTP streaming</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/http-streaming.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
 
         <para>It is very important not to confuse HTTP streaming with the
         <quote>persistent</quote> HTTP requests. As said at the beginning of
@@ -1037,7 +1098,7 @@ ws.send(
       two parties negotiate the data stream using standard IQ stanzas
       (described in <xref linkend="chap-xmpp-stanzas" />). Then, the stream is
       established according to the prearranged entries.
-      <citation>xep-0166</citation> </para>
+      <citation>xep-0166</citation></para>
 
       <para>Although Jingle is relatively old and mature XMPP extension, it
       has not been used in web browsers for a long time. Web browsers had not
@@ -1096,8 +1157,8 @@ ws.send(
       provide XMPP to its users but does not allow them to fully collaborate
       with everyone else. Unlike Facebook, Google users can still send the
       subscription requests and therefore initiate the connection (in the
-      long-term meaning), but this option can be disabled in the future too.
-      </para>
+      long-term meaning), but this option can be disabled in the future
+      too.</para>
     </sect1>
   </chapter>
 
@@ -2186,6 +2247,8 @@ ws.send(
   </bibliography>
 
   <index></index>
+
+  <lot></lot>
 
   <appendix id="my-appendix">
     <title>Screenshots of the application</title>

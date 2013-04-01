@@ -24,7 +24,7 @@
 \thesisadvisor{doc.
       RNDr. Tomá¹ Pitner, Ph.D.}
 % --------------------------------------------
-\label{idp273648}% --------------------------------------------
+\label{idp241616}% --------------------------------------------
 % Load graphicx package with pdf if needed 
 % --------------------------------------------
 \ifdblatexpdf
@@ -367,7 +367,7 @@ TODO
 XMPP, real-time communication, RTC, Celebrio, web browser, HTTP, Comet, JavaScript, WebSockets, BOSH, TODO\end{ThesisKeyWords}
 
 \makeatletter
-\def\dbtolatex@contentsid{idp186768}
+\def\dbtolatex@contentsid{idp202944}
 \def\dbtolatex@@contentsname{\latex@@contentsname}
 \let\latex@@contentsname\contentsname
 \newif\ifdocbooktolatexcontentsname\docbooktolatexcontentsnametrue
@@ -392,9 +392,9 @@ XMPP, real-time communication, RTC, Celebrio, web browser, HTTP, Comet, JavaScri
 
 Millions, billions, trillions. That many and even more messages are exchanged every day between various people over the world. The Internet created brand new way to communicate and collaborate, even if you are located on the opposite parts of the world. Since the times of Alexander Graham Bell, the accesibility to the communication devices and their simplicity incredibly enhanced. Nowadays, almost 2.5 billion people over the world have access to the Internet and therefore they are able to use almost limitless communication possibilities it provides. \docbooktolatexcite{internet-usage}{}
 
-However, the manner of Internet usage essentially changed during the first decade of 21st century. Using the Internet and using the web browser became almost synonyms. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it's not even possible to use the other internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp2607440}\begingroup\catcode`\#=12\footnote{
+However, the manner of Internet usage essentially changed during the first decade of 21st century. Using the Internet and using the web browser became almost synonyms. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it's not even possible to use the other internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp4024960}\begingroup\catcode`\#=12\footnote{
 Two examples of such behavior. Wi-fi network in the Student Agency coaches forces the user to visit the entry page in the web browser. The second example, very well known to the students of the Faculty of Informatics at Masaryk University, is the faculty wireless network called wlan\_fi. Every user has to open the web browser and log in with her credentials. It's not possible just to open the terminal or e-mail client and start working online.
-}\endgroup\docbooktolatexmakefootnoteref{idp2607440} Considering the mentioned fact, web browsers became also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there is the need of common rich applications running withing web browser - rich internet application sprung up. \docbooktolatexcite{ria}{} So popular social networks are built on top of the web browser platform and they are used by more than billion people over the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from the other people. By the beginning of the year 2013, I~would say that static web is dead - users prefer interactivity.
+}\endgroup\docbooktolatexmakefootnoteref{idp4024960} Considering the mentioned fact, web browsers became also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there is the need of common rich applications running withing web browser - rich internet application sprung up. \docbooktolatexcite{ria}{} So popular social networks are built on top of the web browser platform and they are used by more than billion people over the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from the other people. By the beginning of the year 2013, I~would say that static web is dead - users prefer interactivity.
 
 This thesis embraces the topic of real-time applications in web browsers, especially the text communication tools and the technologies being used to develop them. It also describes the problem of {``}inter-process{''} communication between various web pages which need to cooperate and exchange information as quickly as possible. Finally, the possibilities of multimedia content transfer (audio and video) and the current options of capturing multimedia directly from the web browser are described as well.
 
@@ -404,17 +404,17 @@ Considering the fact the people like real-time communication (not only direct me
 
 Since the web browser was designed to perform simple requests/response interaction, it is not a typical platform for building real-time application. Thus, there is a need for an extra layer enhancing or even completely replacing the common way HTTP communicates. Within the scope of this thesis, namely the WebSockets and HTTP long polling approaches are used. The two of them and basic infromation about several others are covered in \hyperlink{chap-rtc}{Chapter {\ref{chap-rtc}}, {``}Bidirectional communication{''}}.
 
-There are many existing real-time chat-based applications over the Internet we could have used. However, none of them suited our needs perfectly. Celebrio has very specific graphical user interface (GUI) and there is a need to integrate both text-based chat and video calling. Just to mention, there is commercial chat module Cometchat\label{idp142768}\begingroup\catcode`\#=12\footnote{
+There are many existing real-time chat-based applications over the Internet we could have used. However, none of them suited our needs perfectly. Celebrio has very specific graphical user interface (GUI) and there is a need to integrate both text-based chat and video calling. Just to mention, there is commercial chat module Cometchat\label{idp2991936}\begingroup\catcode`\#=12\footnote{
 http://www.cometchat.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp142768} or even open project Jappix.\label{idp143632}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp2991936} or even open project Jappix.\label{idp3991616}\begingroup\catcode`\#=12\footnote{
 https://project.jappix.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp143632} Video calling web browser applications are provided for example by TokBox Inc.\label{idp144448}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp3991616} Video calling web browser applications are provided for example by TokBox Inc.\label{idp3200240}\begingroup\catcode`\#=12\footnote{
 http://www.tokbox.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp144448} Nevertheless, following the rule that {``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch{''}, \docbooktolatexcite{brian-stats-tweet}{} just very generic existing libraries (Strophe.js) and APIs (OpenTok) were used for implementing brand new application called {\em{Celebrio Talker}}. The general approaches when building web browser based chat application are mentioned in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}JavaScript XMPP client{''}}. Within the programming part of the thesis, the real-time text chat application, video calling application and simple {``}inter-process{''} communication tool for Celebrio has been implemented. Celebrio Talker application itself, its architecture and the specific procedures used to create it are described in \hyperlink{chap-talker}{Chapter {\ref{chap-talker}}, {``}Talker{''}}.
+}\endgroup\docbooktolatexmakefootnoteref{idp3200240} Nevertheless, following the rule that {``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch{''}, \docbooktolatexcite{brian-stats-tweet}{} just very generic existing libraries (Strophe.js) and APIs (OpenTok) were used for implementing brand new application called {\em{Celebrio Talker}}. The general approaches when building web browser based chat application are mentioned in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}JavaScript XMPP client{''}}. Within the programming part of the thesis, the real-time text chat application, video calling application and simple {``}inter-process{''} communication tool for Celebrio has been implemented. Celebrio Talker application itself, its architecture and the specific procedures used to create it are described in \hyperlink{chap-talker}{Chapter {\ref{chap-talker}}, {``}Talker{''}}.
 
-It has been said that Skype\label{idp149440}\begingroup\catcode`\#=12\footnote{
+It has been said that Skype\label{idp4213376}\begingroup\catcode`\#=12\footnote{
 http://www.skype.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp149440} is the most favorite communication tool among the target audience. If it had been implemented, the existing customer base could be used and converted to our messaging application. However, there is one big pitfall in this approach. Skype license strictly prohibits incorporating their software into mobile devices. \docbooktolatexcite{skype-license}{} They support only prompting the official Skype client to be opened via Skype URI, which is insufficient for Celebrio since the messaging client has to be built in the system, with the corresponding user interface. \docbooktolatexcite{skype-uri}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp4213376} is the most favorite communication tool among the target audience. If it had been implemented, the existing customer base could be used and converted to our messaging application. However, there is one big pitfall in this approach. Skype license strictly prohibits incorporating their software into mobile devices. \docbooktolatexcite{skype-license}{} They support only prompting the official Skype client to be opened via Skype URI, which is insufficient for Celebrio since the messaging client has to be built in the system, with the corresponding user interface. \docbooktolatexcite{skype-uri}{}
 
 Finally, there are several notes about {``}inter-process communication{''} between different applications running separately in various browser frames, tabs or even windows. XrefId[??] covers this topic and describes the issues we came accross when implementing such functionality for Celebrio, where every application runs in separate iframe.
 
@@ -424,9 +424,9 @@ Finally, there are several notes about {``}inter-process communication{''} betwe
 \chapter{Bidirectional communication}
 \label{chap-rtc}\hypertarget{chap-rtc}{}%
 
-The very essence of every instant messaging is the bidirectional stream where both sides can immediately {\em{push}} new data and the other side (or more other sides, respectively) is promptly notified without the need to perform any manual {\em{pull}} (update) action\index{pull \& push communication}.\label{idp157008}\begingroup\catcode`\#=12\footnote{
+The very essence of every instant messaging is the bidirectional stream where both sides can immediately {\em{push}} new data and the other side (or more other sides, respectively) is promptly notified without the need to perform any manual {\em{pull}} (update) action\index{pull \& push communication}.\label{idp164992}\begingroup\catcode`\#=12\footnote{
 In this thesis, this behaviour is commonly refered as RTC. The {``}real-time part{''} relates mostly to the server part since the application running in the web browser can perform the AJAX request on background anytime and the server receives the request instantly. Before AJAX became the essential part of every web app, ifram
-}\endgroup\docbooktolatexmakefootnoteref{idp157008} Such use case requires appropriate transport layer on top which the application can send the messages via any other protocol. When using HTTP, there is a TCP connection opened by the client (web browser) through which the data is sent. However, according to the HTTP protocol, the communication is strictly initiated by the client - HTTP is a request/response protocol. \docbooktolatexcite{rfc-http}{} When the client needs still up-to-date information, it must poll the server as frequently as possible. Such approach takes a lot of bandwidth and generates purposeless overhead on the server. So, when one wants to avoid that drawbacks and still make the web browser application to communicate in both directions, HTTP protocol must be hacked somehow or another communication channel has to be used. This chapter covers both - reshaping HTTP in \hyperlink{chap-http-requests}{Section {\ref{chap-http-requests}}} and brand new approach in \hyperlink{chap-ws}{Section {\ref{chap-ws}}}, bypassing HTTP at all. Unfortunatelly, every approach brings also some disadvantages.
+}\endgroup\docbooktolatexmakefootnoteref{idp164992} Such use case requires appropriate transport layer on top which the application can send the messages via any other protocol. When using HTTP, there is a TCP connection opened by the client (web browser) through which the data is sent. However, according to the HTTP protocol, the communication is strictly initiated by the client - HTTP is a request/response protocol. \docbooktolatexcite{rfc-http}{} When the client needs still up-to-date information, it must poll the server as frequently as possible. Such approach takes a lot of bandwidth and generates purposeless overhead on the server. So, when one wants to avoid that drawbacks and still make the web browser application to communicate in both directions, HTTP protocol must be hacked somehow or another communication channel has to be used. This chapter covers both - reshaping HTTP in \hyperlink{chap-http-requests}{Section {\ref{chap-http-requests}}} and brand new approach in \hyperlink{chap-ws}{Section {\ref{chap-ws}}}, bypassing HTTP at all. Unfortunatelly, every approach brings also some disadvantages.
 
 % ------------------------   
 % Section 
@@ -435,13 +435,55 @@ In this thesis, this behaviour is commonly refered as RTC. The {``}real-time par
 
 Historicaly the first approach, for a very long time the only one, is hacking HTTP to achieve RTC. The idea is very simple. Generally, the client sends an extra request and it is not awaiting the response immediately. Instead, the server keeps the request for some time and sends the data as it comes in the response. There are several techniques to achieve such behaviour, in general called {\em{Comet}}\index{Comet}.
 
-There is one common misunderstanding about long-lived HTTP requests. Since HTTP 1.1 (acutally implemented even before, but not covered in the RFC specification), there is a possibility for the client to claim persistent TCP connection to the server declaring {\texttt{{Connection: Keep-Alive}}} in the request header.\index{HTTP!Keep-Alive} Actually, all connections are considered persistent unless declared otherwise. \docbooktolatexcite{rfc-http}{} Even though the default timeout after which the server closes the connection is only a few seconds, \docbooktolatexcite{apache-core-features}{} the persistent TCP connection is very useful for delivering various resources (stylesheets, scripts, images, etc.) to the client without the unnecessary overhead of creating multiple streams. However, every single transmission within the TCP connection has to be in form of separate HTTP request/response, always initiated by the client. On no account is the server allowed to push any data without respective request from the client. Therefore, such TCP connection is of no use for RTC. TODO figure.
+There is one common misunderstanding about long-lived HTTP requests. Since HTTP 1.1 (acutally implemented even before, but not covered in the RFC specification), there is a possibility for the client to claim persistent TCP connection to the server declaring {\texttt{{Connection: Keep-Alive}}} in the request header.\index{HTTP!Keep-Alive} Actually, all connections are considered persistent unless declared otherwise. \docbooktolatexcite{rfc-http}{} Even though the default timeout after which the server closes the connection is only a few seconds, \docbooktolatexcite{apache-core-features}{} the persistent TCP connection is very useful for delivering various resources (stylesheets, scripts, images, etc.) to the client without the unnecessary overhead of creating multiple streams. However, every single transmission within the TCP connection has to be in form of separate HTTP request/response, always initiated by the client. On no account is the server allowed to push any data without respective request from the client. Therefore, such TCP connection is of no use for RTC.
+
+The situation is depicted at \hyperlink{fig-http-polling}{Figure {\ref{fig-http-polling}}} and \hyperlink{fig-http-polling-wrong}{Figure {\ref{fig-http-polling-wrong}}}. In the former case, a valid sequence of HTTP requests and responses is shown. Nevertheless, there is a delay between the moment the server gets (either generates or receives from third party) the data (2) and the following request (3). Yet it is possible to reduce the latency by shortening the polling time (the time between Response (1.1) and Request (3)), it is still trade-off between the delay and overhead caused by frequent empty request/response pairs.
+
+% figure ------------------------------------------------------
+\begin{figure}[hbt]
+\hypertarget{fig-http-polling}{}%
+\begin{center}
+
+{{\includegraphics[]{vp/http-polling}}\hypertarget{idp139104}{}%
+\label{idp139104}
+}
+{{\caption[{Correct HTTP polling with delay}]{{{Correct HTTP polling with delay}}}\label{fig-http-polling}}}
+\end{center}
+\end{figure}
+
+% figure ------------------------------------------------------
+\begin{figure}[hbt]
+\hypertarget{fig-http-polling-wrong}{}%
+\begin{center}
+
+{{\includegraphics[]{vp/http-polling-wrong}}\hypertarget{idp5438496}{}%
+\label{idp5438496}
+}
+{{\caption[{Forbidden HTTP response without respective request}]{{{Forbidden HTTP response without respective request}}}\label{fig-http-polling-wrong}}}
+\end{center}
+\end{figure}
+
+On the other hand, \hyperlink{fig-http-polling-wrong}{Figure {\ref{fig-http-polling-wrong}}} depicts the forbidden situation of generating HTTP response without request immediately. When the server gets the data (2) it is not allowed to initiate the connection and send HTTP response without appropriate preceding request (2.1). Even though the delay, mentioned in the previous paragraph, can be minimized in this situation, HTTP servers cannot use such technique. To sum it up, response (2.1) is forbidden by HTTP protocol and this situation solution is not valid.
 \subsection{HTTP long polling\index{HTTP!long polling}}
 \label{chap-http-long-polling}\hypertarget{chap-http-long-polling}{}%
 
-The essence of HTTP long polling springs from the idea of prolonging the time span between two poll requests, depicted at figure TODO. In traditional {``}short polling{''}, a client sends regular requests to the server and each request attempts to {``}pull{''} the available data. If no data is available, an empty reponse is sent. \docbooktolatexcite{rfc-bidirectional-http}{} That generates unnecessary overhead for both client and server.
+The essence of HTTP long polling springs from the idea of prolonging the time span between two poll requests. In traditional {``}short polling{''}, a client sends regular requests to the server and each request attempts to {``}pull{''} the available data. If no data is available, an empty reponse is sent. \docbooktolatexcite{rfc-bidirectional-http}{} That generates unnecessary overhead for both client and server.
 
-On the contrary, long polling tries to reduce this load. After receiving the request, the server does not answer immediately and holds the connection. When the server receives (or even makes up by oneself) new data, it carries out the response with the respective content. As soon the client obtains the response, it usually issues a new request immediately so the process can repeat endlessly. If no data appears on the server for certain amount of time, it usually responds with empty data field just to renew the connection.
+On the contrary, long polling tries to reduce this load. After receiving the request, the server {\em{does not}} answer immediately and holds the connection opened. When the server receives (or even makes up by itself) new data, it carries out the response with the respective content, as depicted at \hyperlink{fig-http-long-polling}{Figure {\ref{fig-http-long-polling}}}.
+
+% figure ------------------------------------------------------
+\begin{figure}[hbt]
+\hypertarget{fig-http-long-polling}{}%
+\begin{center}
+
+{{\includegraphics[]{vp/http-long-polling}}\hypertarget{idp5448176}{}%
+\label{idp5448176}
+}
+{{\caption[{HTTP long polling}]{{{HTTP long polling}}}\label{fig-http-long-polling}}}
+\end{center}
+\end{figure}
+
+As soon the client obtains the response, it usually issues a new request immediately so the process can repeat endlessly. If no data appears on the server for certain amount of time, it usually responds with empty data field just to renew the connection.
 
 One of the main drawbacks of long polling is header overhead. Every chunk of data in RTC applications is usually very short, for example some text message of minimal length. However, each update is served by full HTTP request/response with the header easily reaching 800 characters. \docbooktolatexcite{pro-html5-programming}{} In case the payload is a message 20 characters long, the header constitutes 4000\% overhead!\index{HTTP!header overhead} This drawback has even bigger impact as the number of clients increases. \hyperlink{fig-http-overhead}{Figure {\ref{fig-http-overhead}}} shows the comparsion of 1000 (A), 10000 (B) and 100000 (C) clients polling the server every second with the message 20 characters long, both using classic HTTP requests and WebSockets technology (mentioned in \hyperlink{chap-ws}{Section {\ref{chap-ws}}}). \docbooktolatexcite{pro-html5-programming}{}
 
@@ -450,8 +492,8 @@ One of the main drawbacks of long polling is header overhead. Every chunk of dat
 \hypertarget{fig-http-overhead}{}%
 \begin{center}
 
-{{\includegraphics[width=420pt]{img/http-overhead}}\hypertarget{idp5433344}{}%
-\label{idp5433344}
+{{\includegraphics[width=420pt]{img/http-overhead}}\hypertarget{idp5455968}{}%
+\label{idp5455968}
 }
 {{\caption[{Comparison of the unnecessary network overhead between the HTTP polling and using WebSockets \docbooktolatexcite{pro-html5-programming}{}}]{{{Comparison of the unnecessary network overhead between the HTTP polling and using WebSockets \docbooktolatexcite{pro-html5-programming}{}}}}\label{fig-http-overhead}}}
 \end{center}
@@ -461,7 +503,19 @@ Furthermore, in case the server just received the data and sent the response to 
 \subsection{HTTP streaming\index{HTTP!streaming}}
 \label{chap-http-streaming}\hypertarget{chap-http-streaming}{}%
 
-HTTP streaming is slightly different method than long polling, although they are confused one with the other very often. What is mutual for both of the approaches is the client initializing the communication with HTTP request. The server also sends the update as the part of the HTTP response. The main difference is that once the server initializes the response and sends the data, it does not terminate the response and keeps the HTTP connection opened. Meanwhile, the client listens to the response stream and reads the data pushed from the server. When any new data springs up on the server side, it is concatenated to the one existing response stream. \docbooktolatexcite{rfc-bidirectional-http}{} See the schema on TODO figure.
+HTTP streaming is slightly different technique than long polling, although they are confused one with the other very often. What is mutual for both of the approaches is the client initializing the communication by HTTP request. The server also sends the update as the part of the HTTP response. The main difference is that once the server initializes the response and sends the data, it does not terminate the response and keeps the HTTP connection opened. Meanwhile, the client listens to the response stream and reads the data pushed from the server. When any new data springs up on the server side, it is concatenated to the one existing response stream. \docbooktolatexcite{rfc-bidirectional-http}{} See the schema at \hyperlink{fig-http-streaming}{Figure {\ref{fig-http-streaming}}}.
+
+% figure ------------------------------------------------------
+\begin{figure}[hbt]
+\hypertarget{fig-http-streaming}{}%
+\begin{center}
+
+{{\includegraphics[]{vp/http-streaming}}\hypertarget{idp5465280}{}%
+\label{idp5465280}
+}
+{{\caption[{HTTP streaming}]{{{HTTP streaming}}}\label{fig-http-streaming}}}
+\end{center}
+\end{figure}
 
 It is very important not to confuse HTTP streaming with the {``}persistent{''} HTTP requests. As said at the beginning of this chapter, declaring {\texttt{{Connection: Keep-Alive}}} does not allow the server to issue multiple responses to a single request. Such behaviour would be serious violation of HTTP protocol. Instead, the server can declare {\texttt{{Transfer-Encoding: chunked}}}\index{HTTP!chunked response} status in the response header and send the response split into separate pieces, as show below (chunk of zero length stands for the end of the response): \docbooktolatexcite{rfc-bidirectional-http}{}
 
@@ -490,13 +544,13 @@ Although the World Wide Web with HTTP request/response schema has never been int
 
 Similarly as in HTTP, there is an unencrypted version of WebSockets working directly on top of TCP connection. The simpliest way to recognize such connection is WebSocket URI\index{WebSocket!URI} beginning with {\texttt{{ws://}}}. It should not be used on account of two reasons. The first one, quite obvious, is security - the communication can be captured during the transmission. Transparent proxy servers are the second reason. If an unencrypted WebSocket connection is used, the browser is unaware of the transparent proxy and as a result, the WebSocket connection is most likely to fail. \docbooktolatexcite{ws-proxy}{}\docbooktolatexcite{definitive-guide-to-ws}{} As opposite, there is a secure way how to use WebSockets. WebSockets Secure (WSS)\index{WebSocket!Secure} protocol is standard WS wrapped in TLS tunnel, similarly as HTTP can be transmitted over TLS layer. When using WSS, the URI begins with {\texttt{{wss://}}} and it uses port 443 by default. \docbooktolatexcite{definitive-guide-to-ws}{}
 \subsection{Handshake\index{WebSocket!handshake}}
-\label{idp5457888}\hypertarget{idp5457888}{}%
+\label{idp5483904}\hypertarget{idp5483904}{}%
 
 Alike any other multilateral protocol WebSockets need to perform a handshake before actual transmission can take place. During the handshake, the connection is established and both peers acknowledge the properties of the communication.
 
-Since WebSockets emerged as HTTP supplement, the handshake is initialized by HTTP request\label{idp5460816}\begingroup\catcode`\#=12\footnote{
+Since WebSockets emerged as HTTP supplement, the handshake is initialized by HTTP request\label{idp5486832}\begingroup\catcode`\#=12\footnote{
 According to RFC6455, the protocol is designed to work over HTTP ports 80 and 443 as well to support HTTP proxies. However, the design is not limited to HTTP and the future implementations can use simplier handshake over a dedicated port. \docbooktolatexcite{rfc-ws}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5460816} initialized by the client. The client sends the request as follows: \docbooktolatexcite{rfc-ws}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp5486832} initialized by the client. The client sends the request as follows: \docbooktolatexcite{rfc-ws}{}
 
 \begin{Verbatim}[fontsize=\small]
 GET /chat HTTP/1.1
@@ -524,19 +578,19 @@ Number 101 on the first line of the response stands for HTTP status code {\textt
 
 {\texttt{{Sec-WebSocket-Key}}} is random secret issued by the client and added to the initial protocol-switching request. The server is supposed to concatenate the secret with Globally Unique Identifier (GUID)\index{GUID} "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and hash the result with SHA-1 algorithm. The resultis returned as {\texttt{{Sec-WebSocket-Accept}}} header field, base64-encoded. \docbooktolatexcite{rfc-ws}{} However, there seems to be a security issue here. If the initial request is not sent over encrypted HTTP connection (HTTPS), it can be caught by a third party. Since the server does not authenticate in any way and the algorithm does not contain any server secret, the third party attacker could fake the response and pretend to be the server.
 \subsection{Frames and masking}
-\label{idp5473632}\hypertarget{idp5473632}{}%
+\label{idp5499648}\hypertarget{idp5499648}{}%
 
 All the data sent via WebSockets protocol is chunked into frames\index{frames}, working similarly as TCP frames. All the transmission features are handled by the WebSocket API and the transmission is transparent for the application layer above (for example JavaScript API) so that that every message appears in the same state as it was sent. This means the message, single portion of WS communication, can be fragmented during the transmission.
 
 There are several special features concerning WS frames, one of the interesting is masking\index{masking}. The payload data of every frame sent from the client is XORed by the masking key of 32-bit size. The purpose of masking is to prevent any third party from picking any part of the payload and reading it. The other goal might be distinguishing the server stream from the client stream instantly since client-to-server frames always {\em{must}} be masked and server-to-client frames {\em{must not}} be masked under any circumstances. In addition, WS peers have to use masking even if the communication is running on top of TLS layer so the {``}encryption{''} function is pointless. \docbooktolatexcite{rfc-ws}{} The security function of masking is also questionable because the masking key is included in the frame header. The only reason is preventing from random cross-protocol attacks. \docbooktolatexcite{pro-html5-programming}{}
 \subsection{JavaScript API\index{WebSocket!API}}
-\label{idp5480384}\hypertarget{idp5480384}{}%
+\label{idp5506400}\hypertarget{idp5506400}{}%
 
-Since WebSocket technology is intended to be used particularly from the browser applications, there is need of an API web developers can use. The most widespread programming language of web browser client applications is JavaScript and so is the WebSocket API created for. The API consists of one relatively simple JavaScript interface called {\texttt{{WebSocket}}},\label{idp5483568}\begingroup\catcode`\#=12\footnote{
+Since WebSocket technology is intended to be used particularly from the browser applications, there is need of an API web developers can use. The most widespread programming language of web browser client applications is JavaScript and so is the WebSocket API created for. The API consists of one relatively simple JavaScript interface called {\texttt{{WebSocket}}},\label{idp5509584}\begingroup\catcode`\#=12\footnote{
 In the older versions of some browsers, the interface was called differently due to the immaturity of the technology. For instance, Firefox from version 6 to 10 supports WebSockets only as {\texttt{{MozWebSocket}}}. Interesting fact is that Firefox 4 and 5 provides {\texttt{{WebSocket}}} interface as it is, just implementing different WebSocket protocol version. Since Firefox 11.0, current (RFC 6455) WS protocol version is accessible via interface {\texttt{{WebSocket}}}. \docbooktolatexcite{mozilla-ws}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5483568} \docbooktolatexcite{ws-api}{} placed as the property of {\texttt{{window}}} object.\label{idp5488032}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5509584} \docbooktolatexcite{ws-api}{} placed as the property of {\texttt{{window}}} object.\label{idp5514048}\begingroup\catcode`\#=12\footnote{
 Properties of window are accessible in JavaScript directly. Simple test {\texttt{{window.WebSocket === WebSocket}}} returning {\texttt{{true}}} proves it.
-}\endgroup\docbooktolatexmakefootnoteref{idp5488032} It wraps the WebSocket client functionality performed by the user agent (web browser). Using the API is very simple - the object, which handles all the WS functionality, is created by calling {\texttt{{WebSocket()}}} constructor: \docbooktolatexcite{ws-html5rocks}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp5514048} It wraps the WebSocket client functionality performed by the user agent (web browser). Using the API is very simple - the object, which handles all the WS functionality, is created by calling {\texttt{{WebSocket()}}} constructor: \docbooktolatexcite{ws-html5rocks}{}
 
 \begin{Verbatim}[fontsize=\small]
 var connection = new WebSocket(
@@ -581,7 +635,7 @@ To sum it up, using WebSockets became a very simple and elegant way to provide r
 % ------------------------   
 % Section 
 \section{Existing RTC frameworks}
-\label{idp5511888}\hypertarget{idp5511888}{}%
+\label{idp5537904}\hypertarget{idp5537904}{}%
 
 TODO
 
@@ -607,9 +661,9 @@ Google hangouts API
 \chapter{Extensible Messaging and Presence Protocol}
 \label{chap-xmpp}\hypertarget{chap-xmpp}{}%
 
-Extensible Messaging and Presence Protocol (XMPP) technologies were invented by Jeremie Miller in 1998. \docbooktolatexcite{xmpp-the-definitive-guide}{} It is one of the most widespread technologies for instant messaging (IM),\label{idp5518368}\begingroup\catcode`\#=12\footnote{
+Extensible Messaging and Presence Protocol (XMPP) technologies were invented by Jeremie Miller in 1998. \docbooktolatexcite{xmpp-the-definitive-guide}{} It is one of the most widespread technologies for instant messaging (IM),\label{idp5544384}\begingroup\catcode`\#=12\footnote{
 Acutally, the IM client or even the techology itself is sometimes called {``}Instant Messenger{''}. This term is registered as a trademark by AOL company. \docbooktolatexcite{aol-trademarks}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5518368} i.e. exchanging the text or multimedia data between several endpoints. The {``}native{''} implementation of XMPP works right on top of TCP protocol: XMPP endpoint (called client as it represents the first actor in client-server architecture) opens long-lived TCP connection. Then, both the client and the server negotiate and open XML streams so there is one stream in each direction. \docbooktolatexcite{xmpp-the-definitive-guide}{} When the connection is established, both client and server can push any changes as XML elements to the stream and the other side obtains them immediately. Usual XMPP clients are standalone applications able to open TCP connection and listen to the stream opened by the server.
+}\endgroup\docbooktolatexmakefootnoteref{idp5544384} i.e. exchanging the text or multimedia data between several endpoints. The {``}native{''} implementation of XMPP works right on top of TCP protocol: XMPP endpoint (called client as it represents the first actor in client-server architecture) opens long-lived TCP connection. Then, both the client and the server negotiate and open XML streams so there is one stream in each direction. \docbooktolatexcite{xmpp-the-definitive-guide}{} When the connection is established, both client and server can push any changes as XML elements to the stream and the other side obtains them immediately. Usual XMPP clients are standalone applications able to open TCP connection and listen to the stream opened by the server.
 
 XMPP stands for communication protocol handling not only sending and receiving the messages, but also presence notification, contact list (roster) management and others. The architecture is distributed and decentralized. There is no central or top level XMPP server. Anyone can run XMPP server, very similarly as HTTP or FTP server. Identification and recognition on the network is also similar - XMPP relies on Domain Name System (DNS) so that every server is identified via string domain name with arbitrary subdomain level (e.g. xmpp.example.com or just example.org). \docbooktolatexcite{xmpp-the-definitive-guide}{}
 
@@ -672,9 +726,9 @@ XMPP solves the privacy problem with the subscription mechanism. Each user has f
 
 Having described XMPP as communication protocol over TCP, it might be unclear how it is related to the thesis topic. XMPP is nice and mature technology and it would be nice to use it in web browser but it does not support communication over HTTP. Fortunately, XMPP offers many extensions (indeed, the first letter X stands for {``}extensible{''}) providing additional functionality. In fact, those are XMPP extension {\em{protocols}} and so they are called XEPs\index{XEP}.
 
-This section briefly describes one of XEP exensions called BOSH\index{BOSH} (XEP-0124) designed for transferring XMPP over HTTP.\label{idp5561936}\begingroup\catcode`\#=12\footnote{
+This section briefly describes one of XEP exensions called BOSH\index{BOSH} (XEP-0124) designed for transferring XMPP over HTTP.\label{idp5588944}\begingroup\catcode`\#=12\footnote{
 In fact, there are two more XEPs related to HTTP. First of them, XEP-0025: Jabber HTTP Polling, has been replaced by BOSH. It is obsolete and recommended not to be used any longer. \docbooktolatexcite{xep-0025}{} The other one is XEP-0206: XMPP Over BOSH. It is currently used standard but it constitutes just a supplement for BOSH. XEP-0206 describes mainly the session creation and authentication in BOSH. \docbooktolatexcite{xep-0206}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5561936} \docbooktolatexcite{xep-0124}{} The idea behind this extension is very simple: BOSH uses HTTP long polling technique (described in \hyperlink{chap-http-long-polling}{Section {\ref{chap-http-long-polling}}}) to imitate bidirectional TCP communication necessary for XMPP. We can imagine BOSH (it is a protocol itself) as a middle layer protocol or wrapper protocol between HTTP (only capable of sending requests from client to server) and XMPP (understanding only the XML stanzas). BOSH requests and responses are subset of all conceivable HTTP requests or responses (they include all HTTP features such as HTTP method in request or status code in the response). The constraint defined by BOSH protocol restricts the body part to have a specific structure.
+}\endgroup\docbooktolatexmakefootnoteref{idp5588944} \docbooktolatexcite{xep-0124}{} The idea behind this extension is very simple: BOSH uses HTTP long polling technique (described in \hyperlink{chap-http-long-polling}{Section {\ref{chap-http-long-polling}}}) to imitate bidirectional TCP communication necessary for XMPP. We can imagine BOSH (it is a protocol itself) as a middle layer protocol or wrapper protocol between HTTP (only capable of sending requests from client to server) and XMPP (understanding only the XML stanzas). BOSH requests and responses are subset of all conceivable HTTP requests or responses (they include all HTTP features such as HTTP method in request or status code in the response). The constraint defined by BOSH protocol restricts the body part to have a specific structure.
 
 Each BOSH request or response body is valid XML, which wraps up XMPP stanzas in special {\texttt{{\textless{}body /\textgreater{}}}} element. For the purposes of the protocol itself, it is also possible to send just the {\texttt{{body}}} element with no child (XMPP) nodes - for example when starting the session or reporting an error. So, the XMPP part of the communication is separated from BOSH quite well: the former is represented by payload elements inside the {\texttt{{body}}}, the latter consists of {\texttt{{body}}} attributes. Have a look at example of BOSH request: \docbooktolatexcite{xep-0124}{}
 \begin{Verbatim}[fontsize=\small]
@@ -706,9 +760,9 @@ BOSH protocol is an important part of the Talker application implemented as a pr
 \section{XMPP over WebSockets}
 \label{chap-xmpp-ws}\hypertarget{chap-xmpp-ws}{}%
 
-Since there is possibility to transmit any data from the web browser application to the server via WebSockets, it could be handy to transfer XMPP stanzas using WS as well. Using WebSockets saves a lot of overhead and fixes some issues that can happen with BOSH (for example unreliability of HTTP). Generally it works, yet the programmer should be wary of several pitfalls that WebSockets bring. First, the server side must accept WebSockets connection. Usually, the XMPP servers does provide such functionality through addons or modules.\label{idp5576880}\begingroup\catcode`\#=12\footnote{
+Since there is possibility to transmit any data from the web browser application to the server via WebSockets, it could be handy to transfer XMPP stanzas using WS as well. Using WebSockets saves a lot of overhead and fixes some issues that can happen with BOSH (for example unreliability of HTTP). Generally it works, yet the programmer should be wary of several pitfalls that WebSockets bring. First, the server side must accept WebSockets connection. Usually, the XMPP servers does provide such functionality through addons or modules.\label{idp5603968}\begingroup\catcode`\#=12\footnote{
 Additional module for Prosody server has been used as well when implementing Talker application. The process of installation includes downloading the module, adding it to the path that Prosody searches for modules. Then, it must be enabled in the configuration file. Moreover, {\texttt{{luajit}}} and {\texttt{{liblua5.1-bitop0}}} packages had to be downloaded for the module to work correctly (assuming Debian/Ubuntu on the server side).
-}\endgroup\docbooktolatexmakefootnoteref{idp5576880} Provided that the WebSocket extension to the XMPP server is running on localhost, using WS to connect to the server is as simple as follows:
+}\endgroup\docbooktolatexmakefootnoteref{idp5603968} Provided that the WebSocket extension to the XMPP server is running on localhost, using WS to connect to the server is as simple as follows:
 
 \begin{Verbatim}[fontsize=\small]
 var ws = new WebSocket("ws://localhost:5280/xmpp-websocket/", "xmpp");
@@ -722,7 +776,7 @@ ws.send(
 
 Probably the most important difference compared to BOSH is that every WebSocket message (i.e. one chunk of incoming or outcoming communication - can be compared to BOSH request) can contain only one XMPP stanza. \docbooktolatexcite{xmpp-over-websockets}{} It means that the peer cannot send more WS messages together, even if they are available by the time the WS message is sent.
 
-The main drawback of using XMPP over WebSockets is still partial lack of support both in the web browsers (which includes WS support itself and the JavaScript XMPP libraries) and on the XMPP servers. Nevertheless, there is huge trend of implementing it at all sides.\label{idp5582336}\begingroup\catcode`\#=12\footnote{
+The main drawback of using XMPP over WebSockets is still partial lack of support both in the web browsers (which includes WS support itself and the JavaScript XMPP libraries) and on the XMPP servers. Nevertheless, there is huge trend of implementing it at all sides.\label{idp5609424}\begingroup\catcode`\#=12\footnote{
 You might want to have a look at some of the current discussions concerning client-side (i.e. JavaScript) libraries:
 
 \begin{itemize}
@@ -740,20 +794,20 @@ You might want to have a look at some of the current discussions concerning clie
 
 \end{itemize}
 \noindent 
-}\endgroup\docbooktolatexmakefootnoteref{idp5582336}
+}\endgroup\docbooktolatexmakefootnoteref{idp5609424}
 
 TODO create diagram here (XMPP server - plugin - incoming connection vs xmpp server - standard connection). Probably for both BOSH and WS.
 
 % ------------------------   
 % Section 
 \section{Jingle\index{Jingle}\index{XEP}}
-\label{idp5587952}\hypertarget{idp5587952}{}%
+\label{idp5615040}\hypertarget{idp5615040}{}%
 
 Not only can XMPP send text messages but it also supports transferring various multimedia streams. Audio and video above all, yet it is also possible to send raw binary files. All the functionality related to those {``}advanced{''} transfers is being managed by XMPP extension called Jingle. According to the protocol extension, the two parties negotiate the data stream using standard IQ stanzas (described in \hyperlink{chap-xmpp-stanzas}{Section {\ref{chap-xmpp-stanzas}}}). Then, the stream is established according to the prearranged entries. \docbooktolatexcite{xep-0166}{}
 
-Although Jingle is relatively old and mature XMPP extension, it has not been used in web browsers for a long time. Web browsers had not supported multimedia transfers due to the troublesome bidirectional communication and difficult access to multimedia devices (microphone and webcam). Ergo Jingle has not been used in Talker application either - the main reason for not using Jingle in Talker application is lack of JavaScript libraries supporting it. There is just unofficial Strophe.js\index{Strophe.js} plugin for Jingle published by Michael Weibel, not very well maintained and relying on the WebRTC technology\index{WebRTC}.\label{idp5595504}\begingroup\catcode`\#=12\footnote{
+Although Jingle is relatively old and mature XMPP extension, it has not been used in web browsers for a long time. Web browsers had not supported multimedia transfers due to the troublesome bidirectional communication and difficult access to multimedia devices (microphone and webcam). Ergo Jingle has not been used in Talker application either - the main reason for not using Jingle in Talker application is lack of JavaScript libraries supporting it. There is just unofficial Strophe.js\index{Strophe.js} plugin for Jingle published by Michael Weibel, not very well maintained and relying on the WebRTC technology\index{WebRTC}.\label{idp5622464}\begingroup\catcode`\#=12\footnote{
 See {\textless}\url{http://candy-chat.github.com/candy-webrtc/}{\textgreater} and {\textless}\url{https://github.com/mweibel/strophejs-plugins/tree/jingle}{\textgreater} for the references.
-}\endgroup\docbooktolatexmakefootnoteref{idp5595504} Therefore, Jingle is not described further in the thesis, it is mentioned here just as an option for the future.
+}\endgroup\docbooktolatexmakefootnoteref{idp5622464} Therefore, Jingle is not described further in the thesis, it is mentioned here just as an option for the future.
 
 Anyway, C/C++ Jingle libraries seem to be quite mature and ready to be used in the desktop client applications. Above all, there is library developed by Google called libjingle\index{libjingle}, supporting multi-user audio/video/file transfers. \docbooktolatexcite{libjingle}{} Google seems to beleive that Jingle is the right protocol for developing multimedia client that can be used by everyone. They even sidelined original Google Talk VOIP protocol and switched to Jingle as their {``}primary signalling protocol for voice calls{''}, in Gmail, iGoogle and Orkut. \docbooktolatexcite{jingle-is-the-future}{}
 
@@ -803,27 +857,27 @@ Don't forget to use UML: use case diagram, class diagram (if any), sequence/acti
 % ------------------------   
 % Section 
 \section{Ember.js}
-\label{idp5612112}\hypertarget{idp5612112}{}%
+\label{idp5639392}\hypertarget{idp5639392}{}%
 
 Describe Javascript client-side MVC frameworks overall, compare, tell why we used Ember
 
 % ------------------------   
 % Section 
 \section{Contact list}
-\label{idp5613376}\hypertarget{idp5613376}{}%
+\label{idp5640656}\hypertarget{idp5640656}{}%
 
 % -------------------------------------------------------------
 % Chapter Conclusion 
 % ------------------------------------------------------------- 	
 \chapter{Conclusion}
-\label{idp5614528}\hypertarget{idp5614528}{}%
+\label{idp5641808}\hypertarget{idp5641808}{}%
 
 conclusion
 
 % ------------------------   
 % Section 
 \section{Another part of the conclusion}
-\label{idp5615552}\hypertarget{idp5615552}{}%
+\label{idp5642832}\hypertarget{idp5642832}{}%
 
 Another part of the conclusion... just to have subchapter here
 % ------------------------------------------- 
@@ -831,223 +885,223 @@ Another part of the conclusion... just to have subchapter here
 %  Bibliography - chapter
 %
 % ------------------------------------------- 
-\begin{thebibliography}{123}\hypertarget{idp5616912}{}
+\begin{thebibliography}{123}\hypertarget{idp5644192}{}
 
 % ............. biblioentry 
-\bibitem{aol-trademarks}\docbooktolatexbibaux{idp5685344}{aol-trademarks}
-\hypertarget{idp5685344}
+\bibitem{aol-trademarks}\docbooktolatexbibaux{idp5712624}{aol-trademarks}
+\hypertarget{idp5712624}
 AOL Inc.: \emph{AOL Trademark List}, 3/15/2011 [retrieved 2/20/2013], from {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{apache-core-features}\docbooktolatexbibaux{idp5725520}{apache-core-features}
-\hypertarget{idp5725520}
+\bibitem{apache-core-features}\docbooktolatexbibaux{idp5752800}{apache-core-features}
+\hypertarget{idp5752800}
 The Apache Software Foundation: \emph{Apache Core Features}, 2013 [retrieved 2/23/2013], from {\textless}\url{http://httpd.apache.org/docs/2.2/mod/core.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{async-javascript}\docbooktolatexbibaux{idp5641152}{async-javascript}
-\hypertarget{idp5641152}
+\bibitem{async-javascript}\docbooktolatexbibaux{idp5668432}{async-javascript}
+\hypertarget{idp5668432}
 Burnham, T.: \emph{Async JavaScript}, The Pragmatic Programmers, 2012, 978-1-93778-527-7, 104. 
 
 % ............. biblioentry 
-\bibitem{brian-stats-tweet}\docbooktolatexbibaux{idp5699616}{brian-stats-tweet}
-\hypertarget{idp5699616}
+\bibitem{brian-stats-tweet}\docbooktolatexbibaux{idp5726896}{brian-stats-tweet}
+\hypertarget{idp5726896}
 Staatss, B. (Brianstaats): \emph{{``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch @trek at \#embercamp{''}}, 2/15/2013 [retrieved 2/23/2013], Tweet. 
 
 % ............. biblioentry 
-\bibitem{celebrio-system}\docbooktolatexbibaux{idp5671680}{celebrio-system}
-\hypertarget{idp5671680}
+\bibitem{celebrio-system}\docbooktolatexbibaux{idp5698960}{celebrio-system}
+\hypertarget{idp5698960}
 Donko, P. and Kunc, P. and Novák, M. and Smolka, P. and Volmut, J.: \emph{Celebrio System}, 2013 [retrieved 2/19/2013], from {\textless}\url{http://www.celebriosoftware.com/celebrio-system}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{definitive-guide-to-html5}\docbooktolatexbibaux{idp5631840}{definitive-guide-to-html5}
-\hypertarget{idp5631840}
+\bibitem{definitive-guide-to-html5}\docbooktolatexbibaux{idp5659120}{definitive-guide-to-html5}
+\hypertarget{idp5659120}
 Freeman, A.: \emph{The Definitive Guide to HTML5 - TODO cite from page 873
       multimedia chapter}, Apress, 2011, 978-1-4302-3960-4, 1080. 
 
 % ............. biblioentry 
-\bibitem{definitive-guide-to-ws}\docbooktolatexbibaux{idp5624544}{definitive-guide-to-ws}
-\hypertarget{idp5624544}
+\bibitem{definitive-guide-to-ws}\docbooktolatexbibaux{idp5651824}{definitive-guide-to-ws}
+\hypertarget{idp5651824}
 Wang, V. and Salim, F. and Moskovits, P.: \emph{The Definitive Guide to HTML5 WebSocket}, Apress, 2012, 978-1430247401, 210 (140, 156, ). 
 
 % ............. biblioentry 
-\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp5680240}{elderly-questionnaires}
-\hypertarget{idp5680240}
+\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp5707520}{elderly-questionnaires}
+\hypertarget{idp5707520}
 Smolka, P. and Novák, M.: \emph{Elderly people and the computers}, 2/11/2013 [retrieved 2/19/2013], from {\textless}\url{http://infogr.am/Seniori-a-pocitace}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{facebook-usage}\docbooktolatexbibaux{idp5663232}{facebook-usage}
-\hypertarget{idp5663232}
+\bibitem{facebook-usage}\docbooktolatexbibaux{idp5690512}{facebook-usage}
+\hypertarget{idp5690512}
 Olanoff, D.: \emph{Facebook Announces Monthly Active Users Were At 1.01 Billion As
       Of September 30th}, TechCrunch, 10/23/2012 [retrieved 2/19/2013], from {\textless}\url{http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{fb-chat}\docbooktolatexbibaux{idp5696048}{fb-chat}
-\hypertarget{idp5696048}
+\bibitem{fb-chat}\docbooktolatexbibaux{idp5723328}{fb-chat}
+\hypertarget{idp5723328}
 Facebook Developers: \emph{Facebook Chat API}, 2/12/2013 [retrieved 2/20/2013], from http://xmpp.org/about-xmpp/history/ {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{fb-erlang}\docbooktolatexbibaux{idp5702960}{fb-erlang}
-\hypertarget{idp5702960}
+\bibitem{fb-erlang}\docbooktolatexbibaux{idp5730240}{fb-erlang}
+\hypertarget{idp5730240}
 Letuchy, E.: \emph{Facebook Chat}, 5/14/2008 [retrieved 2/23/2013], from {\textless}\url{https://www.facebook.com/note.php?note_id=14218138919}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{google-closing-xmpp}\docbooktolatexbibaux{idp5799296}{google-closing-xmpp}
-\hypertarget{idp5799296}
+\bibitem{google-closing-xmpp}\docbooktolatexbibaux{idp5826576}{google-closing-xmpp}
+\hypertarget{idp5826576}
 Sullivan, J.: \emph{Google backslides on federated instant messaging, on
       purpose?}, 3/15/2013 [retrieved 3/31/2013], from {\textless}\url{https://www.fsf.org/blogs/sysadmin/google-backslides-on-federated-instant-messaging-on-purpose}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{gtalk}\docbooktolatexbibaux{idp5692480}{gtalk}
-\hypertarget{idp5692480}
+\bibitem{gtalk}\docbooktolatexbibaux{idp5719760}{gtalk}
+\hypertarget{idp5719760}
 Google Developers: \emph{Google Talk Developer Documentation}, 3/23/2012 [retrieved 2/20/2013], from {\textless}\url{https://developers.google.com/talk/talk_developers_home}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ie-statistics}\docbooktolatexbibaux{idp5767888}{ie-statistics}
-\hypertarget{idp5767888}
+\bibitem{ie-statistics}\docbooktolatexbibaux{idp5795168}{ie-statistics}
+\hypertarget{idp5795168}
 Terabyte Media: \emph{Web Browser Usage Statistics}, 12/2012 [retrieved 3/3/2013], from {\textless}\url{http://www.statowl.com/web_browser_usage_by_version.php?limit\%5B\%5D=ie}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{internet-usage}\docbooktolatexbibaux{idp5659280}{internet-usage}
-\hypertarget{idp5659280}
+\bibitem{internet-usage}\docbooktolatexbibaux{idp5686560}{internet-usage}
+\hypertarget{idp5686560}
 Miniwatts Marketing Group: \emph{Internet Users in the World - 2012 Q2}, Internet World Stats, 2/17/2013 [retrieved 2/19/2013], from {\textless}\url{http://www.internetworldstats.com/stats.htm}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{jingle-is-the-future}\docbooktolatexbibaux{idp5820560}{jingle-is-the-future}
-\hypertarget{idp5820560}
+\bibitem{jingle-is-the-future}\docbooktolatexbibaux{idp5847840}{jingle-is-the-future}
+\hypertarget{idp5847840}
 Cridland, D.: \emph{Google: {``}The Future is Jingle{''}}, 6/23/2011 [retrieved 3/31/2013], from {\textless}\url{http://xmpp.org/2011/06/the-future-is-jingle/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{js-definitive-guide}\docbooktolatexbibaux{idp5636544}{js-definitive-guide}
-\hypertarget{idp5636544}
+\bibitem{js-definitive-guide}\docbooktolatexbibaux{idp5663824}{js-definitive-guide}
+\hypertarget{idp5663824}
 Flanagan, D.: \emph{JavaScript: The Definitive Guide}, O'Reilly Media, 2011, 978-0-596-80552-4, 1100 (333). 
 
 % ............. biblioentry 
-\bibitem{libjingle}\docbooktolatexbibaux{idp5817376}{libjingle}
-\hypertarget{idp5817376}
+\bibitem{libjingle}\docbooktolatexbibaux{idp5844656}{libjingle}
+\hypertarget{idp5844656}
 Google Developers: \emph{About libjingle}, 3/23/2012 [retrieved 3/31/2013], from {\textless}\url{https://developers.google.com/talk/libjingle/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{mozilla-ws}\docbooktolatexbibaux{idp5753072}{mozilla-ws}
-\hypertarget{idp5753072}
+\bibitem{mozilla-ws}\docbooktolatexbibaux{idp5780352}{mozilla-ws}
+\hypertarget{idp5780352}
 Mozilla Developers: \emph{WebSockets}, 2/4/2013 [retrieved 2/25/2013], from {\textless}\url{https://developer.mozilla.org/en-US/docs/WebSockets}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{pro-html5-programming}\docbooktolatexbibaux{idp5652368}{pro-html5-programming}
-\hypertarget{idp5652368}
+\bibitem{pro-html5-programming}\docbooktolatexbibaux{idp5679648}{pro-html5-programming}
+\hypertarget{idp5679648}
 Lubbers, P. and Salim, F. and Albers, B.: \emph{Pro HTML5 Programming}, Apress, 2011, 978-1-4302-3864-5, 352 (165, ...). 
 
 % ............. biblioentry 
-\bibitem{realtime-web-apps}\docbooktolatexbibaux{idp5646144}{realtime-web-apps}
-\hypertarget{idp5646144}
+\bibitem{realtime-web-apps}\docbooktolatexbibaux{idp5673424}{realtime-web-apps}
+\hypertarget{idp5673424}
 Lengstorf, J. and Leggetter, P.: \emph{Realtime Web Apps}, Apress, 2013, 978-1430246206, 400. 
 
 % ............. biblioentry 
-\bibitem{rfc-bidirectional-http}\docbooktolatexbibaux{idp5728704}{rfc-bidirectional-http}
-\hypertarget{idp5728704}
+\bibitem{rfc-bidirectional-http}\docbooktolatexbibaux{idp5755984}{rfc-bidirectional-http}
+\hypertarget{idp5755984}
 Loreto, S. and Saint-Andre, P. and Salsano, S. and Wilkins, G.: \emph{Known Issues and Best Practices for the Use of Long Polling and
       Streaming in Bidirectional HTTP}, 4/2011 [retrieved 2/23/2013], from {\textless}\url{http://www.ietf.org/rfc/rfc6202.txt}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{rfc-http}\docbooktolatexbibaux{idp5713888}{rfc-http}
-\hypertarget{idp5713888}
+\bibitem{rfc-http}\docbooktolatexbibaux{idp5741168}{rfc-http}
+\hypertarget{idp5741168}
 Fielding, R. and Gettis, J. and Mogul, J. and Frystyk, H. and Masinter, L. and Leach, P. and Berners-Lee, T.: \emph{Hypertext Transfer Protocol -- HTTP/1.1}, 6/1999 [retrieved 2/23/2013], from {\textless}\url{http://www.w3.org/Protocols/rfc2616/rfc2616.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{rfc-ws}\docbooktolatexbibaux{idp5736608}{rfc-ws}
-\hypertarget{idp5736608}
+\bibitem{rfc-ws}\docbooktolatexbibaux{idp5763888}{rfc-ws}
+\hypertarget{idp5763888}
 Fette, I. and Melnikov, A.: \emph{The WebSocket Protocol}, 12/2011 [retrieved 2/24/2013], Internet Engineering Task Force (IETF), from {\textless}\url{http://tools.ietf.org/html/rfc6455}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ria}\docbooktolatexbibaux{idp5667920}{ria}
-\hypertarget{idp5667920}
+\bibitem{ria}\docbooktolatexbibaux{idp5695200}{ria}
+\hypertarget{idp5695200}
 Ward, J.: \emph{What is a Rich Internet Application?}, 10/17/2007 [retrieved 2/19/2013], from {\textless}\url{http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{setting-up-bosh}\docbooktolatexbibaux{idp5792384}{setting-up-bosh}
-\hypertarget{idp5792384}
+\bibitem{setting-up-bosh}\docbooktolatexbibaux{idp5819664}{setting-up-bosh}
+\hypertarget{idp5819664}
 Prosody: \emph{Setting up a BOSH server}, [retrieved 3/10/2013], from {\textless}\url{http://prosody.im/doc/setting_up_bosh}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{skype-license}\docbooktolatexbibaux{idp5706528}{skype-license}
-\hypertarget{idp5706528}
+\bibitem{skype-license}\docbooktolatexbibaux{idp5733808}{skype-license}
+\hypertarget{idp5733808}
 Smith, A.: \emph{Does SkypeKit work on Android?}, 8/7/2012 [retrieved 2/23/2013], from {\textless}\url{http://devforum.skype.com/t5/SkypeKit-FAQs/Does-SkypeKit-work-on-Android/m-p/16490/thread-id/78}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{skype-uri}\docbooktolatexbibaux{idp5710704}{skype-uri}
-\hypertarget{idp5710704}
+\bibitem{skype-uri}\docbooktolatexbibaux{idp5737984}{skype-uri}
+\hypertarget{idp5737984}
 Microsoft: \emph{Skype URIs}, 2013 [retrieved 2/23/2013], from {\textless}\url{http://dev.skype.com/skype-uri}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{spammy-invites}\docbooktolatexbibaux{idp5803168}{spammy-invites}
-\hypertarget{idp5803168}
+\bibitem{spammy-invites}\docbooktolatexbibaux{idp5830448}{spammy-invites}
+\hypertarget{idp5830448}
 Gustafsson, P.: \emph{Spammy invites}, 2/13/2013 [retrieved 3/31/2013], from {\textless}\url{http://mail.jabber.org/pipermail/operators/2013-February/001571.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-api}\docbooktolatexbibaux{idp5748352}{ws-api}
-\hypertarget{idp5748352}
+\bibitem{ws-api}\docbooktolatexbibaux{idp5775632}{ws-api}
+\hypertarget{idp5775632}
 Hickson, I.: \emph{The WebSocket API}, 2/9/2013 [retrieved 2/24/2013], W3C, from {\textless}\url{http://dev.w3.org/html5/websockets/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-caniuse}\docbooktolatexbibaux{idp5764704}{ws-caniuse}
-\hypertarget{idp5764704}
+\bibitem{ws-caniuse}\docbooktolatexbibaux{idp5791984}{ws-caniuse}
+\hypertarget{idp5791984}
 StatCounter GlobalStats: \emph{Can I~use Web Sockets?}, 2/2013 [retrieved 3/3/2013], from {\textless}\url{http://caniuse.com/websockets}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-html5rocks}\docbooktolatexbibaux{idp5756256}{ws-html5rocks}
-\hypertarget{idp5756256}
+\bibitem{ws-html5rocks}\docbooktolatexbibaux{idp5783536}{ws-html5rocks}
+\hypertarget{idp5783536}
 Ubl, M. and Kitamura, E.: \emph{Introducing WebSockets: Bringing Sockets to the Web}, 2/13/2012 [retrieved 2/25/2013], from {\textless}\url{http://www.html5rocks.com/en/tutorials/websockets/basics/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-iana}\docbooktolatexbibaux{idp5761520}{ws-iana}
-\hypertarget{idp5761520}
+\bibitem{ws-iana}\docbooktolatexbibaux{idp5788800}{ws-iana}
+\hypertarget{idp5788800}
 IANA: \emph{WebSocket Protocol Registries}, 11/13/2012 [retrieved 2/25/2013], from {\textless}\url{http://www.iana.org/assignments/websocket/websocket.xml}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-proxy}\docbooktolatexbibaux{idp5743248}{ws-proxy}
-\hypertarget{idp5743248}
+\bibitem{ws-proxy}\docbooktolatexbibaux{idp5770528}{ws-proxy}
+\hypertarget{idp5770528}
 Lubbers, P.: \emph{How HTML5 Web Sockets Interact With Proxy Servers}, 3/16/2011 [retrieved 2/24/2013], InfoQ, from {\textless}\url{http://tools.ietf.org/html/rfc6455}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0025}\docbooktolatexbibaux{idp5779488}{xep-0025}
-\hypertarget{idp5779488}
+\bibitem{xep-0025}\docbooktolatexbibaux{idp5806768}{xep-0025}
+\hypertarget{idp5806768}
 Hildebrand, J. and Kaes, C. and Waite, D.: \emph{XEP-0025: Jabber HTTP Polling}, XMPP Standards Foundation, 2009 [retrieved 3/10/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0025.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0124}\docbooktolatexbibaux{idp5771232}{xep-0124}
-\hypertarget{idp5771232}
+\bibitem{xep-0124}\docbooktolatexbibaux{idp5798512}{xep-0124}
+\hypertarget{idp5798512}
 Paterson, I. and Saint-Andre, P. and Smith, D. and Moffit, J.: \emph{XEP-0124: Bidirectional-streams Over Synchronous HTTP
       (BOSH)}, XMPP Standards Foundation, 2010 [retrieved 3/10/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0124.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0166}\docbooktolatexbibaux{idp5806896}{xep-0166}
-\hypertarget{idp5806896}
+\bibitem{xep-0166}\docbooktolatexbibaux{idp5834176}{xep-0166}
+\hypertarget{idp5834176}
 Ludwig, S. and Beda, J. and Saint-Andre, P. and McQueen, R. and Egan, S. and Hildebrand, J.: \emph{XEP-0166: Jingle}, XMPP Standards Foundation, 2009 [retrieved 3/31/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0166.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0206}\docbooktolatexbibaux{idp5786512}{xep-0206}
-\hypertarget{idp5786512}
+\bibitem{xep-0206}\docbooktolatexbibaux{idp5813792}{xep-0206}
+\hypertarget{idp5813792}
 Paterson, I. and Saint-Andre, P.: \emph{XEP-0206: XMPP Over BOSH}, XMPP Standards Foundation, 2010 [retrieved 3/10/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0206.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-history}\docbooktolatexbibaux{idp5688912}{xmpp-history}
-\hypertarget{idp5688912}
+\bibitem{xmpp-history}\docbooktolatexbibaux{idp5716192}{xmpp-history}
+\hypertarget{idp5716192}
 The XMPP Standards Foundation: \emph{History of XMPP}, 1/27/2010 [retrieved 2/20/2013], from http://xmpp.org/about-xmpp/history/ {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-over-websockets}\docbooktolatexbibaux{idp5795568}{xmpp-over-websockets}
-\hypertarget{idp5795568}
+\bibitem{xmpp-over-websockets}\docbooktolatexbibaux{idp5822848}{xmpp-over-websockets}
+\hypertarget{idp5822848}
 Moffit, J.: \emph{An XMPP Sub-protocol for WebSocket}, 2/25/2013 [retrieved 3/10/2013], from {\textless}\url{http://datatracker.ietf.org/doc/draft-moffitt-xmpp-over-websocket/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp5617168}{xmpp-the-definitive-guide}
-\hypertarget{idp5617168}
+\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp5644448}{xmpp-the-definitive-guide}
+\hypertarget{idp5644448}
 Saint-Andre, P. and Smith, K. and Tronçon, R.: \emph{XMPP: The Definitive Guide}, Sebastopol: O'Reilly, 2009, 978-0-596-52126-4, 310 (7, 13, 14, 16, ). 
 
 \end{thebibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \setlength\saveparskip\parskip
 \setlength\saveparindent\parindent
-\begin{dbtolatexindex}{idp5824512}{}
+\begin{dbtolatexindex}{idp5851792}{}
 \setlength\tempparskip\parskip \setlength\tempparindent\parindent
 \parskip\saveparskip \parindent\saveparindent
 \noindent \indexspace
@@ -1056,6 +1110,9 @@ Saint-Andre, P. and Smith, K. and Tronçon, R.: \emph{XMPP: The Definitive Guide}
 \makeatletter\@input@{\jobname.ind}\makeatother
 \addcontentsline{toc}{chapter}{Index}
 \end{dbtolatexindex}
+\listoffigures
+\listoftables
+\MainMatter
 
 \newcommand{\dbappendix}[1]{\chapter{#1}}%
 % ------------------------------------------------------------- 
