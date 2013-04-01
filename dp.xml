@@ -1168,16 +1168,35 @@ ws.send(
     <para>Describe the tools that can be used to implement RTC in WB (and
     which were used to implement Celebrio Talker)</para>
 
-    <para>Strophe (simple XMPP in Javascript)</para>
+    <sect1>
+      <title>Strophe.js</title>
 
-    <para>Strophe connecting/attaching - security issues. TODO
-    programming</para>
+      <para>Strophe (simple XMPP in Javascript)</para>
 
-    <para>Strophe plugins</para>
+      <para>Strophe connecting/attaching - security issues. TODO
+      programming</para>
+    </sect1>
 
-    <para>JSJaC - https://github.com/sstrigler/JSJaC/</para>
+    <sect1>
+      <title>Other possibilities?</title>
 
-    <para>Possible server-side implementations (JAXL, XMPPHP, ...)</para>
+      <para>JSJaC - https://github.com/sstrigler/JSJaC/</para>
+
+      <para>Parsing XML with jQuery?</para>
+    </sect1>
+
+    <sect1>
+      <title>Strophe plugins</title>
+
+      <para>Strophe plugins</para>
+    </sect1>
+
+    <sect1>
+      <title>Server-side implementations</title>
+
+      <para>Possible server-side implementations (JAXL, XMPPHP, ...).
+      Attaching connection + Node possibility.</para>
+    </sect1>
   </chapter>
 
   <chapter id="chap-talker">
@@ -1185,27 +1204,168 @@ ws.send(
 
     <para>Describe the Talker application in Celebrio.</para>
 
-    <para>Mention what we expected from the app (value proposition)</para>
-
-    <para>Then, application analysis, design and implmementation.</para>
+    <para>mention value proposition (+ section 1 here)</para>
 
     <para>Describe the architecture and used tools&amp;frameworks: JS +
-    Ember.js, OpenTok, WebSockets in new OpenTok</para>
+    Ember.js, OpenTok</para>
 
-    <para>Don't forget to use UML: use case diagram, class diagram (if any),
-    sequence/action diagram</para>
+    <sect1>
+      <title>Requirements analysis</title>
+
+      <para>Mention what we expected from the app (value proposition)</para>
+
+      <para>Then, application analysis + design.</para>
+
+      <para>Don't forget to use UML: use case diagram, class diagram (if any),
+      sequence/action diagram</para>
+    </sect1>
 
     <sect1>
       <title>Ember.js</title>
 
       <para>Describe Javascript client-side MVC frameworks overall, compare,
       tell why we used Ember</para>
+
+      <sect2>
+        <title>Client-side MVC</title>
+
+        <para></para>
+      </sect2>
+
+      <sect2>
+        <title>Comparsion with other frameworks</title>
+
+        <para>Tell why Ember is the best :-)</para>
+      </sect2>
+
+      <sect2>
+        <title>Handlebars templates</title>
+
+        <para></para>
+      </sect2>
+
+      <sect2>
+        <title>Routing</title>
+
+        <para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Initializing the connection</title>
+
+      <para>Strophe init, passing credentials, attaching to the existing
+      connection?</para>
+    </sect1>
+
+    <sect1>
+      <title>Processing events</title>
+
+      <para>everything about processing incoming events. mention appending
+      messages to the message list</para>
+
+      <sect2>
+        <title>Notifications</title>
+
+        <para>Webtop notifications + sound</para>
+      </sect2>
+
+      <sect2>
+        <title>Logging</title>
+
+        <para>Log4js</para>
+      </sect2>
     </sect1>
 
     <sect1>
       <title>Contact list</title>
 
-      <para></para>
+      <para>The list of contacts is essential part of every instant messaging
+      application. The same applies to Talker, with little modification
+      compared to classical IM clients. Talker has been designed and
+      implemented as the part of Celebrio - comprehensive <quote>operating
+      system</quote>. The contact list is not managed by Talker itself, it
+      servers to other applications as well. On the other hand, the user can
+      connect existing third party XMPP account to Celebrio, with its own
+      contact list (roster). It is crucial to deal with the contacts
+      duplication and appropriate matching one to another.</para>
+
+      <sect2>
+        <title>Celebrio contact list</title>
+
+        <para>As mentioned in the previous paragraph, the contact list base
+        comes from the server-side database. Celebrio asks the user for adding
+        her contacts in People application, another part of the system. All
+        contacts are stored in a relational database and available through the
+        system, in all applications. One of the properties of the contact
+        entity is JID.<footnote>
+            <para>Jabber ID</para>
+          </footnote> For the needs of Talker, the contacts are filtered on
+        the server so that only those which have JID filled are returned as
+        the user contact list.</para>
+
+        <para>Since Talker is JavaScript application, the contacts are passed
+        to JavaScript in JSON format. To avoid an extra request (and thus a
+        delay), contact list is rendered by PHP to the
+        <computeroutput>&lt;script/&gt;</computeroutput> element in the
+        server-side processed template. Then, when the Ember application is
+        initialized, the array of plain JavaScript objects is transformed to
+        the content of <computeroutput>ArrayController</computeroutput>,
+        specifically <computeroutput>App.contactsController</computeroutput>.
+        After that, the application can easily manage rendering the contact
+        list within Handlebars template and keeping it up-to-date.</para>
+
+        <para>Ember class <computeroutput>Contact</computeroutput> is one of
+        the most voluminous objects in the application. Every
+        <computeroutput>Contact</computeroutput> object contains both the
+        <quote>static</quote> properties from the server (such as contact name
+        or avatar picture) and the dynamic information about current state in
+        the application. The latter category includes the information whether
+        the contact is online or not, its presence status (DND, Away, ...) and
+        also all the messages related to the contact. </para>
+
+        <para>Within whole Celebrio system, there is a rule that the contacts
+        the user has not added to her contact list (in the People application)
+        does not affect the user in any way. In fact, all messages, updates or
+        invites from unknown contacts are processed by the application, but
+        they are thrown away and not displayed to the user. There is an easy
+        possibility to extend the application to be able to communicate with
+        the contacts that have not been added yet. However, it would break the
+        system philosophy and making such decision is not up to the thesis
+        author.</para>
+      </sect2>
+
+      <sect2>
+        <title>Retrieving the roster</title>
+
+        <para></para>
+      </sect2>
+
+      <sect2>
+        <title>Subscriptions</title>
+
+        <para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Video calling</title>
+
+      <para>Video framework, flash fallback</para>
+
+      <sect2>
+        <title>OpenTok</title>
+
+        <para>OpenTok library, Native implementation in Android</para>
+
+        <para>WS in OpenTok</para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Testing</title>
+
+      <para>Unit tests, performance tests if there is enough time</para>
     </sect1>
   </chapter>
 
@@ -1213,13 +1373,6 @@ ws.send(
     <title>Conclusion</title>
 
     <para>conclusion</para>
-
-    <sect1>
-      <title>Another part of the conclusion</title>
-
-      <para>Another part of the conclusion... just to have subchapter
-      here</para>
-    </sect1>
   </chapter>
 
   <bibliography>
