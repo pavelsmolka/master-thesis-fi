@@ -227,7 +227,10 @@
     communication channel has to be used. This chapter covers both - reshaping
     HTTP in <xref linkend="chap-http-requests" /> and brand new approach in
     <xref linkend="chap-ws" />, bypassing HTTP at all. Unfortunatelly, every
-    approach brings also some disadvantages.</para>
+    approach brings also some disadvantages. Ultimately, overview of several
+    higher-level solutions is stated in <xref
+    linkend="chap-high-level-rtc" />, most of which are based on HTTP requests
+    or WebSockets.</para>
 
     <sect1 id="chap-http-requests">
       <title>Using HTTP requests</title>
@@ -354,13 +357,12 @@
         comparsion of 1000 (A), 10000 (B) and 100000 (C) clients polling the
         server every second with the message 20 characters long, both using
         classic HTTP requests and WebSockets technology (mentioned in <xref
-        linkend="chap-ws" />).
-        <citation>pro-html5-programming</citation></para>
+        linkend="chap-ws" />). <citation>pro-html5-programming</citation> It
+        is obvious that there is huge unnecessary network overhead when using
+        HTTP polling instead of WebSockets.</para>
 
         <figure id="fig-http-overhead">
-          <title>Comparison of the unnecessary network overhead between the
-          HTTP polling and using WebSockets
-          <citation>pro-html5-programming</citation></title>
+          <title>Comparison of network overhead (HTTP and WebSockets)</title>
 
           <mediaobject>
             <imageobject>
@@ -722,14 +724,89 @@ connection.send(file);</programlisting>
     </sect1>
 
     <sect1>
-      <title>High-level RTC frameworks</title>
+      <title>Server-sent events</title>
+
+      <para>Server-sent events (aka EventSource, from this point refered as
+      SSE) should in fact not be listed here but in the next section. It is
+      technology based on HTTP streaming described in <xref
+      linkend="chap-http-streaming" /> so it is not at the basic
+      <quote>zero</quote> level. However, SSE are often compared to WebSockets
+      so that the topic is introduced here. SSE have been standartized as part
+      of HTML5 standard. <citation>sse</citation> There is very brief summary
+      of SSE API and usage in this section.</para>
+
+      <para>As any other web technology, SSE connection must be initialized by
+      the client. There is a JavaScript API providing event handlers, very
+      similar to WS API. The event stream is opened with the constructor,
+      pointing to the resource at the server:</para>
+
+      <para><programlisting>var eventSource = new EventSource("sse-example.php");</programlisting></para>
+
+      <para>The script at the server,
+      <computeroutput>sse-example.php</computeroutput> in our case, pushes the
+      data to the opened HTTP response stream. What is important to get SSE
+      work, the <computeroutput>Content-Type</computeroutput> header must be
+      set to the value <computeroutput>text/event-stream</computeroutput>. The
+      data has to be organized in form of <quote>paragraphs</quote> separated
+      by blank line, where every paragraph stands for one message. Have a look
+      at an example below:</para>
+
+      <para><programlisting>data: This is one-line message
+
+id: 123
+event: myevent
+data: Message of type "myevent" which consists of several lines
+data: Another line of the event message</programlisting></para>
+
+      <para>As shown above, every line in the message consists of key and
+      value separated by colon, similar to JSON format. When we need to
+      transfer multiline message, we can repeat the key several times.
+      <citation>sse-multiline</citation> On the basis of
+      <computeroutput>event</computeroutput> field
+      (<computeroutput>myevent</computeroutput> in our example), the
+      respective event handler is triggered in JavaScript API. In our case, it
+      would be the following event listener, if it has been attached in
+      JavaScript before, logging the event to the console:</para>
+
+      <programlisting>eventSource.addEventListener("myevent", function(e) {
+    // process the event
+    console.log(e);
+}, false);</programlisting>
+
+      <para>The connection is closed either by the client by calling
+      <computeroutput>close()</computeroutput> method on the
+      <computeroutput>EventSource</computeroutput> object or by the server
+      (when all data is sent). However, if server closes the connection, the
+      client attempts to reconnect to the same resource. So, the server cannot
+      close the connection permanently.</para>
+
+      <para>Sever-sent events are often compared to WebSockets, though they
+      are much less known. The support of both in current web browsers is very
+      similar. The only main difference is lack of support of SSE in Internet
+      Explorer 10, which finally provides WebSocket API. Another difference is
+      the fact that SSE, unlike WS, does not provide real bidirectional
+      stream. Only the server can publish new messages through the opened HTTP
+      connection, the client has to push the data to the server via other
+      (standard) HTTP requests. Finally, there is quite a big limitation in
+      the message format. While WebSockets provide real TCP connection any
+      data can be transfered through, SSE is restricted to textual data in the
+      form of key/value pairs. So, there is no compelling reason to use SSE
+      when WebSockets exist. Anyway, it comes in handy to know about it when
+      working with real-time applications in web browsers.</para>
+    </sect1>
+
+    <sect1 id="chap-high-level-rtc">
+      <title>High-level RTC solutions</title>
 
       <para>Actually, there are several higher level solutions for achieving
       bidirectional (and thus real-time) communication in web browser. Some of
       them use HTTP requests described above (such as Bayeux), some of them
       are based on WebSockets (WebRTC) and several are built completely
       independent, installed as web browser plugins and thus behaving like
-      separate runtime platforms (Adobe Flash).</para>
+      separate runtime platforms (Adobe Flash). And, to be precise, some of
+      the frameworks are built on top of others, for example OpenTok uses
+      Flash or WebRTC. See the sections below to understand each of the
+      technologies.</para>
 
       <sect2>
         <title>Adobe Flash</title>
@@ -779,13 +856,55 @@ connection.send(file);</programlisting>
       </sect2>
 
       <sect2>
-        <title>Other frameworks</title>
-
-        <para>Bayeux: http://svn.cometd.org/trunk/bayeux/bayeux.html</para>
+        <title>OpenTok</title>
 
         <para>OpenTok</para>
+      </sect2>
 
-        <para>SignalR (.NET)</para>
+      <sect2>
+        <title>Bayeux</title>
+
+        <para>Bayeux is one of the higher level protocols designed specificaly
+        for bidirectional communication between web browser and the server,
+        primarily intended to work on top of HTTP. The idea of communication
+        is almost the same as in case of HTTP long polling. For transfer of
+        the messages from the server to client, the server holds the request
+        and responds only when there is available message. Sending the data
+        from the client to the server is straightforward, ordinary HTTP
+        request is sufficient.</para>
+
+        <para>Apart from HTTP requests, Bayeux defines the structure for the
+        transmitted data, contained in the body of HTTP requests/responses.
+        Each message has to be in form of JSON, containing structured data
+        such as channel name, client ID and of course the transmitted data
+        itself. <citation>bayeux</citation> Bayeux provides interesting way to
+        communicate, yet it has not been used in this thesis. The main reason
+        for choosing XMPP is much better interoperability with other existing
+        services and ability to easily communicate with the clients not
+        running in web browser.</para>
+      </sect2>
+
+      <sect2>
+        <title>SignalR</title>
+
+        <para>SignalR is a framework taking care of both client (web browser)
+        and server side of the application. SignalR is designed for .NET
+        platform on the server side, so the web application should be powered
+        by ASP.NET framework on the server side. It abstracts the user from
+        finding out which technology the web browser the application runs into
+        supports. Instead, SignalR provides API for sending the messages and
+        handling the incoming ones. Internally, it uses WebSockets for
+        establishing the connection. When the WebSocket API is not available
+        (for example in IE9, which is fun fact considering that SignalR is
+        Microsoft-platform-based), it tries Server Sent Events and then falls
+        back on long polling technique. <citation>signalr</citation> To take
+        is short, SignalR provides envelope for client-side WebSockets and
+        HTTP long polling techniques, with ASP.NET API for handling the
+        messages on the server.</para>
+      </sect2>
+
+      <sect2>
+        <title>Google hangouts API</title>
 
         <para>Google hangouts API</para>
       </sect2>
@@ -2498,6 +2617,114 @@ ws.send(
 
       <releaseinfo>from <ulink
       url="http://www.iphonefaq.org/archives/9730">http://www.iphonefaq.org/archives/9730</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>signalr</abbrev>
+
+      <author>
+        <firstname>Damian</firstname>
+
+        <surname>Edwards</surname>
+      </author>
+
+      <title>SignalR FAQ</title>
+
+      <publisher>
+        <publishername>GitHub</publishername>
+      </publisher>
+
+      <pubdate>9/7/2012 [retrieved 4/5/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://github.com/SignalR/SignalR/wiki/Faq">https://github.com/SignalR/SignalR/wiki/Faq</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>sse-api</abbrev>
+
+      <author>
+        <firstname>Ian</firstname>
+
+        <surname>Hickson</surname>
+      </author>
+
+      <title>Server-Sent Events</title>
+
+      <subtitle>Editor's Draft</subtitle>
+
+      <pubdate>3/29/2013 [retrieved 4/5/2013]</pubdate>
+
+      <publisher>
+        <publishername>W3C</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://dev.w3.org/html5/eventsource/">http://dev.w3.org/html5/eventsource/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>sse-multiline</abbrev>
+
+      <author>
+        <firstname>Remy</firstname>
+
+        <surname>Sharp</surname>
+      </author>
+
+      <title>Server-Sent Events</title>
+
+      <subtitle>Editor's Draft</subtitle>
+
+      <pubdate>1/24/2012 [retrieved 4/5/2013]</pubdate>
+
+      <publisher>
+        <publishername>HTML5Doctor</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://html5doctor.com/server-sent-events/">http://html5doctor.com/server-sent-events/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>bayeux</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Alex</firstname>
+
+          <surname>Russell</surname>
+        </author>
+
+        <author>
+          <firstname>Greg</firstname>
+
+          <surname>Wilkins</surname>
+        </author>
+
+        <author>
+          <firstname>David</firstname>
+
+          <surname>Davis</surname>
+        </author>
+
+        <author>
+          <firstname>Mark</firstname>
+
+          <surname>Nesbitt</surname>
+        </author>
+      </authorgroup>
+
+      <title>The Bayeux Specification</title>
+
+      <pubdate>2007 [retrieved 4/5/2013]</pubdate>
+
+      <publisher>
+        <publishername>The Dojo Foundation</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://svn.cometd.org/trunk/bayeux/bayeux.html">http://svn.cometd.org/trunk/bayeux/bayeux.html</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
