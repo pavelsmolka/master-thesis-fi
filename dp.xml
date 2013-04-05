@@ -722,29 +722,73 @@ connection.send(file);</programlisting>
     </sect1>
 
     <sect1>
-      <title>Existing RTC frameworks</title>
+      <title>High-level RTC frameworks</title>
 
-      <para>TODO</para>
+      <para>Actually, there are several higher level solutions for achieving
+      bidirectional (and thus real-time) communication in web browser. Some of
+      them use HTTP requests described above (such as Bayeux), some of them
+      are based on WebSockets (WebRTC) and several are built completely
+      independent, installed as web browser plugins and thus behaving like
+      separate runtime platforms (Adobe Flash).</para>
 
-      <para>Actually, there are other options such as using various browser
-      plugins (e.g. Adobe Flash) to provide the base layer for TCP
-      connections, but such tools has not been used within this thesis and are
-      not further dealt with.</para>
+      <sect2>
+        <title>Adobe Flash</title>
 
-      <para>Describe other approaches to RTC in WB than XMPP. Tell why we
-      didn't use them (or that we used - OpenTok).</para>
+        <para>Among all, one of the most widespread technologies is Adobe
+        Flash.<footnote>
+            <para>http://www.adobe.com/software/flash/about/</para>
+          </footnote> Apart from the possibility to establish bidirectional
+        persistent TCP connection, Flash allows the developer to create almost
+        any graphics, animations and user interface with nearly no
+        limits.</para>
 
-      <para>Mention:</para>
+        <para>Nevertheless, the disadvantages of Flash are significat. First,
+        Flash is not a native part of any web browser. Until recently, it had
+        to be installed manually as a plugin. Now, it is bundled and shipped
+        with Chromium-based browsers (Chrome, Chromium), but it is still
+        external plugin. <citation>flash-bundled-with-chrome</citation>
+        Another drawback of Flash is lack of support on mobile devices. Apple
+        has been clear about it: iPhones and iPads have never supported Flash
+        technology and it is not likely to change in the future.
+        <citation>iphone-flash-support</citation> Android devices supported
+        Flash at first, but later Adobe quit Google Play.
+        <citation>android-flash-support</citation></para>
 
-      <para>Bayeux: http://svn.cometd.org/trunk/bayeux/bayeux.html</para>
+        <para>There are many other similar technologies such as Adobe Flash,
+        but they all suffer the same pain. Since they are installed as
+        proprietary plugins, the developer can never be sure the application
+        will run in any environment. This concerns technologies like Microsoft
+        Silverlight<footnote>
+            <para>http://www.microsoft.com/silverlight/</para>
+          </footnote> or Adobe AIR<footnote>
+            <para>http://www.adobe.com/products/air.html</para>
+          </footnote> (even though AIR has been intended to be
+        browser-independent platform).</para>
 
-      <para>OpenTok</para>
+        <para>So, Adobe Flash is often used as a fallback for older browsers,
+        running on non-mobile devices, which does not WebRTC yet (described
+        below). It has been used as fallback for the video calls in Talker
+        application. However, creating a new application based on Flash (as a
+        primary technology) in 2013 is not a good idea.</para>
+      </sect2>
 
-      <para>SignalR (.NET)</para>
+      <sect2>
+        <title>WebRTC</title>
 
-      <para>WebRTC (http://www.webrtc.org/)</para>
+        <para>WebRTC (http://www.webrtc.org/)</para>
+      </sect2>
 
-      <para>Google hangouts API</para>
+      <sect2>
+        <title>Other frameworks</title>
+
+        <para>Bayeux: http://svn.cometd.org/trunk/bayeux/bayeux.html</para>
+
+        <para>OpenTok</para>
+
+        <para>SignalR (.NET)</para>
+
+        <para>Google hangouts API</para>
+      </sect2>
     </sect1>
   </chapter>
 
@@ -1178,17 +1222,17 @@ ws.send(
     </sect1>
 
     <sect1>
+      <title>Strophe plugins</title>
+
+      <para>Strophe plugins</para>
+    </sect1>
+
+    <sect1>
       <title>Other possibilities?</title>
 
       <para>JSJaC - https://github.com/sstrigler/JSJaC/</para>
 
       <para>Parsing XML with jQuery?</para>
-    </sect1>
-
-    <sect1>
-      <title>Strophe plugins</title>
-
-      <para>Strophe plugins</para>
     </sect1>
 
     <sect1>
@@ -1322,7 +1366,7 @@ ws.send(
         or avatar picture) and the dynamic information about current state in
         the application. The latter category includes the information whether
         the contact is online or not, its presence status (DND, Away, ...) and
-        also all the messages related to the contact. </para>
+        also all the messages related to the contact.</para>
 
         <para>Within whole Celebrio system, there is a rule that the contacts
         the user has not added to her contact list (in the People application)
@@ -2396,6 +2440,64 @@ ws.send(
 
       <releaseinfo>from <ulink
       url="http://xmpp.org/2011/06/the-future-is-jingle/">http://xmpp.org/2011/06/the-future-is-jingle/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>flash-bundled-with-chrome</abbrev>
+
+      <author>
+        <firstname>Robin</firstname>
+
+        <surname>Wauters</surname>
+      </author>
+
+      <title>Flash Player To Come Bundled With Google Chrome, New Browser
+      Plugin API Coming</title>
+
+      <publisher>
+        <publishername>TechCrunch</publishername>
+      </publisher>
+
+      <pubdate>3/30/2010 [retrieved 4/5/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://techcrunch.com/2010/03/30/flash-player-to-come-bundled-with-google-chrome-new-browser-plugin-api-coming/">http://techcrunch.com/2010/03/30/flash-player-to-come-bundled-with-google-chrome-new-browser-plugin-api-coming/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>android-flash-support</abbrev>
+
+      <author>
+        <firstname>Geoff</firstname>
+
+        <surname>Wauters</surname>
+      </author>
+
+      <title>Adobe Flash for Android: Gone with barely a whimper</title>
+
+      <publisher>
+        <publishername>Digital Trends</publishername>
+      </publisher>
+
+      <pubdate>8/17/2012 [retrieved 4/5/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.digitaltrends.com/mobile/adobe-flash-for-android-gone-with-barely-a-whimper/">http://www.digitaltrends.com/mobile/adobe-flash-for-android-gone-with-barely-a-whimper/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>iphone-flash-support</abbrev>
+
+      <author>
+        <surname>Apple Support Team</surname>
+      </author>
+
+      <title>Does the iPhone support Flash?</title>
+
+      <pubdate>2007 [retrieved 4/5/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.iphonefaq.org/archives/9730">http://www.iphonefaq.org/archives/9730</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
