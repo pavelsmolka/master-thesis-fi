@@ -29,7 +29,8 @@
 
     <fi:thanks xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Thanks to
     everyone... TODO: Petr Kunc (help with OpenTok &amp; RealTime
-    communication,</fi:thanks>
+    communication). Thanks Káťa for cooking and being patient while I was
+    typing the thesis regularly up to 3 AM</fi:thanks>
 
     <pubdate>2013</pubdate>
 
@@ -691,7 +692,7 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <programlisting>// Sending String
 connection.send('string message');
 
-// Sending canvas ImageData as ArrayBuffer
+// Sending canvas ImageData as ArrayBuffe
 var img = canvas_context.getImageData(0, 0, 400, 320);
 var binary = new Uint8Array(img.data.length);
 for (var i = 0; i &lt; img.data.length; i++) {
@@ -721,19 +722,34 @@ connection.send(file);</programlisting>
         by HTTP long polling or streaming mechanism, described in <xref
         linkend="chap-http-requests" />.</para>
       </sect2>
+
+      <sect2>
+        <title>API wrappers</title>
+
+        <para>TODO Mention socket.io, sockjs and similar projects</para>
+
+        <para>https://github.com/sockjs/sockjs-client</para>
+
+        <para>http://socket.io/</para>
+      </sect2>
     </sect1>
 
     <sect1>
-      <title>Server-sent events</title>
+      <title>Server-sent events<indexterm>
+          <primary>Server-sent events</primary>
+        </indexterm></title>
 
       <para>Server-sent events (aka EventSource, from this point refered as
       SSE) should in fact not be listed here but in the next section. It is
-      technology based on HTTP streaming described in <xref
-      linkend="chap-http-streaming" /> so it is not at the basic
-      <quote>zero</quote> level. However, SSE are often compared to WebSockets
-      so that the topic is introduced here. SSE have been standartized as part
-      of HTML5 standard. <citation>sse</citation> There is very brief summary
-      of SSE API and usage in this section.</para>
+      technology based on HTTP streaming<indexterm>
+          <primary>HTTP</primary>
+
+          <secondary>streaming</secondary>
+        </indexterm> described in <xref linkend="chap-http-streaming" /> so it
+      is not at the basic <quote>zero</quote> level. However, SSE are often
+      compared to WebSockets so that the topic is introduced here. SSE have
+      been standartized as part of HTML5 standard. <citation>sse</citation>
+      There is very brief summary of SSE API and usage in this section.</para>
 
       <para>As any other web technology, SSE connection must be initialized by
       the client. There is a JavaScript API providing event handlers, very
@@ -809,7 +825,9 @@ data: Another line of the event message</programlisting></para>
       technologies.</para>
 
       <sect2>
-        <title>Adobe Flash</title>
+        <title>Adobe Flash<indexterm>
+            <primary>Flash</primary>
+          </indexterm></title>
 
         <para>Among all, one of the most widespread technologies is Adobe
         Flash.<footnote>
@@ -835,9 +853,13 @@ data: Another line of the event message</programlisting></para>
         but they all suffer the same pain. Since they are installed as
         proprietary plugins, the developer can never be sure the application
         will run in any environment. This concerns technologies like Microsoft
-        Silverlight<footnote>
+        Silverlight<indexterm>
+            <primary>Silverlight</primary>
+          </indexterm><footnote>
             <para>http://www.microsoft.com/silverlight/</para>
-          </footnote> or Adobe AIR<footnote>
+          </footnote> or Adobe AIR<indexterm>
+            <primary>AIR</primary>
+          </indexterm><footnote>
             <para>http://www.adobe.com/products/air.html</para>
           </footnote> (even though AIR has been intended to be
         browser-independent platform).</para>
@@ -850,9 +872,151 @@ data: Another line of the event message</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>WebRTC</title>
+        <title>WebRTC<indexterm>
+            <primary>WebRTC</primary>
+          </indexterm></title>
 
-        <para>WebRTC (http://www.webrtc.org/)</para>
+        <para>Up to now, none of the technologies mentioned was fully suited
+        as a complete solution for web browser based media communication, such
+        as video calling. WebSockets are the most advanced, however, it is
+        only low level API providing TCP stream. On that account, web browser
+        developers, with Chromium developers in the vanguard, invented WebRTC
+        technology. Is is an API linking up the user media API (webcam,
+        microphone) with the streaming API for sending the multimedia from the
+        browser to the other node.<footnote>
+            <para>Apart from video calling, WebRTC provides an API for sending
+            the files from one peer to another.</para>
+          </footnote></para>
+
+        <para>While WebSockets serve as the interconnection between the client
+        (web browser) and the dedicated server, which makes it suitable for
+        <quote>server-based</quote> protocols such as XMPP, WebRTC provides
+        real peer-to-peer connection<indexterm>
+            <primary>peer-to-peer connection</primary>
+          </indexterm>, directly between two web browsers. That makes WebRTC a
+        perfect tool for implementing direct media communication, such as
+        video calling.</para>
+
+        <sect3>
+          <title>Signaling</title>
+
+          <para>In fact, the server has to mediate the <quote>meta
+          data</quote>, such as initializing connection or negotiating the
+          available media capabilities (such as codecs). This level of
+          communication, exchanging the information about connection itself,
+          is called <emphasis>signaling</emphasis><indexterm>
+              <primary>signaling</primary>
+            </indexterm>. WebRTC does not take care nor about the layer
+          signaling data is transferred at, neither the signaling protocol
+          itself. It can SIP, XMPP or any other, transferred via
+          XMLHTTPRequest or WebSockets. What is important, signaling is not
+          part of WebRTC API. The WebRTC connection itself then concerns only
+          the peers, as shown at <xref linkend="fig-webrtc" />.
+          <citation>webrtc-signaling</citation></para>
+
+          <figure id="fig-webrtc">
+            <title>WebRTC communication schema</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="img/webrtc.png" width="420pt" />
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </sect3>
+
+        <sect3>
+          <title>WebRTC API</title>
+
+          <para>WebRTC provides very high level API abstracting media device
+          access, network connection and encoding/decoding the media streams
+          from the programmer. Unfortunatelly, the WebRTC API is still in the
+          phase of draft and has not been standardized yet.
+          <citation>webrtc-rfc</citation> It means that JavaScript objects are
+          prefixed by vendor prefixes, so that there is
+          <computeroutput>webkitRTCPeerConnection</computeroutput> instead of
+          <computeroutput>RTCPeerConnection</computeroutput> in
+          Chromium.</para>
+
+          <para>The core API object is JavaScript object RTCPeerConnection.
+          Creating one may look like the following (with respective
+          prefix):</para>
+
+          <programlisting>var config =  {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
+var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisting>
+
+          <para>Then, we can send all available ICE<footnote>
+              <para>ICE stands for Interactive Connectivity
+              Establishment</para>
+            </footnote> candidate to the other peer, via specified STUN
+          server. ICE candidate<indexterm>
+              <primary>ICE candidate</primary>
+            </indexterm> is basically a possible transport address for media
+          stream, later validated for peer-to-peer connectivity.
+          <citation>ice</citation> So, each possible connection address is
+          sent via previously created <computeroutput>pc</computeroutput>
+          object. The process is still in the phase of negotiation so sending
+          is up to the signaling service:</para>
+
+          <programlisting>pc.onicecandidate = function (event) {
+    // use existing signaling channel to send the candidate
+    signalingChannel.send(JSON.stringify({ "candidate": event.candidate }));
+};</programlisting>
+
+          <para>In case the other side publishes its video stream, we set up a
+          hook which handles it and shows it in the remote video element,
+          stored in <computeroutput>remoteView</computeroutput> JavaScript
+          variable. <citation>webrtc-rfc</citation> In other words, the
+          incoming URL is assigned to the
+          <computeroutput>video</computeroutput> element as a source
+          (<computeroutput>src</computeroutput>) attribute. The
+          <computeroutput>src</computeroutput> attribute determines the media
+          source played within the element.
+          <citation>definitive-guide-to-html5</citation> </para>
+
+          <programlisting>pc.onaddstream = function (event) {
+    remoteView.src = URL.createObjectURL(event.stream);
+};</programlisting>
+
+          <para>Sending the media stream from the local browser to the other
+          peer is similar. First, we capture audio and video stream from the
+          local multimedia devices. The result, multimedia stream, is passed
+          as the argument to the function which adds it to the
+          <computeroutput>RTCPeerConnection</computeroutput> object
+          <computeroutput>pc</computeroutput>. Besides, it is a common habit
+          to add the video of self to the page as well. It is handled by
+          <computeroutput>selfView</computeroutput> variable, containing
+          reference to another video element on the page. The example below
+          represents the described situation:</para>
+
+          <programlisting>navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+    selfView.src = URL.createObjectURL(stream);
+    pc.addStream(stream);
+});</programlisting>
+
+          <para>Closing the connection is quite straightforward, by invoking
+          <computeroutput>close()</computeroutput> method on
+          <computeroutput>RTCPeerConnection</computeroutput> object which has
+          been instantiated before as
+          <computeroutput>pc</computeroutput>.</para>
+        </sect3>
+
+        <sect3>
+          <title>WebRTC in various environments</title>
+
+          <para>TODO: Support (Firefox, Chrome, Ericson).
+          http://blog.chromium.org/2013/02/hello-firefox-this-is-chrome-calling.html</para>
+
+          <para>Mention that C++ WebRTC package can be built into any app, not
+          only browser.</para>
+
+          <para>TODO: Microsoft draft.</para>
+
+          <para>TODO: Firefox has to set preferences</para>
+
+          <para>TODO: WebRTC Skype
+          http://gigaom.com/2012/06/26/skype-webrtc-web-client/</para>
+        </sect3>
       </sect2>
 
       <sect2>
@@ -862,7 +1026,9 @@ data: Another line of the event message</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>Bayeux</title>
+        <title>Bayeux<indexterm>
+            <primary>Bayeux</primary>
+          </indexterm></title>
 
         <para>Bayeux is one of the higher level protocols designed specificaly
         for bidirectional communication between web browser and the server,
@@ -885,7 +1051,9 @@ data: Another line of the event message</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>SignalR</title>
+        <title>SignalR<indexterm>
+            <primary>SignalR</primary>
+          </indexterm></title>
 
         <para>SignalR is a framework taking care of both client (web browser)
         and server side of the application. SignalR is designed for .NET
@@ -1638,7 +1806,7 @@ ws.send(
 
       <isbn>978-1-4302-3960-4</isbn>
 
-      <pagenums>1080</pagenums>
+      <pagenums>1080 (880)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -2725,6 +2893,108 @@ ws.send(
 
       <releaseinfo>from <ulink
       url="http://svn.cometd.org/trunk/bayeux/bayeux.html">http://svn.cometd.org/trunk/bayeux/bayeux.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc-signaling</abbrev>
+
+      <author>
+        <firstname>Sam</firstname>
+
+        <surname>Dutton</surname>
+      </author>
+
+      <title>Getting Started with WebRTC</title>
+
+      <pubdate>7/23/2012 [retrieved 4/6/2013]</pubdate>
+
+      <publisher>
+        <publishername>HTML5 Rocks</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://www.html5rocks.com/en/tutorials/webrtc/basics/">http://www.html5rocks.com/en/tutorials/webrtc/basics/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc-rfc</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Adam</firstname>
+
+          <surname>Bergkvist</surname>
+        </author>
+
+        <author>
+          <firstname>Daniel</firstname>
+
+          <surname>Burnett</surname>
+        </author>
+
+        <author>
+          <firstname>Cullen</firstname>
+
+          <surname>Jennings</surname>
+        </author>
+
+        <author>
+          <firstname>Anant</firstname>
+
+          <surname>Narayanan</surname>
+        </author>
+      </authorgroup>
+
+      <title>WebRTC 1.0: Real-time Communication Between Browsers</title>
+
+      <subtitle>Editor's Draft</subtitle>
+
+      <pubdate>3/22/2013 [retrieved 4/6/2013]</pubdate>
+
+      <publisher>
+        <publishername>W3C</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://dev.w3.org/2011/webrtc/editor/webrtc.html">http://dev.w3.org/2011/webrtc/editor/webrtc.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ice</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jonathan</firstname>
+
+          <surname>Rosenberg</surname>
+        </author>
+
+        <author>
+          <firstname>Ari</firstname>
+
+          <surname>Keranen</surname>
+        </author>
+
+        <author>
+          <firstname>Bruce</firstname>
+
+          <surname>Lowekamp</surname>
+        </author>
+
+        <author>
+          <firstname>Adam</firstname>
+
+          <surname>Roach</surname>
+        </author>
+      </authorgroup>
+
+      <title>TCP Candidates with Interactive Connectivity Establishment
+      (ICE)</title>
+
+      <pubdate>5/18/2012 [retrieved 4/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://tools.ietf.org/html/draft-ietf-mmusic-ice-tcp-16">http://tools.ietf.org/html/draft-ietf-mmusic-ice-tcp-16</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
