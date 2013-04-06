@@ -178,7 +178,9 @@
     the specific procedures used to create it are described in <xref
     linkend="chap-talker" />.</para>
 
-    <para>It has been said that Skype<footnote>
+    <para>It has been said that Skype<indexterm>
+        <primary>Skype</primary>
+      </indexterm><footnote>
         <para>http://www.skype.com/</para>
       </footnote> is the most favorite communication tool among the target
     audience. If it had been implemented, the existing customer base could be
@@ -876,6 +878,8 @@ data: Another line of the event message</programlisting></para>
             <primary>WebRTC</primary>
           </indexterm></title>
 
+        <para>TODO: Move this to standalone chapter?</para>
+
         <para>Up to now, none of the technologies mentioned was fully suited
         as a complete solution for web browser based media communication, such
         as video calling. WebSockets are the most advanced, however, it is
@@ -972,7 +976,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
           (<computeroutput>src</computeroutput>) attribute. The
           <computeroutput>src</computeroutput> attribute determines the media
           source played within the element.
-          <citation>definitive-guide-to-html5</citation> </para>
+          <citation>definitive-guide-to-html5</citation></para>
 
           <programlisting>pc.onaddstream = function (event) {
     remoteView.src = URL.createObjectURL(event.stream);
@@ -1004,18 +1008,57 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         <sect3>
           <title>WebRTC in various environments</title>
 
-          <para>TODO: Support (Firefox, Chrome, Ericson).
-          http://blog.chromium.org/2013/02/hello-firefox-this-is-chrome-calling.html</para>
+          <para>WebRTC is truly new technology, not yet adopted by many web
+          browsers. And for those which support it, the implementation may
+          differ since the standard has not been fully defined and finished
+          yet. Chromium browser (i.e. Chrome and Chromium) developers were the
+          first who added WebRTC API to their products - in 2012. By the
+          beginning of the year 2013, WebRTC API was added also to the newest
+          Firefox builds so that Chrome and Firefox can <quote>talk</quote> to
+          each other.<footnote>
+              <para>Note that in current Firefox version (22, nightly build by
+              the time this thesis part is created), the user has to enable
+              <computeroutput>media.peerconnection.enabled</computeroutput>
+              field in <computeroutput>about:config</computeroutput> to get
+              WebRTC run.</para>
+            </footnote> <citation>webrtc-interop</citation> Opera browser also
+          takes part in this initiative, yet no existing official claim of
+          support has been released. All of the mentioned browsers used the
+          same backend implementation, hosted at <ulink
+          url="http://www.webrtc.org">http://www.webrtc.org</ulink>. In
+          theory, this backend implementation (written in C++) can be built
+          into any application to support WebRTC, not only a web
+          browser.</para>
 
-          <para>Mention that C++ WebRTC package can be built into any app, not
-          only browser.</para>
+          <para>There are also other parties which implement WebRTC in their
+          own way, keeping to the API more or less. One of such initiatives is
+          Ericsson Browser (called just Browser), which claimed self to be the
+          first browser to implement WebRTC. Ericsson Browser uses different
+          backend implementation but it tries to be in accordance with the
+          official API. <citation>webrtc-ericsson</citation></para>
 
-          <para>TODO: Microsoft draft.</para>
+          <para>Microsoft came up with another approach. Even though Internet
+          Explorer does not support WebRTC, Microsoft came up with their own
+          API standard proposal. <citation>webrtc-ms</citation> It differs
+          from the <quote>official</quote> API mainly in the extended
+          possibilities to control more aspects of WebRTC communication,
+          including low level <quote>transport</quote> layers. Since the none
+          of the standards has been finished yet, it is possible (and
+          probable) that the final API definition will result somwhere in
+          between.</para>
 
-          <para>TODO: Firefox has to set preferences</para>
-
-          <para>TODO: WebRTC Skype
-          http://gigaom.com/2012/06/26/skype-webrtc-web-client/</para>
+          <para>One of the logical reasons why Microsoft does want to
+          intervene to the process of defining WebRTC API as much as possible
+          is Skype<indexterm>
+              <primary>Skype</primary>
+            </indexterm>. Skype has been bought by Microsoft some time ago
+          and, as everything nowadays, is planned to be available in the web
+          browser. Microsoft seems to bet on WebRTC technology.
+          <citation>webrtc-skype</citation> As a pleasant side-effect of Skype
+          working on top of WebRTC, it would be finally possible to play along
+          with Skype with other technologies. Of course, the technology
+          barrier is the smaller one compared to licences and legal
+          regulations, but it is another story.</para>
         </sect3>
       </sect2>
 
@@ -1069,6 +1112,12 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         is short, SignalR provides envelope for client-side WebSockets and
         HTTP long polling techniques, with ASP.NET API for handling the
         messages on the server.</para>
+      </sect2>
+
+      <sect2>
+        <title>Google Talk</title>
+
+        <para></para>
       </sect2>
 
       <sect2>
@@ -1496,16 +1545,72 @@ ws.send(
   <chapter id="chap-xmpp-in-javascript">
     <title>JavaScript XMPP client</title>
 
-    <para>Describe the tools that can be used to implement RTC in WB (and
-    which were used to implement Celebrio Talker)</para>
+    <para>In this chapter, the two previous topics are connected together. The
+    possibilities of bidirectional communication, necessary for receiving
+    messages real-time, were mentioned in <xref linkend="chap-rtc" />. In
+    simple terms, such techniques (HTTP long polling, WebSockets, ...) stand
+    for the <quote>transport</quote> layer of the application, handling the
+    low-level connection and transferring the messages from the server to
+    client and vice versa. Above this layer, there is a <quote>real
+    communication protocol</quote> definition, which would be XMPP in our
+    case. It does not make any sense to divide the protocols according to the
+    OSI Model<indexterm>
+        <primary>OSI Model</primary>
+      </indexterm> (ISO/IEC 7498-1) since everything above HTTP (including
+    HTTP itself) takes place at application layer (number 7). On <xref
+    linkend="fig-isoosi" />, the communication between layers is depicted for
+    the case of an application initializing Jingle multimedia stream (XEP
+    extension) over XMPP, using BOSH mechanism sending and receiving the
+    messages via HTTP. All of the protocols have been described (or at least
+    mentioned previously). XMLHTTPRequest is rather API than protocol, its
+    usage should be, however, displayed as well.</para>
+
+    <figure id="fig-isoosi">
+      <title>Complexity of the communication protocols at application
+      layer</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="vp/isoosi.pdf" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>It is nor simple neither easy to take care about such a broad range
+    of protocols in the application, handling the communication correctly at
+    all levels. Fortunately, there are several existing libraries serving the
+    lower level protocols. Specifically, most of them would conceal HTTP
+    requests as well as BOSH and simplifying the XMPP layer. One of the
+    JavaScript libraries, used when implementing Talker application, called
+    Strophe, is described in this chapter. Also some other tools and libraries
+    for creating XMPP client in web browser are briefly mentioned
+    below.</para>
+
+    <para>All along the thesis, we assume the application runs in the web
+    browser. After all, the thesis title contains it. Therefore, mostly
+    JavaScript libraries and tools for building a client application within a
+    web browser are be mentioned in this chapter. Yet, it is certainly
+    possible to implement XMPP client at the server side or as an independent
+    desktop appliacation. In the end of this chapter, some server-side
+    implementations are also mentioned due to the security reasons. See <xref
+    linkend="chap-server-side-xmpp-client" /> for details.</para>
 
     <sect1>
-      <title>Strophe.js</title>
+      <title>Strophe.js<indexterm>
+          <primary>Strophe.js</primary>
+        </indexterm></title>
 
-      <para>Strophe (simple XMPP in Javascript)</para>
+      <para>Strophe.js (sometimes refered only as <quote>Strophe</quote>) is
+      complex but simple to use JavaScript library for creating XMPP client in
+      web browser application. Since XMPP is the protocol powering the Talker
+      application, Strophe.js appeared to be a proper tool for creating it. In
+      fact, Strophe handles whole <quote>transport</quote> layer for the
+      application, as it was described in the introduction to this
+      chapter.</para>
 
-      <para>Strophe connecting/attaching - security issues. TODO
-      programming</para>
+      <para></para>
+
+      <para>TODO: connecting/attaching - security issues. </para>
     </sect1>
 
     <sect1>
@@ -1522,7 +1627,7 @@ ws.send(
       <para>Parsing XML with jQuery?</para>
     </sect1>
 
-    <sect1>
+    <sect1 id="chap-server-side-xmpp-client">
       <title>Server-side implementations</title>
 
       <para>Possible server-side implementations (JAXL, XMPPHP, ...).
@@ -1587,6 +1692,8 @@ ws.send(
 
       <para>Strophe init, passing credentials, attaching to the existing
       connection?</para>
+
+      <para>TODO programming - attach connection</para>
     </sect1>
 
     <sect1>
@@ -2995,6 +3102,100 @@ ws.send(
 
       <releaseinfo>from <ulink
       url="http://tools.ietf.org/html/draft-ietf-mmusic-ice-tcp-16">http://tools.ietf.org/html/draft-ietf-mmusic-ice-tcp-16</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc-interop</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Maire</firstname>
+
+          <surname>Reavy</surname>
+        </author>
+
+        <author>
+          <firstname>Serge</firstname>
+
+          <surname>Lachapelle</surname>
+        </author>
+      </authorgroup>
+
+      <title>Hello Firefox, this is Chrome calling!</title>
+
+      <pubdate>2/4/2013 [retrieved 4/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://blog.chromium.org/2013/02/hello-firefox-this-is-chrome-calling.html">http://blog.chromium.org/2013/02/hello-firefox-this-is-chrome-calling.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc-ericsson</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Stefan</firstname>
+
+          <surname>Alund</surname>
+        </author>
+      </authorgroup>
+
+      <title>Bowser – The World’s First WebRTC-Enabled Mobile Browser</title>
+
+      <pubdate>10/19/2012 [retrieved 4/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://labs.ericsson.com/blog/bowser-the-world-s-first-webrtc-enabled-mobile-browser">https://labs.ericsson.com/blog/bowser-the-world-s-first-webrtc-enabled-mobile-browser</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc-ms</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Bernard</firstname>
+
+          <surname>Aboba</surname>
+        </author>
+
+        <author>
+          <firstname>Martin</firstname>
+
+          <surname>Thomson</surname>
+        </author>
+      </authorgroup>
+
+      <title>Customizable, Ubiquitous Real Time Communication over the Web
+      (CU-RTC-Web)</title>
+
+      <pubdate>8/9/2012 [retrieved 4/6/2013]</pubdate>
+
+      <publisher>
+        <publishername>Microsoft</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://html5labs.interoperabilitybridges.com/cu-rtc-web/cu-rtc-web.htm">http://html5labs.interoperabilitybridges.com/cu-rtc-web/cu-rtc-web.htm</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc-skype</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Janko</firstname>
+
+          <surname>Roettgers</surname>
+        </author>
+      </authorgroup>
+
+      <title>Scoop: Microsoft bets on WebRTC for Skype’s browser
+      future</title>
+
+      <pubdate>6/26/2012 [retrieved 4/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://gigaom.com/2012/06/26/skype-webrtc-web-client/">http://gigaom.com/2012/06/26/skype-webrtc-web-client/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
