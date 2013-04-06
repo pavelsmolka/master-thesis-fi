@@ -219,14 +219,16 @@
       </footnote> Such use case requires appropriate transport layer on top
     which the application can send the messages via any other protocol. When
     using HTTP, there is a TCP connection opened by the client (web browser)
-    through which the data is sent. However, according to the HTTP protocol,
-    the communication is strictly initiated by the client - HTTP is a
-    request/response protocol. <citation>rfc-http</citation> When the client
-    needs still up-to-date information, it must poll the server as frequently
-    as possible. Such approach takes a lot of bandwidth and generates
-    purposeless overhead on the server. So, when one wants to avoid that
-    drawbacks and still make the web browser application to communicate in
-    both directions, HTTP protocol must be hacked somehow or another
+    through which the data is sent. However, according to the HTTP
+    protocol<indexterm>
+        <primary>HTTP</primary>
+      </indexterm>, the communication is strictly initiated by the client -
+    HTTP is a request/response protocol. <citation>rfc-http</citation> When
+    the client needs still up-to-date information, it must poll the server as
+    frequently as possible. Such approach takes a lot of bandwidth and
+    generates purposeless overhead on the server. So, when one wants to avoid
+    that drawbacks and still make the web browser application to communicate
+    in both directions, HTTP protocol must be hacked somehow or another
     communication channel has to be used. This chapter covers both - reshaping
     HTTP in <xref linkend="chap-http-requests" /> and brand new approach in
     <xref linkend="chap-ws" />, bypassing HTTP at all. Unfortunatelly, every
@@ -456,7 +458,9 @@ and this is the second one
     </sect1>
 
     <sect1 id="chap-ws">
-      <title>WebSockets</title>
+      <title>WebSockets<indexterm>
+          <primary>WebSockets</primary>
+        </indexterm></title>
 
       <para>Although the World Wide Web with HTTP request/response schema has
       never been intended to server as RTC platform, the contemporary
@@ -813,18 +817,200 @@ data: Another line of the event message</programlisting></para>
       working with real-time applications in web browsers.</para>
     </sect1>
 
-    <sect1 id="chap-high-level-rtc">
-      <title>High-level RTC solutions</title>
+    <sect1>
+      <title>WebRTC<indexterm>
+          <primary>WebRTC</primary>
+        </indexterm></title>
 
-      <para>Actually, there are several higher level solutions for achieving
-      bidirectional (and thus real-time) communication in web browser. Some of
-      them use HTTP requests described above (such as Bayeux), some of them
-      are based on WebSockets (WebRTC) and several are built completely
-      independent, installed as web browser plugins and thus behaving like
-      separate runtime platforms (Adobe Flash). And, to be precise, some of
-      the frameworks are built on top of others, for example OpenTok uses
-      Flash or WebRTC. See the sections below to understand each of the
-      technologies.</para>
+      <para>Up to now, none of the technologies mentioned was fully suited as
+      a complete solution for web browser based media communication, such as
+      video calling. WebSockets are the most advanced, however, it is only low
+      level API providing TCP stream. On that account, web browser developers,
+      with Chromium developers in the vanguard, invented WebRTC technology. Is
+      is an API linking up the user media API (webcam, microphone) with the
+      streaming API for sending the multimedia from the browser to the other
+      node.<footnote>
+          <para>Apart from video calling, WebRTC provides an API for sending
+          the files from one peer to another.</para>
+        </footnote></para>
+
+      <para>While WebSockets serve as the interconnection between the client
+      (web browser) and the dedicated server, which makes it suitable for
+      <quote>server-based</quote> protocols such as XMPP, WebRTC provides real
+      peer-to-peer connection<indexterm>
+          <primary>peer-to-peer connection</primary>
+        </indexterm>, directly between two web browsers. That makes WebRTC a
+      perfect tool for implementing direct media communication, such as video
+      calling.</para>
+
+      <sect2>
+        <title>Signaling</title>
+
+        <para>In fact, the server has to mediate the <quote>meta data</quote>,
+        such as initializing connection or negotiating the available media
+        capabilities (such as codecs). This level of communication, exchanging
+        the information about connection itself, is called
+        <emphasis>signaling</emphasis><indexterm>
+            <primary>signaling</primary>
+          </indexterm>. WebRTC does not take care nor about the layer
+        signaling data is transferred at, neither the signaling protocol
+        itself. It can SIP, XMPP or any other, transferred via XMLHTTPRequest
+        or WebSockets. What is important, signaling is not part of WebRTC API.
+        The WebRTC connection itself then concerns only the peers, as shown at
+        <xref linkend="fig-webrtc" />.
+        <citation>webrtc-signaling</citation></para>
+
+        <figure id="fig-webrtc">
+          <title>WebRTC communication schema</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="img/webrtc.png" width="420pt" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </sect2>
+
+      <sect2>
+        <title>WebRTC API</title>
+
+        <para>WebRTC provides very high level API abstracting media device
+        access, network connection and encoding/decoding the media streams
+        from the programmer. Unfortunatelly, the WebRTC API is still in the
+        phase of draft and has not been standardized yet.
+        <citation>webrtc-rfc</citation> It means that JavaScript objects are
+        prefixed by vendor prefixes, so that there is
+        <computeroutput>webkitRTCPeerConnection</computeroutput> instead of
+        <computeroutput>RTCPeerConnection</computeroutput> in Chromium.</para>
+
+        <para>The core API object is JavaScript object RTCPeerConnection.
+        Creating one may look like the following (with respective
+        prefix):</para>
+
+        <programlisting>var config =  {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
+var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisting>
+
+        <para>Then, we can send all available ICE<footnote>
+            <para>ICE stands for Interactive Connectivity Establishment</para>
+          </footnote> candidate to the other peer, via specified STUN server.
+        ICE candidate<indexterm>
+            <primary>ICE candidate</primary>
+          </indexterm> is basically a possible transport address for media
+        stream, later validated for peer-to-peer connectivity.
+        <citation>ice</citation> So, each possible connection address is sent
+        via previously created <computeroutput>pc</computeroutput> object. The
+        process is still in the phase of negotiation so sending is up to the
+        signaling service:</para>
+
+        <programlisting>pc.onicecandidate = function (event) {
+    // use existing signaling channel to send the candidate
+    signalingChannel.send(JSON.stringify({ "candidate": event.candidate }));
+};</programlisting>
+
+        <para>In case the other side publishes its video stream, we set up a
+        hook which handles it and shows it in the remote video element, stored
+        in <computeroutput>remoteView</computeroutput> JavaScript variable.
+        <citation>webrtc-rfc</citation> In other words, the incoming URL is
+        assigned to the <computeroutput>video</computeroutput> element as a
+        source (<computeroutput>src</computeroutput>) attribute. The
+        <computeroutput>src</computeroutput> attribute determines the media
+        source played within the element.
+        <citation>definitive-guide-to-html5</citation></para>
+
+        <programlisting>pc.onaddstream = function (event) {
+    remoteView.src = URL.createObjectURL(event.stream);
+};</programlisting>
+
+        <para>Sending the media stream from the local browser to the other
+        peer is similar. First, we capture audio and video stream from the
+        local multimedia devices. The result, multimedia stream, is passed as
+        the argument to the function which adds it to the
+        <computeroutput>RTCPeerConnection</computeroutput> object
+        <computeroutput>pc</computeroutput>. Besides, it is a common habit to
+        add the video of self to the page as well. It is handled by
+        <computeroutput>selfView</computeroutput> variable, containing
+        reference to another video element on the page. The example below
+        represents the described situation:</para>
+
+        <programlisting>navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+    selfView.src = URL.createObjectURL(stream);
+    pc.addStream(stream);
+});</programlisting>
+
+        <para>Closing the connection is quite straightforward, by invoking
+        <computeroutput>close()</computeroutput> method on
+        <computeroutput>RTCPeerConnection</computeroutput> object which has
+        been instantiated before as
+        <computeroutput>pc</computeroutput>.</para>
+      </sect2>
+
+      <sect2>
+        <title>WebRTC in various environments</title>
+
+        <para>WebRTC is truly new technology, not yet adopted by many web
+        browsers. And for those which support it, the implementation may
+        differ since the standard has not been fully defined and finished yet.
+        Chromium browser (i.e. Chrome and Chromium) developers were the first
+        who added WebRTC API to their products - in 2012. By the beginning of
+        the year 2013, WebRTC API was added also to the newest Firefox builds
+        so that Chrome and Firefox can <quote>talk</quote> to each
+        other.<footnote>
+            <para>Note that in current Firefox version (22, nightly build by
+            the time this thesis part is created), the user has to enable
+            <computeroutput>media.peerconnection.enabled</computeroutput>
+            field in <computeroutput>about:config</computeroutput> to get
+            WebRTC run.</para>
+          </footnote> <citation>webrtc-interop</citation> Opera browser also
+        takes part in this initiative, yet no existing official claim of
+        support has been released. All of the mentioned browsers used the same
+        backend implementation, hosted at <ulink
+        url="http://www.webrtc.org">http://www.webrtc.org</ulink>. In theory,
+        this backend implementation (written in C++) can be built into any
+        application to support WebRTC, not only a web browser.</para>
+
+        <para>There are also other parties which implement WebRTC in their own
+        way, keeping to the API more or less. One of such initiatives is
+        Ericsson Browser (called just Browser), which claimed self to be the
+        first browser to implement WebRTC. Ericsson Browser uses different
+        backend implementation but it tries to be in accordance with the
+        official API. <citation>webrtc-ericsson</citation></para>
+
+        <para>Microsoft came up with another approach. Even though Internet
+        Explorer does not support WebRTC, Microsoft came up with their own API
+        standard proposal. <citation>webrtc-ms</citation> It differs from the
+        <quote>official</quote> API mainly in the extended possibilities to
+        control more aspects of WebRTC communication, including low level
+        <quote>transport</quote> layers. Since the none of the standards has
+        been finished yet, it is possible (and probable) that the final API
+        definition will result somwhere in between.</para>
+
+        <para>One of the logical reasons why Microsoft does want to intervene
+        to the process of defining WebRTC API as much as possible is
+        Skype<indexterm>
+            <primary>Skype</primary>
+          </indexterm>. Skype has been bought by Microsoft some time ago and,
+        as everything nowadays, is planned to be available in the web browser.
+        Microsoft seems to bet on WebRTC technology.
+        <citation>webrtc-skype</citation> As a pleasant side-effect of Skype
+        working on top of WebRTC, it would be finally possible to play along
+        with Skype with other technologies. Of course, the technology barrier
+        is the smaller one compared to licences and legal regulations, but it
+        is another story.</para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="chap-high-level-rtc">
+      <title>Other RTC solutions</title>
+
+      <para>Actually, there are several other, mostly higher-level, solutions
+      for achieving bidirectional (and thus real-time) communication in web
+      browser. Some of them use HTTP requests described above (such as
+      Bayeux), some of them are based on WebSockets (OpenTok) and several are
+      built completely independent, installed as web browser plugins and thus
+      behaving as separate runtime platforms (Adobe Flash, Google Talk). And,
+      to be precise, some of the frameworks are built on top of others, for
+      example OpenTok can use Flash. See the sections below to understand each
+      of the technologies.</para>
 
       <sect2>
         <title>Adobe Flash<indexterm>
@@ -874,198 +1060,9 @@ data: Another line of the event message</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>WebRTC<indexterm>
-            <primary>WebRTC</primary>
-          </indexterm></title>
-
-        <para>TODO: Move this to standalone chapter?</para>
-
-        <para>Up to now, none of the technologies mentioned was fully suited
-        as a complete solution for web browser based media communication, such
-        as video calling. WebSockets are the most advanced, however, it is
-        only low level API providing TCP stream. On that account, web browser
-        developers, with Chromium developers in the vanguard, invented WebRTC
-        technology. Is is an API linking up the user media API (webcam,
-        microphone) with the streaming API for sending the multimedia from the
-        browser to the other node.<footnote>
-            <para>Apart from video calling, WebRTC provides an API for sending
-            the files from one peer to another.</para>
-          </footnote></para>
-
-        <para>While WebSockets serve as the interconnection between the client
-        (web browser) and the dedicated server, which makes it suitable for
-        <quote>server-based</quote> protocols such as XMPP, WebRTC provides
-        real peer-to-peer connection<indexterm>
-            <primary>peer-to-peer connection</primary>
-          </indexterm>, directly between two web browsers. That makes WebRTC a
-        perfect tool for implementing direct media communication, such as
-        video calling.</para>
-
-        <sect3>
-          <title>Signaling</title>
-
-          <para>In fact, the server has to mediate the <quote>meta
-          data</quote>, such as initializing connection or negotiating the
-          available media capabilities (such as codecs). This level of
-          communication, exchanging the information about connection itself,
-          is called <emphasis>signaling</emphasis><indexterm>
-              <primary>signaling</primary>
-            </indexterm>. WebRTC does not take care nor about the layer
-          signaling data is transferred at, neither the signaling protocol
-          itself. It can SIP, XMPP or any other, transferred via
-          XMLHTTPRequest or WebSockets. What is important, signaling is not
-          part of WebRTC API. The WebRTC connection itself then concerns only
-          the peers, as shown at <xref linkend="fig-webrtc" />.
-          <citation>webrtc-signaling</citation></para>
-
-          <figure id="fig-webrtc">
-            <title>WebRTC communication schema</title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="img/webrtc.png" width="420pt" />
-              </imageobject>
-            </mediaobject>
-          </figure>
-        </sect3>
-
-        <sect3>
-          <title>WebRTC API</title>
-
-          <para>WebRTC provides very high level API abstracting media device
-          access, network connection and encoding/decoding the media streams
-          from the programmer. Unfortunatelly, the WebRTC API is still in the
-          phase of draft and has not been standardized yet.
-          <citation>webrtc-rfc</citation> It means that JavaScript objects are
-          prefixed by vendor prefixes, so that there is
-          <computeroutput>webkitRTCPeerConnection</computeroutput> instead of
-          <computeroutput>RTCPeerConnection</computeroutput> in
-          Chromium.</para>
-
-          <para>The core API object is JavaScript object RTCPeerConnection.
-          Creating one may look like the following (with respective
-          prefix):</para>
-
-          <programlisting>var config =  {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
-var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisting>
-
-          <para>Then, we can send all available ICE<footnote>
-              <para>ICE stands for Interactive Connectivity
-              Establishment</para>
-            </footnote> candidate to the other peer, via specified STUN
-          server. ICE candidate<indexterm>
-              <primary>ICE candidate</primary>
-            </indexterm> is basically a possible transport address for media
-          stream, later validated for peer-to-peer connectivity.
-          <citation>ice</citation> So, each possible connection address is
-          sent via previously created <computeroutput>pc</computeroutput>
-          object. The process is still in the phase of negotiation so sending
-          is up to the signaling service:</para>
-
-          <programlisting>pc.onicecandidate = function (event) {
-    // use existing signaling channel to send the candidate
-    signalingChannel.send(JSON.stringify({ "candidate": event.candidate }));
-};</programlisting>
-
-          <para>In case the other side publishes its video stream, we set up a
-          hook which handles it and shows it in the remote video element,
-          stored in <computeroutput>remoteView</computeroutput> JavaScript
-          variable. <citation>webrtc-rfc</citation> In other words, the
-          incoming URL is assigned to the
-          <computeroutput>video</computeroutput> element as a source
-          (<computeroutput>src</computeroutput>) attribute. The
-          <computeroutput>src</computeroutput> attribute determines the media
-          source played within the element.
-          <citation>definitive-guide-to-html5</citation></para>
-
-          <programlisting>pc.onaddstream = function (event) {
-    remoteView.src = URL.createObjectURL(event.stream);
-};</programlisting>
-
-          <para>Sending the media stream from the local browser to the other
-          peer is similar. First, we capture audio and video stream from the
-          local multimedia devices. The result, multimedia stream, is passed
-          as the argument to the function which adds it to the
-          <computeroutput>RTCPeerConnection</computeroutput> object
-          <computeroutput>pc</computeroutput>. Besides, it is a common habit
-          to add the video of self to the page as well. It is handled by
-          <computeroutput>selfView</computeroutput> variable, containing
-          reference to another video element on the page. The example below
-          represents the described situation:</para>
-
-          <programlisting>navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
-    selfView.src = URL.createObjectURL(stream);
-    pc.addStream(stream);
-});</programlisting>
-
-          <para>Closing the connection is quite straightforward, by invoking
-          <computeroutput>close()</computeroutput> method on
-          <computeroutput>RTCPeerConnection</computeroutput> object which has
-          been instantiated before as
-          <computeroutput>pc</computeroutput>.</para>
-        </sect3>
-
-        <sect3>
-          <title>WebRTC in various environments</title>
-
-          <para>WebRTC is truly new technology, not yet adopted by many web
-          browsers. And for those which support it, the implementation may
-          differ since the standard has not been fully defined and finished
-          yet. Chromium browser (i.e. Chrome and Chromium) developers were the
-          first who added WebRTC API to their products - in 2012. By the
-          beginning of the year 2013, WebRTC API was added also to the newest
-          Firefox builds so that Chrome and Firefox can <quote>talk</quote> to
-          each other.<footnote>
-              <para>Note that in current Firefox version (22, nightly build by
-              the time this thesis part is created), the user has to enable
-              <computeroutput>media.peerconnection.enabled</computeroutput>
-              field in <computeroutput>about:config</computeroutput> to get
-              WebRTC run.</para>
-            </footnote> <citation>webrtc-interop</citation> Opera browser also
-          takes part in this initiative, yet no existing official claim of
-          support has been released. All of the mentioned browsers used the
-          same backend implementation, hosted at <ulink
-          url="http://www.webrtc.org">http://www.webrtc.org</ulink>. In
-          theory, this backend implementation (written in C++) can be built
-          into any application to support WebRTC, not only a web
-          browser.</para>
-
-          <para>There are also other parties which implement WebRTC in their
-          own way, keeping to the API more or less. One of such initiatives is
-          Ericsson Browser (called just Browser), which claimed self to be the
-          first browser to implement WebRTC. Ericsson Browser uses different
-          backend implementation but it tries to be in accordance with the
-          official API. <citation>webrtc-ericsson</citation></para>
-
-          <para>Microsoft came up with another approach. Even though Internet
-          Explorer does not support WebRTC, Microsoft came up with their own
-          API standard proposal. <citation>webrtc-ms</citation> It differs
-          from the <quote>official</quote> API mainly in the extended
-          possibilities to control more aspects of WebRTC communication,
-          including low level <quote>transport</quote> layers. Since the none
-          of the standards has been finished yet, it is possible (and
-          probable) that the final API definition will result somwhere in
-          between.</para>
-
-          <para>One of the logical reasons why Microsoft does want to
-          intervene to the process of defining WebRTC API as much as possible
-          is Skype<indexterm>
-              <primary>Skype</primary>
-            </indexterm>. Skype has been bought by Microsoft some time ago
-          and, as everything nowadays, is planned to be available in the web
-          browser. Microsoft seems to bet on WebRTC technology.
-          <citation>webrtc-skype</citation> As a pleasant side-effect of Skype
-          working on top of WebRTC, it would be finally possible to play along
-          with Skype with other technologies. Of course, the technology
-          barrier is the smaller one compared to licences and legal
-          regulations, but it is another story.</para>
-        </sect3>
-      </sect2>
-
-      <sect2>
         <title>OpenTok</title>
 
-        <para>OpenTok</para>
+        <para>TODO: OpenTok</para>
       </sect2>
 
       <sect2>
@@ -1117,13 +1114,13 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       <sect2>
         <title>Google Talk</title>
 
-        <para></para>
+        <para>TODO</para>
       </sect2>
 
       <sect2>
         <title>Google hangouts API</title>
 
-        <para>Google hangouts API</para>
+        <para>TODO</para>
       </sect2>
     </sect1>
   </chapter>
@@ -1610,7 +1607,7 @@ ws.send(
 
       <para></para>
 
-      <para>TODO: connecting/attaching - security issues. </para>
+      <para>TODO: connecting/attaching - security issues.</para>
     </sect1>
 
     <sect1>
