@@ -968,6 +968,17 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         this backend implementation (written in C++) can be built into any
         application to support WebRTC, not only a web browser.</para>
 
+        <para>For the web browsers which does not support WebRTC yet, there
+        are several attempts to add its functionality via browser plugins. It
+        can be useful as a temporary improvement for the experienced users but
+        one can never rely on the user having the plugin installed. The
+        library providing WebRTC functionality for Safari, Opera, IE and older
+        versions of Firefox is called webrtc4all.
+        <citation>webrtc4all</citation> However, it is still proprietary
+        solution, adding one more prefix
+        (<computeroutput>w4a</computeroutput>) to the world of WebRTC
+        JavaScript APIs.</para>
+
         <para>There are also other parties which implement WebRTC in their own
         way, keeping to the API more or less. One of such initiatives is
         Ericsson Browser (called just Browser), which claimed self to be the
@@ -976,7 +987,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         official API. <citation>webrtc-ericsson</citation></para>
 
         <para>Microsoft came up with another approach. Even though Internet
-        Explorer does not support WebRTC, Microsoft came up with their own API
+        Explorer does not support WebRTC, Microsoft invented their own API
         standard proposal. <citation>webrtc-ms</citation> It differs from the
         <quote>official</quote> API mainly in the extended possibilities to
         control more aspects of WebRTC communication, including low level
@@ -1158,22 +1169,22 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
     with arbitrary subdomain level (e.g. xmpp.example.com or just
     example.org). <citation>xmpp-the-definitive-guide</citation></para>
 
-    <para>The user names have the same structure as e-mail addresses so the
-    user name is followed by at sign and the server domain name. This rule
-    also guarantees that every XMPP user is registered at the certain server.
-    If there is any message or notification for the given user, her
-    <quote>home</quote> server is looked up first, the message is transferred
-    to that server first and then, the respective server (that the user
-    belongs to) is responsible for delivering the message to the user or
-    saving it until the user logs in. Therefore, two possible connection types
-    take place in XMPP. Client-to-server communication is the first one, when
-    the clients can talk only to their <quote>home</quote> server. Then,
-    server-to-server communication is designed for delivering the messages to
-    the users at different domains. When two servers are exchanging any data,
-    direct connection to the target server is established. This approach is
-    dissimilar to the way SMTP servers exchange e-mail messages. It helps to
-    prevent address spoofing or spamming.
-    <citation>xmpp-the-definitive-guide</citation></para>
+    <para>The user name, called Jabber ID (or shortly as JID), has the same
+    structure as e-mail address so the user name is followed by at sign and
+    the server domain name. This rule also guarantees that every XMPP user is
+    registered at the certain server. If there is any message or notification
+    for the given user, her <quote>home</quote> server is looked up first, the
+    message is transferred to that server first and then, the respective
+    server (that the user belongs to) is responsible for delivering the
+    message to the user or saving it until the user logs in. Therefore, two
+    possible connection types take place in XMPP. Client-to-server
+    communication is the first one, when the clients can talk only to their
+    <quote>home</quote> server. Then, server-to-server communication is
+    designed for delivering the messages to the users at different domains.
+    When two servers are exchanging any data, direct connection to the target
+    server is established. This approach is dissimilar to the way SMTP servers
+    exchange e-mail messages. It helps to prevent address spoofing or
+    spamming. <citation>xmpp-the-definitive-guide</citation></para>
 
     <para>XMPP has been chosen as the communication protocol for this thesis
     topic - Talker application. XMPP has been verified by big companies such
@@ -1579,9 +1590,12 @@ ws.send(
     lower level protocols. Specifically, most of them would conceal HTTP
     requests as well as BOSH and simplifying the XMPP layer. One of the
     JavaScript libraries, used when implementing Talker application, called
-    Strophe, is described in this chapter. Also some other tools and libraries
-    for creating XMPP client in web browser are briefly mentioned
-    below.</para>
+    Strophe, is described in this chapter. There are also other libraries for
+    creating XMPP client in web browser, for example JSJaC. However, JSJaC is
+    not that popular (and thus verified) as Strophe.js and has not been used
+    in Talker application. It is mentioned just as another option. It would be
+    also possible to handle whole XMPP/BOSH/HTTP stack manually and parse XML
+    with</para>
 
     <para>All along the thesis, we assume the application runs in the web
     browser. After all, the thesis title contains it. Therefore, mostly
@@ -1597,37 +1611,154 @@ ws.send(
           <primary>Strophe.js</primary>
         </indexterm></title>
 
-      <para>Strophe.js (sometimes refered only as <quote>Strophe</quote>) is
-      complex but simple to use JavaScript library for creating XMPP client in
-      web browser application. Since XMPP is the protocol powering the Talker
-      application, Strophe.js appeared to be a proper tool for creating it. In
-      fact, Strophe handles whole <quote>transport</quote> layer for the
-      application, as it was described in the introduction to this
-      chapter.</para>
+      <para>Strophe.js<footnote>
+          <para>Strophe.js is sometimes refered only as
+          <quote>Strophe</quote>. However, Strophe is, strictly speaking, a
+          name of the collection of libraries, from which only one is
+          Strophe.js, the JavaScript tool described in this chapter.</para>
+        </footnote> is complex but simple to use JavaScript library for
+      creating XMPP client in web browser application, initially created and
+      further maintained by Jack Moffitt. Since XMPP is the protocol powering
+      the Talker application, Strophe.js appeared to be a proper tool for
+      creating it. In fact, Strophe handles whole <quote>transport</quote>
+      layer for the application, as it was described in the introduction to
+      this chapter.</para>
 
-      <para></para>
+      <para>Strophe.js is uses BOSH protocol (based on HTTP long polling) for
+      sending messages and receiving the updates from the server. There is an
+      unofficial project fork using WebSockets but it has not been accepted by
+      the community yet. The main reason is probably unfinished standard for
+      handling XMPP stanzas in WebSocket stream, currently available as a
+      draft. <citation>xmpp-over-websockets</citation></para>
 
-      <para>TODO: connecting/attaching - security issues.</para>
+      <para>In the following sections, the essential topics concerning
+      Strophe.js are mentioned. It mostly comprises Strophe.js basic usage and
+      philosophy, including using the plugins for getting additional
+      functionality beyond the library itself.</para>
+
+      <sect2>
+        <title>Connection</title>
+
+        <para>Since XMPP client is intended to communicate with various nodes
+        in the Internet, the connection represents the essence of the
+        application. Strophe connects to the BOSH server through which it
+        communicates with the rest of the XMPP world. Its URL is stated as
+        BOSH_SERVICE variable in the following example. Setting up the
+        connection is simple:</para>
+
+        <programlisting>var BOSH_SERVICE = 'https://bind.jappix.com/',
+    jid  = 'pavel@example.com',
+    pass = 'mysecretpassword',
+    onConnect = function(status) { /* implmementation */ };
+var connection = new Strophe.Connection(BOSH_SERVICE);
+connection.connect(jid, pass, onConnect);</programlisting>
+
+        <para>Apart from the BOSH service URL, Jabber ID and password is
+        passed to the connection method. </para>
+
+        <para>The last argument stands for the callback function which is
+        triggered every time the connection status is changed. The status is
+        passed as an argument to the function. It must take one of
+        Strophe.Status enum values, for example
+        <computeroutput>Strophe.Status.CONNECTED</computeroutput> when the
+        connection is established. Example onConnect callback can look like
+        this:</para>
+
+        <programlisting>onConnect = function(status) {
+  if (status === Strophe.Status.CONNECTED) {
+    connected();
+  } else {
+    console.log('Connecting status: ' + status);
+  }
+};</programlisting>
+
+        <para>When the connection is established,
+        <computeroutput>connected</computeroutput> function is invoked.
+        Usually, this is the place the event handlers are attached to the
+        connection (passed as <computeroutput>this</computeroutput> in the
+        context of onConnect function). Event handlers are described in <xref
+        linkend="chap-strophe-events" />.</para>
+
+        <para>TODO: attaching - security issues.</para>
+      </sect2>
+
+      <sect2 id="chap-strophe-events">
+        <title>Event handling</title>
+
+        <para>Both JavaScript and XMPP are typical fields of using
+        asynchronous processing of incoming events. The idea is simple.
+        Generally, we specify the actions we are interested in and attach the
+        event handlers to each of them. Event handler<indexterm>
+            <primary>event handler</primary>
+          </indexterm>, function or method, is invoked as soon as the
+        specified action occurs. The event handlers, defered functions, are
+        called callbacks<indexterm>
+            <primary>callback</primary>
+          </indexterm>. Not only Strophe but all other asynchronous libraries
+        (event-based or request/response) in JavaScript are based on
+        callbacks, for example popular jQuery AJAX functions.<footnote>
+            <para>http://api.jquery.com/jQuery.ajax/</para>
+          </footnote></para>
+
+        <para>When the idea of callback is clear, applying them to Strophe.js
+        event handling is simple, see the example below. The first parameter
+        is the callback itself (its name or anonymous function implemented on
+        site). The <quote>areas of concern</quote> are specified as the
+        remaining five parameters. The example callback here triggers every
+        time the chat message comes, i.e.
+        <computeroutput>message</computeroutput> stanza with attribute
+        <computeroutput>type='chat'</computeroutput>. The parameters specified
+        as null means that any value of that place is processed by the
+        handler. So, the message sender, which can be specified by the
+        next-to-last argument, can be anyone:</para>
+
+        <programlisting>connection.addHandler(onChatMessage, null, 'message', 'chat', null,  null);</programlisting>
+
+        <para>The callback function receives the incoming stanza object in
+        Strophe-specific pre-parsed format. Then, the object can be queried
+        (with jQuery or plain JavaScript selectors), such as at the example
+        below:</para>
+
+        <programlisting>onChatMessage = function(msg) {
+  var messageBody = msg.getElementsByTagName('body');
+  console.log("Message text: " + messageBody);
+  return true;
+}</programlisting>
+
+        <para>The last line in the function is common pattern in Strophe.js
+        the developer must be aware of. Each handler must return
+        <computeroutput>true</computeroutput> (or any other value which
+        evaluates to <computeroutput>true</computeroutput>) to stay bound to
+        the event. If <computeroutput>false</computeroutput> is returned, the
+        handler is unattached and it is not triggered anymore.
+        <citation>xmpp-in-javascript</citation> So
+        <computeroutput>false</computeroutput> return values are proper for
+        disposable callbacks, used only once.</para>
+      </sect2>
+
+      <sect2>
+        <title>Stanza builders</title>
+
+        <para>How XML stanza elements are created.</para>
+      </sect2>
+
+      <sect2>
+        <title>Logger</title>
+
+        <para>TODO mention the logger somewhere</para>
+      </sect2>
     </sect1>
 
     <sect1>
       <title>Strophe plugins</title>
 
-      <para>Strophe plugins</para>
-    </sect1>
-
-    <sect1>
-      <title>Other possibilities?</title>
-
-      <para>JSJaC - https://github.com/sstrigler/JSJaC/</para>
-
-      <para>Parsing XML with jQuery?</para>
+      <para>TODO Strophe plugins</para>
     </sect1>
 
     <sect1 id="chap-server-side-xmpp-client">
       <title>Server-side implementations</title>
 
-      <para>Possible server-side implementations (JAXL, XMPPHP, ...).
+      <para>TODO Possible server-side implementations (JAXL, XMPPHP, ...).
       Attaching connection + Node possibility.</para>
     </sect1>
   </chapter>
@@ -2030,6 +2161,30 @@ ws.send(
       <isbn>978-1-4302-3864-5</isbn>
 
       <pagenums>352 (165, ...)</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>xmpp-in-javascript</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jack</firstname>
+
+          <surname>Moffitt</surname>
+        </author>
+      </authorgroup>
+
+      <title>Professional XMPP Programming with JavaScript and jQuery</title>
+
+      <publisher>
+        <publishername>John Wiley &amp; Sons</publishername>
+      </publisher>
+
+      <pubdate>2010</pubdate>
+
+      <isbn>978-0470540718</isbn>
+
+      <pagenums>432 (58)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -3193,6 +3348,23 @@ ws.send(
 
       <releaseinfo>from <ulink
       url="http://gigaom.com/2012/06/26/skype-webrtc-web-client/">http://gigaom.com/2012/06/26/skype-webrtc-web-client/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>webrtc4all</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>Doubango Telecom</surname>
+        </author>
+      </authorgroup>
+
+      <title>webrtc4all</title>
+
+      <pubdate>2012 [retrieved 4/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="https://code.google.com/p/webrtc4all/">https://code.google.com/p/webrtc4all/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
