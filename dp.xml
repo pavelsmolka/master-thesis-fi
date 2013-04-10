@@ -1654,7 +1654,7 @@ var connection = new Strophe.Connection(BOSH_SERVICE);
 connection.connect(jid, pass, onConnect);</programlisting>
 
         <para>Apart from the BOSH service URL, Jabber ID and password is
-        passed to the connection method. </para>
+        passed to the connection method.</para>
 
         <para>The last argument stands for the callback function which is
         triggered every time the connection status is changed. The status is
@@ -1739,13 +1739,59 @@ connection.connect(jid, pass, onConnect);</programlisting>
       <sect2>
         <title>Stanza builders</title>
 
-        <para>How XML stanza elements are created.</para>
+        <para>Whole XMPP protocol is represented by XML elements called
+        stanzas, transferred between a client and a server. There are various
+        approaches to create XML document structure in JavaScript. Using
+        jQuery is the most common way to do so. jQuery object, created by
+        jQuery <computeroutput>$()</computeroutput> function, represents XML
+        structure tree which can be extended using methods like
+        <computeroutput>append()</computeroutput>,
+        <computeroutput>wrap()</computeroutput> and
+        <computeroutput>after()</computeroutput>.
+        <citation>jquery-api</citation></para>
+
+        <para>Strophe.js comes up with completely independent XML creator,
+        however inspired by jQuery. <citation>xmpp-in-javascript</citation>
+        The functionality is to be found within
+        <computeroutput>Strophe.Builder</computeroutput> object. It allows the
+        library user to create XML elements such as follows:
+        <citation>strophe-api</citation><programlisting>$iq({to: 'tomas', from: 'pavel', type: 'get', id: '1'})
+    .c('query', {xmlns: 'strophe:example'})
+    .c('example')
+    .toString()</programlisting>The example code creates IQ stanza, the
+        following code is the result:<programlisting>&lt;iq to='tomas' from='pavel' type='get' id='1'&gt;
+  &lt;query xmlns='strophe:example'&gt;
+    &lt;example/&gt;
+  &lt;/query&gt;
+&lt;/iq&gt;</programlisting>Bijection between the two pieces of code is
+        obvious. The only catch could be not yet defined
+        <computeroutput>$iq()</computeroutput> function. Similarly as jQuery,
+        Strophe.js provides shorthand functions
+        <computeroutput>$msg()</computeroutput>,
+        <computeroutput>$pres()</computeroutput>, and
+        <computeroutput>$iq()</computeroutput> for creating all three kinds of
+        stanzas, along with <computeroutput>$build()</computeroutput> function
+        for making any kind of element. Therefore, creating presence stanza
+        and sending it using Strophe.js can look as simple as the following
+        example:</para>
+
+        <programlisting>this.send($pres().tree());</programlisting>
       </sect2>
 
       <sect2>
         <title>Logger</title>
 
-        <para>TODO mention the logger somewhere</para>
+        <para>Strophe.js does not conceal information about its operation. It
+        contains several logger methods, divided by log level, mostly used by
+        the library itself (it however can be used by the user code as well).
+        Logging functionality is inserted in the main Strophe object itself.
+        Calling the logger from the library methods is thus simplier, however
+        it can hardly be replaced by another logger (all at once) defined by
+        the user. All logger methods point to the ultimate log() method, which
+        just returns by default. The intention of the library authors is
+        providing this method to be overridden by custom user code. So is done
+        in the Talker application, as described in the following
+        chapter.</para>
       </sect2>
     </sect1>
 
@@ -3365,6 +3411,42 @@ connection.connect(jid, pass, onConnect);</programlisting>
 
       <releaseinfo>from <ulink
       url="https://code.google.com/p/webrtc4all/">https://code.google.com/p/webrtc4all/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>jquery-api</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>The jQuery Foundation</surname>
+        </author>
+      </authorgroup>
+
+      <title>jQuery API Documentation</title>
+
+      <pubdate>2013 [retrieved 4/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://api.jquery.com/append/">http://api.jquery.com/append/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>strophe-api</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jack</firstname>
+
+          <surname>Moffitt</surname>
+        </author>
+      </authorgroup>
+
+      <title>Strophe.js API Documentation</title>
+
+      <pubdate>2013 [retrieved 4/10/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://strophe.im/strophejs/doc/1.0.2/files2/strophe-js.html">http://strophe.im/strophejs/doc/1.0.2/files2/strophe-js.html</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
