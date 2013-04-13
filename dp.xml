@@ -126,6 +126,9 @@
     creating real-time application, text messenger supporting video calling,
     became not only programming challenge but also a business goal.</para>
 
+    <para>TODO: rework this a bit. Mention all RTC tools, not only web based.
+    Mention more history:</para>
+
     <para>Considering the fact the people like real-time communication (not
     only direct messaging but also real-time cooperation, simultaneous
     document editing or playing multiplayer games) while using web browser
@@ -202,6 +205,13 @@
 
   <chapter id="chap-rtc">
     <title>Bidirectional communication</title>
+
+    <para>Suggestion TODO: split the chapter: describe HTTP more in depth,
+    tell why HTTP si so important (not only because of browsers), describe the
+    history of communication tools. (maybe in the intro)</para>
+
+    <para>Suggestion TODO: mention RTC history (unix talk, IRC, ICQ -
+    Meebo)</para>
 
     <para>The very essence of every instant messaging is the bidirectional
     stream where both sides can immediately <emphasis>push</emphasis> new data
@@ -463,7 +473,7 @@ and this is the second one
         </indexterm></title>
 
       <para>Although the World Wide Web with HTTP request/response schema has
-      never been intended to server as RTC platform, the contemporary
+      never been intended to serve as RTC platform, the contemporary
       applications require such functionality and the developers started to
       bend the protocol in the undesirable way. Most of the patterns described
       in <xref linkend="chap-http-streaming" /> do their jobs and one can
@@ -754,8 +764,9 @@ connection.send(file);</programlisting>
         </indexterm> described in <xref linkend="chap-http-streaming" /> so it
       is not at the basic <quote>zero</quote> level. However, SSE are often
       compared to WebSockets so that the topic is introduced here. SSE have
-      been standartized as part of HTML5 standard. <citation>sse</citation>
-      There is very brief summary of SSE API and usage in this section.</para>
+      been standartized as part of HTML5 standard.
+      <citation>sse-api</citation> There is very brief summary of SSE API and
+      usage in this section.</para>
 
       <para>As any other web technology, SSE connection must be initialized by
       the client. There is a JavaScript API providing event handlers, very
@@ -1139,6 +1150,10 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
   <chapter id="chap-xmpp">
     <title>Extensible Messaging and Presence Protocol</title>
 
+    <para>Suggestion TODO: xmpp: to chce XMPP trochu více popsat a zasadit ho
+    do kontextu HTTP komunikace a tu zase do celkového provozu na internetu
+    mezi ostatní protokoly </para>
+
     <para>Extensible Messaging and Presence Protocol (XMPP) technologies were
     invented by Jeremie Miller in 1998.
     <citation>xmpp-the-definitive-guide</citation> It is one of the most
@@ -1170,21 +1185,22 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
     example.org). <citation>xmpp-the-definitive-guide</citation></para>
 
     <para>The user name, called Jabber ID (or shortly as JID), has the same
-    structure as e-mail address so the user name is followed by at sign and
-    the server domain name. This rule also guarantees that every XMPP user is
-    registered at the certain server. If there is any message or notification
-    for the given user, her <quote>home</quote> server is looked up first, the
-    message is transferred to that server first and then, the respective
-    server (that the user belongs to) is responsible for delivering the
-    message to the user or saving it until the user logs in. Therefore, two
-    possible connection types take place in XMPP. Client-to-server
-    communication is the first one, when the clients can talk only to their
-    <quote>home</quote> server. Then, server-to-server communication is
-    designed for delivering the messages to the users at different domains.
-    When two servers are exchanging any data, direct connection to the target
-    server is established. This approach is dissimilar to the way SMTP servers
-    exchange e-mail messages. It helps to prevent address spoofing or
-    spamming. <citation>xmpp-the-definitive-guide</citation></para>
+    structure as e-mail address so the user name is followed by
+    <computeroutput>@</computeroutput> and the server domain name. This rule
+    also guarantees that every XMPP user is registered at the certain server.
+    If there is any message or notification for the given user, her
+    <quote>home</quote> server is looked up first, the message is transferred
+    to that server first and then, the respective server (that the user
+    belongs to) is responsible for delivering the message to the user or
+    saving it until the user logs in. Therefore, two possible connection types
+    take place in XMPP. Client-to-server communication is the first one, when
+    the clients can talk only to their <quote>home</quote> server. Then,
+    server-to-server communication is designed for delivering the messages to
+    the users at different domains. When two servers are exchanging any data,
+    direct connection to the target server is established. This approach is
+    dissimilar to the way SMTP servers exchange e-mail messages. It helps to
+    prevent address spoofing or spamming.
+    <citation>xmpp-the-definitive-guide</citation></para>
 
     <para>XMPP has been chosen as the communication protocol for this thesis
     topic - Talker application. XMPP has been verified by big companies such
@@ -1758,8 +1774,8 @@ connection.connect(jid, pass, onConnect);</programlisting>
         <citation>strophe-api</citation><programlisting>$iq({to: 'tomas', from: 'pavel', type: 'get', id: '1'})
     .c('query', {xmlns: 'strophe:example'})
     .c('example')
-    .toString()</programlisting>The example code creates IQ stanza, the
-        following code is the result:<programlisting>&lt;iq to='tomas' from='pavel' type='get' id='1'&gt;
+    .toString()</programlisting>The previous example code creates IQ stanza
+        and the following snippet represents a result:<programlisting>&lt;iq to='tomas' from='pavel' type='get' id='1'&gt;
   &lt;query xmlns='strophe:example'&gt;
     &lt;example/&gt;
   &lt;/query&gt;
@@ -1790,15 +1806,73 @@ connection.connect(jid, pass, onConnect);</programlisting>
         the user. All logger methods point to the ultimate log() method, which
         just returns by default. The intention of the library authors is
         providing this method to be overridden by custom user code. So is done
-        in the Talker application, as described in the following
-        chapter.</para>
+        in the Talker application, as described in <xref
+        linkend="chap-talker" />.</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Strophe plugins</title>
 
-      <para>TODO Strophe plugins</para>
+      <para>XMPP has been designed to be extensible (even by the protocol
+      name) by various XEP extensions. Strophe.js follows the same direction
+      and provides a simple way for the plugins to be added. And fortunately,
+      there is not just the possibility to create the plugin, there are plenty
+      existing extensions available publicly at GitHub. In this section,
+      general way how to use the pulgins is described as well as brief
+      overview of several plugins used in Talker application.</para>
+
+      <para>Each Strophe.js plugin is contained in separate JavaScript file,
+      included to the application which uses it. The common name convention
+      for plugin file is <computeroutput>strophe.myplugin.js</computeroutput>.
+      <citation>xmpp-in-javascript</citation> Whole plugin functionality is
+      packed to JavaScript object and passed to Strophe as follows:</para>
+
+      <programlisting>Strophe.addConnectionPlugin('myplugin',
+{
+  // plugin methods and properties
+
+  init: function(connection) {
+    // init body
+  },
+
+  exampleMethod: function() { /* ... */ }
+});</programlisting>
+
+      <para>Among all plugin object properties and methods,
+      <computeroutput>init()</computeroutput> is explicitly quoted. That's
+      because <computeroutput>init()</computeroutput> method is run as the
+      plugin setup automatically by Strophe, after the new connection object
+      has been created (which is passed to the method as the only parameter).
+      The plugin can save the connection object for later use.
+      <citation>xmpp-in-javascript</citation> When the plugin is initialized,
+      any method (such as exampleMethod() from the example above) can be
+      invoked using the plugin name property of the connection object, as
+      follows:</para>
+
+      <programlisting>connection.myplugin.exampleMethod();</programlisting>
+
+      <para>In the Talker application, several Strophe plugins are used.
+      Particularly, the application uses Roster plugin, which provides easier
+      handling of the user contact list (XMPP Roster).<indexterm>
+          <primary>XMPP</primary>
+
+          <secondary>Roster</secondary>
+        </indexterm> The basic use cases comprise retrieving the roster from
+      the server by calling
+      <computeroutput>connection.roster.get(onRoster)</computeroutput>,
+      usually as soon as the Strophe connection is established. The parameter
+      represents callback function invoked when the server responds and the
+      contact list is fetched. Of course, the contact list is no static
+      structure and it gets changed as the contacts log in and out. All
+      incoming changes are captured by the plugin and processed by the handler
+      method, if it has been set up. For example, the following line of code
+      sets up <computeroutput>presenceListener</computeroutput> function as a
+      callback which is triggered any time the contact list is changed. The
+      structure of method parameters is exactly the same as in case of
+      ordinary Strophe handlers.</para>
+
+      <programlisting>connection.roster.registerCallback(presenceListener, null, 'presence', null, null,  null);</programlisting>
     </sect1>
 
     <sect1 id="chap-server-side-xmpp-client">
@@ -2230,7 +2304,7 @@ connection.connect(jid, pass, onConnect);</programlisting>
 
       <isbn>978-0470540718</isbn>
 
-      <pagenums>432 (58)</pagenums>
+      <pagenums>432 (58, 402)</pagenums>
     </biblioentry>
 
     <biblioentry>
