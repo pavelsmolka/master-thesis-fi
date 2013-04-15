@@ -1965,22 +1965,24 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   <chapter id="chap-talker">
     <title>Talker</title>
 
-    <para>Describe the Talker application in Celebrio.</para>
-
-    <para>mention value proposition (+ section 1 here)</para>
-
-    <para>Describe the architecture and used tools&amp;frameworks: JS +
-    Ember.js, OpenTok</para>
+    <para>TODO introduction to Talker. what is it and what technologies are
+    used in it</para>
 
     <sect1>
       <title>Requirements analysis</title>
 
-      <para>Mention what we expected from the app (value proposition)</para>
+      <para>TODO: Mention what we expected from the app (value
+      proposition)</para>
 
-      <para>Then, application analysis + design.</para>
+      <para>TODO: application analysis + design.</para>
 
-      <para>Don't forget to use UML: use case diagram, class diagram (if any),
-      sequence/action diagram</para>
+      <para>TODO: use UML: </para>
+
+      <para>TODO: use case diagram, </para>
+
+      <para>TODO: class diagram (if any), </para>
+
+      <para>TODO: sequence/action diagram - is there any?</para>
     </sect1>
 
     <sect1>
@@ -2038,7 +2040,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2>
         <title>Logging</title>
 
-        <para>Log4js</para>
+        <para>TODO: mention Log4js or another tool we might use.</para>
       </sect2>
     </sect1>
 
@@ -2103,41 +2105,45 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2>
         <title>Retrieving the roster</title>
 
-        <para></para>
+        <para>TODO: how the roster is retrieved and handled (do not duplicate
+        XMPP chapter)</para>
       </sect2>
 
       <sect2>
         <title>Subscriptions</title>
 
-        <para></para>
+        <para>TODO: subscriptions. do not duplicate XMPP chapter (however this
+        is not very much mentioned there)</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Video calling</title>
 
-      <para>Video framework, flash fallback</para>
+      <para>TODO: Video framework, flash fallback</para>
 
       <sect2>
         <title>OpenTok</title>
 
-        <para>OpenTok library, Native implementation in Android</para>
+        <para>TODO: OpenTok library, Native implementation in Android</para>
 
-        <para>WS in OpenTok</para>
+        <para>TODO: WS in OpenTok</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Testing</title>
 
-      <para>Unit tests, performance tests if there is enough time</para>
+      <para>TODO: Unit tests, performance tests if there is enough time</para>
+
+      <para>TODO: programming</para>
     </sect1>
   </chapter>
 
   <chapter>
     <title>Conclusion</title>
 
-    <para>conclusion</para>
+    <para>TODO: conclusion</para>
   </chapter>
 
   <bibliography>
