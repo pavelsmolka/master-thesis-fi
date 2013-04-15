@@ -500,7 +500,9 @@ and this is the second one
           <secondary>URI</secondary>
         </indexterm> beginning with <computeroutput>ws://</computeroutput>. It
       should not be used on account of two reasons. The first one, quite
-      obvious, is security - the communication can be captured during the
+      obvious, is security<indexterm>
+          <primary>security</primary>
+        </indexterm> - the communication can be captured during the
       transmission. Transparent proxy servers are the second reason. If an
       unencrypted WebSocket connection is used, the browser is unaware of the
       transparent proxy and as a result, the WebSocket connection is most
@@ -1152,7 +1154,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
 
     <para>Suggestion TODO: xmpp: to chce XMPP trochu více popsat a zasadit ho
     do kontextu HTTP komunikace a tu zase do celkového provozu na internetu
-    mezi ostatní protokoly </para>
+    mezi ostatní protokoly</para>
 
     <para>Extensible Messaging and Presence Protocol (XMPP) technologies were
     invented by Jeremie Miller in 1998.
@@ -1398,12 +1400,14 @@ Content-Length: 188
       HTTP header. So much for the HTTP part. The request body consists of
       <computeroutput>body</computeroutput> element which represents BOSH
       layer, along with the element attributes (plus namespace).
-      <computeroutput>sid</computeroutput> attribute represents the session ID
-      while <computeroutput>rid</computeroutput> stands for request ID and
-      gets incremented with each request. Ultimately, the child nodes of the
-      <computeroutput>body</computeroutput> represent two XMPP stanzas (both
-      of message type). It is obvious that multiple XMPP stanzas can be
-      transmitted via single BOSH request.</para>
+      <computeroutput>sid</computeroutput> attribute represents the session
+      ID, identifying the connection and not mutated during one session. The
+      other one, <computeroutput>rid</computeroutput>, stands for request ID
+      and it gets incremented with each request. Ultimately, the child nodes
+      of the <computeroutput>body</computeroutput> represent two XMPP stanzas
+      (both of message type). It is obvious that multiple XMPP stanzas can be
+      transmitted via single BOSH request. TODO extract RID/SID/handshake
+      stuff to separate sub-section here?</para>
 
       <para>BOSH protocol is an important part of the Talker application
       implemented as a programming part of the thesis. Despite it bears the
@@ -1653,7 +1657,7 @@ ws.send(
       functionality beyond the library itself.</para>
 
       <sect2>
-        <title>Connection</title>
+        <title>New connection</title>
 
         <para>Since XMPP client is intended to communicate with various nodes
         in the Internet, the connection represents the essence of the
@@ -1694,8 +1698,46 @@ connection.connect(jid, pass, onConnect);</programlisting>
         connection (passed as <computeroutput>this</computeroutput> in the
         context of onConnect function). Event handlers are described in <xref
         linkend="chap-strophe-events" />.</para>
+      </sect2>
 
-        <para>TODO: attaching - security issues.</para>
+      <sect2 id="strophe-attach">
+        <title>Attaching to an existing connection</title>
+
+        <para>There is one problem with the process mentioned above.
+        Generally, passing confidential data to JavaScript hard-coded in the
+        rendered HTML files (i.e. within
+        <computeroutput>&lt;script/&gt;</computeroutput> tag) constitutes a
+        security issue<indexterm>
+            <primary>security</primary>
+          </indexterm>. As you may have noticed, the previous example
+        incorporates a password in the JavaScript snippet, which is exactly
+        this kind of problem. Firstly, the page can be stored in plain text as
+        a browser cache. Secondly, the web page is available for anyone within
+        the browser history tool so the password can be easily tracked down.
+        Last but not least, unless TLS is used, the web page traverses
+        Internet unencrypted. <citation>attached-to-strophe</citation></para>
+
+        <para>Luckily, Strophe.js comes with the possibility to attach to the
+        existing connection. It basically means the initial BOSH handshake
+        takes place at the server side. A connection is established and the
+        server-side based XMPP client comes up with the session identifier and
+        current request number (SID and RID, mentioned in <xref
+        linkend="chap-bosh" />).<indexterm>
+            <primary>SID</primary>
+          </indexterm><indexterm>
+            <primary>RID</primary>
+          </indexterm> Afterwards, RID and SID are sent to the client (either
+        within the initial HTML template or as a separate JSON response). RID
+        and SID represent tokens which are secure enough to identify the
+        client. However, unlike password, in case of being disclosed to the
+        attacker, only a single session is compromised.
+        <citation>xmpp-in-javascript</citation></para>
+
+        <para>Attaching to an existing connection in the JavaScript
+        application using Strophe.js is quite simple, similar to initializing
+        a new connection: <citation>xmpp-in-javascript</citation>
+        <programlisting>var connection = new Strophe.Connection(BOSH_SERVICE);
+connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
 
       <sect2 id="chap-strophe-events">
@@ -1878,8 +1920,32 @@ connection.connect(jid, pass, onConnect);</programlisting>
     <sect1 id="chap-server-side-xmpp-client">
       <title>Server-side implementations</title>
 
-      <para>TODO Possible server-side implementations (JAXL, XMPPHP, ...).
-      Attaching connection + Node possibility.</para>
+      <para>Connection attachment, as described in <xref
+      linkend="strophe-attach" />, is used in Talker application. Apart from
+      the security advantages and the possibility of boosting performance by
+      pre-creating the connections, there are also some drawbacks in this
+      approach. The most important is a need of an XMPP client (or a
+      connection manager) implemented in the server-side language,
+      alternatively running Strophe itself in the server-side JavaScript
+      environment. </para>
+
+      <para>There are several available solutions. For example, Python XMPP
+      connection manager called Punjab<footnote>
+          <para>https://github.com/twonds/punjab</para>
+        </footnote> is well-suited for <quote>pre-creating</quote> BOSH
+      connections. Speaking of PHP (as it is the language Celebrio is powered
+      by), there is JAXL<footnote>
+          <para>https://github.com/abhinavsingh/JAXL</para>
+        </footnote> library which has been used in this project. Anyway, it is
+      not very steady tool. I have found two bugs in this library, not
+      mentioning poor documentation. One minor bug has already been accepted
+      by the library author to the official branch,<footnote>
+          <para>https://github.com/abhinavsingh/JAXL/pull/30</para>
+        </footnote> the other is still being opened by the time of finishing
+      this thesis.<footnote>
+          <para>https://github.com/abhinavsingh/JAXL/issues/32</para>
+        </footnote>Although the latter might not be a real issue, it still
+      prevents from successful BOSH connection establishment.</para>
     </sect1>
   </chapter>
 
@@ -2304,7 +2370,7 @@ connection.connect(jid, pass, onConnect);</programlisting>
 
       <isbn>978-0470540718</isbn>
 
-      <pagenums>432 (58, 402)</pagenums>
+      <pagenums>432 (58, 380, 402)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -3521,6 +3587,25 @@ connection.connect(jid, pass, onConnect);</programlisting>
 
       <releaseinfo>from <ulink
       url="http://strophe.im/strophejs/doc/1.0.2/files2/strophe-js.html">http://strophe.im/strophejs/doc/1.0.2/files2/strophe-js.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>attached-to-strophe</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jack</firstname>
+
+          <surname>Moffitt</surname>
+        </author>
+      </authorgroup>
+
+      <title>Getting Attached To Strophe</title>
+
+      <pubdate>8/3/2008 [retrieved 4/15/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://metajack.im/2008/10/03/getting-attached-to-strophe/">http://metajack.im/2008/10/03/getting-attached-to-strophe/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
