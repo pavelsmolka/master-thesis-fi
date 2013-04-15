@@ -744,11 +744,24 @@ connection.send(file);</programlisting>
       <sect2>
         <title>API wrappers</title>
 
-        <para>TODO Mention socket.io, sockjs and similar projects</para>
+        <para>Yet WebSockets is powerfull technology, there are still many
+        browsers not supporting it. In that case, when real-time communication
+        constitutes the core functionality, a fallback (i.e. the alternative
+        technology used when the original is missing) must be defined to
+        substitute WebSockets. It might be Flash or HTTP polling. It would be
+        great not to have to define the fallback in every project again and
+        again. Luckily, there are several API wrappers for this.</para>
 
-        <para>https://github.com/sockjs/sockjs-client</para>
-
-        <para>http://socket.io/</para>
+        <para>The basic use case is obvious. Using the wrapper instead of WS
+        API itself guarantees the developer that a fallback is used when the
+        application runs in the environment without WebSockets. Whole process
+        of choosing the transport technology is transparent and not necessary
+        to be specified. As examples, however not used within Talker
+        application, projects Socket.IO<footnote>
+            <para>http://socket.io/</para>
+          </footnote> and SockJS should be mentioned.<footnote>
+            <para>https://github.com/sockjs/sockjs-client</para>
+          </footnote></para>
       </sect2>
     </sect1>
 
