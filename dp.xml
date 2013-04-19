@@ -1104,7 +1104,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         primary technology) in 2013 is not a good idea.</para>
       </sect2>
 
-      <sect2>
+      <sect2 id="chap-opentok">
         <title>OpenTok</title>
 
         <para>TODO: OpenTok</para>
@@ -2053,8 +2053,38 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2>
         <title>Used technologies</title>
 
-        <para>TODO: Non-functional requirements -&gt; the used technologies
-        (platform, javascript, ember, xmpp, opentok, ... why)</para>
+        <para>The use cases and value proposition imply some technologies and
+        tools that are obvious to be used and also some constraints. At the
+        lowest level, Talker is part of web application and it must run in the
+        web browser environment. With respect to interactivity and real-time
+        behaviour, it must be powered by <emphasis>JavaScript</emphasis>.
+        There are other possibilities such as Adobe Flash<indexterm>
+            <primary>Flash</primary>
+          </indexterm> or browser plugins, they however do not play well with
+        various environments.</para>
+
+        <para>XMPP has been chosen as the communication protocol for sending
+        the messages. It is opened, mature and interoperable technology,
+        facilitating just plugging in the new part of world-wide network. XMPP
+        is described in <xref linkend="chap-xmpp" /> and JavaScript XMPP
+        framework in <xref linkend="chap-xmpp-in-javascript" />. Such
+        nontrivial application, as Talker is, deserves fine client-side
+        framework so the connections, states, contact lists and all messages
+        are not only stored in DOM but also managed by JavaScript itself. In
+        the last years, there are a lot of MVC JavaScript frameworks. When
+        implementing the application, I have tried Backbone, Angular, Knockout
+        and Ember - all modern MVC JavaScript frameworks. After short period
+        of testing, I chose Ember as the best one. Framework overview, various
+        advantages and also some pitfalls are mentioned in <xref
+        linkend="chap-ember" />.</para>
+
+        <para>The last important field to be covered are the video calls. On
+        no account did I consider to implement it from scratch. Anyway, there
+        are several handy tools and frameworks which could have been used.
+        After all, I decided to use OpenTok, video call library described in
+        <xref linkend="chap-opentok" />, mostly for its wide compatibility. It
+        even supports WebRTC in its newest version, which is considered to be
+        the future of media applications on web.</para>
       </sect2>
 
       <sect2>
@@ -2070,7 +2100,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
     </sect1>
 
-    <sect1>
+    <sect1 id="chap-ember">
       <title>Ember.js</title>
 
       <para>Describe Javascript client-side MVC frameworks overall, compare,
