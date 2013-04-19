@@ -2015,12 +2015,36 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
         <para>The first step when creating a successful application (or even a
         whole ecosystem of application such as Celebrio is) should start by
-        considering the added customer (or more precisely user) value. </para>
+        considering the added customer (or more precisely user) value. Value
+        proposition mainly contemplates the possible market, the users and the
+        benefits they would have from using our application, i.e. Talker.
+        <citation>value-proposition</citation> Our target market is
+        well-defined and quite easy to interview: the elderly people. More
+        than a half of the elderly use (or are willing to use) the real-time
+        communication tool, comprising both text chat and video calls. They
+        prefer it to be interoperable so they can speak to the people not
+        using directly the same software tool as well.</para>
 
-        <para><citation>elderly-questionnaires</citation></para>
+        <para>Talker offers the benefit of running within Celebrio, the
+        <quote>operating system</quote> designed specifically for the elderly.
+        The compatibility is limitless within XMPP network. Unlike many
+        communication tools, it provides text chat and video calling bundled
+        together so the user just uses it as a <quote>dialogue</quote>
+        application, no matter which way she feels like communicating at the
+        moment.</para>
+      </sect2>
 
-        <para>TODO: Mention what we expected from the app (value
-        proposition)</para>
+      <sect2>
+        <title>Use cases</title>
+
+        <para>The use case analysis springs from two information sources. The
+        first one is based on author's own opinion and experience with online
+        communication tools. The other part is supported by user interviews
+        and market research. In other words, the potential customers said what
+        their probable use cases would look like. However, there is no
+        quantitative data analysis on this topic.</para>
+
+        <para>TODO: Describe basic use cases</para>
 
         <para>TODO: use case diagram, + describe use cases (as it should
         be)</para>
@@ -2451,6 +2475,43 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <isbn>978-0470540718</isbn>
 
       <pagenums>432 (58, 380, 402)</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>value-proposition</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Cindy</firstname>
+
+          <surname>Barnes</surname>
+        </author>
+
+        <author>
+          <firstname>Helen</firstname>
+
+          <surname>Blake</surname>
+        </author>
+
+        <author>
+          <firstname>David</firstname>
+
+          <surname>Pinder</surname>
+        </author>
+      </authorgroup>
+
+      <title>Creating and Delivering Your Value Proposition: Managing Customer
+      Experience for Profit </title>
+
+      <publisher>
+        <publishername>Kogan Page Publishers</publishername>
+      </publisher>
+
+      <pubdate>2009</pubdate>
+
+      <isbn>978-0749458591</isbn>
+
+      <pagenums>232</pagenums>
     </biblioentry>
 
     <biblioentry>
