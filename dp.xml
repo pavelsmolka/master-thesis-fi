@@ -870,7 +870,11 @@ data: Another line of the event message</programlisting></para>
       calling.</para>
 
       <sect2>
-        <title>Signaling</title>
+        <title>Signaling<indexterm>
+            <primary>WebRTC</primary>
+
+            <secondary>Signaling</secondary>
+          </indexterm></title>
 
         <para>In fact, the server has to mediate the <quote>meta data</quote>,
         such as initializing connection or negotiating the available media
@@ -916,10 +920,14 @@ data: Another line of the event message</programlisting></para>
         <programlisting>var config =  {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
 var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisting>
 
-        <para>Then, we can send all available ICE<footnote>
+        <para>Then, we can send all available ICE<indexterm>
+            <primary>ICE</primary>
+          </indexterm><footnote>
             <para>ICE stands for Interactive Connectivity Establishment</para>
-          </footnote> candidate to the other peer, via specified STUN server.
-        ICE candidate<indexterm>
+          </footnote> candidate to the other peer, via specified
+        STUN<indexterm>
+            <primary>STUN</primary>
+          </indexterm> server. ICE candidate<indexterm>
             <primary>ICE candidate</primary>
           </indexterm> is basically a possible transport address for media
         stream, later validated for peer-to-peer connectivity.
@@ -1940,7 +1948,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       approach. The most important is a need of an XMPP client (or a
       connection manager) implemented in the server-side language,
       alternatively running Strophe itself in the server-side JavaScript
-      environment. </para>
+      environment.</para>
 
       <para>There are several available solutions. For example, Python XMPP
       connection manager called Punjab<footnote>
@@ -1965,24 +1973,60 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   <chapter id="chap-talker">
     <title>Talker</title>
 
-    <para>TODO introduction to Talker. what is it and what technologies are
-    used in it</para>
+    <para>As people use computers and the Internet more and more, they do not
+    avoid interaction with others. On the contrary, communication and sharing
+    represents essential part of current web systems. The social networks
+    provide mostly the way to communicate with other people and they are used
+    by millions. The same rules are valid for Celebrio, smart and simple
+    application imitating the interface of operating system. Therefore,
+    application Talker has been designed and implemented to serve as real-time
+    communicator or instant messenger client.</para>
+
+    <para>In this chapter, Talker application is described in depth. There are
+    the requirements listed, both functional and non-functional. Further on,
+    the used technologies are mentioned and compared to possible
+    substitutions. Some of the technologies, are described in individual
+    dedicated chapters, such as Strophe.js in <xref
+    linkend="chap-xmpp-in-javascript" /> so that only the parts specific to
+    Talker are mentioned. Ultimately, several sections are dedicated to the
+    implementation and testing. Source codes of the application are packed as
+    the thesis supplement, they are however unlikely to run without Celebrio
+    which was the application built for.</para>
 
     <sect1>
-      <title>Requirements analysis</title>
+      <title>Analysis and design</title>
 
-      <para>TODO: Mention what we expected from the app (value
-      proposition)</para>
+      <para>overall analysis, what the application should serve for. mention
+      that design springs from the analysis</para>
 
-      <para>TODO: application analysis + design.</para>
+      <sect2>
+        <title>Value proposition</title>
 
-      <para>TODO: use UML: </para>
+        <para>TODO: Mention what we expected from the app (value
+        proposition)</para>
 
-      <para>TODO: use case diagram, </para>
+        <para>TODO: use case diagram, + describe use cases (as it should
+        be)</para>
+      </sect2>
 
-      <para>TODO: class diagram (if any), </para>
+      <sect2>
+        <title>Application architecture</title>
 
-      <para>TODO: sequence/action diagram - is there any?</para>
+        <para>TODO: application analysis + design.</para>
+
+        <para>TODO: class diagram (if any),</para>
+
+        <para>TODO: sequence/action diagram - is there any? maybe
+        communication... js client - php server - boshserver -
+        xmppserver</para>
+      </sect2>
+
+      <sect2>
+        <title>Used techologies</title>
+
+        <para>TODO: used technologies (platform, javascript, ember, xmpp,
+        opentok, ... why)</para>
+      </sect2>
     </sect1>
 
     <sect1>
