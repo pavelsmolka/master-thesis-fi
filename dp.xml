@@ -1996,17 +1996,41 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     <sect1>
       <title>Analysis and design</title>
 
-      <para>overall analysis, what the application should serve for. mention
-      that design springs from the analysis</para>
+      <para>Firstly, this section describes the application analysis, i.e.
+      what the requirements are. It includes both the non-functional
+      requirements (such as the platform the application must run or the
+      system it has to cooperate with) and the probable usage by the
+      customers. After the requirements are clear, it must be decided how to
+      implement the desired functionality. That is where design takes place.
+      Application design springs from the analysis and it just further
+      decomposes and clarifies the way it will be implemented. The design part
+      is crucial because the sooner possible glitches are unveiled and fixed
+      the lower the cost is. The last thing which has to be considered and
+      decided is the <quote>stack</quote> of proper technologies to be used,
+      with regard to the both non-functional requirements and the design
+      complexity.</para>
 
       <sect2>
         <title>Value proposition</title>
+
+        <para>The first step when creating a successful application (or even a
+        whole ecosystem of application such as Celebrio is) should start by
+        considering the added customer (or more precisely user) value. </para>
+
+        <para><citation>elderly-questionnaires</citation></para>
 
         <para>TODO: Mention what we expected from the app (value
         proposition)</para>
 
         <para>TODO: use case diagram, + describe use cases (as it should
         be)</para>
+      </sect2>
+
+      <sect2>
+        <title>Used technologies</title>
+
+        <para>TODO: Non-functional requirements -&gt; the used technologies
+        (platform, javascript, ember, xmpp, opentok, ... why)</para>
       </sect2>
 
       <sect2>
@@ -2019,13 +2043,6 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>TODO: sequence/action diagram - is there any? maybe
         communication... js client - php server - boshserver -
         xmppserver</para>
-      </sect2>
-
-      <sect2>
-        <title>Used techologies</title>
-
-        <para>TODO: used technologies (platform, javascript, ember, xmpp,
-        opentok, ... why)</para>
       </sect2>
     </sect1>
 
