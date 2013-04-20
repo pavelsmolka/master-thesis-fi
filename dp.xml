@@ -72,7 +72,7 @@
     exchanged every day between various people over the world. The Internet
     created brand new way to communicate and collaborate, even if you are
     located on the opposite parts of the world. Since the times of Alexander
-    Graham Bell, the accesibility to the communication devices and their
+    Graham Bell, the accessibility to the communication devices and their
     simplicity incredibly enhanced. Nowadays, almost 2.5 billion people over
     the world have access to the Internet and therefore they are able to use
     almost limitless communication possibilities it provides.
@@ -82,7 +82,7 @@
     first decade of 21st century. Using the Internet and using the web browser
     became almost synonyms. People use the web browser as the primary platform
     to do every single task on the Internet. Sometimes it's not even possible
-    to use the other internet services without visiting certain web page in
+    to use the other Internet services without visiting certain web page in
     the web browser and performing the authentication there.<footnote>
         <para>Two examples of such behavior. Wi-fi network in the Student
         Agency coaches forces the user to visit the entry page in the web
@@ -96,7 +96,7 @@
     world wide web and HTTP protocol was completely different at first
     (displaying single documents connected via hypertext links), it appeared
     that there is the need of common rich applications running withing web
-    browser - rich internet application sprung up. <citation>ria</citation> So
+    browser - rich Internet application sprung up. <citation>ria</citation> So
     popular social networks are built on top of the web browser platform and
     they are used by more than billion people over the world.
     <citation>facebook-usage</citation> And the main reason why the social
@@ -115,7 +115,7 @@
 
     <para>As mentioned above, the web browser became one of the most popular
     platforms. Celebrio, simple software for the elderly simulating the
-    operating system interface, is typical example of rich internet
+    operating system interface, is typical example of rich Internet
     application. <citation>celebrio-system</citation> All the topics mentioned
     in the previous paragraph appeared to be very important in the system.
     When interviewing the elderly people in the Czech Republic, it appeared
@@ -143,7 +143,7 @@
     <quote>world of Facebook Chat</quote> via XMPP as proxy.
     <citation>fb-erlang</citation> Combination of the facts that XMPP is open
     technology with open-sourced client and server implementations
-    <citation>xmpp-history</citation> and the big internet companies also use
+    <citation>xmpp-history</citation> and the big Internet companies also use
     it persuaded us to use it in our communication application too. XMPP
     itself and its usage in web applications is described in <xref
     linkend="chap-xmpp" />.</para>
@@ -153,7 +153,7 @@
     real-time application. Thus, there is a need for an extra layer enhancing
     or even completely replacing the common way HTTP communicates. Within the
     scope of this thesis, namely the WebSockets and HTTP long polling
-    approaches are used. The two of them and basic infromation about several
+    approaches are used. The two of them and basic information about several
     others are covered in <xref linkend="chap-rtc" />.</para>
 
     <para>There are many existing real-time chat-based applications over the
@@ -199,7 +199,7 @@
     communication</quote> between different applications running separately in
     various browser frames, tabs or even windows. <xref
     linkend="chap-inter-process" /> covers this topic and describes the issues
-    we came accross when implementing such functionality for Celebrio, where
+    we came across when implementing such functionality for Celebrio, where
     every application runs in separate iframe.</para>
   </chapter>
 
@@ -207,7 +207,7 @@
     <title>Bidirectional communication</title>
 
     <para>Suggestion TODO: split the chapter: describe HTTP more in depth,
-    tell why HTTP si so important (not only because of browsers), describe the
+    tell why HTTP is so important (not only because of browsers), describe the
     history of communication tools. (maybe in the intro)</para>
 
     <para>Suggestion TODO: mention RTC history (unix talk, IRC, ICQ -
@@ -220,12 +220,11 @@
     (update) action<indexterm>
         <primary>pull &amp; push communication</primary>
       </indexterm>.<footnote>
-        <para>In this thesis, this behaviour is commonly refered as RTC. The
+        <para>In this thesis, this behaviour is commonly referred as RTC. The
         <quote>real-time part</quote> relates mostly to the server part since
         the application running in the web browser can perform the AJAX
         request on background anytime and the server receives the request
-        instantly. Before AJAX became the essential part of every web app,
-        ifram</para>
+        instantly.</para>
       </footnote> Such use case requires appropriate transport layer on top
     which the application can send the messages via any other protocol. When
     using HTTP, there is a TCP connection opened by the client (web browser)
@@ -241,7 +240,7 @@
     in both directions, HTTP protocol must be hacked somehow or another
     communication channel has to be used. This chapter covers both - reshaping
     HTTP in <xref linkend="chap-http-requests" /> and brand new approach in
-    <xref linkend="chap-ws" />, bypassing HTTP at all. Unfortunatelly, every
+    <xref linkend="chap-ws" />, bypassing HTTP at all. Unfortunately, every
     approach brings also some disadvantages. Ultimately, overview of several
     higher-level solutions is stated in <xref
     linkend="chap-high-level-rtc" />, most of which are based on HTTP requests
@@ -250,9 +249,9 @@
     <sect1 id="chap-http-requests">
       <title>Using HTTP requests</title>
 
-      <para>Historicaly the first approach, for a very long time the only one,
-      is hacking HTTP to achieve RTC. The idea is very simple. Generally, the
-      client sends an extra request and it is not awaiting the response
+      <para>Historically the first approach, for a very long time the only
+      one, is hacking HTTP to achieve RTC. The idea is very simple. Generally,
+      the client sends an extra request and it is not awaiting the response
       immediately. Instead, the server keeps the request for some time and
       sends the data as it comes in the response. There are several techniques
       to achieve such behaviour, in general called
@@ -261,7 +260,7 @@
         </indexterm>.</para>
 
       <para>There is one common misunderstanding about long-lived HTTP
-      requests. Since HTTP 1.1 (acutally implemented even before, but not
+      requests. Since HTTP 1.1 (actually implemented even before, but not
       covered in the RFC specification), there is a possibility for the client
       to claim persistent TCP connection to the server declaring
       <computeroutput>Connection: Keep-Alive</computeroutput> in the request
@@ -273,9 +272,9 @@
       unless declared otherwise. <citation>rfc-http</citation> Even though the
       default timeout after which the server closes the connection is only a
       few seconds, <citation>apache-core-features</citation> the persistent
-      TCP connection is very useful for delivering various resources
-      (stylesheets, scripts, images, etc.) to the client without the
-      unnecessary overhead of creating multiple streams. However, every single
+      TCP connection is very useful for delivering various resources (style
+      sheets, scripts, images, etc.) to the client without the unnecessary
+      overhead of creating multiple streams. However, every single
       transmission within the TCP connection has to be in form of separate
       HTTP request/response, always initiated by the client. On no account is
       the server allowed to push any data without respective request from the
@@ -331,7 +330,7 @@
         prolonging the time span between two poll requests. In traditional
         <quote>short polling</quote>, a client sends regular requests to the
         server and each request attempts to <quote>pull</quote> the available
-        data. If no data is available, an empty reponse is sent.
+        data. If no data is available, an empty response is sent.
         <citation>rfc-bidirectional-http</citation> That generates unnecessary
         overhead for both client and server.</para>
 
@@ -369,7 +368,7 @@
             <secondary>header overhead</secondary>
           </indexterm> This drawback has even bigger impact as the number of
         clients increases. <xref linkend="fig-http-overhead" /> shows the
-        comparsion of 1000 (A), 10000 (B) and 100000 (C) clients polling the
+        comparison of 1000 (A), 10000 (B) and 100000 (C) clients polling the
         server every second with the message 20 characters long, both using
         classic HTTP requests and WebSockets technology (mentioned in <xref
         linkend="chap-ws" />). <citation>pro-html5-programming</citation> It
@@ -493,7 +492,7 @@ and this is the second one
       attached). <citation>js-definitive-guide</citation></para>
 
       <para>Similarly as in HTTP, there is an unencrypted version of
-      WebSockets working directly on top of TCP connection. The simpliest way
+      WebSockets working directly on top of TCP connection. The simplest way
       to recognize such connection is WebSocket URI<indexterm>
           <primary>WebSocket</primary>
 
@@ -535,7 +534,7 @@ and this is the second one
             <para>According to RFC6455, the protocol is designed to work over
             HTTP ports 80 and 443 as well to support HTTP proxies. However,
             the design is not limited to HTTP and the future implementations
-            can use simplier handshake over a dedicated port.
+            can use simpler handshake over a dedicated port.
             <citation>rfc-ws</citation></para>
           </footnote> initialized by the client. The client sends the request
         as follows: <citation>rfc-ws</citation></para>
@@ -582,7 +581,7 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         secret with Globally Unique Identifier (GUID)<indexterm>
             <primary>GUID</primary>
           </indexterm> "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and hash the
-        result with SHA-1 algorithm. The resultis returned as
+        result with SHA-1 algorithm. The results returned as
         <computeroutput>Sec-WebSocket-Accept</computeroutput> header field,
         base64-encoded. <citation>rfc-ws</citation> However, there seems to be
         a security issue here. If the initial request is not sent over
@@ -601,9 +600,9 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
           </indexterm>, working similarly as TCP frames. All the transmission
         features are handled by the WebSocket API and the transmission is
         transparent for the application layer above (for example JavaScript
-        API) so that that every message appears in the same state as it was
-        sent. This means the message, single portion of WS communication, can
-        be fragmented during the transmission.</para>
+        API) so that every message appears in the same state as it was sent.
+        This means the message, single portion of WS communication, can be
+        fragmented during the transmission.</para>
 
         <para>There are several special features concerning WS frames, one of
         the interesting is masking<indexterm>
@@ -744,7 +743,7 @@ connection.send(file);</programlisting>
       <sect2>
         <title>API wrappers</title>
 
-        <para>Yet WebSockets is powerfull technology, there are still many
+        <para>Yet WebSockets is powerful technology, there are still many
         browsers not supporting it. In that case, when real-time communication
         constitutes the core functionality, a fallback (i.e. the alternative
         technology used when the original is missing) must be defined to
@@ -770,7 +769,7 @@ connection.send(file);</programlisting>
           <primary>Server-sent events</primary>
         </indexterm></title>
 
-      <para>Server-sent events (aka EventSource, from this point refered as
+      <para>Server-sent events (aka EventSource, from this point referred as
       SSE) should in fact not be listed here but in the next section. It is
       technology based on HTTP streaming<indexterm>
           <primary>HTTP</primary>
@@ -779,7 +778,7 @@ connection.send(file);</programlisting>
         </indexterm> described in <xref linkend="chap-http-streaming" /> so it
       is not at the basic <quote>zero</quote> level. However, SSE are often
       compared to WebSockets so that the topic is introduced here. SSE have
-      been standartized as part of HTML5 standard.
+      been standardized as part of HTML5 standard.
       <citation>sse-api</citation> There is very brief summary of SSE API and
       usage in this section.</para>
 
@@ -808,7 +807,7 @@ data: Another line of the event message</programlisting></para>
 
       <para>As shown above, every line in the message consists of key and
       value separated by colon, similar to JSON format. When we need to
-      transfer multiline message, we can repeat the key several times.
+      transfer multi-line message, we can repeat the key several times.
       <citation>sse-multiline</citation> On the basis of
       <computeroutput>event</computeroutput> field
       (<computeroutput>myevent</computeroutput> in our example), the
@@ -837,10 +836,10 @@ data: Another line of the event message</programlisting></para>
       connection, the client has to push the data to the server via other
       (standard) HTTP requests. Finally, there is quite a big limitation in
       the message format. While WebSockets provide real TCP connection any
-      data can be transfered through, SSE is restricted to textual data in the
-      form of key/value pairs. So, there is no compelling reason to use SSE
-      when WebSockets exist. Anyway, it comes in handy to know about it when
-      working with real-time applications in web browsers.</para>
+      data can be transferred through, SSE is restricted to textual data in
+      the form of key/value pairs. So, there is no compelling reason to use
+      SSE when WebSockets exist. Anyway, it comes in handy to know about it
+      when working with real-time applications in web browsers.</para>
     </sect1>
 
     <sect1>
@@ -906,7 +905,7 @@ data: Another line of the event message</programlisting></para>
 
         <para>WebRTC provides very high level API abstracting media device
         access, network connection and encoding/decoding the media streams
-        from the programmer. Unfortunatelly, the WebRTC API is still in the
+        from the programmer. Unfortunately, the WebRTC API is still in the
         phase of draft and has not been standardized yet.
         <citation>webrtc-rfc</citation> It means that JavaScript objects are
         prefixed by vendor prefixes, so that there is
