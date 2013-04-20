@@ -2044,10 +2044,36 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         their probable use cases would look like. However, there is no
         quantitative data analysis on this topic.</para>
 
-        <para>TODO: Describe basic use cases</para>
+        <figure id="talker-uc">
+          <title>Talker use case diagram</title>
 
-        <para>TODO: use case diagram, + describe use cases (as it should
-        be)</para>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/talker-uc.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>As displayed at <xref linkend="talker-uc" />, Talker use case
+        analysis is quite simple. There are two actors operating the system,
+        Celebrio user and remote XMPP server. The former uses all GUI
+        application components, i.e. she can display the contact list with
+        current contact present statuses, enter the text chat (which includes
+        sending and receiving new messages) and set up a video call. A contact
+        list, the first application screen, is further described in <xref
+        linkend="chap-contact-list" />. When any of the contact is clicked at,
+        communication view is displayed so the user can read the incoming
+        messages, send a new message or start a video call. Several
+        application screenshots are pictured in <xref
+        linkend="appendix-screenshots" />.</para>
+
+        <para>There is one more actor displayed at <xref
+        linkend="talker-uc" />. It is remote XMPP server, communicating with
+        the application indirectly through established connection. When a new
+        message appears at the server, it is pushed to the application and
+        handled it as an incoming message. Every new message, received or
+        sent, is appended to the <quote>chat history</quote>, as usual in
+        similar IM clients.</para>
       </sect2>
 
       <sect2>
@@ -2095,8 +2121,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>TODO: class diagram (if any),</para>
 
         <para>TODO: sequence/action diagram - is there any? maybe
-        communication... js client - php server - boshserver -
-        xmppserver</para>
+        communication... js client - php server - boshserver - xmppserver.
+        Move video call state machine diagram from video call section
+        here?</para>
       </sect2>
     </sect1>
 
@@ -2159,7 +2186,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
     </sect1>
 
-    <sect1>
+    <sect1 id="chap-contact-list">
       <title>Contact list</title>
 
       <para>The list of contacts is essential part of every instant messaging
@@ -2243,6 +2270,24 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>TODO: OpenTok library, Native implementation in Android</para>
 
         <para>TODO: WS in OpenTok</para>
+      </sect2>
+
+      <sect2>
+        <title>Implementation</title>
+
+        <para></para>
+
+        <figure>
+          <title>Video call states</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/video-calls.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para></para>
       </sect2>
     </sect1>
 
@@ -2531,7 +2576,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </authorgroup>
 
       <title>Creating and Delivering Your Value Proposition: Managing Customer
-      Experience for Profit </title>
+      Experience for Profit</title>
 
       <publisher>
         <publishername>Kogan Page Publishers</publishername>
@@ -3784,7 +3829,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
   <lot></lot>
 
-  <appendix id="my-appendix">
+  <appendix id="appendix-screenshots">
     <title>Screenshots of the application</title>
 
     <para>Some screenshots from Celebrio Talker</para>
