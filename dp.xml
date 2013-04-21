@@ -1993,7 +1993,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     which was the application built for.</para>
 
     <sect1>
-      <title>Analysis and design</title>
+      <title>Analysis</title>
 
       <para>Firstly, this section describes the application analysis, i.e.
       what the requirements are. It includes both the non-functional
@@ -2076,7 +2076,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>Used technologies</title>
+        <title>Choosing technologies</title>
 
         <para>The use cases and value proposition imply some technologies and
         tools that are obvious to be used and also some constraints. At the
@@ -2111,18 +2111,120 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         even supports WebRTC in its newest version, which is considered to be
         the future of media applications on web.</para>
       </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Application architecture</title>
+
+      <para>As mentioned in the previous section, Talker is not trivial
+      application which could be served by several inline scripts manipulating
+      the DOM. It has to handle states, keep track of all simultaneous chats
+      and dispatch all messages to appropriate contacts. Those reasons led to
+      semi-modular architecture, pictured at <xref
+      linkend="fig-talker-modules" />. Modules inside the grey package
+      represent those I directly implemented, the outside ones are the used
+      libraries and third party modules, however necessary to run the
+      application.</para>
+
+      <figure id="fig-talker-modules">
+        <title>Application modules structure</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="vp/components-talker.pdf" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>The main application logic is placed inside
+      <computeroutput>App</computeroutput> module. It is implemented as
+      <computeroutput>Ember.Application</computeroutput> object and it serves
+      as namespace for the rest of the application. Using namespace to wrap
+      the whole application is good practice so the global namespace (i.e.
+      window object) is not polluted. Within the namespace, other Ember-based
+      classes are separated into four parts according to the MVC structure,
+      i.e. models, views and controllers. The last part is router, responsible
+      for handling the application state.</para>
 
       <sect2>
-        <title>Application architecture</title>
+        <title>Models</title>
 
-        <para>TODO: application analysis + design.</para>
+        <para>Talker is supposed to handle data: keep the information about
+        the contact list, update it as the contacts sign in and out, keep
+        track of the message lists corresponding to individual contacts. All
+        mentioned data manipulation is achieved with models. Model hierarchy
+        is displayed at <xref linkend="fig-models" />. The main two entities,
+        <computeroutput>Contact</computeroutput> and
+        <computeroutput>Message</computeroutput>, are quite self-explaining.
+        It should be mentioned that messages are stored directly as a property
+        list of each contact. Potential contact removal would erase its
+        messages as well. Class<footnote>
+            <para>When speaking about classes and displaying them at the class
+            diagrams, one should be aware of the fact there are no real
+            language-based classes in JavaScript. However, Ember provides a
+            convenient way to imitate the class behaviour with
+            <computeroutput>Ember.Object.extend</computeroutput> method,
+            further described in the next section.</para>
+          </footnote> <computeroutput>Person</computeroutput> encapsulates the
+        properties common for the contacts and the user operating the
+        application. In other words, information about the current user,
+        logged in to the application, is stored in an instance of that
+        class.</para>
 
-        <para>TODO: class diagram (if any),</para>
+        <figure id="fig-models">
+          <title>Structure of application models</title>
 
-        <para>TODO: sequence/action diagram - is there any? maybe
-        communication... js client - php server - boshserver - xmppserver.
-        Move video call state machine diagram from video call section
-        here?</para>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/cd-app-models.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </sect2>
+
+      <sect2>
+        <title>Views and controllers</title>
+
+        <para>All Ember-related problematics is described in section <xref
+        linkend="chap-ember" />, only the structure is mentioned here. As the
+        user traverses the application, various controllers manage the states.
+        The structure of controllers bijectively corresponds to the views
+        hierarchy (i.e. almost every view has its respective controller and
+        vice versa). Only the former is displayed, see <xref
+        linkend="fig-controllers" />. The main view, contact list, is handled
+        by <computeroutput>ContactsController</computeroutput> instance. When
+        the user enters the conversation, ConversationController takes over
+        the command. TextController and VideoController (with their respective
+        views) are present within the conversation. Calling one or another
+        depends on whether the user interacts with the text part (chat) or the
+        video call.</para>
+
+        <figure id="fig-controllers">
+          <title>Application views/controllers structure</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/cd-app-controllers.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </sect2>
+
+      <sect2>
+        <title>Adapters</title>
+
+        <para>TODO: describe adapters structure, how they are interconnected
+        with the app. <xref linkend="fig-adapters" /></para>
+
+        <figure id="fig-adapters">
+          <title>Connection of the application and adapters</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/cd-adapters.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
       </sect2>
     </sect1>
 
@@ -2160,8 +2262,25 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     <sect1>
       <title>Initializing the connection</title>
 
-      <para>Strophe init, passing credentials, attaching to the existing
+      <para>TODO:Strophe init, passing credentials, attaching to the existing
       connection?</para>
+
+      <para>TODO: sequence/action diagram - is there any? maybe
+      communication... js client - php server - boshserver - xmppserver. Move
+      video call state machine diagram from video call section here?</para>
+
+      <para>When the user clicks at Talker icon in the Celebrio main menu, a
+      request is sent to the server which renders HTML page and sends it along
+      with all necessary assets, such as JavaScript files and style sheets.
+      When the page is loaded, Talker starts running. First of all, the
+      connection to remote BOSH server must be established so that the
+      application can communicate with the rest of the world. There are two
+      options to do it: creating a brand new connection or using the existing
+      one, i.e. attaching to the connection as it is described in <xref
+      linkend="strophe-attach" />.</para>
+
+      <para>As JavaScript files are loaded, App object is defined by Ember
+      firstly. Then, new StropheAdapter</para>
 
       <para>TODO programming - attach connection</para>
     </sect1>
