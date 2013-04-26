@@ -2075,7 +2075,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         similar IM clients.</para>
       </sect2>
 
-      <sect2>
+      <sect2 id="sect-choosing-tech">
         <title>Choosing technologies</title>
 
         <para>The use cases and value proposition imply some technologies and
@@ -2096,11 +2096,18 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         nontrivial application, as Talker is, deserves fine client-side
         framework so the connections, states, contact lists and all messages
         are not only stored in DOM but also managed by JavaScript itself. In
-        the last years, there are a lot of MVC JavaScript frameworks. When
-        implementing the application, I have tried Backbone, Angular, Knockout
-        and Ember - all modern MVC JavaScript frameworks. After short period
-        of testing, I chose Ember as the best one. Framework overview, various
-        advantages and also some pitfalls are mentioned in <xref
+        the last years, there are a lot of MVC<footnote>
+            <para>MVC stands for Model - View - Controller, common three-tier
+            architecture. Model is responsible for data layer, View stands for
+            presentation layer. The function of controller varies from one
+            implementation to another, but it is mostly responsible for
+            dispatching the user actions and controlling application flow, for
+            example redirecting.</para>
+          </footnote> JavaScript frameworks. When implementing the
+        application, I have tried Backbone, Angular, Knockout and Ember - all
+        modern MVC JavaScript frameworks. After short period of testing, I
+        chose Ember as the best one. Framework overview, various advantages
+        and also some pitfalls are mentioned in <xref
         linkend="chap-ember" />.</para>
 
         <para>The last important field to be covered are the video calls. On
@@ -2213,8 +2220,23 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2>
         <title>Adapters</title>
 
-        <para>TODO: describe adapters structure, how they are interconnected
-        with the app. <xref linkend="fig-adapters" /></para>
+        <para>There is a lot of application logic not related to the data
+        itself, but comprising connection establishing, managing and
+        triggering correct handlers when any new data comes from the server.
+        As Jon Cairns fittingly notes, models should not contain the
+        unnecessary application logic not directly related to them.
+        <citation>fat-model-skinny-controller</citation> This pieces of code
+        are divided into two <quote>adapter</quote> classes.
+        <computeroutput>StropheAdapter</computeroutput> is responsible for
+        creating, keeping up and reacting to the XMPP connection with BOSH
+        server. In other words, it mostly handles the text messages.
+        <computeroutput>OpenTokAdapter</computeroutput> uses OpenTok library
+        to keep track of the video calls. Video adapter object is assigned to
+        every contact because it keeps the state information (session) which
+        is different for each contact. On the other hand, StropheAdapter is
+        created and initialized just once for whole application since it does
+        not contain any contact-specific data. The class structure is
+        displayed at <xref linkend="fig-adapters" />.</para>
 
         <figure id="fig-adapters">
           <title>Connection of the application and adapters</title>
@@ -2231,25 +2253,108 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     <sect1 id="chap-ember">
       <title>Ember.js</title>
 
-      <para>Describe Javascript client-side MVC frameworks overall, compare,
-      tell why we used Ember</para>
+      <para>Talker is purely client-side-based application, implemented in
+      JavaScript and running in web browser. As it is mentioned in the
+      technology overview in <xref linkend="sect-choosing-tech" />, Talker
+      implements MVC structure on the client side, in the form of Ember MVC
+      objects. In this section, JavaScript MVC is analysed overally at first,
+      then some features specific to Ember which were used in the
+      implementation are described.</para>
 
       <sect2>
         <title>Client-side MVC</title>
 
-        <para></para>
+        <para>First of all, it should be clarified why it is necessary to do
+        MVC in JavaScript. Most of the web technologies running on the server
+        and powering web applications use some kind of MVC<indexterm>
+            <primary>MVC</primary>
+          </indexterm>, accross all programming languages. It is Rails for
+        Ruby; Zend, Nette or Symphony for PHP; Django for Python; Spring MVC
+        or simple servlets with JSPs in Java; ASP.NET MVC for C#/.NET, etc. It
+        appears that three-tier architecture helps the developers to organize
+        the code and the frameworks can do a lot of job automatically.</para>
+
+        <para>In the years, the approach to web application development
+        changes a bit. As the clients performance increases, interactivity and
+        quick response becomes the most desired benchmark. And here comes
+        JavaScript, which can manage whole application at the client side,
+        only synchronizing data with a server using AJAX requests. It seems
+        this trend of <emphasis>thick client</emphasis> will be stronger and
+        stronger in the next years and the server is going to be transformed
+        only to the proxy in front of database system.
+        <citation>yehuda-talk</citation><citation>new-dev-era</citation></para>
+
+        <para>It is obvious that many tasks previously a server was
+        responsible for are moved to the client, to JavaScript. Above all,
+        JavaScript application handles user actions (such as clicking a button
+        or even typing to an input), rendering HTML snippets (templates) and
+        storing the <quote>temporary</quote> data. Storing the data has become
+        more tricky, because the JavaScript application works as a first level
+        cache which processes all changes but synchronizes with the server
+        only occasionally. Simple example: let there be an input for the user
+        name, bound to the JavaScript model object representing a user.
+        Whenever a new letter appears in the input, JavaScript updates its
+        model object (still on the client side). No sooner has whole username
+        been entered (either submitted or after a delay) when JavaScript
+        synchronizes it with the server. Whole process schema is displayed at
+        <xref linkend="fig-js-mvc-input" />.</para>
+
+        <figure id="fig-js-mvc-input">
+          <title>Example client-handled input, bound to JavaScript
+          model</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/js-mvc-input.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The main advantage of such approach is definitely the swiftness.
+        Input changes numbered 1, 2 and 3 are processed immediately at the
+        client. If the browser ran in the offline mode, submitting would store
+        the data to the local storage eventually. Other very important
+        benefit, especially for the application developer, is separation of
+        concerns between individual tiers. The result is much better organized
+        and thus better maintainable than monolithic blend of code containing
+        all aspects of an application at one place.</para>
+
+        <para>In modern client-side JavaScript MVC frameworks, JavaScript is
+        also responsible for rendering HTML. This topic is set aside to
+        separate section in <xref linkend="sect-html-rendering" />.</para>
       </sect2>
 
       <sect2>
         <title>Comparsion with other frameworks</title>
 
+        <para>Ember.js is not the only available JavaScript MVC framework. In
+        fact, there are plenty of similar frameworks, each of them providing
+        slightly different set of tools and asserting slightly different
+        philosophy. I have chosen Ember for Talker for several reasons. The
+        facts in this section may be a little subjective as they are mostly
+        just opinions of mine, as author of this thesis and Talker
+        application.</para>
+
+        <para></para>
+
         <para>Tell why Ember is the best :-)</para>
+
+        <para>lot of automatic work, ember data, the community, steep learning
+        curve</para>
       </sect2>
 
       <sect2>
-        <title>Handlebars templates</title>
+        <title>Views + Controllers (TODO: temporary title)</title>
 
         <para></para>
+      </sect2>
+
+      <sect2 id="sect-html-rendering">
+        <title>Rendering HTML</title>
+
+        <para>Handlebars<indexterm>
+            <primary>Handlebars</primary>
+          </indexterm>, how templates work, </para>
       </sect2>
 
       <sect2>
@@ -3940,6 +4045,68 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
       <releaseinfo>from <ulink
       url="http://metajack.im/2008/10/03/getting-attached-to-strophe/">http://metajack.im/2008/10/03/getting-attached-to-strophe/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>fat-model-skinny-controller</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jon</firstname>
+
+          <surname>Cairns</surname>
+        </author>
+      </authorgroup>
+
+      <title><quote>Fat model, skinny controller</quote> is a load of
+      rubbish</title>
+
+      <pubdate>4/11/2013 [retrieved 4/21/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://joncairns.com/2013/04/fat-model-skinny-controller-is-a-load-of-rubbish/">http://joncairns.com/2013/04/fat-model-skinny-controller-is-a-load-of-rubbish/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>yehuda-talk</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Yehuda</firstname>
+
+          <surname>Katz</surname>
+        </author>
+      </authorgroup>
+
+      <title>Building Web Applications with Ember.js</title>
+
+      <pubdate>4/13/2013 [retrieved 4/26/2013]</pubdate>
+
+      <publisher>
+        <publishername>YouTube</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://www.youtube.com/watch?v=u6RFyVN9sNg">http://www.youtube.com/watch?v=u6RFyVN9sNg</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>new-dev-era</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Tarek</firstname>
+
+          <surname>Ziadé</surname>
+        </author>
+      </authorgroup>
+
+      <title>A new development era (essay)</title>
+
+      <pubdate>1/25/2013 [retrieved 4/26/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://blog.ziade.org/2013/01/25/a-new-development-era-essay/">http://blog.ziade.org/2013/01/25/a-new-development-era-essay/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
