@@ -2325,7 +2325,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>Comparsion with other frameworks</title>
+        <title>Comparsion to other frameworks</title>
 
         <para>Ember.js is not the only available JavaScript MVC framework. In
         fact, there are plenty of similar frameworks, each of them providing
@@ -2333,20 +2333,132 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         philosophy. I have chosen Ember for Talker for several reasons. The
         facts in this section may be a little subjective as they are mostly
         just opinions of mine, as author of this thesis and Talker
-        application.</para>
+        application. There is actually not much comparison but more the
+        features specific for Ember are described and explained.</para>
 
-        <para></para>
+        <para>First of all, Ember provides automatic bindings. There are
+        automatic bindings between object properties, so that all computed
+        properties are automatically updated when the <quote>raw</quote>
+        properties, which they are based on, change their values.
+        <citation>ember-in-action</citation> The following snippet of code
+        from Talker <computeroutput>Message</computeroutput> object represents
+        such situation: <computeroutput>fromName</computeroutput> attribute
+        represents the contact name and it is based on the contact JID, stored
+        in <computeroutput>from</computeroutput> attribute:</para>
 
-        <para>Tell why Ember is the best :-)</para>
+        <programlisting>App.Message = Ember.Object.extend({
+    from : null,
+    fromName : function() {
+        /* implementation */
+    }.property('from')
+});</programlisting>
 
-        <para>lot of automatic work, ember data, the community, steep learning
-        curve</para>
+        <para>Bindings are really valuable when
+        <computeroutput>fromName</computeroutput> property value has already
+        been rendered in the template. There is no
+        <computeroutput>render()</computeroutput> function (as it is in
+        Backbone, for instance) to render the template; templates are rendered
+        automatically and updated automatically as well, as the underlying
+        data changes.</para>
+
+        <para>There is a lot of additional work Ember does. It follows the
+        <quote>convention over configuration</quote> rule to the maximum
+        extent, above all other MVC frameworks. For example, when one keeps to
+        the official naming conventions, the framework creates the objects
+        which are necessary and has not been defined, such as missing
+        controller.</para>
+
+        <para>Ember.js uses templating engine Handlebars, which provides very
+        clean and convenient way to create presentation layer of the
+        application. In my opinion, using dedicated templating engine makes
+        the code much more cleaner than using HTML attributes, as for example
+        Knockout.js does. Templating is described in detail in <xref
+        linkend="sect-html-rendering" />.</para>
+
+        <para>To sum it up, Ember.js is modern and powerful tool doing a lot
+        of job that programmer does not have to take care about. On the other
+        hand, the learning curve of Ember is told to be one of the steepest
+        and it is quite difficult to make the <emphasis>second</emphasis>
+        step, after reading the basic tutorials and examples. Fortunatelly,
+        there is quite active community working on screencasts<footnote>
+            <para>http://emberwatch.com/</para>
+          </footnote>, documentation and actively answering question on
+        Twitter and Stackoverflow.</para>
       </sect2>
 
       <sect2>
-        <title>Views + Controllers (TODO: temporary title)</title>
+        <title>Controllers (TODO: temporary title)</title>
 
-        <para></para>
+        <para>Application controllers are responsible for storing the current
+        state and mediating the communication between the views and models.
+        <citation>ember-howto</citation> In Ember (and thus in Talker as well)
+        controllers also represent collections of model objects. </para>
+
+        <para>The first function, processing the user actions from the view,
+        is represented by <computeroutput>processMessage</computeroutput>
+        method in <computeroutput>TextController</computeroutput>. The
+        following snippet is shortened part from Talker source code:</para>
+
+        <programlisting>App.TextController = Ember.ObjectController.extend({
+
+    processMessage : function(messageText) {
+
+        var message = App.Message.create({ ... });
+
+        message.send();
+        this.get('content.messages').pushObject(message);
+    }
+
+});</programlisting>
+
+        <para>The method <computeroutput>processMessage</computeroutput> is
+        called from the view object when the message input is submitted. The
+        view just grabs the data from input and sends it to the controller,
+        which creates new <computeroutput>Message</computeroutput> object,
+        sends the message and finally updates the list of messages for the
+        current contact, accessible via
+        <computeroutput>this.get('content')</computeroutput>. Adding
+        <computeroutput>.messages</computeroutput> to the
+        <quote>selector</quote> points the getter directly to the array of
+        messages.<footnote>
+            <para>Acutally, the method contains a lot more code such as
+            argument check and return values. They have been omitted in this
+            example for clarity and shortness.</para>
+          </footnote></para>
+
+        <para>Another example of controller from Talker is not
+        <computeroutput>ObjectController</computeroutput> as in previous
+        example, but <computeroutput>ArrayController</computeroutput>. It
+        represents the collection of contacts, displayed in the main
+        application view:</para>
+
+        <programlisting>App.contactsController = Ember.ArrayController.create({
+
+    content:[],
+
+    pair : function () {
+        var content = this.get('content');
+        var result = [];
+        for (ii = 0; ii &lt; content.length; ii += 2) {
+            result.pushObject({
+                "first" : content[ii],
+                "second" : content[ii + 1] ? content[ii + 1] : null
+            });
+        }
+        return result;
+    }.property('content.@each')
+});</programlisting>
+
+        <para>The contacts are stored in the
+        <computeroutput>content</computeroutput> attribute, which is Ember
+        convention for naming the actual data set within the
+        <computeroutput>ArrayController</computeroutput>. As it is necessary
+        to render the contacts as pairs in the two-row-view, there is
+        <computeroutput>pair</computeroutput> method returning the content
+        reformated as the array of pairs. Notice that the function is property
+        of <computeroutput>content.@each</computeroutput>, which means that
+        any update, insert or delete of the content array forces to
+        recalculate pairs as well.</para>
       </sect2>
 
       <sect2 id="sect-html-rendering">
@@ -2773,6 +2885,56 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <isbn>978-0470540718</isbn>
 
       <pagenums>432 (58, 380, 402)</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ember-in-action</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Joachim</firstname>
+
+          <othername>Haagen</othername>
+
+          <surname>Skeie</surname>
+        </author>
+      </authorgroup>
+
+      <title>Ember.js in Action</title>
+
+      <publisher>
+        <publishername>Manning Publications</publishername>
+      </publisher>
+
+      <pubdate>2013</pubdate>
+
+      <isbn>978-1617291456</isbn>
+
+      <pagenums>325 (21)</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ember-howto</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Marc</firstname>
+
+          <surname>Bodmer</surname>
+        </author>
+      </authorgroup>
+
+      <title>Ember.js Application Development How-to</title>
+
+      <publisher>
+        <publishername>Packt Publishing</publishername>
+      </publisher>
+
+      <pubdate>2013</pubdate>
+
+      <isbn>978-1-78216-338-1</isbn>
+
+      <pagenums>40 (16)</pagenums>
     </biblioentry>
 
     <biblioentry>
