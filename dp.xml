@@ -8,7 +8,7 @@
 -->
 <book lang="en">
   <bookinfo>
-    <title>Real-time Communication in Web Browser</title>
+    <title>Real-time Communication \\* in Web Browser</title>
 
     <subtitle>Master thesis</subtitle>
 
@@ -2381,13 +2381,14 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         and it is quite difficult to make the <emphasis>second</emphasis>
         step, after reading the basic tutorials and examples. Fortunatelly,
         there is quite active community working on screencasts<footnote>
-            <para>http://emberwatch.com/</para>
+            <para><ulink
+            url="http://emberwatch.com/">http://emberwatch.com/</ulink></para>
           </footnote>, documentation and actively answering question on
         Twitter and Stackoverflow.</para>
       </sect2>
 
-      <sect2>
-        <title>Controllers (TODO: temporary title)</title>
+      <sect2 id="sect-ember-controllers">
+        <title>Controllers</title>
 
         <para>Application controllers are responsible for storing the current
         state and mediating the communication between the views and models.
@@ -2464,12 +2465,139 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2 id="sect-html-rendering">
         <title>Rendering HTML</title>
 
-        <para>Handlebars<indexterm>
+        <para>Thick JavaScript client is responsible not only for manipulating
+        the data but also for rendering it to the HTML page. Ember is shipped
+        with Handlebars<indexterm>
             <primary>Handlebars</primary>
-          </indexterm>, how templates work, </para>
+          </indexterm> - a lightweight templating engine. The application is
+        decomposed to the separate views; in case of Talker it is a contact
+        list, the conversation, which consists of another two parts - text
+        chat and video. The structure basically corresponds with the
+        controller tree at <xref linkend="fig-controllers" />. Additionally,
+        text chat contains theoretically unlimited number of view, each of
+        them for a single message, either sent or received.</para>
+
+        <para>There are two important parts of the view: the view object
+        itself and its template. To describe the philosophy of presentation
+        layer, <computeroutput>VideoView</computeroutput> is further examined
+        here, as an example:</para>
+
+        <programlisting>App.VideoView = Ember.View.extend({
+    templateName: 'video',
+
+    buttonLabel : function() {
+        return this.get('controller.content.isActive') ? m.stop : m.start;
+    }.property("controller.content.isActive")
+});</programlisting>
+
+        <para>There are two properties in the view object,
+        <computeroutput>templateName</computeroutput> and
+        <computeroutput>buttonLabel</computeroutput>. The former just
+        determines the name of template connected to this view. The latter is
+        common method returning one of <computeroutput>stop</computeroutput>
+        or <computeroutput>start</computeroutput> messages, according to the
+        value of property <computeroutput>isActive</computeroutput>, located
+        in the <computeroutput>controller.content</computeroutput> object,
+        pointing to the contact the user is currently talking to. The other
+        important part is the template itself, inserted directly in HTML
+        page:<footnote>
+            <para>Handlebars templates must be compiled by Ember to JavaScript
+            code to be ready to be used. It is possible to let Ember compile
+            the templates in the browser or precompile the templates on the
+            server. However, there is very poor support for doing so in PHP.
+            Therefore, templates are rendered in HTML page and compiled in the
+            browser while developing the application. For production, it is
+            recommended to precompile them using dedicated Node.js module:
+            <ulink
+            url="http://handlebarsjs.com/precompilation.html">http://handlebarsjs.com/precompilation.html</ulink>.</para>
+          </footnote></para>
+
+        <programlisting>&lt;script type="text/x-handlebars" data-template-name="video"&gt;
+
+    &lt;div class="content_margin" &gt;
+        &lt;div id="video"&gt;&lt;!-- video of me comes here --&gt;&lt;/div&gt;
+        &lt;div id="stream"&gt;&lt;!-- video of the contact comes here --&gt;&lt;/div&gt;
+        &lt;div id="message"&gt;{{stateMessage}}&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="button_wrapper_video"&gt;
+        &lt;button {{action toggleCall target="controller"}} type="submit"&gt;
+            {{view.buttonLabel}}
+        &lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/script&gt;</programlisting>
+
+        <para>The template is inserted in script element, declaring itself as
+        a handlebars template. The only attribute
+        <computeroutput>data-template-name</computeroutput> identifies the
+        snippet and connects it to the view object, which specified the same
+        value in the <computeroutput>templateName</computeroutput> attribute,
+        as shown above. The template can contain any HTML, along with the
+        variables and expressions, both enclosed with the double braces,
+        sometimes called moustaches. In the example of video template, there
+        is <computeroutput>stateMessage</computeroutput> variable queried,
+        which is looked up in the object bound to the template. The object is
+        provided by router (described in <xref linkend="sect-routing" />). In
+        this case, it would be the current contact the user is talking
+        to.</para>
+
+        <para>The second handlebars expression in the template is action.
+        Actions are usually bound to the active elements, such as buttons.
+        When the button is clicked, the action is triggered. Ember finds the
+        controller responsible for the current state, which would be an
+        instance of <computeroutput>VideoController</computeroutput> in this
+        case, and calls the method
+        <computeroutput>toggleCall</computeroutput>, specified in the template
+        expression. Actions can be placed both in the controllers the views,
+        according to the each of whose nature.</para>
+
+        <para>Handlebars templates can transform almost any data stored in
+        JavaScript to HTML code so the rendered template corresponds exactly
+        to the application state. It is possible to add classes according to
+        the values of the object properties. In the following snippet, there
+        is message template, rendered individually for each message in the
+        conversation. The class is assigned to the wrapping div element
+        according to <computeroutput>isFromMe</computeroutput> property. If it
+        is true, <computeroutput>from_me</computeroutput> class attribute is
+        added, <computeroutput>to_me</computeroutput> otherwise. Class
+        <computeroutput>message</computeroutput> is added independently of the
+        properties and it is always present so the block can be styled as
+        message with custom CSS.</para>
+
+        <programlisting>&lt;script type="text/x-handlebars" data-template-name="message"&gt;
+    &lt;div {{bindAttr class="isFromMe:from_me:to_me :message"}}&gt;
+        &lt;span class="from"&gt;{{fromName}}:&lt;/span&gt;
+        &lt;span class="text"&gt;{{text}}&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/script&gt;</programlisting>
+
+        <para>The last two things to be mentioned about templates are
+        iterating and nesting. Have a look at the following example from the
+        main contact list view (altered a bit):</para>
+
+        <programlisting>&lt;script type="text/x-handlebars" data-template-name="contact-list"&gt;
+    {{#each App.contactsController.pair}}
+        &lt;div class="pair_wrapper"&gt;
+            {{view App.ContactView contentBinding="first"}}
+            {{view App.ContactView contentBinding="second" }}
+        &lt;/div&gt;
+    {{/each}}   
+&lt;/script&gt;</programlisting>
+
+        <para>When the template is rendered, Ember iterates over the
+        collection of contacts, accessed with
+        <computeroutput>pair</computeroutput> method (it was mentioned in
+        <xref linkend="sect-ember-controllers" />). Then, framework takes each
+        contact from the pair and instantiates
+        <computeroutput>ContactView</computeroutput> for it, passing it as a
+        current object for the view and rendering the template exactly in the
+        place the view expression is stated. Therefore, the list of contacts
+        is rendered, grouped by two inside
+        <computeroutput>pair_wrapper</computeroutput> blocks.</para>
       </sect2>
 
-      <sect2>
+      <sect2 id="sect-routing">
         <title>Routing</title>
 
         <para></para>
@@ -4273,8 +4401,6 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   </bibliography>
 
   <index></index>
-
-  <lot></lot>
 
   <appendix id="appendix-screenshots">
     <title>Screenshots of the application</title>
