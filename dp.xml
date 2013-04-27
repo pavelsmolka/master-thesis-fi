@@ -2393,7 +2393,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>Application controllers are responsible for storing the current
         state and mediating the communication between the views and models.
         <citation>ember-howto</citation> In Ember (and thus in Talker as well)
-        controllers also represent collections of model objects. </para>
+        controllers also represent collections of model objects.</para>
 
         <para>The first function, processing the user actions from the view,
         is represented by <computeroutput>processMessage</computeroutput>
@@ -2600,7 +2600,130 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2 id="sect-routing">
         <title>Routing</title>
 
-        <para></para>
+        <para>Despite HTTP is stateless protocol, it is common habit to build
+        stateful web applications. The states are simulated by various web
+        pages and the transitions are carried out clicking on the links. All
+        changes are simultaneously displayed in URL bar.</para>
+
+        <para>The problem is that JavaScript application cannot change the web
+        page, leave one and continue at other. JavaScript would lost its
+        context and whole MVC structure would serve to no purpose. Therefore,
+        most of the JavaScript applications using MVC frameworks run at single
+        web page, no matter how many states they contain. In Ember.js, there
+        is special object called <emphasis>Router</emphasis><indexterm>
+            <primary>router</primary>
+          </indexterm>, responsible for transitions between states,
+        dispatching of events and rendering correct templates.<footnote>
+            <para>Ember router API changed a lot since the application was
+            implemented (it is less than a year, but still). Further in this
+            section, the old version of API is described since it is the
+            version used in Talker application. Updating Talker to the newest
+            Ember.js version with new router is one of the possible future
+            tasks.</para>
+          </footnote></para>
+
+        <para>Router contains several states, ordered in a tree structure,
+        according to the flow of possible user actions. The routes can be
+        nested. The first aspect of router is mapping the states to URLs.
+        Every time the transition takes place, router changes the context
+        (basically renders different template) and it changes URL as well.
+        Since JavaScript can change only URL fragment router does exactly so.
+        And vice versa, when the user types specific URL in the URL bar, the
+        application lets the router to choose the matching state and set the
+        context in a similar way.</para>
+
+        <programlisting>App.Router = Ember.Router.extend({
+
+    root: Ember.Route.extend({
+
+        goToContactList : Ember.State.transitionTo('contacts'),
+        goToConversation : Ember.State.transitionTo('conversation.index'),
+
+        index : Ember.Route.extend({
+            route:'/',
+            redirectsTo:"contacts"
+        }),
+
+        contacts : Ember.Route.extend({
+            route:'/contacts'
+        }),
+
+        conversation : Ember.Route.extend({
+            route:'/conversation/:contact_id'
+            index : Ember.Route.extend({
+                route:'/'
+            })
+        })
+    })
+});</programlisting>
+
+        <para>Handling the application links is the second responsibility of
+        router. In the example above, there are two link destinations, named
+        by <computeroutput>goTo*</computeroutput> labels. When any element is
+        marked with Handlebars <computeroutput>{{action
+        goTo*}}</computeroutput>, it is transformed into a link leading to the
+        corresponding router state. And the router handles the event by simple
+        transitioning to one of existing states.</para>
+
+        <para>Let's have a look at one of the routes in more detail. As
+        mentioned before, router is responsible for creating unique URL for
+        every application state. That usually means serializing the
+        application state to URL when the transition is carried out via link.
+        In the other case, when the URL is typed into URL bar directly, it has
+        to deserialize it and establish correct application state.</para>
+
+        <programlisting>conversation : Ember.Route.extend({
+
+    route : '/conversation/:contact_id',
+
+    connectOutlets : function (router, contact) {
+        // binds current contact to the conversationController 
+        // so the text/video view can access it
+        router.get('applicationController')
+              .connectOutlet('conversation', contact);
+    },
+    deserialize : function (router, params) {
+        return App.contactsController.find(function(item) {
+            return item.id == params.contact_id;
+        });
+    },
+    serialize : function (router, context) {
+        return context ? { contact_id : context.get('id') } : {};
+    }
+})</programlisting>
+
+        <para>There are two methods providing such functionality,
+        <computeroutput>serialize</computeroutput> and
+        <computeroutput>deserialize</computeroutput>. The former picks the
+        unique identifier for current context (contact object) and returns it
+        as <computeroutput>contact_id</computeroutput>. This parameter is used
+        in the route
+        <computeroutput>'/conversation/:contact_id'</computeroutput> as a
+        dynamic segment, so that actual route would be
+        <computeroutput>'/conversation/42'</computeroutput> for example.
+        Deserializing works in exactly opposite way. Ember prepares the URL
+        segment for the router so it is passed as object containing the map of
+        dynamic segments, which would be <computeroutput>{ contact_id : '42'
+        }</computeroutput> in our (example) case. The only job
+        <computeroutput>deserialize</computeroutput> must do is to find the
+        appropriate object (contact with ID 42) and return it as the current
+        context object.</para>
+
+        <para>The last remarkable aspect of router is choosing the appropriate
+        templates and connecting them together. Basically,
+        <computeroutput>connectOutlets</computeroutput> method tells main
+        application controller to <quote>include</quote> the controller
+        responsible for current state, which would be
+        <computeroutput>ConversationController</computeroutput> instance in
+        the example above. This is importand when rendering the templates.
+        First, main application template is rendered. Then, Ember looks into
+        the template for <computeroutput>{{outlet}}</computeroutput> tag and
+        inserts the conversation template exactly to the place it is found.
+        The last thing, appropriate contact object is passed as the context
+        for the conversation controller (and thus the template as well).
+        Everything described in this paragraph is deduced from one line
+        implementation of <computeroutput>connectOutlets</computeroutput>
+        method in the example above.</para>
       </sect2>
     </sect1>
 
