@@ -2730,13 +2730,6 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     <sect1>
       <title>Initializing the connection</title>
 
-      <para>TODO:Strophe init, passing credentials, attaching to the existing
-      connection?</para>
-
-      <para>TODO: sequence/action diagram - is there any? maybe
-      communication... js client - php server - boshserver - xmppserver. Move
-      video call state machine diagram from video call section here?</para>
-
       <para>When the user clicks at Talker icon in the Celebrio main menu, a
       request is sent to the server which renders HTML page and sends it along
       with all necessary assets, such as JavaScript files and style sheets.
@@ -2747,22 +2740,125 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       one, i.e. attaching to the connection as it is described in <xref
       linkend="strophe-attach" />.</para>
 
-      <para>As JavaScript files are loaded, App object is defined by Ember
-      firstly. Then, new StropheAdapter</para>
+      <para>As JavaScript files are loaded,
+      <computeroutput>App</computeroutput> object is defined by Ember firstly
+      - whole MVC structure described in <xref linkend="chap-ember" />. Then,
+      new <computeroutput>StropheAdapter</computeroutput> object is created
+      and it attempts to establish the connection with BOSH server
+      immediately. Strophe adapter supports both creating a new connection and
+      letting server to create one. The initialization code basically checks
+      whether the password has been provided to the client code. If yes, BOSH
+      authentication takes place, as displayed at <xref
+      linkend="fig-conn-establish" />. When the password is not provided,
+      JavaScript client sends an authentication request to the server, which
+      should establish the connection and return JID, SID and RID so the
+      client can attach to the connection and use it for further
+      communication. The workflow is depicted at <xref
+      linkend="fig-conn-attach" />. In both cases, the authentication
+      handshake follows the SASL authentication protocol defined by XEP-0206.
+      <citation>xep-0206</citation></para>
 
-      <para>TODO programming - attach connection</para>
+      <figure id="fig-conn-establish">
+        <title>Establishing a new BOSH connection from JavaScript</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="vp/conn-establish.pdf" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <figure id="fig-conn-attach">
+        <title>Establishing a new BOSH connection using server side XMPP
+        client</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="vp/conn-attach.pdf" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>It is recommended not to send a password to the client, for
+      obvious security reasons. Therefore, Talker is set to use server-side
+      connection establishment by default. On the other hand, PHP
+      implementations of XMPP clients are not that matured and certain
+      problems appeared, as mentioned in <xref
+      linkend="chap-server-side-xmpp-client" />.</para>
     </sect1>
 
     <sect1>
       <title>Processing events</title>
 
-      <para>everything about processing incoming events. mention appending
-      messages to the message list</para>
+      <para>Talker works as a typical asynchronous application. The
+      application mostly consists of many callbacks (event listeners) attached
+      to different events and awaiting to be triggered within the event loop.
+      <citation>async-javascript</citation> It is common pattern in JavaScript
+      applications nowadays. <citation>js-definitive-guide</citation> Talker
+      does expect the events to come either from the user (traversing the
+      application, sending a message, ...) or from the network (response from
+      BOSH server, incoming message, ...). Basically, almost everything in
+      Talker is intended to be either declarative (Ember object patterns) or
+      event-based (Strophe events).</para>
+
+      <para>The first kind of events are those incoming from the network. As
+      it was mentioned in <xref linkend="chap-strophe-events" />, Strophe is
+      set up with the event handlers attached to various event types. There is
+      not even one synchronous call between the application and the server so
+      that every response is handled with custom callback asynchronously. All
+      callbacks are defined as methods of
+      <computeroutput>StropheAdapter.prototype</computeroutput> object so that
+      they are shared by all <computeroutput>StropheAdapter</computeroutput>
+      instances. <citation>js-enlightnment</citation> </para>
+
+      <para>Incoming chat messages are handled by
+      <computeroutput>chatMessage</computeroutput> method. The message is
+      passed to the method from Strophe library in form of
+      <computeroutput>Element</computeroutput> object. The method parses the
+      message, constructs the Ember model
+      <computeroutput>Message</computeroutput> object and tries to assign the
+      message to a contact (the recipient). When the recipient is know (so she
+      is present in the the user contact list), new message is appended to the
+      list of messages. Ember automatically updates the view so the message
+      appears in the list immediately.</para>
+
+      <programlisting>var message = App.Message.create({
+    to : msg.getAttribute('to'),
+    from : Strophe.getBareJidFromJid(msg.getAttribute('from')),
+    type : msg.getAttribute('type')
+});
+
+var contact = App.contactsController.find(function(item) {
+    return item.jid == message.from;
+});
+
+contact.get('messages').pushObject(message);</programlisting>
+
+      <para>The user actions are handled mostly by Ember itself. For example
+      sending a new message is managed by the controller (described in <xref
+      linkend="sect-ember-controllers" />), which just calls adapter function
+      which actually sends the prepared message object. It is one of the
+      design drawbacks of the application, that the there is two-way awareness
+      between the adapter and controllers (somethimes controller calls
+      adapter, sometimes the adapter actively calls controller). This design
+      was chosen for its simplicity and it appeared to be sufficient for the
+      application of Talker's size.</para>
 
       <sect2>
         <title>Notifications</title>
 
-        <para>Webtop notifications + sound</para>
+        <para>Talker is only a part of bigger system - Celebrio. The user has
+        to find out when a new message arrives. Therefore, simple mechanism of
+        notifications has been developed and used accross the system, not only
+        in Talker. When a new chat message arrives, the application triggers
+        the built-in mechanism and the notification is propagated to the main
+        Celebrio frame using <computeroutput>postMessage</computeroutput>
+        API.<footnote>
+            <para><ulink
+            url="https://developer.mozilla.org/en-US/docs/DOM/window.postMessage">https://developer.mozilla.org/en-US/docs/DOM/window.postMessage</ulink></para>
+          </footnote> Since notifications are not specific only to Talker and
+        they were not developed as a part of the application, they are not
+        described further here.</para>
       </sect2>
 
       <sect2>
@@ -2793,9 +2889,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         her contacts in People application, another part of the system. All
         contacts are stored in a relational database and available through the
         system, in all applications. One of the properties of the contact
-        entity is JID.<footnote>
-            <para>Jabber ID</para>
-          </footnote> For the needs of Talker, the contacts are filtered on
+        entity is JID. For the needs of Talker, the contacts are filtered on
         the server so that only those which have JID filled are returned as
         the user contact list.</para>
 
@@ -3016,7 +3110,31 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
       <isbn>978-0-596-80552-4</isbn>
 
-      <pagenums>1100 (333)</pagenums>
+      <pagenums>1100 (320, 333)</pagenums>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>js-enlightnment</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Cody</firstname>
+
+          <surname>Lindley</surname>
+        </author>
+      </authorgroup>
+
+      <title>JavaScript Enlightenment</title>
+
+      <publisher>
+        <publishername>O'Reilly Media</publishername>
+      </publisher>
+
+      <pubdate>2013</pubdate>
+
+      <isbn>978-1449342883</isbn>
+
+      <pagenums>166 (49)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -3042,7 +3160,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
       <isbn>978-1-93778-527-7</isbn>
 
-      <pagenums>104</pagenums>
+      <pagenums>104 (3)</pagenums>
     </biblioentry>
 
     <biblioentry>
