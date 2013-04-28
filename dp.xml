@@ -59,6 +59,12 @@
 
       <keyword>BOSH</keyword>
 
+      <keyword>Ember</keyword>
+
+      <keyword>Strophe</keyword>
+
+      <keyword>OpenTok</keyword>
+
       <keyword>TODO</keyword>
     </keywordset>
   </bookinfo>
@@ -2809,7 +2815,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       callbacks are defined as methods of
       <computeroutput>StropheAdapter.prototype</computeroutput> object so that
       they are shared by all <computeroutput>StropheAdapter</computeroutput>
-      instances. <citation>js-enlightnment</citation> </para>
+      instances. <citation>js-enlightnment</citation></para>
 
       <para>Incoming chat messages are handled by
       <computeroutput>chatMessage</computeroutput> method. The message is
@@ -2845,7 +2851,9 @@ contact.get('messages').pushObject(message);</programlisting>
       application of Talker's size.</para>
 
       <sect2>
-        <title>Notifications</title>
+        <title>Notifications<indexterm>
+            <primary>notifications</primary>
+          </indexterm></title>
 
         <para>Talker is only a part of bigger system - Celebrio. The user has
         to find out when a new message arrives. Therefore, simple mechanism of
@@ -2860,11 +2868,106 @@ contact.get('messages').pushObject(message);</programlisting>
         they were not developed as a part of the application, they are not
         described further here.</para>
       </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Logger</title>
+
+      <para>Although JavaScript is very popular language, at least in web
+      applications, there is not common way to log messages. There are two
+      possible reasons. Firstly, JavaScript runs in the web browser and
+      frequent AJAX requests would be necessary to log everything what
+      happens. Secondly, web browser is kind of <quote>hostile</quote>
+      environment, so the system developer cannot rely on the message
+      truthfulness at all. Anyway, it is useful to have some information
+      logged, at least in the development mode, locally to the browser
+      console.<footnote>
+          <para>All current browsers have console.log method implemented,
+          which outputs any message from JavaScript code to the browser
+          console, accessible to anyone using the browser. The main advantage
+          is the fact that console is hidden from the ordinary users, yet it
+          can easily be accessed by anyone debugging the application or
+          reporting a bug. See API for details: <ulink
+          url="https://developer.mozilla.org/en/docs/DOM/console.log">https://developer.mozilla.org/en/docs/DOM/console.log</ulink>.</para>
+        </footnote></para>
+
+      <para>The main problem with common frequently used
+      <computeroutput>console.log</computeroutput> method is the impossibility
+      of hiding certain kind of messages. In Talker, there are seven different
+      kinds of logs: those related to messages, video, subscriptions,
+      notifications etc. It is impossible to have the output uncluttered
+      without constant commenting and uncommenting
+      <computeroutput>console.log()</computeroutput> calls.</para>
+
+      <para>In order to solve this trouble, logging library Log4js<indexterm>
+          <primary>Log4js</primary>
+        </indexterm> has been used in the application. It allows to create
+      various loggers (with various appenders). Each logger has its own log
+      level set so it outputs only the messages tagged by that level, or
+      higher. Actually, the logger usage is very similar to well known log4j,
+      including formating layouts. There is AJAX appender available in the
+      library so it is possible to send the messages to the server to be
+      stored. This might be useful to log error messages not reproducible in
+      the development environment.</para>
+
+      <sect2>
+        <title>Setup</title>
+
+        <para>The logger (with console appender) is set up as follows:</para>
+
+        <programlisting>Log4js.getLogger("message")
+      .setLevel(Log4js.Level.INFO)
+      .setAppenders([new Log4js.BrowserConsoleAppender()]);</programlisting>
+
+        <para>Originally, the library does not allow chaining the methods so a
+        local variable must be created to set up the logger (or getLogger
+        method must be called multiple times). I believe method chaining is
+        sensible pattern so I reimplemented several methods in the library to
+        support it. Unfortunatelly, the project is not hosted on GitHub so it
+        is quite difficult to offer the changes back to the community.</para>
+      </sect2>
 
       <sect2>
         <title>Logging</title>
 
-        <para>TODO: mention Log4js or another tool we might use.</para>
+        <para>Logging a message is also quite easy, it might look as the
+        following example (cut out of
+        <computeroutput>onConnect</computeroutput> method):</para>
+
+        <programlisting>App.log.logger.info('Strophe is connected as ' + App.me.jid);
+App.log.logger.debug(this);</programlisting>
+
+        <para>Two notes should be mentioned about the code. Firstly, all
+        logger which have been set up are accessible via
+        <computeroutput>App.log</computeroutput> object. It is a wrapper so
+        the used logging library can be changed (and it was changed several
+        times during the development). As long as the logger objects implement
+        common logging methods (such as <computeroutput>info</computeroutput>
+        and <computeroutput>debug</computeroutput>), the application will
+        work. </para>
+
+        <para>The second thing is logging complex objects such as
+        <computeroutput>this</computeroutput>, pointing to the
+        <computeroutput>Strophe.connection</computeroutput> in the example
+        call. Log4js does not provide any layout which would not transform the
+        value to string - [object Object] in our case. This is not very useful
+        - the developer usually knows there is a object and he just wants the
+        possibility to inspect it. Therefore, I enhanced the library again in
+        order to log complex objects. First of all, the logger outputs a text
+        message saying complex value is about to be logged. Then, the complex
+        value is logged individually without being cast to string. Therefore,
+        it is possible to access it interactively in the console, fold and
+        unfold the nested properties and carry out other inspections. Logging
+        object from the example above thus looks as follows (arrows within the
+        object symbolize the property can be inspected):</para>
+
+        <programlisting>INFO - Strophe is connected as pavel.smolka@jappix.com
+DEBUG - [object Object]
+Strophe.Connection {
+ &gt; adapter: StropheAdapter
+ &gt; addHandlers: Array[0]
+ ...
+}</programlisting>
       </sect2>
     </sect1>
 
