@@ -473,7 +473,7 @@ and this is the second one
     </sect1>
 
     <sect1 id="chap-ws">
-      <title>WebSockets<indexterm>
+      <title>Permanent TCP streams with WebSockets<indexterm>
           <primary>WebSockets</primary>
         </indexterm></title>
 
@@ -524,7 +524,7 @@ and this is the second one
       by default. <citation>definitive-guide-to-ws</citation></para>
 
       <sect2>
-        <title>Handshake<indexterm>
+        <title>WebSocket Handshake<indexterm>
             <primary>WebSocket</primary>
 
             <secondary>handshake</secondary>
@@ -630,7 +630,7 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
       </sect2>
 
       <sect2>
-        <title>JavaScript API<indexterm>
+        <title>WS JavaScript API<indexterm>
             <primary>WebSocket</primary>
 
             <secondary>API</secondary>
@@ -747,7 +747,7 @@ connection.send(file);</programlisting>
       </sect2>
 
       <sect2>
-        <title>API wrappers</title>
+        <title>WebSocket API wrappers</title>
 
         <para>Yet WebSockets is powerful technology, there are still many
         browsers not supporting it. In that case, when real-time communication
@@ -849,7 +849,7 @@ data: Another line of the event message</programlisting></para>
     </sect1>
 
     <sect1>
-      <title>WebRTC<indexterm>
+      <title>Media streaming with WebRTC technology<indexterm>
           <primary>WebRTC</primary>
         </indexterm></title>
 
@@ -1110,13 +1110,13 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       </sect2>
 
       <sect2 id="chap-opentok">
-        <title>OpenTok</title>
+        <title>OpenTok video call library</title>
 
         <para>TODO: OpenTok</para>
       </sect2>
 
       <sect2>
-        <title>Bayeux<indexterm>
+        <title>Bayeux protocol<indexterm>
             <primary>Bayeux</primary>
           </indexterm></title>
 
@@ -1141,7 +1141,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       </sect2>
 
       <sect2>
-        <title>SignalR<indexterm>
+        <title>SignalR framework<indexterm>
             <primary>SignalR</primary>
           </indexterm></title>
 
@@ -1162,7 +1162,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       </sect2>
 
       <sect2>
-        <title>Google Talk</title>
+        <title>Google Talk service</title>
 
         <para>TODO</para>
       </sect2>
@@ -1237,7 +1237,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
     server infrastructure, client software and existing user base.</para>
 
     <sect1 id="chap-xmpp-stanzas">
-      <title>XML Stanzas</title>
+      <title>XML Stanzas - XMPP building blocks</title>
 
       <para>As mentioned in the introduction to this chapter, when XMPP
       connection is established, two streams are opened and both the client
@@ -1518,7 +1518,7 @@ ws.send(
     </sect1>
 
     <sect1>
-      <title>Jingle<indexterm>
+      <title>Jingle - XMPP media extension<indexterm>
           <primary>Jingle</primary>
         </indexterm><indexterm>
           <primary>XEP</primary>
@@ -1653,7 +1653,7 @@ ws.send(
     linkend="chap-server-side-xmpp-client" /> for details.</para>
 
     <sect1>
-      <title>Strophe.js<indexterm>
+      <title>Strophe.js - JavaScript XMPP library<indexterm>
           <primary>Strophe.js</primary>
         </indexterm></title>
 
@@ -2257,7 +2257,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     </sect1>
 
     <sect1 id="chap-ember">
-      <title>Ember.js</title>
+      <title>Ember.js - JavaScript MVC framework</title>
 
       <para>Talker is purely client-side-based application, implemented in
       JavaScript and running in web browser. As it is mentioned in the
@@ -2944,7 +2944,7 @@ App.log.logger.debug(this);</programlisting>
         times during the development). As long as the logger objects implement
         common logging methods (such as <computeroutput>info</computeroutput>
         and <computeroutput>debug</computeroutput>), the application will
-        work. </para>
+        work.</para>
 
         <para>The second thing is logging complex objects such as
         <computeroutput>this</computeroutput>, pointing to the
@@ -3048,7 +3048,7 @@ Strophe.Connection {
       <para>TODO: Video framework, flash fallback</para>
 
       <sect2>
-        <title>OpenTok</title>
+        <title>Using OpenTok library</title>
 
         <para>TODO: OpenTok library, Native implementation in Android</para>
 
