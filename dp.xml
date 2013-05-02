@@ -210,7 +210,7 @@
   </chapter>
 
   <chapter id="chap-rtc">
-    <title>Bidirectional communication</title>
+    <title>Bidirectional communication between web browser and server</title>
 
     <para>Suggestion TODO: split the chapter: describe HTTP more in depth,
     tell why HTTP is so important (not only because of browsers), describe the
@@ -1162,15 +1162,13 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       </sect2>
 
       <sect2>
-        <title>Google Talk service</title>
+        <title>Real-time communication tools from Google</title>
 
-        <para>TODO</para>
-      </sect2>
+        <para>TODO: Google Talk service (mention it runs with XMPP), </para>
 
-      <sect2>
-        <title>Google hangouts API</title>
+        <para>TODO: Google hangouts API, </para>
 
-        <para>TODO</para>
+        <para>TODO: Google App Channel (from app engine i guess)</para>
       </sect2>
     </sect1>
   </chapter>
@@ -1593,6 +1591,9 @@ ws.send(
       subscription requests and therefore initiate the connection (in the
       long-term meaning), but this option can be disabled in the future
       too.</para>
+
+      <para>TODO: Update the current state of affairs.
+      http://www.fsf.org/blogs/sysadmin/google-reinstates-federated-instant-messaging</para>
     </sect1>
   </chapter>
 
@@ -1879,7 +1880,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
     </sect1>
 
-    <sect1>
+    <sect1 id="chap-strophe-plugins">
       <title>Strophe plugins</title>
 
       <para>XMPP has been designed to be extensible (even by the protocol
@@ -2985,7 +2986,7 @@ Strophe.Connection {
       duplication and appropriate matching one to another.</para>
 
       <sect2>
-        <title>Celebrio contact list</title>
+        <title>Fetching Celebrio contact list</title>
 
         <para>As mentioned in the previous paragraph, the contact list base
         comes from the server-side database. Celebrio asks the user for adding
@@ -3028,14 +3029,42 @@ Strophe.Connection {
       </sect2>
 
       <sect2>
-        <title>Retrieving the roster</title>
+        <title>Matching the entries from XMPP roster</title>
 
-        <para>TODO: how the roster is retrieved and handled (do not duplicate
-        XMPP chapter)</para>
+        <para>The contact list retrieved from Celebrio backend, as it was
+        described in the previous section, is only underlying material for
+        building the contact list. The other part is XMPP roster<indexterm>
+            <primary>XMPP</primary>
+
+            <secondary>roster</secondary>
+          </indexterm> (contact list), stored at the XMPP server. The roster
+        can possibly contain different contacts from internal Celebrio contact
+        list, because it can be accessed from other XMPP clients as
+        well.</para>
+
+        <para>When the application is connected, fetching a roster from XMPP
+        server is one of the first steps. One of Strophe.js plugins (plugins
+        were generally described in <xref linkend="chap-strophe-plugins" />),
+        called characteristically Roster, provides convenient API for this - a
+        callback function is passed to
+        <computeroutput>roster.get</computeroutput> method and executed when
+        the roster is fetched.</para>
+
+        <para>There are two important steps within callback the function.
+        Firstly, the retrieved contacts (those from XMPP roster) are filtered.
+        If TODO</para>
+
+        <para>TODO insert action diagram, already done</para>
       </sect2>
 
       <sect2>
-        <title>Subscriptions</title>
+        <title>Presence handling</title>
+
+        <para></para>
+      </sect2>
+
+      <sect2>
+        <title>How subscriptions are handled</title>
 
         <para>TODO: subscriptions. do not duplicate XMPP chapter (however this
         is not very much mentioned there)</para>
