@@ -3077,7 +3077,7 @@ Strophe.Connection {
       </sect2>
 
       <sect2>
-        <title>Presence handling</title>
+        <title>Presence and online statuses</title>
 
         <para>One of the biggest advantages of real-time communication tools
         is the fact that one can see whether his contacts are currently
@@ -3137,8 +3137,23 @@ Strophe.Connection {
       <sect2>
         <title>Subscriptions</title>
 
-        <para>TODO: subscriptions. do not duplicate XMPP chapter (however this
-        is not very much mentioned there)</para>
+        <para>Subscribing in XMPP basically addressses adding the contacts to
+        the contact list and asking them for the same. Due to the simplicity
+        of the application, Talker performs subscriptions automatically. When
+        the new contact (i.e. new contact added in Celebrio system) is found,
+        the subscription request is sent when Talker starts and loads the
+        contact list. In the opposite direction, when the subscription request
+        is received, the application tries to find the appropriate contact and
+        subscribe too. If no such contact is found, information is logged and
+        nothing happens.</para>
+
+        <para>This approach has one big advantage: the user does not have to
+        respond to the subscription requests and she does not need to send own
+        requests either. Yet, there is also one disadvantage, basically the
+        same thing from the opposite point of view. The user cannot fully
+        control her contact list - for example refuse subscription request
+        from the contact in roster. We decided for this trade off to make the
+        application as simple as possible.</para>
       </sect2>
     </sect1>
 
