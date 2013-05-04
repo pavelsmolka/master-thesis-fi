@@ -1926,7 +1926,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       handling of the user contact list (XMPP Roster).<indexterm>
           <primary>XMPP</primary>
 
-          <secondary>Roster</secondary>
+          <secondary>roster</secondary>
         </indexterm> The basic use cases comprise retrieving the roster from
       the server by calling
       <computeroutput>connection.roster.get(onRoster)</computeroutput>,
@@ -3173,7 +3173,7 @@ Strophe.Connection {
       <sect2>
         <title>Implementation</title>
 
-        <para></para>
+        <para>TODO</para>
 
         <figure>
           <title>Video call states</title>
@@ -3192,9 +3192,263 @@ Strophe.Connection {
     <sect1>
       <title>Testing</title>
 
-      <para>TODO: Unit tests</para>
+      <para>Every application is tested during the development. Traversing the
+      application manually is common way of testing, especially in case of web
+      applications. It is definitely the easiest but also not repeatable and
+      thus difficult to scale in large projects. Therefore, automatic tests
+      are often used. There are three kinds of tests concerning web
+      applications. The most widespread kind of tests are unit tests
+      concerning the server-side code. Testing server-side code brings the
+      benefit of predictable and easily modifiable runtime environment.
+      However, Talker is client-side application and therefore server-side
+      unit testing is not an option. The other two types of tests, both
+      related to Talker, are JavaScript unit tests and Selenium tests, both
+      described below.</para>
 
-      <para>TODO: programming</para>
+      <para>JavaScript unit testing<indexterm>
+          <primary>unit testing</primary>
+        </indexterm> is relatively new technique, definitely younger than
+      classic JUnit tests in Java or PHPUnit in PHP. Earlier, the JavaScript
+      consisted of several action listeners bound to the HTML elements on web
+      page. However, hardly did real application logic move to JavaScript when
+      the application code grew bigger. Therefore, it must to be tested
+      automatically.</para>
+
+      <para>There are several available solutions for unit testing in
+      JavaScript. Some solutions cover whole testing <quote>stack</quote>,
+      such as Jasmine or QUnit. On the other hand, there are tools which
+      separate the problem of testing (setting up the environment and running
+      tests) from assertion, which is responsible for injecting the functions
+      which help with checking whether the tested method behaves correctly and
+      return correct values. I believe the separation of concerns is good
+      pattern overall so I have used the tools from the second group:
+      Mocha<indexterm>
+          <primary>Mocha</primary>
+        </indexterm> and Intern<indexterm>
+          <primary>Intern</primary>
+        </indexterm> testing frameworks, both using Chai<indexterm>
+          <primary>Chai</primary>
+        </indexterm> as the assertion library.</para>
+
+      <para>JavaScript is specific by not having strictly defined the runtime
+      environment. Usually, client-side JavaScript runs in web browser
+      interpreter. However, there are also many tools running with Node.js,
+      JavaScript server-side platform and runtime environment. Since Talker is
+      web-based application, it is crucial to have it tested in web browser
+      environment. All three solutions described below perform the automatic
+      tests with web browser environment.</para>
+
+      <sect2>
+        <title>Chai assertion library</title>
+
+        <para>Before the unit testing frameworks can be described, another
+        part of testing must be mentioned. It is assertion, i.e. checking
+        whether the code resulted to the expected values. Both Intern and
+        Mocha, testing frameworks described later on, use assertion library
+        Chai. It provides convenient and easily readable way to check various
+        conditions.</para>
+
+        <para>There are two assertion styles which can be used with Chai:
+        behavior-driven development (BDD style) and test-driven (TDD). They
+        differ only by syntax, their expression power is equal. TDD style
+        looks more similar to JUnit or PHPUnit:
+        <citation>chai-tdd</citation></para>
+
+        <programlisting>assert.include([ 1, 2, 3 ], 3, 'array contains value');
+assert.deepProperty({ tea: { green: 'matcha' }}, 'tea.green', 'matcha');</programlisting>
+
+        <para>On the other hand, BDD provides easy-to-read word chaining,
+        resulting to a sentence. The following example (BDD) equals the
+        previous one (TDD), only the used style differs:
+        <citation>chai-bdd</citation></para>
+
+        <programlisting>expect([1,2,3]).to.include(3);
+expect({ tea: { green: 'matcha' }})
+    .to.have.deep.property('green.tea', 'matcha');</programlisting>
+      </sect2>
+
+      <sect2>
+        <title>Unit testing with Intern framework</title>
+
+        <para>Intern is a tool for creating, running and managing JavaScript
+        unit tests, all with minimal need to set up another third party tools
+        and environments. Intern is not yet available as npm<footnote>
+            <para>Node.js package</para>
+          </footnote> package <citation>intern-blog</citation> so it has to be
+        installed manually. After the installation, a configuration file must
+        be set up to tell the framework where the tests are and how the
+        testing environment should look like.</para>
+
+        <para>Similarly as with Chai, the tests can be implemented in two
+        syntax ways: TDD and BDD. The following examples are actual tests
+        implemented for Talker application, running with Intern, using BDD
+        style. The overall test structure uses Dojo (library Intern depends
+        on, providing define method) and it look as follows:</para>
+
+        <programlisting>define([
+  /* load dependencies */
+], function (bdd, expect) {
+  with (bdd) {
+
+    /* test suite */
+    describe('StropheAdapter', function () {
+  
+      /* before each test */
+      beforeEach(function() {
+        adapter = new StropheAdapter();
+        send = adapter.connection.send;
+      });
+
+      /* inner test suite = set of tests */
+      describe('#constructor', function () {
+
+        /* test itself, with description */
+        it('should do something...', function () {
+          /* perform test, make assertions */
+        });
+      });
+    });
+  }
+});</programlisting>
+
+        <para>First, there are dependencies defined so the framework loads
+        them before the test is executed. Almost all JS files included in the
+        application are defined here to emulate the environment of the
+        application as precisely as possible. The next statement tells BDD
+        style is going to be used. Later on, actual test suites with tests are
+        listed. Each suite can mention
+        <computeroutput>before</computeroutput>,
+        <computeroutput>beforeEach</computeroutput>,
+        <computeroutput>after</computeroutput> and
+        <computeroutput>afterEach</computeroutput> functions to be run,
+        similarly as other testing frameworks allow. A test itself consists of
+        a description label. This label should describe the test aim and hence
+        identify it. Inside the test, any code can be executed as well as
+        assertions can be carried out.</para>
+
+        <para>JavaScript differs from common programming languages in the way
+        the asynchronous code is executed. JavaScript does not provide
+        multithreading by default <citation>js-definitive-guide</citation>.
+        Hence, the pattern of passing a callback to the asynchronous operation
+        is used instead. Unfortunatelly, it is nontrivial task to test
+        asynchronous doce in JavaScript. Intern provides convenient way to do
+        so using promises pattern. The following example tests that
+        <computeroutput>start</computeroutput> method connects the application
+        to XMPP server in 10 seconds, using Chai assertion to check it.</para>
+
+        <programlisting>it('should connect and call onConnection callback', function () {
+    var dfd = this.async(10000);
+    adapter.start(dfd.rejectOnError(function (status) {
+        if (!(status === Strophe.Status.ATTACHED 
+                || status === Strophe.Status.CONNECTED)) {
+            return;
+        }
+
+        expect(adapter.connection.connected).to.be.true;
+        // explicitly resolve the test since 
+        // it was successful to this point
+        dfd.resolve();
+    }));
+});</programlisting>
+
+        <para>The callback is hand over to start method to be triggered every
+        time the connection status changes. This means it is also triggered if
+        Strophe only performs the authentication or even if the connection
+        fails! Therefore, the promise is resolved (so the test succeeds) only
+        if the correct status is passed as an argument. </para>
+
+        <para>It has to be admitted that the previous test is not real unit
+        test, mocking all surrounding objects the function interacts with.
+        Considering that the goal of testing is making sure the implemented
+        methods work as expected, being implemented in this way is the easiest
+        and most straightforward way to achieve it. Mocking the libraries and
+        network requests would require substantial architecture changes in the
+        application, leading to inappropriate complexity and problems for
+        anyone to work with it <quote>out of the box</quote>.</para>
+      </sect2>
+
+      <sect2>
+        <title>Mocha unit tests</title>
+
+        <para>Mocha<indexterm>
+            <primary>Mocha</primary>
+          </indexterm> is another framework for creating unit tests in
+        JavaScript. The structure of tests is similar to Intern, Mocha also
+        supports BDD style with <computeroutput>describe</computeroutput> and
+        <computeroutput>it</computeroutput> keywords. What is different is the
+        way Mocha tests are executed and dependencies are loaded. Mocha is
+        more lightweight than Intern, it is just Node package, not including
+        any configuration files and environment administration.</para>
+
+        <para>The easiest way to run Mocha is from command line:
+        <computeroutput>mocha test-file.js</computeroutput>. However, to be
+        able to use Chai to do assertions, each test file must declare it with
+        Node <computeroutput>require</computeroutput> function. The unit test
+        implemented with mocha then looks as the following example - similar
+        to Intern test:</para>
+
+        <programlisting>var expect = require('chai').expect;
+
+describe('StropheAdapter', function(){
+    describe('#constructor', function(){
+        it('should do something...', function () {
+          /* perform test, make assertions */
+        });
+    })
+});</programlisting>
+      </sect2>
+
+      <sect2>
+        <title>JsTestDriver<indexterm>
+            <primary>JsTestDriver</primary>
+          </indexterm> framework</title>
+
+        <para>Running Mocha tests in console with Node brings one huge
+        disadvantage. There is no easy option to load custom JavaScript files
+        which are necessary to perform the test, unless they are packed as npm
+        packages. Therefore, I used another tool called JS Test Driver to wrap
+        Mocha tests, load dependencies before executing them and also run them
+        in the browser environment.</para>
+
+        <para>JS Test Driver (JSTD) is a Java library allowing the developers
+        to run the tests in certain environment, according to the specified
+        configuration file. Although it has not originally been intended to be
+        used with Mocha, there is an adapter aviailable which bridges this
+        imperfection. Furthermore, JSTD can be easily run from PHPStorm or
+        WebStorm IDEs (there is a plugin in the IDE especially for
+        JSTD).</para>
+
+        <para>There is a configuration file for JSTD test suite, specifying
+        the scrpits to be loaded and test files to be executed, similarly as
+        Intern does. The structure is self-explaining:</para>
+
+        <programlisting>load:
+  - "lib/mocha.js"
+  - "lib/chai.js"
+  - ".../strophe_adapter.js"
+test:
+  - "test-file.js"</programlisting>
+
+        <para>Mocha and Chai have to be loaded explicitly. Moreover, Mocha and
+        Chai must be set up manually in each test file:</para>
+
+        <programlisting>mocha.setup('bdd');
+expect = chai.expect;</programlisting>
+
+        <para>Although JSTD looks like worthwhile tool, I had serious problems
+        with keeping it running. Nondeterministic behavior, when the same test
+        (simple test without side effects, network dependencies and so on)
+        sometimes passes and sometimes results in infinite loop never ending
+        the process, makes JSTD almost impossible to be used.</para>
+      </sect2>
+
+      <sect2>
+        <title>Selenium tests<indexterm>
+            <primary>Selenium</primary>
+          </indexterm></title>
+
+        <para></para>
+      </sect2>
     </sect1>
   </chapter>
 
@@ -3328,7 +3582,7 @@ Strophe.Connection {
 
       <isbn>978-0-596-80552-4</isbn>
 
-      <pagenums>1100 (320, 333)</pagenums>
+      <pagenums>1100 (320, 322, 333)</pagenums>
     </biblioentry>
 
     <biblioentry>
@@ -4880,6 +5134,63 @@ Strophe.Connection {
 
       <releaseinfo>from <ulink
       url="http://xmpp.org/rfcs/rfc3921.html">http://xmpp.org/rfcs/rfc3921.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>intern-blog</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Paul</firstname>
+
+          <surname>Bouchon</surname>
+        </author>
+      </authorgroup>
+
+      <title>Meet your newest Intern</title>
+
+      <pubdate>5/1/2013 [retrieved 5/4/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.sitepen.com/blog/2013/05/01/intern-javascript-testing/">http://www.sitepen.com/blog/2013/05/01/intern-javascript-testing/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>chai-tdd</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jake</firstname>
+
+          <surname>Luer</surname>
+        </author>
+      </authorgroup>
+
+      <title>Chai API - TDD</title>
+
+      <pubdate>2013 [retrieved 5/4/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://chaijs.com/api/assert/">http://chaijs.com/api/assert/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>chai-bdd</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Jake</firstname>
+
+          <surname>Luer</surname>
+        </author>
+      </authorgroup>
+
+      <title>Chai API - BDD</title>
+
+      <pubdate>2013 [retrieved 5/4/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://chaijs.com/api/bdd/">http://chaijs.com/api/bdd/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
