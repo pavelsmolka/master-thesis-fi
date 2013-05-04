@@ -1164,9 +1164,9 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       <sect2>
         <title>Real-time communication tools from Google</title>
 
-        <para>TODO: Google Talk service (mention it runs with XMPP), </para>
+        <para>TODO: Google Talk service (mention it runs with XMPP),</para>
 
-        <para>TODO: Google hangouts API, </para>
+        <para>TODO: Google hangouts API,</para>
 
         <para>TODO: Google App Channel (from app engine i guess)</para>
       </sect2>
@@ -1977,7 +1977,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   </chapter>
 
   <chapter id="chap-talker">
-    <title>Talker</title>
+    <title>Talker - IM client in web browser</title>
 
     <para>As people use computers and the Internet more and more, they do not
     avoid interaction with others. On the contrary, communication and sharing
@@ -1985,8 +1985,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     provide mostly the way to communicate with other people and they are used
     by millions. The same rules are valid for Celebrio, smart and simple
     application imitating the interface of operating system. Therefore,
-    application Talker has been designed and implemented to serve as real-time
-    communicator or instant messenger client.</para>
+    application Talker has been designed and implemented to serve in Celebrio
+    as real-time communicator or instant messenger client.</para>
 
     <para>In this chapter, Talker application is described in depth. There are
     the requirements listed, both functional and non-functional. Further on,
@@ -3050,21 +3050,92 @@ Strophe.Connection {
         <computeroutput>roster.get</computeroutput> method and executed when
         the roster is fetched.</para>
 
-        <para>There are two important steps within callback the function.
-        Firstly, the retrieved contacts (those from XMPP roster) are filtered.
-        If TODO</para>
+        <para>The callback does basically two things, as displayed at <xref
+        linkend="fig-roster-fetch" />. The retrieved contacts (those from XMPP
+        roster) are matched to existing contacts retrieved from Celebrio
+        server. Contacts present only in the roster are just logged, the
+        application does not work with them. In other words, the appropriate
+        record in <computeroutput>contactsController</computeroutput> array is
+        found and match to every XMPP contact retrieved in the roster.</para>
 
-        <para>TODO insert action diagram, already done</para>
+        <figure id="fig-roster-fetch">
+          <title>Matching XMPP roster and Celebrio contact list</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/roster-fetch.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The second part (left side of the picture) of matching contacts
+        works from the opposite direction. Application processes all contacts
+        that has been retrieved from the server and which are not in XMPP
+        roster. Then, it sends subscription request, which consists of several
+        steps, but it simply means adding the contact to the XMPP
+        roster.</para>
       </sect2>
 
       <sect2>
         <title>Presence handling</title>
 
-        <para></para>
+        <para>One of the biggest advantages of real-time communication tools
+        is the fact that one can see whether his contacts are currently
+        available (i.e. online, logged in) or not. In terms of XMPP and
+        Talker, we speak about <emphasis>presence</emphasis><indexterm>
+            <primary>presence</primary>
+          </indexterm>. Strophe does not provide convenient way to work with
+        presence but Roster plugin does.<footnote>
+            <para>It is the same Roster plugin which handles roster retrieval
+            and processing, mentioned in the previous section.</para>
+          </footnote></para>
+
+        <para>Presence is processed in way usual to Strophe: the developer
+        provide a callback to a certain topic, which is triggered when
+        anything related to that topic happens. The process of binding the
+        callback is described in <xref linkend="chap-strophe-plugins" />. When
+        the callback is bound, Strophe watches over the presence changes sent
+        as presence stanzas from server and hands them over to the assigned
+        callback - <computeroutput>onPresenceChange</computeroutput> method
+        where the presence change is processed.</para>
+
+        <para>The callback function recieves two parameters. The first one
+        contains the list of all contacts, the second parameter represents
+        just the information about the contact whose presence has changed.
+        This is a bit tricky because the callback is triggered even if only
+        the presence of the currently logged user changes - in this case the
+        second parameter (changed) is undefined.</para>
+
+        <para>The presence is processed in two ways. Firstly, there is basic
+        telling online from offline status. The other part is optional online
+        status specifying the availability (away, DND, ...), contained in
+        <computeroutput>&lt;show&gt;</computeroutput> element of XMPP message.
+        <citation>rfc-3921</citation> The online status is processed as well
+        and the current value is stored for each contact. Unfortunatelly, the
+        graphic design for showing statuses has not been proposed yet so it it
+        not displayed within the application, yet ready to be.</para>
+
+        <para>There is one more glitch about online statuses. XMPP makes it
+        possible for one to be logged in simultaneously from several devices.
+        In such case, each session (called resource in XMPP) should state its
+        priority. By changing the priority appropriately, it is possible to
+        keep the client running at home and yet receive the messages at work
+        by being logged there in with higher priority. In case the contact is
+        logged in at several places (i.e. several pieces of presence
+        information are fetched from the server), Talker finds the resource
+        with highest priority and processes its online status. </para>
+
+        <para>Another possible approach would be sorting the online statuses
+        from the most desirable (i.e. online would be the first, then away,
+        and so for) and looking for the <quote>best</quote> one, regardless of
+        the priority. It could actually more correspond to the real state of
+        matters because some clients (such as Google Talk client) set always
+        the highest priority. However, I decided to keep the rules XMPP
+        protocol sets.</para>
       </sect2>
 
       <sect2>
-        <title>How subscriptions are handled</title>
+        <title>Subscriptions</title>
 
         <para>TODO: subscriptions. do not duplicate XMPP chapter (however this
         is not very much mentioned there)</para>
@@ -3106,7 +3177,7 @@ Strophe.Connection {
     <sect1>
       <title>Testing</title>
 
-      <para>TODO: Unit tests, performance tests if there is enough time</para>
+      <para>TODO: Unit tests</para>
 
       <para>TODO: programming</para>
     </sect1>
@@ -4770,6 +4841,30 @@ Strophe.Connection {
 
       <releaseinfo>from <ulink
       url="http://blog.ziade.org/2013/01/25/a-new-development-era-essay/">http://blog.ziade.org/2013/01/25/a-new-development-era-essay/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>rfc-3921</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Peter</firstname>
+
+          <surname>Saint-Andre</surname>
+        </author>
+      </authorgroup>
+
+      <title>Extensible Messaging and Presence Protocol (XMPP): Instant
+      Messaging and Presence</title>
+
+      <pubdate>2004 [retrieved 5/4/2013]</pubdate>
+
+      <publisher>
+        <publishername>Jabber Software Foundation</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://xmpp.org/rfcs/rfc3921.html">http://xmpp.org/rfcs/rfc3921.html</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
