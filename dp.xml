@@ -1581,10 +1581,9 @@ ws.send(
       their users and for the Google users too, after all. Google confirmed
       that throwing the subscription requests away is an attempt to reduce the
       amount of spam delivered to Google users.
-      <citation>spammy-invites</citation> The issue is still opened by the
-      time this thesis is submitted.</para>
+      <citation>spammy-invites</citation></para>
 
-      <para>If Google closes its network for the people from other domains, it
+      <para>If Google closed its network for the people from other domains, it
       would be the second huge social network, along with Facebook, which does
       provide XMPP to its users but does not allow them to fully collaborate
       with everyone else. Unlike Facebook, Google users can still send the
@@ -1592,8 +1591,11 @@ ws.send(
       long-term meaning), but this option can be disabled in the future
       too.</para>
 
-      <para>TODO: Update the current state of affairs.
-      http://www.fsf.org/blogs/sysadmin/google-reinstates-federated-instant-messaging</para>
+      <para>Fortunatelly, severals weeks later, Google announced that the
+      alleged spam problems are gone and XMPP network is opened again.
+      <citation>spammy-invites-update</citation> Hence, the users having their
+      accounts registered at external XMPP providers can send invites
+      (subscription requests) to Google users without problems.</para>
     </sect1>
   </chapter>
 
@@ -5191,6 +5193,25 @@ expect = chai.expect;</programlisting>
 
       <releaseinfo>from <ulink
       url="http://chaijs.com/api/bdd/">http://chaijs.com/api/bdd/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>spammy-invites-update</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Per</firstname>
+
+          <surname>Gustafsson</surname>
+        </author>
+      </authorgroup>
+
+      <title>Update on spammy invites</title>
+
+      <pubdate>5/4/2013 [retrieved 4/9/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://mail.jabber.org/pipermail/operators/2013-April/001672.html">http://mail.jabber.org/pipermail/operators/2013-April/001672.html</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
