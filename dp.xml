@@ -1112,7 +1112,38 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       <sect2 id="chap-opentok">
         <title>OpenTok video call library</title>
 
-        <para>TODO: OpenTok</para>
+        <para>OpenTok is a high-level video call platform for building
+        real-time communication applications in web browser. It allows the
+        developer to easily set up a video call session, using OpenTok server
+        as a mediator. OpenTok is available as a free library for one-to-one
+        calls. If more users were participating in one call, payed
+        subscription has to be bought.
+        <citation>opentok-pricing</citation></para>
+
+        <para>From the technical point of view, there are two versions of
+        client-side OpenTok library. The first one is built on top of Adobe
+        Flash, using it for establishing the connection with OpenTok server
+        the media streaming, the other one uses WebRTC (and therefore is
+        limited to the browsers which support it). Unfortunatelly, the two
+        versions are not compatible so it is impossible for one user to have
+        Flash version and for the other to use WebRTC when communicating
+        together.</para>
+
+        <para>Each OpenTok session is identified by session ID and every user
+        who wants to join the session must hold a token generated for the
+        session. Therefore, OpenTok contains server-side library for issuing
+        and managing session IDs and tokens, available for most commonly used
+        server-side languages.
+        <citation>opentok-server-side-lib</citation></para>
+
+        <para>OpenTok library is the tool that has been used for implementing
+        video calls in Talker application, hence the library API usage is
+        described separately in <xref linkend="chap-video-calling" />. The
+        main advantage of OpenTok is a low entry barrier and simple API that
+        can be used out of the box. On the other hand, it is still proprietary
+        tool and every application built with OpenTok heavily relies on the
+        third party service. Nevertheless, we have not experienced any serious
+        problems during almost one year running OpenTok in Celebrio.</para>
       </sect2>
 
       <sect2>
@@ -3125,7 +3156,7 @@ Strophe.Connection {
         by being logged there in with higher priority. In case the contact is
         logged in at several places (i.e. several pieces of presence
         information are fetched from the server), Talker finds the resource
-        with highest priority and processes its online status. </para>
+        with highest priority and processes its online status.</para>
 
         <para>Another possible approach would be sorting the online statuses
         from the most desirable (i.e. online would be the first, then away,
@@ -3159,7 +3190,7 @@ Strophe.Connection {
       </sect2>
     </sect1>
 
-    <sect1>
+    <sect1 id="chap-video-calling">
       <title>Video calling</title>
 
       <para>TODO: Video framework, flash fallback</para>
@@ -3357,7 +3388,7 @@ expect({ tea: { green: 'matcha' }})
         time the connection status changes. This means it is also triggered if
         Strophe only performs the authentication or even if the connection
         fails! Therefore, the promise is resolved (so the test succeeds) only
-        if the correct status is passed as an argument. </para>
+        if the correct status is passed as an argument.</para>
 
         <para>It has to be admitted that the previous test is not real unit
         test, mocking all surrounding objects the function interacts with.
@@ -5208,10 +5239,44 @@ expect = chai.expect;</programlisting>
 
       <title>Update on spammy invites</title>
 
-      <pubdate>5/4/2013 [retrieved 4/9/2013]</pubdate>
+      <pubdate>5/4/2013 [retrieved 5/6/2013]</pubdate>
 
       <releaseinfo>from <ulink
       url="http://mail.jabber.org/pipermail/operators/2013-April/001672.html">http://mail.jabber.org/pipermail/operators/2013-April/001672.html</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>opentok-pricing</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>TokBox Inc.</surname>
+        </author>
+      </authorgroup>
+
+      <title>OpenTok pricing</title>
+
+      <pubdate>2013 [retrieved 5/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.tokbox.com/pricing">http://www.tokbox.com/pricing</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>opentok-server-side-lib</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>TokBox Inc.</surname>
+        </author>
+      </authorgroup>
+
+      <title>OpenTok server-side libraries reference</title>
+
+      <pubdate>2013 [retrieved 5/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.tokbox.com/opentok/docs/server/server_side_libraries.html">http://www.tokbox.com/opentok/docs/server/server_side_libraries.html</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
