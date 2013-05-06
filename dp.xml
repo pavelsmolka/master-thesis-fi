@@ -1193,13 +1193,44 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       </sect2>
 
       <sect2>
-        <title>Real-time communication tools from Google</title>
+        <title>Real-time communication tools from Google<indexterm>
+            <primary>Google</primary>
+          </indexterm></title>
 
-        <para>TODO: Google Talk service (mention it runs with XMPP),</para>
+        <para>There are three topics briefly mentioned in this section, all
+        developed by Google - Channel API, Google Talk and Google Hangouts
+        API, all of which serve as RTC tools or even complete
+        applications.</para>
 
-        <para>TODO: Google hangouts API,</para>
+        <para>The first one, Google Channel API<indexterm>
+            <primary>Channel API</primary>
+          </indexterm>, is a tool for creating persistent connections between
+        a browser-based client and server. It simply wraps common Comet
+        techniques (i.e. HTTP long polling or streaming) with convenient
+        methods for binding handlers to incoming events, usually messages.
+        Nevertheless, Channel API is part of Google App Engine and it is
+        intended to be used only within the apps built on it. Although it is
+        possible to use only the client side of Channel API in custom web
+        application, using only half of the tool does not seem to be very
+        helpful.</para>
 
-        <para>TODO: Google App Channel (from app engine i guess)</para>
+        <para>The other tool (more precisely standalone application) from
+        Google is chat service. It became natural part of Gmail, serving for
+        quick and more informal messages than e-mail. It is a service built on
+        XMPP protocol, not dissimilar to Talker application. Thanks to using
+        XMPP, it is possible to connect with Gmail account from various IM
+        clients such as Pidgin or Miranda. Recently, Google added support for
+        video calls in web browser - originally powered by a browser plugin
+        that had to be installed, now switching to WebRTC.</para>
+
+        <para>The last topic in this section is Hangouts API. Hangouts is a
+        platform for creating group video chat, running within a web
+        application. Hangouts offer neat user experience, they however cannot
+        be much customised. In other words, it is possible to add a Hangout to
+        arbitrary web application but its look and feel cannot be altered.
+        This is insurmountable problem for Celebrio Talker since it must
+        strictly keep up with the user interface of whole Celebrio, the system
+        it is built into.</para>
       </sect2>
     </sect1>
   </chapter>
