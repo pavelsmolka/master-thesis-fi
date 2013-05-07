@@ -30,7 +30,8 @@
     <fi:thanks xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Thanks to
     everyone... TODO: Petr Kunc (help with OpenTok &amp; RealTime
     communication). Thanks Káťa for cooking and being patient while I was
-    typing the thesis regularly up to 3 AM</fi:thanks>
+    typing the thesis regularly up to 3 AM TODO Celebrio members (graphics)
+    Online help (twitter, ember community, stackoverflow)</fi:thanks>
 
     <pubdate>2013</pubdate>
 
@@ -2141,9 +2142,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         linkend="talker-uc" />. It is remote XMPP server, communicating with
         the application indirectly through established connection. When a new
         message appears at the server, it is pushed to the application and
-        handled it as an incoming message. Every new message, received or
-        sent, is appended to the <quote>chat history</quote>, as usual in
-        similar IM clients.</para>
+        handled as an incoming message. Every new message, received or sent,
+        is appended to the <quote>chat history</quote>, as usual in similar IM
+        clients.</para>
       </sect2>
 
       <sect2 id="sect-choosing-tech">
@@ -3645,7 +3646,7 @@ expect = chai.expect;</programlisting>
             <primary>Selenium</primary>
           </indexterm></title>
 
-        <para></para>
+        <para>TODO: if there is time to :-)</para>
       </sect2>
     </sect1>
   </chapter>
@@ -3653,7 +3654,76 @@ expect = chai.expect;</programlisting>
   <chapter>
     <title>Conclusion</title>
 
-    <para>TODO: conclusion</para>
+    <para>The thesis embraces the topic of real-time communication in web
+    browser. Several approaches to RTC in web browser were described in the
+    first theoretical part, including HTTP polling and WebSockets. Several
+    frameworks were mentioned. From the simple ones such as Server-sent
+    events, providing just a thin layer over the HTTP, to the complex
+    solutions (e.g. WebRTC or even OpenTok), serving for video calling right
+    in the web browser. </para>
+
+    <sect1>
+      <title>How the results are used</title>
+
+      <para>It is obvious from the wide range of frameworks, libraries and
+      complete solutions that web browser turns from a web documents reader
+      into a platform that can host almost any kind of application, including
+      real-time ones. Therefore such application - Talker - has been created.
+      It is real-time communication application serving as an IM client for
+      Celebrio, web-based system for the elderly. Talker implements both text
+      chat, using XMPP due to its wide usage and interoperability, and video
+      calls, built with OpenTok framework (using Flash or HTML5
+      WebRTC).</para>
+
+      <para>Talker has been designed, implemented, tested and integrated into
+      Celebrio. It is part of the production version now and actually one of
+      the main reasons users are willing to pay for the system. Hence the
+      thesis goal has not only been reached but in some parts even extended.
+      Talker is available in the system<footnote>
+          <para>Production version of the system is running at <ulink
+          url="http://system.celebriosoftware.com">http://system.celebriosoftware.com</ulink>.</para>
+        </footnote> so anyone can try it. Nevertheless, several changes have
+      been made recently and they are not deployed in the system yet, hence
+      the latest source code is attached to the thesis. It is not intended to
+      run alone, without the system.</para>
+    </sect1>
+
+    <sect1>
+      <title>Future possibilities</title>
+
+      <para>There is still long way to go until the the application is
+      perfect. It can be (and certainly will be) updated in many aspects since
+      all used frameworks still evolve. </para>
+
+      <para>Version 1.0.0 of Ember.js is to be released any day now. The new
+      version will certainly contain a lot of improvements, both in
+      performance and code style. Ember router is completely reworked and
+      additional support for loading data from server with Ember Data
+      framework is available. That is definitely worth updating.</para>
+
+      <para>Strophe.js is more stable and not evolving that fast. However, it
+      might be interesting to use WebSockets instead of sending HTTP long
+      polling requests, which are about to be added to the library soon. There
+      are already unofficial implementations and the library author is working
+      on XMPP over WebSockets specification.
+      <citation>xmpp-over-websockets</citation> Jingle is about to be added to
+      Strophe as well, but maybe in a longer time period.</para>
+
+      <para>Finally, the application itself has a lot to be improved. Yet the
+      core concept has been proven and the main features have been
+      implemented, there are several fancy additions that can be done. Above
+      all, already implemented chat states (away, DND, ...) are not show yet
+      in the UI -- work which depends only on the system graphical designer.
+      Additionaly, the chat history can be added so the user can see the
+      messages sent and received during the previous sessions.</para>
+
+      <para>Because the application has been developed as part of proprietary
+      software system Celebrio, it has not been opensourced and it is not
+      likely to be. However, the application core could be generalized and
+      provided to the community. In that case, adding XMPP chat and video
+      calling to any web application could become just a matter of including
+      <quote>Talker component</quote>.</para>
+    </sect1>
   </chapter>
 
   <bibliography>
