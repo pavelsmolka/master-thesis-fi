@@ -27,11 +27,21 @@
       RNDr. Tomáš Pitner, Ph.D.</fi:advisor>
     </author>
 
-    <fi:thanks xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Thanks to
-    everyone... TODO: Petr Kunc (help with OpenTok &amp; RealTime
-    communication). Thanks Káťa for cooking and being patient while I was
-    typing the thesis regularly up to 3 AM TODO Celebrio members (graphics)
-    Online help (twitter, ember community, stackoverflow)</fi:thanks>
+    <fi:thanks xmlns:fi="http://www.fi.muni.cz/~xpavlov/fithesis">Above all, I
+    would like to thank my colleagues from Celebrio, with who I have been
+    working for a long time and who inspired me to create this thesis;
+    especially Petr Kunc, always challenging my ideas but always being
+    helpful. Of course, I would also like to thank my advisor, doc. Tomáš
+    Pitner, for not only providing me valuable advices and help during the
+    work on my thesis, but also for guiding me through the studies at the
+    faculty. I must not forget my Lasaris laboratory fellow students,
+    discovering me the world of web development. I also thank my parents for
+    bringing me up to this point in the best way parents can, and still
+    supporting and encouraging me to do my best. After all, I am grateful to
+    the Internet community, StackOverflow members, various IRC attendants,
+    people contributing and commenting at GitHub, Twitter and other media
+    sources that helped me and inspired me all the time. Thank you,
+    world!</fi:thanks>
 
     <pubdate>2013</pubdate>
 
