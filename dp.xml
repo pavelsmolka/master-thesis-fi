@@ -35,18 +35,28 @@
     Pitner, for not only providing me valuable advices and help during the
     work on my thesis, but also for guiding me through the studies at the
     faculty. I must not forget my Lasaris laboratory fellow students,
-    discovering me the world of web development. I also thank my parents for
-    bringing me up to this point in the best way parents can, and still
-    supporting and encouraging me to do my best. After all, I am grateful to
-    the Internet community, StackOverflow members, various IRC attendants,
-    people contributing and commenting at GitHub, Twitter and other media
-    sources that helped me and inspired me all the time. Thank you,
-    world!</fi:thanks>
+    discovering me the world of web development. I am also thankful to my
+    parents for bringing me up to this point in the best way parents can, and
+    still supporting and encouraging me to do my best. Alike, I thank to my
+    nearest to have patience with me working and studying and hardly finding
+    any time for them. After all, I am grateful to the Internet community,
+    StackOverflow members, various IRC attendants, people contributing and
+    commenting at GitHub, Twitter and other media sources that helped me and
+    inspired me all the time. Thank you, world!</fi:thanks>
 
     <pubdate>2013</pubdate>
 
     <abstract>
-      <para>TODO</para>
+      <para>The thesis comprehends the topic of real-time communication in web
+      browser. Most of the available solutions for building real-time web
+      applications are described and compared, with regards to security,
+      browser support and usage difficulty. According to the theoretical
+      results, a real-time application Talker is designed and developed,
+      serving as text and video instant messaging client for Celebrio - simple
+      web-based application environment for the elderly. XMPP protocol, used
+      in Talker in order to be interconnectible with other IM clients, is also
+      mentioned within the thesis, especially with regards to running the XMPP
+      client in web browser.</para>
     </abstract>
 
     <keywordset>
@@ -75,6 +85,8 @@
       <keyword>Strophe</keyword>
 
       <keyword>OpenTok</keyword>
+
+      <keyword>Talker</keyword>
 
       <keyword>TODO</keyword>
     </keywordset>
@@ -119,16 +131,7 @@
     <citation>facebook-usage</citation> And the main reason why the social
     networks are so popular is the real-time stream of news and messages from
     the other people. By the beginning of the year 2013, I would say that
-    static web is dead - users prefer interactivity.</para>
-
-    <para>This thesis embraces the topic of real-time applications in web
-    browsers, especially the text communication tools and the technologies
-    being used to develop them. It also describes the problem of
-    <quote>inter-process</quote> communication between various web pages which
-    need to cooperate and exchange information as quickly as possible.
-    Finally, the possibilities of multimedia content transfer (audio and
-    video) and the current options of capturing multimedia directly from the
-    web browser are described as well.</para>
+    static web is dead -- users prefer interactivity.</para>
 
     <para>As mentioned above, the web browser became one of the most popular
     platforms. Celebrio, simple software for the elderly simulating the
@@ -143,8 +146,14 @@
     creating real-time application, text messenger supporting video calling,
     became not only programming challenge but also a business goal.</para>
 
-    <para>TODO: rework this a bit. Mention all RTC tools, not only web based.
-    Mention more history:</para>
+    <para>With regard to the <quote>real-time tendency</quote>, this thesis
+    embraces the topic of real-time applications in web browsers, especially
+    the text communication tools and the technologies being used to develop
+    them. Among the available solutions, XMPP protocol and OpenTok library
+    (built on WebRTC) are chosen and real-time communication application is
+    designed and developed as a part of the thesis. Both text and multimedia
+    streams are covered, as well as multimedia content transfer (audio and
+    video).</para>
 
     <para>Considering the fact the people like real-time communication (not
     only direct messaging but also real-time cooperation, simultaneous
@@ -164,6 +173,17 @@
     it persuaded us to use it in our communication application too. XMPP
     itself and its usage in web applications is described in <xref
     linkend="chap-xmpp" />.</para>
+
+    <para>Nevertheless, there are also other RTC solutions not directly based
+    in web browser. Very popular communication platforms, XMPP (Jabber), ICQ
+    or Windows Live Messenger have to be mentioned, all intended to run in
+    dedicated client applications (Pidgin, ICQ, ...). All of them have been
+    ported to web browser in some way, in form of Meebo (supporting ICQ and
+    XMPP, however closed lately) or Google Talk (XMPP). There are also several
+    voice over IP (VOIP) tools providing video calls platform, such as Skype.
+    To make this list comprehensive, Unix <quote>talk</quote> chat program for
+    sending text messages has to be mentioned, however it was superseded by
+    previously mentioned modern systems.</para>
 
     <para>Since the web browser was designed to perform simple
     requests/response interaction, it is not a typical platform for building
@@ -211,13 +231,6 @@
     Skype URI, which is insufficient for Celebrio since the messaging client
     has to be built in the system, with the corresponding user interface.
     <citation>skype-uri</citation></para>
-
-    <para>Finally, there are several notes about <quote>inter-process
-    communication</quote> between different applications running separately in
-    various browser frames, tabs or even windows. <xref
-    linkend="chap-inter-process" /> covers this topic and describes the issues
-    we came across when implementing such functionality for Celebrio, where
-    every application runs in separate iframe.</para>
   </chapter>
 
   <chapter id="chap-rtc">
@@ -3670,7 +3683,7 @@ expect = chai.expect;</programlisting>
     frameworks were mentioned. From the simple ones such as Server-sent
     events, providing just a thin layer over the HTTP, to the complex
     solutions (e.g. WebRTC or even OpenTok), serving for video calling right
-    in the web browser. </para>
+    in the web browser.</para>
 
     <sect1>
       <title>How the results are used</title>
@@ -3703,7 +3716,7 @@ expect = chai.expect;</programlisting>
 
       <para>There is still long way to go until the the application is
       perfect. It can be (and certainly will be) updated in many aspects since
-      all used frameworks still evolve. </para>
+      all used frameworks still evolve.</para>
 
       <para>Version 1.0.0 of Ember.js is to be released any day now. The new
       version will certainly contain a lot of improvements, both in
