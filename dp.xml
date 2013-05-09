@@ -1661,9 +1661,25 @@ ws.send(
             </itemizedlist></para>
         </footnote></para>
 
-      <para>TODO create diagram here (XMPP server - plugin - incoming
-      connection vs xmpp server - standard connection). Probably for both BOSH
-      and WS.</para>
+      <para>Both BOSH and WS require additional plugins to be installed at the
+      server since they they are not part of XMPP. The plugins basically
+      handle the connection (or request, in case of BOSH) and hand pure XMPP
+      message over to the server. In case of BOSH, the request can be sent to
+      the plugin directly when the port is specified, or redirected by default
+      HTTP server. The schema of transitions between the users (using WS,
+      direct BOSH with specified plugin port and BOSH request to default HTTP
+      port) and the server side is displayed at <xref
+      linkend="fig-xmpp-server-plugins" />.</para>
+
+      <figure id="fig-xmpp-server-plugins">
+        <title>Communicating to XMPP server with WS and BOSH plugins</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="vp/bosh-ws-xmpp.pdf" />
+          </imageobject>
+        </mediaobject>
+      </figure>
     </sect1>
 
     <sect1>
