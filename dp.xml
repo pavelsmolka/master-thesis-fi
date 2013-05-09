@@ -8,7 +8,7 @@
 -->
 <book lang="en">
   <bookinfo>
-    <title>osReal-time Communication \\* in Web Browser</title>
+    <title>Real-time Communication \\* in Web Browser</title>
 
     <subtitle>Master thesis</subtitle>
 
@@ -236,13 +236,6 @@
   <chapter id="chap-rtc">
     <title>Bidirectional communication between web browser and server</title>
 
-    <para>Suggestion TODO: split the chapter: describe HTTP more in depth,
-    tell why HTTP is so important (not only because of browsers), describe the
-    history of communication tools. (maybe in the intro)</para>
-
-    <para>Suggestion TODO: mention RTC history (unix talk, IRC, ICQ -
-    Meebo)</para>
-
     <para>The very essence of every instant messaging is the bidirectional
     stream where both sides can immediately <emphasis>push</emphasis> new data
     and the other side (or more other sides, respectively) is promptly
@@ -279,75 +272,138 @@
     <sect1 id="chap-http-requests">
       <title>Using HTTP requests</title>
 
-      <para>Historically the first approach, for a very long time the only
-      one, is hacking HTTP to achieve RTC. The idea is very simple. Generally,
-      the client sends an extra request and it is not awaiting the response
-      immediately. Instead, the server keeps the request for some time and
-      sends the data as it comes in the response. There are several techniques
-      to achieve such behaviour, in general called
+      <para>Hypertext Transfer Protocol represents the most widely used
+      protcol in web applications. It is a typical example of application
+      layer procotol (7th level), according to OSI Model<indexterm>
+          <primary>OSI Model</primary>
+        </indexterm> (ISO/IEC 7498-1). HTTP powers the Web. Along with other
+      application layer procotols -- Simple Mail Transfer Protocol
+      (SMTP)<indexterm>
+          <primary>SMTP</primary>
+        </indexterm>, File Transfer Protocol (FTP)<indexterm>
+          <primary>FTP</primary>
+        </indexterm> and DNS (domain name system) protocols -- HTTP
+      constitutes whole Internet as we know it. HTTP works as a
+      <quote>request-response</quote> protocol, presuming and underlying
+      transport layer protocol on top of which it works. The underlying
+      transport protocol is almost always represented by Transmission Control
+      Protocol (TCP)<indexterm>
+          <primary>TCP</primary>
+        </indexterm>, however UDP can be used as well (for example in case of
+      Simple Service Discovery Protocol (SSDP). <citation>ssdp-udp</citation>
+      Nowadays, HTTP is not only used by web browser clients but also, thanks
+      to its simplicity, by various mobile applications and Internet services,
+      requesting new data or updating the information at a server.</para>
+
+      <para>HTTP is very lightweight client-server protocol, where client
+      carries out a request and a server responds. The request specifies the
+      action and a resource the action relates to, along with the protocol
+      version. For example, the following request line represents a request
+      fetching index.html file from the server:</para>
+
+      <programlisting>GET /index.html HTTP/1.1</programlisting>
+
+      <para>Further request data is optional. After the initial line, custom
+      request headers can be specified, along with optional request body,
+      which usually contains the request data. <citation>rfc-http</citation>
+      For example in case of POST request, updating the resource, the new
+      resource data is contained in the request body.</para>
+
+      <para>HTTP response structure is similar to a request. The first initial
+      line contains the response status code and <quote>reason phrase</quote>,
+      which identify how the request was handled.
+      <citation>rfc-http</citation> Then, optional headers and message body
+      can be listed. The following piece of code displays the response to the
+      previous example request, resulted to success and transferring simple
+      HTML code to the client:</para>
+
+      <programlisting>HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+
+&lt;html&gt;&lt;body&gt;&lt;p&gt;
+  This is the HTML content in response body, 
+  separated by one blank line from the headers.
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</programlisting>
+
+      <para>Historically the first approach to achieve RTC in web browser, for
+      a very long time the only one, is hacking HTTP. The idea is very simple.
+      Generally, the client sends an extra request and it is not awaiting the
+      response immediately. Instead, the server keeps the request for some
+      time and sends the data as it comes in the response. There are several
+      techniques to achieve such behaviour, in general called
       <emphasis>Comet</emphasis><indexterm>
           <primary>Comet</primary>
-        </indexterm>.</para>
+        </indexterm>. Naive approach, consisting of ordinary HTTP requests,
+      HTTP long polling and HTTP streaming are described in the following
+      sections.</para>
 
-      <para>There is one common misunderstanding about long-lived HTTP
-      requests. Since HTTP 1.1 (actually implemented even before, but not
-      covered in the RFC specification), there is a possibility for the client
-      to claim persistent TCP connection to the server declaring
-      <computeroutput>Connection: Keep-Alive</computeroutput> in the request
-      header.<indexterm>
-          <primary>HTTP</primary>
+      <sect2>
+        <title>Naive approach to real-time communication with HTTP</title>
 
-          <secondary>Keep-Alive</secondary>
-        </indexterm> Actually, all connections are considered persistent
-      unless declared otherwise. <citation>rfc-http</citation> Even though the
-      default timeout after which the server closes the connection is only a
-      few seconds, <citation>apache-core-features</citation> the persistent
-      TCP connection is very useful for delivering various resources (style
-      sheets, scripts, images, etc.) to the client without the unnecessary
-      overhead of creating multiple streams. However, every single
-      transmission within the TCP connection has to be in form of separate
-      HTTP request/response, always initiated by the client. On no account is
-      the server allowed to push any data without respective request from the
-      client. Therefore, such TCP connection is of no use for RTC.</para>
+        <para>It would be great for There is one common misunderstanding about
+        long-lived HTTP requests. Since HTTP 1.1 (actually implemented even
+        before, but not covered in the RFC specification), there is a
+        possibility for the client to claim persistent TCP<indexterm>
+            <primary>TCP</primary>
+          </indexterm> connection to the server declaring
+        <computeroutput>Connection: Keep-Alive</computeroutput> in the request
+        header.<indexterm>
+            <primary>HTTP</primary>
 
-      <para>The situation is depicted at <xref linkend="fig-http-polling" />
-      and <xref linkend="fig-http-polling-wrong" />. In the former case, a
-      valid sequence of HTTP requests and responses is shown. Nevertheless,
-      there is a delay between the moment the server gets (either generates or
-      receives from third party) the data (2) and the following request (3).
-      Yet it is possible to reduce the latency by shortening the polling time
-      (the time between Response (1.1) and Request (3)), it is still trade-off
-      between the delay and overhead caused by frequent empty request/response
-      pairs.</para>
+            <secondary>Keep-Alive</secondary>
+          </indexterm> Actually, all connections are considered persistent
+        unless declared otherwise. <citation>rfc-http</citation> Even though
+        the default timeout after which the server closes the connection is
+        only a few seconds, <citation>apache-core-features</citation> the
+        persistent TCP connection is very useful for delivering various
+        resources (style sheets, scripts, images, etc.) to the client without
+        the unnecessary overhead of creating multiple streams. However, every
+        single transmission within the TCP connection has to be in form of
+        separate HTTP request/response, always initiated by the client. On no
+        account is the server allowed to push any data without respective
+        request from the client. Therefore, such TCP connection is of no use
+        for RTC.</para>
 
-      <figure id="fig-http-polling">
-        <title>Correct HTTP polling with delay</title>
+        <para>The situation is depicted at <xref linkend="fig-http-polling" />
+        and <xref linkend="fig-http-polling-wrong" />. In the former case, a
+        valid sequence of HTTP requests and responses is shown. Nevertheless,
+        there is a delay between the moment the server gets (either generates
+        or receives from third party) the data (2) and the following request
+        (3). Yet it is possible to reduce the latency by shortening the
+        polling time (the time between Response (1.1) and Request (3)), it is
+        still trade-off between the delay and overhead caused by frequent
+        empty request/response pairs.</para>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="vp/http-polling.pdf" />
-          </imageobject>
-        </mediaobject>
-      </figure>
+        <figure id="fig-http-polling">
+          <title>Correct HTTP polling with delay</title>
 
-      <figure id="fig-http-polling-wrong">
-        <title>Forbidden HTTP response without respective request</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/http-polling.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="vp/http-polling-wrong.pdf" />
-          </imageobject>
-        </mediaobject>
-      </figure>
+        <figure id="fig-http-polling-wrong">
+          <title>Forbidden HTTP response without respective request</title>
 
-      <para>On the other hand, <xref linkend="fig-http-polling-wrong" />
-      depicts the forbidden situation of generating HTTP response without
-      request immediately. When the server gets the data (2) it is not allowed
-      to initiate the connection and send HTTP response without appropriate
-      preceding request (2.1). Even though the delay, mentioned in the
-      previous paragraph, can be minimized in this situation, HTTP servers
-      cannot use such technique. To sum it up, response (2.1) is forbidden by
-      HTTP protocol and this situation solution is not valid.</para>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="vp/http-polling-wrong.pdf" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>On the other hand, <xref linkend="fig-http-polling-wrong" />
+        depicts the forbidden situation of generating HTTP response without
+        request immediately. When the server gets the data (2) it is not
+        allowed to initiate the connection and send HTTP response without
+        appropriate preceding request (2.1). Even though the delay, mentioned
+        in the previous paragraph, can be minimized in this situation, HTTP
+        servers cannot use such technique. To sum it up, response (2.1) is
+        forbidden by HTTP protocol and this situation solution is not
+        valid.</para>
+      </sect2>
 
       <sect2 id="chap-http-long-polling">
         <title>HTTP long polling<indexterm>
@@ -2065,7 +2121,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   </chapter>
 
   <chapter id="chap-talker">
-    <title>Talker - IM client in web browser</title>
+    <title>Talker -- IM client in web browser</title>
 
     <para>As people use computers and the Internet more and more, they do not
     avoid interaction with others. On the contrary, communication and sharing
@@ -5536,6 +5592,55 @@ expect = chai.expect;</programlisting>
       <releaseinfo>from <ulink
       url="http://www.tokbox.com/opentok/docs/server/server_side_libraries.html">http://www.tokbox.com/opentok/docs/server/server_side_libraries.html</ulink></releaseinfo>
     </biblioentry>
+
+    <biblioentry>
+      <abbrev>ssdp-udp</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Alan</firstname>
+
+          <surname>Presser</surname>
+        </author>
+
+        <author>
+          <firstname>Lee</firstname>
+
+          <surname>Farrell</surname>
+        </author>
+
+        <author>
+          <firstname>Devon</firstname>
+
+          <surname>Kemp</surname>
+        </author>
+
+        <author>
+          <firstname>William</firstname>
+
+          <surname>Lupton</surname>
+        </author>
+
+        <author>
+          <firstname>Shinichi</firstname>
+
+          <surname>Tsuruyama</surname>
+        </author>
+
+        <author>
+          <firstname>Shivaun</firstname>
+
+          <surname>Albright</surname>
+        </author>
+      </authorgroup>
+
+      <title>UPnP Device Architecture</title>
+
+      <pubdate>10/15/2008 [retrieved 5/6/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf">http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf</ulink></releaseinfo>
+    </biblioentry>
   </bibliography>
 
   <index></index>
@@ -5543,6 +5648,6 @@ expect = chai.expect;</programlisting>
   <appendix id="appendix-screenshots">
     <title>Screenshots of the application</title>
 
-    <para>Some screenshots from Celebrio Talker</para>
+    <para>TODO Some screenshots from Celebrio Talker</para>
   </appendix>
 </book>
