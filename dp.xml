@@ -1318,10 +1318,6 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
   <chapter id="chap-xmpp">
     <title>Extensible Messaging and Presence Protocol</title>
 
-    <para>Suggestion TODO: xmpp: to chce XMPP trochu více popsat a zasadit ho
-    do kontextu HTTP komunikace a tu zase do celkového provozu na internetu
-    mezi ostatní protokoly</para>
-
     <para>Extensible Messaging and Presence Protocol (XMPP) technologies were
     invented by Jeremie Miller in 1998.
     <citation>xmpp-the-definitive-guide</citation> It is one of the most
@@ -1567,13 +1563,26 @@ Content-Length: 188
       <computeroutput>body</computeroutput> element which represents BOSH
       layer, along with the element attributes (plus namespace).
       <computeroutput>sid</computeroutput> attribute represents the session
-      ID, identifying the connection and not mutated during one session. The
-      other one, <computeroutput>rid</computeroutput>, stands for request ID
-      and it gets incremented with each request. Ultimately, the child nodes
-      of the <computeroutput>body</computeroutput> represent two XMPP stanzas
-      (both of message type). It is obvious that multiple XMPP stanzas can be
-      transmitted via single BOSH request. TODO extract RID/SID/handshake
-      stuff to separate sub-section here?</para>
+      ID, identifying the connection and it is not mutated during one session.
+      The other one, <computeroutput>rid</computeroutput>, stands for request
+      ID and it gets incremented with each request. Ultimately, the child
+      nodes of the <computeroutput>body</computeroutput> represent two XMPP
+      stanzas (both of message type). It is obvious that multiple XMPP stanzas
+      can be transmitted via single BOSH request. </para>
+
+      <para>Those <computeroutput>sid</computeroutput> and
+      <computeroutput>rid</computeroutput> properties are quite important in
+      BOSH. The security is ensured just by that pair of strings in BOSH,
+      because of the stateless nature of HTTP. If an attacker stole sid and
+      rid, he could communicate with the server on behalf of the actual user.
+      On the other hand, there is one big advantage. The connection can be
+      established and handed over from one point to another. For example, a
+      web server can initiate (carry out the handshake) a connection and then
+      only <computeroutput>sid</computeroutput> and
+      <computeroutput>rid</computeroutput> are passed to the client (browser),
+      which can continue communicating. This approach is used in Talker
+      application so the user credentials (JID and password) are not sent to
+      the browser at all.</para>
 
       <para>BOSH protocol is an important part of the Talker application
       implemented as a programming part of the thesis. Despite it bears the
