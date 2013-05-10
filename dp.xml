@@ -54,9 +54,9 @@
       results, a real-time application Talker is designed and developed,
       serving as text and video instant messaging client for Celebrio - simple
       web-based application environment for the elderly. XMPP protocol, used
-      in Talker in order to be interconnectible with other IM clients, is also
-      mentioned within the thesis, especially with regards to running the XMPP
-      client in web browser.</para>
+      in Talker in order to be interconnectible with other instant messaging
+      clients, is also mentioned within the thesis, especially with regards to
+      running the XMPP client in web browser.</para>
     </abstract>
 
     <keywordset>
@@ -87,8 +87,6 @@
       <keyword>OpenTok</keyword>
 
       <keyword>Talker</keyword>
-
-      <keyword>TODO</keyword>
     </keywordset>
   </bookinfo>
 
@@ -273,11 +271,11 @@
       <title>Using HTTP requests</title>
 
       <para>Hypertext Transfer Protocol represents the most widely used
-      protcol in web applications. It is a typical example of application
-      layer procotol (7th level), according to OSI Model<indexterm>
+      protocol in web applications. It is a typical example of application
+      layer protocol (7th level), according to OSI Model<indexterm>
           <primary>OSI Model</primary>
         </indexterm> (ISO/IEC 7498-1). HTTP powers the Web. Along with other
-      application layer procotols -- Simple Mail Transfer Protocol
+      application layer protocols -- Simple Mail Transfer Protocol
       (SMTP)<indexterm>
           <primary>SMTP</primary>
         </indexterm>, File Transfer Protocol (FTP)<indexterm>
@@ -1082,9 +1080,9 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
           </footnote> <citation>webrtc-interop</citation> Opera browser also
         takes part in this initiative, yet no existing official claim of
         support has been released. All of the mentioned browsers used the same
-        backend implementation, hosted at <ulink
+        back-end implementation, hosted at <ulink
         url="http://www.webrtc.org">http://www.webrtc.org</ulink>. In theory,
-        this backend implementation (written in C++) can be built into any
+        this back-end implementation (written in C++) can be built into any
         application to support WebRTC, not only a web browser.</para>
 
         <para>For the web browsers which does not support WebRTC yet, there
@@ -1102,7 +1100,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         way, keeping to the API more or less. One of such initiatives is
         Ericsson Browser (called just Browser), which claimed self to be the
         first browser to implement WebRTC. Ericsson Browser uses different
-        backend implementation but it tries to be in accordance with the
+        back-end implementation but it tries to be in accordance with the
         official API. <citation>webrtc-ericsson</citation></para>
 
         <para>Microsoft came up with another approach. Even though Internet
@@ -1112,7 +1110,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         control more aspects of WebRTC communication, including low level
         <quote>transport</quote> layers. Since the none of the standards has
         been finished yet, it is possible (and probable) that the final API
-        definition will result somwhere in between.</para>
+        definition will result somewhere in between.</para>
 
         <para>One of the logical reasons why Microsoft does want to intervene
         to the process of defining WebRTC API as much as possible is
@@ -1155,7 +1153,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         any graphics, animations and user interface with nearly no
         limits.</para>
 
-        <para>Nevertheless, the disadvantages of Flash are significat. First,
+        <para>Nevertheless, the disadvantages of Flash are significant. First,
         Flash is not a native part of any web browser. Until recently, it had
         to be installed manually as a plugin. Now, it is bundled and shipped
         with Chromium-based browsers (Chrome, Chromium), but it is still
@@ -1204,7 +1202,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         client-side OpenTok library. The first one is built on top of Adobe
         Flash, using it for establishing the connection with OpenTok server
         the media streaming, the other one uses WebRTC (and therefore is
-        limited to the browsers which support it). Unfortunatelly, the two
+        limited to the browsers which support it). Unfortunately, the two
         versions are not compatible so it is impossible for one user to have
         Flash version and for the other to use WebRTC when communicating
         together.</para>
@@ -1231,14 +1229,14 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
             <primary>Bayeux</primary>
           </indexterm></title>
 
-        <para>Bayeux is one of the higher level protocols designed specificaly
-        for bidirectional communication between web browser and the server,
-        primarily intended to work on top of HTTP. The idea of communication
-        is almost the same as in case of HTTP long polling. For transfer of
-        the messages from the server to client, the server holds the request
-        and responds only when there is available message. Sending the data
-        from the client to the server is straightforward, ordinary HTTP
-        request is sufficient.</para>
+        <para>Bayeux is one of the higher level protocols designed
+        specifically for bidirectional communication between web browser and
+        the server, primarily intended to work on top of HTTP. The idea of
+        communication is almost the same as in case of HTTP long polling. For
+        transfer of the messages from the server to client, the server holds
+        the request and responds only when there is available message. Sending
+        the data from the client to the server is straightforward, ordinary
+        HTTP request is sufficient.</para>
 
         <para>Apart from HTTP requests, Bayeux defines the structure for the
         transmitted data, contained in the body of HTTP requests/responses.
@@ -1289,10 +1287,10 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         techniques (i.e. HTTP long polling or streaming) with convenient
         methods for binding handlers to incoming events, usually messages.
         Nevertheless, Channel API is part of Google App Engine and it is
-        intended to be used only within the apps built on it. Although it is
-        possible to use only the client side of Channel API in custom web
-        application, using only half of the tool does not seem to be very
-        helpful.</para>
+        intended to be used only within the web applications built on it.
+        Although it is possible to use only the client side of Channel API in
+        custom web application, using only half of the tool does not seem to
+        be very helpful.</para>
 
         <para>The other tool (more precisely standalone application) from
         Google is chat service. It became natural part of Gmail, serving for
@@ -1322,7 +1320,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
     invented by Jeremie Miller in 1998.
     <citation>xmpp-the-definitive-guide</citation> It is one of the most
     widespread technologies for instant messaging (IM),<footnote>
-        <para>Acutally, the IM client or even the techology itself is
+        <para>Actually, the IM client or even the technology itself is
         sometimes called <quote>Instant Messenger</quote>. This term is
         registered as a trademark by AOL company.
         <citation>aol-trademarks</citation></para>
@@ -1380,8 +1378,8 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       and the server can send any XML elements at any time. The meanings of
       various pieces of XML are described in this section.</para>
 
-      <para>There are three three basic XML elements that every XMPP
-      communication consists of. Those are
+      <para>There are three basic XML elements that every XMPP communication
+      consists of. Those are
       <computeroutput>&lt;message/&gt;</computeroutput>,
       <computeroutput>&lt;presence/&gt;</computeroutput> and
       <computeroutput>&lt;iq/&gt;</computeroutput> (which stands for
@@ -1428,7 +1426,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
       from or the device she uses.</para>
 
       <para>Message stanza receiving is not acknowledged so the sender has no
-      information whether it has been delivered successfulIy or not. On the
+      information whether it has been delivered successfully or not. On the
       contrary, IQ stanza <indexterm>
           <primary>XMPP</primary>
 
@@ -1480,7 +1478,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         Each user has full control over the peers who can monitor her online
         status. If anyone else wants to track the presence status, the
         subscription request must be sent. When received, the user decides
-        whether the permission will be granted or not. Unfortunatelly, the
+        whether the permission will be granted or not. Unfortunately, the
         subscription request can be blocked by the respective
         <quote>home</quote> XMPP server of the user we try to reach. To be
         tangible: there are two widely used XMPP providers -
@@ -1508,7 +1506,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
           <primary>XEP</primary>
         </indexterm>.</para>
 
-      <para>This section briefly describes one of XEP exensions called
+      <para>This section briefly describes one of XEP extensions called
       BOSH<indexterm>
           <primary>BOSH</primary>
         </indexterm> (XEP-0124) designed for transferring XMPP over
@@ -1568,7 +1566,7 @@ Content-Length: 188
       ID and it gets incremented with each request. Ultimately, the child
       nodes of the <computeroutput>body</computeroutput> represent two XMPP
       stanzas (both of message type). It is obvious that multiple XMPP stanzas
-      can be transmitted via single BOSH request. </para>
+      can be transmitted via single BOSH request.</para>
 
       <para>Those <computeroutput>sid</computeroutput> and
       <computeroutput>rid</computeroutput> properties are quite important in
@@ -1662,13 +1660,13 @@ ws.send(
         </footnote></para>
 
       <para>Both BOSH and WS require additional plugins to be installed at the
-      server since they they are not part of XMPP. The plugins basically
-      handle the connection (or request, in case of BOSH) and hand pure XMPP
-      message over to the server. In case of BOSH, the request can be sent to
-      the plugin directly when the port is specified, or redirected by default
-      HTTP server. The schema of transitions between the users (using WS,
-      direct BOSH with specified plugin port and BOSH request to default HTTP
-      port) and the server side is displayed at <xref
+      server since they are not part of XMPP. The plugins basically handle the
+      connection (or request, in case of BOSH) and hand pure XMPP message over
+      to the server. In case of BOSH, the request can be sent to the plugin
+      directly when the port is specified, or redirected by default HTTP
+      server. The schema of transitions between the users (using WS, direct
+      BOSH with specified plugin port and BOSH request to default HTTP port)
+      and the server side is displayed at <xref
       linkend="fig-xmpp-server-plugins" />.</para>
 
       <figure id="fig-xmpp-server-plugins">
@@ -1725,7 +1723,7 @@ ws.send(
       library developed by Google called libjingle<indexterm>
           <primary>libjingle</primary>
         </indexterm>, supporting multi-user audio/video/file transfers.
-      <citation>libjingle</citation> Google seems to beleive that Jingle is
+      <citation>libjingle</citation> Google seems to believe that Jingle is
       the right protocol for developing multimedia client that can be used by
       everyone. They even sidelined original Google Talk VOIP protocol and
       switched to Jingle as their <quote>primary signalling protocol for voice
@@ -1758,7 +1756,7 @@ ws.send(
       long-term meaning), but this option can be disabled in the future
       too.</para>
 
-      <para>Fortunatelly, severals weeks later, Google announced that the
+      <para>Fortunately, severals weeks later, Google announced that the
       alleged spam problems are gone and XMPP network is opened again.
       <citation>spammy-invites-update</citation> Hence, the users having their
       accounts registered at external XMPP providers can send invites
@@ -1818,7 +1816,7 @@ ws.send(
     JavaScript libraries and tools for building a client application within a
     web browser are be mentioned in this chapter. Yet, it is certainly
     possible to implement XMPP client at the server side or as an independent
-    desktop appliacation. In the end of this chapter, some server-side
+    desktop application. In the end of this chapter, some server-side
     implementations are also mentioned due to the security reasons. See <xref
     linkend="chap-server-side-xmpp-client" /> for details.</para>
 
@@ -1828,7 +1826,7 @@ ws.send(
         </indexterm></title>
 
       <para>Strophe.js<footnote>
-          <para>Strophe.js is sometimes refered only as
+          <para>Strophe.js is sometimes referred only as
           <quote>Strophe</quote>. However, Strophe is, strictly speaking, a
           name of the collection of libraries, from which only one is
           Strophe.js, the JavaScript tool described in this chapter.</para>
@@ -1945,7 +1943,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         event handlers to each of them. Event handler<indexterm>
             <primary>event handler</primary>
           </indexterm>, function or method, is invoked as soon as the
-        specified action occurs. The event handlers, defered functions, are
+        specified action occurs. The event handlers, deferred functions, are
         called callbacks<indexterm>
             <primary>callback</primary>
           </indexterm>. Not only Strophe but all other asynchronous libraries
@@ -2039,7 +2037,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         contains several logger methods, divided by log level, mostly used by
         the library itself (it however can be used by the user code as well).
         Logging functionality is inserted in the main Strophe object itself.
-        Calling the logger from the library methods is thus simplier, however
+        Calling the logger from the library methods is thus simpler, however
         it can hardly be replaced by another logger (all at once) defined by
         the user. All logger methods point to the ultimate log() method, which
         just returns by default. The intention of the library authors is
@@ -2057,7 +2055,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       and provides a simple way for the plugins to be added. And fortunately,
       there is not just the possibility to create the plugin, there are plenty
       existing extensions available publicly at GitHub. In this section,
-      general way how to use the pulgins is described as well as brief
+      general way how to use the plugins is described as well as brief
       overview of several plugins used in Talker application.</para>
 
       <para>Each Strophe.js plugin is contained in separate JavaScript file,
@@ -2240,7 +2238,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         communication view is displayed so the user can read the incoming
         messages, send a new message or start a video call. Several
         application screenshots are pictured in <xref
-        linkend="appendix-screenshots" />.</para>
+        linkend="appendix-screenshots" />. TODO are they?</para>
 
         <para>There is one more actor displayed at <xref
         linkend="talker-uc" />. It is remote XMPP server, communicating with
@@ -2368,7 +2366,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2>
         <title>Views and controllers</title>
 
-        <para>All Ember-related problematics is described in section <xref
+        <para>All Ember-related problematic is described in section <xref
         linkend="chap-ember" />, only the structure is mentioned here. As the
         user traverses the application, various controllers manage the states.
         The structure of controllers bijectively corresponds to the views
@@ -2433,7 +2431,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       JavaScript and running in web browser. As it is mentioned in the
       technology overview in <xref linkend="sect-choosing-tech" />, Talker
       implements MVC structure on the client side, in the form of Ember MVC
-      objects. In this section, JavaScript MVC is analysed overally at first,
+      objects. In this section, JavaScript MVC is analysed overall at first,
       then some features specific to Ember which were used in the
       implementation are described.</para>
 
@@ -2444,7 +2442,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         MVC in JavaScript. Most of the web technologies running on the server
         and powering web applications use some kind of MVC<indexterm>
             <primary>MVC</primary>
-          </indexterm>, accross all programming languages. It is Rails for
+          </indexterm>, across all programming languages. It is Rails for
         Ruby; Zend, Nette or Symphony for PHP; Django for Python; Spring MVC
         or simple servlets with JSPs in Java; ASP.NET MVC for C#/.NET, etc. It
         appears that three-tier architecture helps the developers to organize
@@ -2470,7 +2468,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         only occasionally. Simple example: let there be an input for the user
         name, bound to the JavaScript model object representing a user.
         Whenever a new letter appears in the input, JavaScript updates its
-        model object (still on the client side). No sooner has whole username
+        model object (still on the client side). No sooner has whole user name
         been entered (either submitted or after a delay) when JavaScript
         synchronizes it with the server. Whole process schema is displayed at
         <xref linkend="fig-js-mvc-input" />.</para>
@@ -2501,7 +2499,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </sect2>
 
       <sect2>
-        <title>Comparsion to other frameworks</title>
+        <title>Comparison to other frameworks</title>
 
         <para>Ember.js is not the only available JavaScript MVC framework. In
         fact, there are plenty of similar frameworks, each of them providing
@@ -2555,12 +2553,12 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         of job that programmer does not have to take care about. On the other
         hand, the learning curve of Ember is told to be one of the steepest
         and it is quite difficult to make the <emphasis>second</emphasis>
-        step, after reading the basic tutorials and examples. Fortunatelly,
+        step, after reading the basic tutorials and examples. Fortunately,
         there is quite active community working on screencasts<footnote>
             <para><ulink
             url="http://emberwatch.com/">http://emberwatch.com/</ulink></para>
           </footnote>, documentation and actively answering question on
-        Twitter and Stackoverflow.</para>
+        Twitter and StackOverflow.</para>
       </sect2>
 
       <sect2 id="sect-ember-controllers">
@@ -2598,7 +2596,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <computeroutput>.messages</computeroutput> to the
         <quote>selector</quote> points the getter directly to the array of
         messages.<footnote>
-            <para>Acutally, the method contains a lot more code such as
+            <para>Actually, the method contains a lot more code such as
             argument check and return values. They have been omitted in this
             example for clarity and shortness.</para>
           </footnote></para>
@@ -2632,9 +2630,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <computeroutput>ArrayController</computeroutput>. As it is necessary
         to render the contacts as pairs in the two-row-view, there is
         <computeroutput>pair</computeroutput> method returning the content
-        reformated as the array of pairs. Notice that the function is property
-        of <computeroutput>content.@each</computeroutput>, which means that
-        any update, insert or delete of the content array forces to
+        reformatted as the array of pairs. Notice that the function is
+        property of <computeroutput>content.@each</computeroutput>, which
+        means that any update, insert or delete of the content array forces to
         recalculate pairs as well.</para>
       </sect2>
 
@@ -2838,8 +2836,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         by <computeroutput>goTo*</computeroutput> labels. When any element is
         marked with Handlebars <computeroutput>{{action
         goTo*}}</computeroutput>, it is transformed into a link leading to the
-        corresponding router state. And the router handles the event by simple
-        transitioning to one of existing states.</para>
+        corresponding router state. And the router handles the event by simply
+        transitioning it to one of existing states.</para>
 
         <para>Let's have a look at one of the routes in more detail. As
         mentioned before, router is responsible for creating unique URL for
@@ -2891,7 +2889,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         application controller to <quote>include</quote> the controller
         responsible for current state, which would be
         <computeroutput>ConversationController</computeroutput> instance in
-        the example above. This is importand when rendering the templates.
+        the example above. This is important when rendering the templates.
         First, main application template is rendered. Then, Ember looks into
         the template for <computeroutput>{{outlet}}</computeroutput> tag and
         inserts the conversation template exactly to the place it is found.
@@ -2994,7 +2992,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       message, constructs the Ember model
       <computeroutput>Message</computeroutput> object and tries to assign the
       message to a contact (the recipient). When the recipient is know (so she
-      is present in the the user contact list), new message is appended to the
+      is present in the user contact list), new message is appended to the
       list of messages. Ember automatically updates the view so the message
       appears in the list immediately.</para>
 
@@ -3015,10 +3013,10 @@ contact.get('messages').pushObject(message);</programlisting>
       linkend="sect-ember-controllers" />), which just calls adapter function
       which actually sends the prepared message object. It is one of the
       design drawbacks of the application, that the there is two-way awareness
-      between the adapter and controllers (somethimes controller calls
-      adapter, sometimes the adapter actively calls controller). This design
-      was chosen for its simplicity and it appeared to be sufficient for the
-      application of Talker's size.</para>
+      between the adapter and controllers (sometimes controller calls adapter,
+      sometimes the adapter actively calls controller). This design was chosen
+      for its simplicity and it appeared to be sufficient for the application
+      of Talker's size.</para>
 
       <sect2>
         <title>Notifications<indexterm>
@@ -3027,7 +3025,7 @@ contact.get('messages').pushObject(message);</programlisting>
 
         <para>Talker is only a part of bigger system - Celebrio. The user has
         to find out when a new message arrives. Therefore, simple mechanism of
-        notifications has been developed and used accross the system, not only
+        notifications has been developed and used across the system, not only
         in Talker. When a new chat message arrives, the application triggers
         the built-in mechanism and the notification is propagated to the main
         Celebrio frame using <computeroutput>postMessage</computeroutput>
@@ -3093,7 +3091,7 @@ contact.get('messages').pushObject(message);</programlisting>
         local variable must be created to set up the logger (or getLogger
         method must be called multiple times). I believe method chaining is
         sensible pattern so I reimplemented several methods in the library to
-        support it. Unfortunatelly, the project is not hosted on GitHub so it
+        support it. Unfortunately, the project is not hosted on GitHub so it
         is quite difficult to offer the changes back to the community.</para>
       </sect2>
 
@@ -3200,7 +3198,7 @@ Strophe.Connection {
       <sect2>
         <title>Matching the entries from XMPP roster</title>
 
-        <para>The contact list retrieved from Celebrio backend, as it was
+        <para>The contact list retrieved from Celebrio back-end, as it was
         described in the previous section, is only underlying material for
         building the contact list. The other part is XMPP roster<indexterm>
             <primary>XMPP</primary>
@@ -3268,7 +3266,7 @@ Strophe.Connection {
         callback - <computeroutput>onPresenceChange</computeroutput> method
         where the presence change is processed.</para>
 
-        <para>The callback function recieves two parameters. The first one
+        <para>The callback function receives two parameters. The first one
         contains the list of all contacts, the second parameter represents
         just the information about the contact whose presence has changed.
         This is a bit tricky because the callback is triggered even if only
@@ -3280,8 +3278,8 @@ Strophe.Connection {
         status specifying the availability (away, DND, ...), contained in
         <computeroutput>&lt;show&gt;</computeroutput> element of XMPP message.
         <citation>rfc-3921</citation> The online status is processed as well
-        and the current value is stored for each contact. Unfortunatelly, the
-        graphic design for showing statuses has not been proposed yet so it it
+        and the current value is stored for each contact. Unfortunately, the
+        graphic design for showing statuses has not been proposed yet so it is
         not displayed within the application, yet ready to be.</para>
 
         <para>There is one more glitch about online statuses. XMPP makes it
@@ -3306,7 +3304,7 @@ Strophe.Connection {
       <sect2>
         <title>Subscriptions</title>
 
-        <para>Subscribing in XMPP basically addressses adding the contacts to
+        <para>Subscribing in XMPP basically addresses adding the contacts to
         the contact list and asking them for the same. Due to the simplicity
         of the application, Talker performs subscriptions automatically. When
         the new contact (i.e. new contact added in Celebrio system) is found,
@@ -3333,7 +3331,7 @@ Strophe.Connection {
       of Talker application. To achieve it, OpenTok library has been used.
       OpenTok is high-level library from TokBox company, allowing the
       developer to embed video calls support to a arbitrary web application.
-      In this section, basic usage of OpenTok libarary is described as well as
+      In this section, basic usage of OpenTok library is described as well as
       the specifics for Talker implementation. OpenTok consists of JavaScript
       part and server-side SDK, necessary to create the session.</para>
 
@@ -3370,7 +3368,7 @@ Strophe.Connection {
         application, the last mentioned field is used for distinguishing free
         users from premium, i.e. handing over additional information to the
         session. To sum it up, Session ID identifies the session (i.e. one
-        call among various number of people, typicaly 2) and token serves as
+        call among various number of people, typically 2) and token serves as
         the specific user identification.</para>
       </sect2>
 
@@ -3392,7 +3390,7 @@ session.connect(API_KEY, token);</programlisting>
         <para>Even though the previous code would establish the connection, no
         matter what happens with the connection, the application cannot react
         to it. That is the reason why event handlers must be bound to the
-        session so the application can respons for example to someone
+        session so the application can respond for example to someone
         connecting to the same session and sending a stream. Binding the event
         looks as follows:</para>
 
@@ -3431,7 +3429,7 @@ session.connect(API_KEY, token);</programlisting>
         implemented as independent application as well. It is just a
         substitution for the contacts not communicating via Celebrio.</para>
 
-        <para>When the application recieves incoming call request (in form of
+        <para>When the application receives incoming call request (in form of
         the link described above), it parses the request link and hence
         obtains session ID. The next step is asking the server to generate
         another unique token, with which Talker can establish the call (i.e.
@@ -3462,14 +3460,15 @@ session.connect(API_KEY, token);</programlisting>
       <sect2>
         <title>Embedding the video element</title>
 
-        <para>If the video call is succesfully established, two video elements
-        must be embedded to the page. One for the application user to be able
-        to see herself, the other (bigger one) for displaying the other call
-        participant. OpenTok provides a convinient way to create the video
-        element. There is action listener which triggers the following code
-        when the session is connected (i.e. when the application connects to
-        the session identified by given session ID), creating the video
-        element of the caller (video of <quote>me</quote>):</para>
+        <para>If the video call is successfully established, two video
+        elements must be embedded to the page. One for the application user to
+        be able to see herself, the other (bigger one) for displaying the
+        other call participant. OpenTok provides a convenient way to create
+        the video element. There is action listener which triggers the
+        following code when the session is connected (i.e. when the
+        application connects to the session identified by given session ID),
+        creating the video element of the caller (video of
+        <quote>me</quote>):</para>
 
         <programlisting>$("#video").append("&lt;div id='publishing'&gt;&lt;/div&gt;")
 var publisher = TB.initPublisher(API_KEY, 'publishing', {
@@ -3615,8 +3614,8 @@ expect({ tea: { green: 'matcha' }})
 });</programlisting>
 
         <para>First, there are dependencies defined so the framework loads
-        them before the test is executed. Almost all JS files included in the
-        application are defined here to emulate the environment of the
+        them before the test is executed. Almost all JavaScript files included
+        in the application are defined here to emulate the environment of the
         application as precisely as possible. The next statement tells BDD
         style is going to be used. Later on, actual test suites with tests are
         listed. Each suite can mention
@@ -3633,8 +3632,8 @@ expect({ tea: { green: 'matcha' }})
         the asynchronous code is executed. JavaScript does not provide
         multithreading by default <citation>js-definitive-guide</citation>.
         Hence, the pattern of passing a callback to the asynchronous operation
-        is used instead. Unfortunatelly, it is nontrivial task to test
-        asynchronous doce in JavaScript. Intern provides convenient way to do
+        is used instead. Unfortunately, it is nontrivial task to test
+        asynchronous code in JavaScript. Intern provides convenient way to do
         so using promises pattern. The following example tests that
         <computeroutput>start</computeroutput> method connects the application
         to XMPP server in 10 seconds, using Chai assertion to check it.</para>
@@ -3709,20 +3708,20 @@ describe('StropheAdapter', function(){
         <para>Running Mocha tests in console with Node brings one huge
         disadvantage. There is no easy option to load custom JavaScript files
         which are necessary to perform the test, unless they are packed as npm
-        packages. Therefore, I used another tool called JS Test Driver to wrap
+        packages. Therefore, I used another tool called JsTestDriver to wrap
         Mocha tests, load dependencies before executing them and also run them
         in the browser environment.</para>
 
-        <para>JS Test Driver (JSTD) is a Java library allowing the developers
-        to run the tests in certain environment, according to the specified
+        <para>JsTestDriver (JSTD) is a Java library allowing the developers to
+        run the tests in certain environment, according to the specified
         configuration file. Although it has not originally been intended to be
-        used with Mocha, there is an adapter aviailable which bridges this
+        used with Mocha, there is an adapter available which bridges this
         imperfection. Furthermore, JSTD can be easily run from PHPStorm or
         WebStorm IDEs (there is a plugin in the IDE especially for
         JSTD).</para>
 
         <para>There is a configuration file for JSTD test suite, specifying
-        the scrpits to be loaded and test files to be executed, similarly as
+        the scripts to be loaded and test files to be executed, similarly as
         Intern does. The structure is self-explaining:</para>
 
         <programlisting>load:
@@ -3795,9 +3794,9 @@ expect = chai.expect;</programlisting>
     <sect1>
       <title>Future possibilities</title>
 
-      <para>There is still long way to go until the the application is
-      perfect. It can be (and certainly will be) updated in many aspects since
-      all used frameworks still evolve.</para>
+      <para>There is still long way to go until the application is perfect. It
+      can be (and certainly will be) updated in many aspects since all used
+      frameworks still evolve.</para>
 
       <para>Version 1.0.0 of Ember.js is to be released any day now. The new
       version will certainly contain a lot of improvements, both in
@@ -3817,9 +3816,9 @@ expect = chai.expect;</programlisting>
       core concept has been proven and the main features have been
       implemented, there are several fancy additions that can be done. Above
       all, already implemented chat states (away, DND, ...) are not show yet
-      in the UI -- work which depends only on the system graphical designer.
-      Additionaly, the chat history can be added so the user can see the
-      messages sent and received during the previous sessions.</para>
+      in the user interface -- work which depends only on the system graphical
+      designer. Additionally, the chat history can be added so the user can
+      see the messages sent and received during the previous sessions.</para>
 
       <para>Because the application has been developed as part of proprietary
       software system Celebrio, it has not been opensourced and it is not
@@ -3919,8 +3918,7 @@ expect = chai.expect;</programlisting>
         </author>
       </authorgroup>
 
-      <title>The Definitive Guide to HTML5 - TODO cite from page 873
-      multimedia chapter</title>
+      <title>The Definitive Guide to HTML5</title>
 
       <publisher>
         <publishername>Apress</publishername>
