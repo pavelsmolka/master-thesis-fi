@@ -199,7 +199,7 @@
     systems.</para>
 
     <para>Since the web browser was designed to perform simple
-    requests/response interaction, it is not a typical platform for building
+    request/response interaction, it is not a typical platform for building
     real-time applications. Thus, there is a need for an extra layer enhancing
     or even completely replacing the common way HTTP communicates. Within the
     scope of this thesis, primarily the WebSockets and HTTP long polling
@@ -516,7 +516,7 @@ Content-Type: text/html; charset=UTF-8
         Meanwhile, the client listens to the response stream and reads the
         data pushed from the server. When any new data springs up on the
         server side, it is concatenated to the one existing response stream.
-        <citation>rfc-bidirectional-http</citation> See the scheme at <xref
+        <citation>rfc-bidirectional-http</citation> See the scheme in <xref
         linkend="fig-http-streaming" />.</para>
 
         <figure id="fig-http-streaming">
@@ -647,7 +647,7 @@ and this is the second one
 Host: server.example.com
 Upgrade: websocket
 Connection: Upgrade
-Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Sec-WebSocket-Key: RWFzdGVyIGVnZyBmb3IgQWRh
 Origin: http://example.com
 Sec-WebSocket-Protocol: chat, superchat
 Sec-WebSocket-Version: 13</programlisting>
@@ -681,9 +681,9 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <citation>rfc-ws</citation></para>
 
         <para><computeroutput>Sec-WebSocket-Key</computeroutput> is a random
-        secret issued by a client and added to an initial protocol-switching
-        request. A server is supposed to concatenate the secret with Globally
-        Unique Identifier (GUID)<indexterm>
+        secret issued by a client, base64-encoded and added to an initial
+        protocol-switching request. A server is supposed to concatenate the
+        secret with Globally Unique Identifier (GUID)<indexterm>
             <primary>GUID</primary>
           </indexterm> "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and hash the
         result with the SHA-1 algorithm. The result is returned as
@@ -769,11 +769,12 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
 
         <para>The first (mandatory) argument stands for a WebSocket URI a
         client attempts to connect to. It can either begin with a
-        <type>ws://</type> prefix or <type>wss://</type>, depending whether
-        the TLS layer is to be used or not. The second parameter is optional
-        -- specific WS subprotocols can be demanded there. Since there are
-        only a few subprotocols recorded by IANA registry, it has been of
-        little use so far. <citation>ws-iana</citation></para>
+        <computeroutput>ws://</computeroutput> prefix or
+        <computeroutput>wss://</computeroutput>, depending whether the TLS
+        layer is to be used or not. The second parameter is optional --
+        specific WS subprotocols can be demanded there. Since there are only a
+        few subprotocols recorded by IANA registry, it has been of little use
+        so far. <citation>ws-iana</citation></para>
 
         <para><computeroutput>WebSocket</computeroutput> interface provides at
         least four event handlers, to each of whom a custom callback can be
@@ -810,10 +811,10 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <computeroutput>send()</computeroutput> method. See the examples
         below: <citation>ws-html5rocks</citation></para>
 
-        <programlisting>// Sending String
+        <programlisting>// Sending a String
 connection.send('string message');
 
-// Sending canvas ImageData as ArrayBuffe
+// Sending the canvas ImageData as an ArrayBuffer
 var img = canvas_context.getImageData(0, 0, 400, 320);
 var binary = new Uint8Array(img.data.length);
 for (var i = 0; i &lt; img.data.length; i++) {
@@ -821,7 +822,7 @@ for (var i = 0; i &lt; img.data.length; i++) {
 }
 connection.send(binary.buffer);
 
-// Sending file as Blob
+// Sending a file as a Blob
 var file = document.querySelector('input[type="file"]').files[0];
 connection.send(file);</programlisting>
 
@@ -848,13 +849,14 @@ connection.send(file);</programlisting>
         <title>WebSocket API wrappers</title>
 
         <para>WebSockets is a powerful technology, yet there are many browsers
-        wich do not support it. In that case, when the real-time communication
-        constitutes the core functionality, a fallback (i.e. an alternative
-        technology used when the original is missing) must be defined to
-        substitute the WebSockets. It might be Adobe Flash or the HTTP
-        polling. It would be great not to have to define a fallback in every
-        project again and again. Luckily, there are several API wrappers for
-        this, doing this part of job for the developer automatically.</para>
+        which do not support it. In that case, when the real-time
+        communication constitutes the core functionality, a fallback (i.e. an
+        alternative technology used when the original is missing) must be
+        defined to substitute the WebSockets. It might be Adobe Flash or the
+        HTTP polling. It would be great not to have to define a fallback in
+        every project again and again. Luckily, there are several API wrappers
+        for this, doing this part of job for the developer
+        automatically.</para>
 
         <para>The basic use case is obvious. Using the wrapper instead of the
         WS API itself guarantees the developer that a fallback is used when
@@ -932,7 +934,7 @@ data: Another line of the event message</programlisting></para>
       attempts to reconnect to the same resource. So, a server cannot close
       the connection permanently.</para>
 
-      <para>Sever-sent events are often compared to WebSockets, though they
+      <para>Server-sent events are often compared to WebSockets, though they
       are much less known. The support of both in the current web browsers is
       very similar. The only main difference is the lack of support of SSE in
       Internet Explorer 10, which finally provides the WebSocket API. Another
@@ -991,9 +993,9 @@ data: Another line of the event message</programlisting></para>
         exchanging the information about the connection itself, is called
         <emphasis>signaling</emphasis><indexterm>
             <primary>signaling</primary>
-          </indexterm>. WebRTC does not take care neither about a layer the
-        signaling data is transferred at, nor the signaling protocol itself.
-        It can be SIP, XMPP or any other, transferred via XMLHTTPRequest or
+          </indexterm>. WebRTC does not take care either about a layer the
+        signaling data is transferred at, or the signaling protocol itself. It
+        can be SIP, XMPP or any other, transferred via XMLHTTPRequest or
         WebSockets. What is important, signaling is not a part of a WebRTC
         API. The WebRTC connection itself then concerns only the peers, as
         shown in <xref linkend="fig-webrtc" />.
@@ -1022,8 +1024,9 @@ data: Another line of the event message</programlisting></para>
         <computeroutput>webkitRTCPeerConnection</computeroutput> instead of
         <computeroutput>RTCPeerConnection</computeroutput> in Chromium.</para>
 
-        <para>The core API object is a JavaScript object RTCPeerConnection.
-        Creating one may look as follows (with a respective prefix):</para>
+        <para>The core API object is a JavaScript object
+        <computeroutput>RTCPeerConnection</computeroutput>. Creating one may
+        look as follows (with a respective prefix):</para>
 
         <programlisting>var config =  {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
 var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisting>
@@ -1189,9 +1192,9 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         Flash at first, but later Adobe quit Google Play.
         <citation>android-flash-support</citation></para>
 
-        <para>There are many other similar technologies similar to Adobe
-        Flash, but they all suffer the same pain. Because they are installed
-        as proprietary plugins, a developer can never be sure the application
+        <para>There are many other technologies similar to Adobe Flash, but
+        they all suffer the same pain. Because they are installed as
+        proprietary plugins, a developer can never be sure the application
         will run in any environment. This concerns the technologies as
         Microsoft Silverlight<indexterm>
             <primary>Silverlight</primary>
@@ -1205,7 +1208,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         browser-independent platform).</para>
 
         <para>To sum it up, Adobe Flash is often used as a fallback for older
-        browsers, running on non-mobile devices, which does not support WebRTC
+        browsers, running on non-mobile devices, which do not support WebRTC
         yet. It has been used as a fallback for the video calls in Talker
         application. However, creating a new application based on Flash (as a
         <emphasis>primary</emphasis> technology) in 2013 is not a good
@@ -1369,7 +1372,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
     decentralized. There is no central or top level XMPP server. Anyone can
     run an XMPP server, very similarly as an HTTP or FTP server.
     Identification and recognition on the network is also similar -- XMPP
-    relies on Domain Name System (DNS, so that every server is identified via
+    relies on Domain Name System (DNS), so that every server is identified via
     string domain name with arbitrary subdomain level (e.g. xmpp.example.com
     or just example.org).
     <citation>xmpp-the-definitive-guide</citation></para>
@@ -1380,16 +1383,16 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
     also guarantees that every XMPP user is registered on a certain server. If
     there is a message or notification for the particular user, her
     <quote>home</quote> server is looked up first, the message is transferred
-    to that server first and then, the respective server (that the user
-    belongs to) is responsible for delivering the message to the user or
-    saving it until the user logs in. Therefore, two possible connection types
-    take place in XMPP. Client-to-server communication is the first one, when
-    the clients can talk only to their <quote>home</quote> server. Then,
-    server-to-server communication is designed for delivering the messages to
-    users at different domains. When two servers are exchanging any data, a
-    direct connection to the target server has been established. This approach
-    is dissimilar to the way SMTP servers exchange e-mail messages. It helps
-    to prevent address spoofing or spamming.
+    to that server and then, the respective server (that the user belongs to)
+    is responsible for delivering the message to the user or saving it until
+    she logs in. Therefore, two possible connection types take place in XMPP.
+    Client-to-server communication is the first one, when the clients can talk
+    only to their <quote>home</quote> server. Then, server-to-server
+    communication is designed for delivering the messages to users at
+    different domains. When two servers are exchanging any data, a direct
+    connection to the target server has been established. This approach is
+    dissimilar to the way SMTP servers exchange e-mail messages. It helps to
+    prevent address spoofing or spamming.
     <citation>xmpp-the-definitive-guide</citation></para>
 
     <para>XMPP has been chosen as the communication protocol for this thesis
@@ -1548,7 +1551,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
           them, XEP-0025: Jabber HTTP Polling, has been replaced by BOSH. It
           is obsolete and recommended not to be used any longer.
           <citation>xep-0025</citation> The other one is XEP-0206: XMPP Over
-          BOSH. It is currently used a standard but it constitutes just a
+          BOSH. It is currently used as a standard but it constitutes just a
           supplement for BOSH (XEP-0124). XEP-0206 describes mainly the
           session creation and an authentication process in BOSH.
           <citation>xep-0206</citation></para>
@@ -1608,19 +1611,21 @@ Content-Length: 188
       <para>Those <computeroutput>sid</computeroutput> and
       <computeroutput>rid</computeroutput> properties are rather important in
       BOSH. The security is ensured just by that pair of strings in BOSH,
-      because of the stateless nature of HTTP. If an attacker stole sid and
-      rid, he could communicate with a server on behalf of the actual user. On
-      the other hand, there is one big advantage. A connection can be
-      established and handed over from one point to another. For example, a
-      web server can initiate a connection (carry out a handshake) and then
-      only <computeroutput>sid</computeroutput> and
+      because of the stateless nature of HTTP. If an attacker stole
+      <computeroutput>sid</computeroutput> and
+      <computeroutput>rid</computeroutput>, he could communicate with a server
+      on behalf of the actual user. On the other hand, there is one big
+      advantage. A connection can be established and handed over from one
+      point to another. For example, a web server can initiate a connection
+      (carry out a handshake) and then only
+      <computeroutput>sid</computeroutput> and
       <computeroutput>rid</computeroutput> are passed to a client (a web
       browser), which can continue communicating. This approach is used in the
       Talker application so the user credentials (JID and a password) are not
       sent to a browser at all.</para>
 
       <para>BOSH protocol is an important part of the Talker application
-      implemented as a programming part of this thesis. Despite it bears the
+      implemented as a programming part of this thesis. Despite bearing the
       disadvantages of an HTTP bidirectional communication, as described
       before, it is the only reliable technology nowadays. There are several
       mature client-side libraries using BOSH (such as Strophe.js we used) and
@@ -1680,33 +1685,23 @@ ws.send(
           discussions concerning client-side (i.e. JavaScript)
           libraries:</para>
 
-          <para><itemizedlist>
-              <listitem>
-                <para><ulink
-                url="https://github.com/metajack/strophejs/issues/68">https://github.com/metajack/strophejs/issues/68</ulink></para>
-              </listitem>
+          <para><ulink
+          url="https://github.com/metajack/strophejs/issues/68">https://github.com/metajack/strophejs/issues/68</ulink></para>
 
-              <listitem>
-                <para><ulink
-                url="https://github.com/metajack/strophejs/pull/95">https://github.com/metajack/strophejs/pull/95</ulink></para>
-              </listitem>
+          <para><ulink
+          url="https://github.com/metajack/strophejs/pull/95">https://github.com/metajack/strophejs/pull/95</ulink></para>
 
-              <listitem>
-                <para><ulink
-                url="http://stackoverflow.com/questions/1850162/">http://stackoverflow.com/questions/1850162/</ulink></para>
-              </listitem>
-            </itemizedlist></para>
-        </footnote></para>
-
-      <para>Both BOSH and WS require additional plugins to be installed on a
-      server since they are not part of XMPP. The plugins basically handle a
-      connection (or a request, in case of BOSH) and hand over a pure XMPP
-      message to the core XMPP server. In case of BOSH, the request can be
-      sent to the plugin directly when the port is specified, or redirected by
-      default HTTP server. The schema of transitions between the users at one
-      side (using either WS, direct BOSH with specified plugin port or BOSH
-      request to default HTTP port) and a server side is depicted in <xref
-      linkend="fig-xmpp-server-plugins" />.</para>
+          <para><ulink
+          url="http://stackoverflow.com/questions/1850162/">http://stackoverflow.com/questions/1850162/</ulink></para>
+        </footnote> Both BOSH and WS require additional plugins to be
+      installed on a server since they are not part of XMPP. The plugins
+      basically handle a connection (or a request, in case of BOSH) and hand
+      over a pure XMPP message to the core XMPP server. In case of BOSH, the
+      request can be sent to the plugin directly when the port is specified,
+      or redirected by default HTTP server. The schema of transitions between
+      the users at one side (using either WS, direct BOSH with specified
+      plugin port or BOSH request to default HTTP port) and a server side is
+      depicted in <xref linkend="fig-xmpp-server-plugins" />.</para>
 
       <figure id="fig-xmpp-server-plugins">
         <title>Communicating to XMPP server with WS and BOSH plugins</title>
@@ -1842,11 +1837,11 @@ ws.send(
     protocols in the application, handling the communication correctly at all
     levels. Fortunately, there are several existing libraries serving the
     lower level protocols. Specifically, most of them would conceal HTTP
-    requests as well as BOSH and simplifying the XMPP layer. </para>
+    requests as well as BOSH and simplifying the XMPP layer.</para>
 
     <para>One of the JavaScript libraries, used when implementing the Talker
     application, called <emphasis>Strophe.js</emphasis>, is described in this
-    chapter. </para>
+    chapter.</para>
 
     <para>There are also other libraries for creating an XMPP client in a web
     browser, for example JSJaC. However, JSJaC is not as popular (and thus
@@ -1911,7 +1906,7 @@ ws.send(
         <programlisting>var BOSH_SERVICE = 'https://bind.jappix.com/',
     jid  = 'pavel@example.com',
     pass = 'mysecretpassword',
-    onConnect = function(status) { /* implmementation */ };
+    onConnect = function(status) { /* implementation */ };
 var connection = new Strophe.Connection(BOSH_SERVICE);
 connection.connect(jid, pass, onConnect);</programlisting>
 
@@ -1939,8 +1934,8 @@ connection.connect(jid, pass, onConnect);</programlisting>
         <computeroutput>connected</computeroutput> function is invoked.
         Usually, this is the place the event handlers are attached to the
         connection object, which is passed as
-        <computeroutput>this</computeroutput> in the context of
-        <computeroutput>onConnect</computeroutput> function). Event handlers
+        <computeroutput>this</computeroutput> parameter in the context of the
+        <computeroutput>onConnect</computeroutput> function. Event handlers
         are described in <xref linkend="chap-strophe-events" />.</para>
       </sect2>
 
@@ -2023,7 +2018,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
         <para>A callback function receives an incoming stanza object in a
         Strophe-specific pre-parsed format. Then, the object can be queried
-        (with jQuery or plain JavaScript selectors), such as at the example
+        (with jQuery or plain JavaScript selectors), such as in the example
         below:</para>
 
         <programlisting>onChatMessage = function(msg) {
@@ -2111,7 +2106,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       and provides a simple way for the plugins to be added. And fortunately,
       there is not just the possibility to create a plugin on one's own, there
       are plenty of existing extensions available publicly at GitHub. In this
-      section, a general way how to use the plugins is described as well as a
+      section, a general way to use the plugins is described as well as a
       brief overview of several plugins used in the Talker application.</para>
 
       <para>Each Strophe.js plugin is contained in a separate JavaScript file,
@@ -2165,7 +2160,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       structure of method parameters is exactly the same as in case of
       ordinary Strophe handlers.</para>
 
-      <programlisting>connection.roster.registerCallback(presenceListener, null, 'presence', null, null,  null);</programlisting>
+      <programlisting>connection.roster.registerCallback(presenceListener, 
+        null, 'presence', null, null,  null);</programlisting>
     </sect1>
 
     <sect1 id="chap-server-side-xmpp-client">
@@ -2292,8 +2288,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         current contact present statuses, enter the text chat (which includes
         sending and receiving new messages) and set up a video call. A contact
         list, the first application screen, is further described in <xref
-        linkend="chap-contact-list" />. When any of the contact is clicked at,
-        communication view is displayed so the user can read the incoming
+        linkend="chap-contact-list" />. When any of the contacts is clicked
+        at, communication view is displayed so the user can read the incoming
         messages, send a new message or start a video call. Several
         application screenshots are pictured in <xref
         linkend="appendix-screenshots" />. TODO are they?</para>
@@ -2359,7 +2355,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       application which could be served by several inline scripts manipulating
       the DOM. It has to handle states, keep track of all simultaneous chats
       and dispatch all messages to appropriate contacts. Those reasons led to
-      semi-modular architecture, pictured at <xref
+      semi-modular architecture, depicted in <xref
       linkend="fig-talker-modules" />. Modules inside the grey package
       represent those I directly implemented, the outside ones are the used
       libraries and third party modules, however necessary to run the
@@ -2424,7 +2420,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2>
         <title>Views and controllers</title>
 
-        <para>All Ember-related problematic is described in section <xref
+        <para>All Ember-related issues are described in the section <xref
         linkend="chap-ember" />, only the structure is mentioned here. As the
         user traverses the application, various controllers manage the states.
         The structure of controllers bijectively corresponds to the views
@@ -2465,10 +2461,11 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <computeroutput>OpenTokAdapter</computeroutput> uses OpenTok library
         to keep track of the video calls. Video adapter object is assigned to
         every contact because it keeps the state information (session) which
-        is different for each contact. On the other hand, StropheAdapter is
-        created and initialized just once for whole application since it does
-        not contain any contact-specific data. The class structure is depicted
-        in <xref linkend="fig-adapters" />.</para>
+        is different for each contact. On the other hand,
+        <computeroutput>StropheAdapter</computeroutput> is created and
+        initialized just once for the whole application since it does not
+        contain any contact-specific data. The class structure is depicted in
+        <xref linkend="fig-adapters" />.</para>
 
         <figure id="fig-adapters">
           <title>Connection of the application and adapters</title>
@@ -2485,8 +2482,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     <sect1 id="chap-ember">
       <title>Ember.js -- JavaScript MVC framework</title>
 
-      <para>Talker is purely client-side-based application, implemented in
-      JavaScript and running in web browser. As it is mentioned in the
+      <para>Talker is a purely client-side-based application, implemented in
+      JavaScript and running in a web browser. As it is mentioned in the
       technology overview in <xref linkend="sect-choosing-tech" />, Talker
       implements MVC structure on the client side, in the form of Ember MVC
       objects. In this section, JavaScript MVC is analysed overall at first,
@@ -2565,8 +2562,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         slightly different set of tools and asserting slightly different
         philosophy. I have chosen Ember for Talker for several reasons. The
         facts in this section may be a little subjective as they are mostly
-        just opinions of mine, as author of this thesis and Talker
-        application. There is actually not much comparison but more the
+        just opinions of mine, as author of this thesis and the Talker
+        application. There is actually not much comparison but rather the
         features specific for Ember are described and explained.</para>
 
         <para>First of all, Ember provides automatic bindings. There are
@@ -2598,8 +2595,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         follows the <quote>convention over configuration</quote> rule to the
         maximum extent, above all other MVC frameworks. For example, when one
         keeps to the official naming conventions, the framework creates the
-        objects which are necessary and has not been defined, such as missing
-        controller.</para>
+        objects which are necessary and have not been defined, such as a
+        missing controller.</para>
 
         <para>Ember.js uses templating engine Handlebars, which provides very
         clean and convenient way to create presentation layer of the
@@ -2707,8 +2704,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         decomposed to the separate views; in case of Talker it is a contact
         list, the conversation, which consists of another two parts -- text
         chat and video. The structure basically corresponds with the
-        controller tree at <xref linkend="fig-controllers" />. Additionally,
-        text chat contains theoretically unlimited number of view, each of
+        controller tree in <xref linkend="fig-controllers" />. Additionally,
+        text chat contains theoretically unlimited number of views -- each of
         them for a single message, either sent or received.</para>
 
         <para>There are two important parts of the view: the view object
@@ -2762,8 +2759,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
 &lt;/script&gt;</programlisting>
 
-        <para>The template is inserted in script element, declaring itself as
-        a handlebars template. The only attribute
+        <para>The template is inserted in a
+        <computeroutput>script</computeroutput> element, declaring itself as a
+        handlebars template. The only attribute
         <computeroutput>data-template-name</computeroutput> identifies the
         snippet and connects it to the view object, which specified the same
         value in the <computeroutput>templateName</computeroutput> attribute,
@@ -2783,8 +2781,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         instance of <computeroutput>VideoController</computeroutput> in this
         case, and calls the method
         <computeroutput>toggleCall</computeroutput>, specified in the template
-        expression. Actions can be placed both in the controllers the views,
-        according to the each of whose nature.</para>
+        expression. Actions can be placed both in the controllers and the
+        views, according to the each of whose nature.</para>
 
         <para>Handlebars templates can transform almost any data stored in
         JavaScript to HTML code so the rendered template corresponds exactly
@@ -2834,13 +2832,14 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <sect2 id="sect-routing">
         <title>Routing</title>
 
-        <para>Despite HTTP is stateless protocol, it is common habit to build
-        stateful web applications. The states are simulated by various web
-        pages and the transitions are carried out clicking on the links. All
-        changes are simultaneously displayed in URL bar.</para>
+        <para>Although HTTP is a stateless protocol, it is common habit to
+        build complex stateful applications on the web. The states are
+        simulated by various web pages and the transitions are carried out
+        clicking on the links. All changes are simultaneously displayed in URL
+        bar.</para>
 
         <para>The problem is that JavaScript application cannot change the web
-        page, leave one and continue at other. JavaScript would lost its
+        page, leave one and continue at other. JavaScript would lose its
         context and whole MVC structure would serve to no purpose. Therefore,
         most of the JavaScript applications using MVC frameworks run at single
         web page, no matter how many states they contain. In Ember.js, there
@@ -2863,7 +2862,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         (basically renders different template) and it changes URL as well.
         Since JavaScript can change only URL fragment router does exactly so.
         And vice versa, when the user types specific URL in the URL bar, the
-        application lets the router to choose the matching state and set the
+        application lets the router choose the matching state and set the
         context in a similar way.</para>
 
         <programlisting>App.Router = Ember.Router.extend({
@@ -3051,8 +3050,8 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <computeroutput>Element</computeroutput> object. The method parses the
       message, constructs the Ember model
       <computeroutput>Message</computeroutput> object and tries to assign the
-      message to a contact (the recipient). When the recipient is know (so she
-      is present in the user contact list), new message is appended to the
+      message to a contact (the recipient). When the recipient is known (so
+      she is present in the user contact list), new message is appended to the
       list of messages. Ember automatically updates the view so the message
       appears in the list immediately.</para>
 
@@ -3072,7 +3071,7 @@ contact.get('messages').pushObject(message);</programlisting>
       sending a new message is managed by the controller (described in <xref
       linkend="sect-ember-controllers" />), which just calls adapter function
       which actually sends the prepared message object. It is one of the
-      design drawbacks of the application, that the there is two-way awareness
+      design drawbacks of the application, that there is two-way awareness
       between the adapter and controllers (sometimes controller calls adapter,
       sometimes the adapter actively calls controller). This design was chosen
       for its simplicity and it appeared to be sufficient for the application
@@ -3166,7 +3165,7 @@ contact.get('messages').pushObject(message);</programlisting>
 App.log.logger.debug(this);</programlisting>
 
         <para>Two notes should be mentioned about the code. Firstly, all
-        logger which have been set up are accessible via
+        loggers which have been set up are accessible via
         <computeroutput>App.log</computeroutput> object. It is a wrapper so
         the used logging library can be changed (and it was changed several
         times during the development). As long as the logger objects implement
@@ -3179,7 +3178,7 @@ App.log.logger.debug(this);</programlisting>
         <computeroutput>Strophe.connection</computeroutput> in the example
         call. Log4js does not provide any layout which would not transform the
         value to string -- [object Object] in our case. This is not very
-        useful -- the developer usually knows there is a object and he just
+        useful -- the developer usually knows there is an object and she just
         wants the possibility to inspect it. Therefore, I enhanced the library
         again in order to log complex objects. First of all, the logger
         outputs a text message saying complex value is about to be logged.
@@ -3247,7 +3246,7 @@ Strophe.Connection {
 
         <para>Within whole Celebrio system, there is a rule that the contacts
         the user has not added to her contact list (in the People application)
-        does not affect the user in any way. In fact, all messages, updates or
+        do not affect the user in any way. In fact, all messages, updates or
         invites from unknown contacts are processed by the application, but
         they are thrown away and not displayed to the user. There is an easy
         possibility to extend the application to be able to communicate with
@@ -3298,7 +3297,7 @@ Strophe.Connection {
 
         <para>The second part (left side of the picture) of matching contacts
         works from the opposite direction. Application processes all contacts
-        that has been retrieved from the server and which are not in XMPP
+        that have been retrieved from the server and which are not in XMPP
         roster. Then, it sends subscription request, which consists of several
         steps, but it simply means adding the contact to the XMPP
         roster.</para>
@@ -3318,8 +3317,8 @@ Strophe.Connection {
             and processing, mentioned in the previous section.</para>
           </footnote></para>
 
-        <para>Presence is processed in way usual to Strophe: the developer
-        provide a callback to a certain topic, which is triggered when
+        <para>Presence is processed in a way usual to Strophe: the developer
+        provides a callback to a certain topic, which is triggered when
         anything related to that topic happens. The process of binding the
         callback is described in <xref linkend="chap-strophe-plugins" />. When
         the callback is bound, Strophe watches over the presence changes sent
@@ -3355,8 +3354,8 @@ Strophe.Connection {
 
         <para>Another possible approach would be sorting the online statuses
         from the most desirable (i.e. online would be the first, then away,
-        and so for) and looking for the <quote>best</quote> one, regardless of
-        the priority. It could actually more correspond to the real state of
+        ...) and looking for the <quote>best</quote> one, regardless of the
+        priority. It could actually more correspond to the real state of
         matters because some clients (such as Google Talk client) set always
         the highest priority. However, I decided to keep the rules XMPP
         protocol sets.</para>
@@ -3391,7 +3390,7 @@ Strophe.Connection {
       <para>Providing simple interface for video calling is one of the goals
       of Talker application. To achieve it, OpenTok library has been used.
       OpenTok is high-level library from TokBox company, allowing the
-      developer to embed video calls support to a arbitrary web application.
+      developer to embed video calls support to an arbitrary web application.
       In this section, basic usage of OpenTok library is described as well as
       the specifics for Talker implementation. OpenTok consists of JavaScript
       part and server-side SDK, necessary to create the session.</para>
@@ -3503,7 +3502,7 @@ session.connect(API_KEY, token);</programlisting>
 
         <para>Once the call is initiated, it can be either answered or timed
         out. There are 60 seconds within the other side must respond to the
-        call. Then, the video call session can be of course hang up. All
+        call. Then, the video call session can be of course hung up. All
         possible states along with the transition actions are depicted in
         <xref linkend="fig-call-states" />.</para>
 
@@ -3544,7 +3543,7 @@ var publisher = TB.initPublisher(API_KEY, 'publishing', {
         height. The reason why the application creates a wrapper element each
         time a call is established is caused by the library removing both
         video element <emphasis>and</emphasis> its wrapper when the call is
-        hang up (or dismissed after timeout).</para>
+        hung up (or dismissed after timeout).</para>
 
         <para>Creating and automatic disposal of a video element of the other
         call participant is similar, only it is triggered when a new stream is
@@ -3574,7 +3573,7 @@ var publisher = TB.initPublisher(API_KEY, 'publishing', {
       classic JUnit tests in Java or PHPUnit in PHP. Earlier, the JavaScript
       consisted of several action listeners bound to the HTML elements on web
       page. However, hardly did real application logic move to JavaScript when
-      the application code grew bigger. Therefore, it must to be tested
+      the application code grew bigger. Therefore, it must be tested
       automatically.</para>
 
       <para>There are several available solutions for unit testing in
@@ -3714,11 +3713,11 @@ expect({ tea: { green: 'matcha' }})
     }));
 });</programlisting>
 
-        <para>The callback is hand over to start method to be triggered every
-        time the connection status changes. This means it is also triggered if
-        Strophe only performs the authentication or even if the connection
-        fails! Therefore, the promise is resolved (so the test succeeds) only
-        if the correct status is passed as an argument.</para>
+        <para>The callback is handed over to start method to be triggered
+        every time the connection status changes. This means it is also
+        triggered if Strophe only performs the authentication or even if the
+        connection fails! Therefore, the promise is resolved (so the test
+        succeeds) only if the correct status is passed as an argument.</para>
 
         <para>It has to be admitted that the previous test is not real unit
         test, mocking all surrounding objects the function interacts with.
