@@ -173,9 +173,13 @@
     There are <quote>big players</quote> providing their own services as
     closed-source, without the possibility to being used by third party
     developers. To name the most important ones, it is Google Talk web browser
-    client and Facebook chat, using XMPP protocol.
+    client and Facebook chat, using XMPP<indexterm>
+        <primary>XMPP</primary>
+      </indexterm> protocol.
     <citation>gtalk</citation><citation>fb-chat</citation> Even though
-    Facebook chat service is not a pure XMPP server implementation (the
+    Facebook<indexterm>
+        <primary>Facebook</primary>
+      </indexterm> chat service is not a pure XMPP server implementation (the
     message and presence engine is a proprietary system of Facebook,
     implemented mostly in C++ and Erlang), they provide the possibility to
     connect to the <quote>world of Facebook Chat</quote> via XMPP as proxy.
@@ -192,11 +196,12 @@
     dedicated client applications (Pidgin, ICQ, ...). All of them have been
     ported to a web browser in some way, in the form of applications such as
     Meebo (supporting ICQ and XMPP, however closed lately) or Google Talk
-    (XMPP). There are also several voice over IP (VOIP) tools providing a
-    video call platform, such as Skype. To make this list comprehensive, Unix
-    <quote>talk</quote> chat program for sending text messages has to be
-    mentioned. However, it was superseded by previously mentioned modern
-    systems.</para>
+    (XMPP). There are also several voice over IP (VoIP) tools providing a
+    video call platform, such as Skype<indexterm>
+        <primary>Skype</primary>
+      </indexterm>. To make this list comprehensive, Unix <quote>talk</quote>
+    chat program for sending text messages has to be mentioned. However, it
+    was superseded by previously mentioned modern systems.</para>
 
     <para>Since the web browser was designed to perform simple
     request/response interaction, it is not a typical platform for building
@@ -1300,7 +1305,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         server.</para>
       </sect2>
 
-      <sect2>
+      <sect2 id="chap-google-tools">
         <title>Real-time communication tools from Google<indexterm>
             <primary>Google</primary>
           </indexterm></title>
@@ -1331,14 +1336,35 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         for video calls in a web browser -- originally powered by a browser
         plugin that had to be installed, now switching to WebRTC.</para>
 
-        <para>The last topic in this section is Hangouts API. Hangouts is a
-        platform for creating group video chat, running within a web
+        <para>The last topic in this section is about Hangouts API. Hangouts
+        is a platform for creating group video chat, running within a web
         application. Although Hangouts offer neat user experience, they can
         only be customised to a small extent. In other words, it is possible
         to add a Hangout to an arbitrary web application but its look and feel
         cannot be altered. This is an insurmountable problem for Celebrio
         Talker since it must strictly keep up with the user interface of
         Celebrio, the system it is built into.</para>
+
+        <para>Recently (on May 16, 2013), Google announced transforming
+        <emphasis>Hangouts</emphasis><indexterm>
+            <primary>Hangouts</primary>
+          </indexterm> to a complex real-time communication platform,
+        incorporating the Google Talk service, previously mentioned
+        <quote>old</quote> Hangouts and Google+ Messenger chat application.
+        <citation>new-hangouts</citation> The new Hangouts platform is
+        currently available either as a standalone Android/iOS application or
+        an extension for Google Chrome, so it is not purely a technology of a
+        web browser. On the other hand, the browser plugin allows the user to
+        use new Hangouts at any web page, offering very simple user interface
+        for both a text chat or a video call.</para>
+
+        <para>The new platform will preserve XMPP as an underlying protocol,
+        so it will basically extend the Google Talk service. However, Google
+        declared one important constraint. Their XMPP service will no longer
+        support a server-to-server communication.
+        <citation>new-hangouts</citation> More information about
+        interoperability problems is to be found in <xref
+        linkend="chap-interoperability-problems" />.</para>
       </sect2>
     </sect1>
   </chapter>
@@ -1785,16 +1811,35 @@ ws.send(
       <para>If Google closes its network for the people from other domains, it
       will be the second huge social network, along with Facebook, which does
       provide XMPP to its users but does not allow them to fully collaborate
-      with everyone else. Unlike Facebook, Google users can still send the
-      subscription requests and therefore initiate the connection (in the
-      long-term meaning), but this option can be disabled in the future,
-      too.</para>
+      with everyone else. Unlike Facebook<indexterm>
+          <primary>Facebook</primary>
+        </indexterm>, Google users can still send the subscription requests
+      and therefore initiate the connection (in the long-term meaning), but
+      this option can be disabled in the future, too.</para>
 
       <para>Fortunately, severals weeks later, Google announced that the
       alleged spam problems are gone and the XMPP network is opened again.
       <citation>spammy-invites-update</citation> Hence, the users having their
       accounts registered at the external XMPP providers can send invites
       (subscription requests) to Google users without problems.</para>
+
+      <para>Yet another turn came just a few days before this thesis is
+      submitted. Google announced the Hangouts<indexterm>
+          <primary>Hangouts</primary>
+        </indexterm> service to be transformed into a brand new product, as
+      described in <xref linkend="chap-google-tools" />. However, it will not
+      be further possible to communicate to Google users from external XMPP
+      services, similarly as in the time period described in the previous
+      paragraphs. Thereby, it will not be possible (according to the latest
+      Google statements) to interconnect a Hangouts account with other XMPP
+      service providers, such as <computeroutput>jabber.org</computeroutput>
+      or <computeroutput>jappix.com</computeroutput>. A possibility to log in
+      to a new Hangouts account from a custom XMPP client, i.e. the
+      client-to-server communication, will be preserved.
+      <citation>new-hangouts</citation> Google justifies this restriction by
+      claiming that most of the messages coming to Google XMPP servers from
+      external XMPP providers is spam. Unfortunately, no data nor statistics
+      on this topic have been released so far.</para>
     </sect1>
   </chapter>
 
@@ -2226,28 +2271,28 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <para>Firstly, this section describes the application analysis, i.e.
       what the requirements are. It includes both the non-functional
       requirements (such as the platform the application must run on or the
-      system it has to cooperate with) and the probable usage by the
-      customers. When the requirements are clear, it must be decided how to
-      implement the desired functionality. That is where design takes place.
-      The application design springs from the analysis and it just further
-      decomposes it and clarifies the way it will be implemented. The design
-      part is crucial because the sooner possible glitches are unveiled and
-      fixed the lower the cost is. The last thing which has to be considered
-      and decided is the <quote>stack</quote> of proper technologies to be
-      used, with regard to the both non-functional requirements and the design
+      system it has to cooperate with) and the probable usage by customers.
+      When the requirements are clear, it must be decided how to implement the
+      desired functionality. That is where the design takes place. The
+      application design springs from the analysis, further decomposes it and
+      clarifies the way it will be implemented. The design part is crucial
+      because the sooner possible glitches are unveiled and fixed the lower
+      the cost is. The last thing which has to be considered and decided is
+      the <quote>stack</quote> of proper technologies to be used, with regard
+      to the both non-functional requirements and the design
       complexity.</para>
 
       <sect2>
         <title>Value proposition</title>
 
         <para>The first step when creating a successful application (or even a
-        whole ecosystem of an application such as Celebrio) should start by
-        considering the added customer (or more precisely user) value. Value
-        proposition mainly contemplates the possible market, the users and the
-        benefits they would have from using our application, i.e. Talker.
-        <citation>value-proposition</citation> Our target market is
+        whole ecosystem of applications such as Celebrio) should start by
+        considering the added customer (or more precisely user) value. The
+        value proposition mainly contemplates the possible market, the users
+        and the benefits they would have from using our application, i.e.
+        Talker. <citation>value-proposition</citation> Our target market is
         well-defined and rather easy to interview: the elderly people. More
-        than a half of the elderly use (or are willing to use) the real-time
+        than a half of the elderly use (or are willing to use) a real-time
         communication tool, comprising both text chat and video calls. They
         prefer it to be interoperable so they can speak to the people not
         using directly the same software tool as they do.</para>
@@ -3809,7 +3854,81 @@ expect = chai.expect;</programlisting>
             <primary>Selenium</primary>
           </indexterm></title>
 
-        <para>TODO: if there is time to :-)</para>
+        <para>Testing the functionality of individual methods with unit tests
+        or packages with integration tests is usually not sufficient. Even if
+        all functions and methods worked correctly, it is not guaranteed that
+        the application behaves fine as a whole. Therefore, <emphasis>system
+        testing</emphasis> comes in handy.</para>
+
+        <para>Selenium is a system testing framework for web applications. It
+        is also sometimes referred as a user interface testing tool, since it
+        traverses the application from the user's point of view, performing
+        the same actions as user does, directly in a web browser. Therefore, a
+        Selenium test suite is more or less just a set of instructions -- user
+        actions, that are performed in a certain succession (in a web browser
+        environment), written in a custom language. PHP has been chosen for
+        Talker Selenium tests since whole Celebrio back-end is written in
+        PHP.</para>
+
+        <para>The Selenium framework itself is a Java tool, running on a
+        background. Java basically starts a server, which serves as a proxy
+        and starts a web browser instance. In this web browser instance,
+        Selenium tests are run automatically. Selenium could be compared to an
+        arbitrary macro tool, recording and replaying user actions.</para>
+
+        <para>There are two versions of Selenium. The older version, Selenium
+        version 1, sometimes also called Selenium RC, basically
+        <quote>injected</quote> the tests in the form of JavaScript functions
+        and then ran them using JavaScript as well. On the contrary, Selenium
+        2, which uses a WebDriver API, drives the browser directly using its
+        built-in support for automation.
+        <citation>selenium-webdriver</citation> Since the version 2 is more
+        lightweight and provides several additional features, it has been used
+        as a testing framework for the UI tests in Talker.</para>
+
+        <para>The generic tests functionality, common to a whole system, used
+        not only in Talker, is implemented in the
+        <computeroutput>SeleniumBase</computeroutput> class. The specific web
+        browser the tests will run in is chosen there, along with several
+        additional actions mutual to all test suites, not only Talker. The
+        other important thing to be handled in the base class is user logging.
+        Each Selenium test runs separately (there is a usual requirement for
+        test independency) so the user has to be logged in before the test
+        enters the application itself. Logging the user is implemented in the
+        same way as the tests are, so that Selenium opens a web page with
+        login screen, it fills in the user credentials and the login button is
+        pressed.</para>
+
+        <para>When the user is logged in, the application main specifics can
+        be tested. The test suite checks whether the important elements are
+        present on a page. Then, it performs the basic operations such as
+        entering the conversation view and sending a message. The tests are
+        implemented within the <computeroutput>TalkerTest</computeroutput>
+        class. An example of a testing method looks as follows:</para>
+
+        <programlisting>public function testConversationRoute() {
+    $this-&gt;signIn();
+    $this-&gt;url("app/talker");
+    $contact = $this-&gt;byClassName("menu_item_people");
+    $contact-&gt;click();
+    $this-&gt;assertRegExp('/#\\/conversation\\/\\d+/i', $this-&gt;url());
+}</programlisting>
+
+        <para>At the start, the example test method logs the user in and
+        enters the Talker application. In fact, the steps copy the standard
+        user actions. When the application is loaded, a specific element
+        representing an item in the contact list is selected and clicked. In
+        case the element was missing, the test would fail immediately.
+        Finally, the PHPUnit testing and assertion library checks whether the
+        URL has been correctly set to a new one, identifying a conversaion
+        view.</para>
+
+        <para>To keep the tests as much independent as possible, the incoming
+        actions (such as incoming message or answered video call) are not
+        incorporated in the testing suite. Still, the main aim of Selenium
+        test suite is met. Whenever the application code is changed, the test
+        suite ensures that nothing has broken and that the important parts
+        have not changed.</para>
       </sect2>
     </sect1>
   </chapter>
@@ -5728,6 +5847,47 @@ expect = chai.expect;</programlisting>
 
       <releaseinfo>from <ulink
       url="http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf">http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>selenium-webdriver</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>Selenium Project Authors</surname>
+        </author>
+      </authorgroup>
+
+      <title>Selenium WebDriver</title>
+
+      <pubdate>5/17/2013 [retrieved 5/19/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://docs.seleniumhq.org/docs/03_webdriver.jsp">http://docs.seleniumhq.org/docs/03_webdriver.jsp</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>new-hangouts</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Sean</firstname>
+
+          <surname>Gallagher</surname>
+        </author>
+      </authorgroup>
+
+      <title>Hands on with Hangouts, Google’s new text and video chat
+      architecture</title>
+
+      <pubdate>5/17/2013 [retrieved 5/20/2013]</pubdate>
+
+      <publisher>
+        <publishername>Ars Technica</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/">http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
