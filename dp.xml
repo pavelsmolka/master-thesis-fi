@@ -3039,34 +3039,33 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     <sect1>
       <title>Initializing the connection</title>
 
-      <para>TODO odsud</para>
-
-      <para>When the user clicks at Talker icon in the Celebrio main menu, a
-      request is sent to the server which renders HTML page and sends it along
-      with all necessary assets, such as JavaScript files and style sheets.
-      When the page is loaded, Talker starts running. First of all, the
-      connection to remote BOSH server must be established so that the
+      <para>When the user clicks at the Talker icon in the Celebrio main menu,
+      a request is sent to the server which generates an HTML page (containing
+      directly HTML as well as the Handlebars templates) and sends it along
+      with all necessary assets, such as JavaScript files and CSS style
+      sheets. When the page is loaded, Talker starts running. First of all,
+      the connection to a remote BOSH server must be established so that the
       application can communicate with the rest of the world. There are two
       options to do it: creating a brand new connection or using the existing
       one, i.e. attaching to the connection as it is described in <xref
       linkend="strophe-attach" />.</para>
 
-      <para>As JavaScript files are loaded,
+      <para>As JavaScript files are loaded, the
       <computeroutput>App</computeroutput> object is defined by Ember firstly
-      -- whole MVC structure described in <xref linkend="chap-ember" />. Then,
-      new <computeroutput>StropheAdapter</computeroutput> object is created
-      and it attempts to establish the connection with BOSH server
-      immediately. Strophe adapter supports both creating a new connection and
-      letting server to create one. The initialization code basically checks
-      whether the password has been provided to the client code. If yes, BOSH
-      authentication takes place, as depicted in <xref
-      linkend="fig-conn-establish" />. When the password is not provided,
-      JavaScript client sends an authentication request to the server, which
-      should establish the connection and return JID, SID and RID so the
-      client can attach to the connection and use it for further
-      communication. The workflow is depicted in <xref
-      linkend="fig-conn-attach" />. In both cases, the authentication
-      handshake follows the SASL authentication protocol defined by XEP-0206.
+      -- a whole MVC structure described in <xref linkend="chap-ember" /> is
+      initialized. Then, a new <computeroutput>StropheAdapter</computeroutput>
+      object is created and it attempts to establish the connection with a
+      BOSH server immediately. The Strophe adapter supports both creating a
+      new connection and letting the server to create one. The initialization
+      code basically checks whether the password has been provided, i.e.
+      passed to the client code. If yes, a BOSH authentication takes place, as
+      depicted in <xref linkend="fig-conn-establish" />. When the password has
+      not been provided, the JavaScript client sends an authentication request
+      to the server, which should establish the connection and return JID, SID
+      and RID so the client can attach to the connection and use it for the
+      further communication. The workflow is depicted in <xref
+      linkend="fig-conn-attach" />. In both cases, an authentication handshake
+      follows the SASL authentication protocol defined by XEP-0206.
       <citation>xep-0206</citation></para>
 
       <figure id="fig-conn-establish">
@@ -3080,7 +3079,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </figure>
 
       <figure id="fig-conn-attach">
-        <title>Establishing a new BOSH connection using server side XMPP
+        <title>Establishing a new BOSH connection using a server side XMPP
         client</title>
 
         <mediaobject>
@@ -3091,10 +3090,10 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       </figure>
 
       <para>It is recommended not to send a password to the client, for
-      obvious security reasons. Therefore, Talker is set to use server-side
+      obvious security reasons. Therefore, Talker is set to use a server-side
       connection establishment by default. On the other hand, PHP
       implementations of XMPP clients are not that matured and certain
-      problems appeared, as mentioned in <xref
+      problems have appeared, as mentioned in <xref
       linkend="chap-server-side-xmpp-client" />.</para>
     </sect1>
 
@@ -3102,36 +3101,52 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <title>Processing events</title>
 
       <para>Talker works as a typical asynchronous application. The
-      application mostly consists of many callbacks (event listeners) attached
-      to different events and awaiting to be triggered within the event loop.
-      <citation>async-javascript</citation> It is common pattern in JavaScript
-      applications nowadays. <citation>js-definitive-guide</citation> Talker
-      does expect the events to come either from the user (traversing the
-      application, sending a message, ...) or from the network (response from
-      BOSH server, incoming message, ...). Basically, almost everything in
-      Talker is intended to be either declarative (Ember object patterns) or
-      event-based (Strophe events).</para>
+      application mostly consists of various
+      <emphasis>callbacks</emphasis><indexterm>
+          <primary>callback</primary>
+        </indexterm> (i.e. event listeners), attached to different events and
+      awaiting to be triggered within the JavaScript event loop.
+      <citation>async-javascript</citation> It is a common pattern in
+      JavaScript applications, nowadays,
+      <citation>js-definitive-guide</citation> along with the
+      <emphasis>promises</emphasis><indexterm>
+          <primary>promises</primary>
+        </indexterm> pattern, which wraps the event listener function to a
+      later resolved object, which can be further processed even before the
+      event occurs. <citation>domenic-promises</citation> </para>
+
+      <para>Talker does expect the events<indexterm>
+          <primary>events</primary>
+        </indexterm> to come either from the user (traversing the application,
+      sending a message, ...) or from the network (a response from a BOSH
+      server, an incoming message, ...). Basically, almost everything in
+      Talker is intended to be either
+      <emphasis>declarative</emphasis><indexterm>
+          <primary>declarative programming</primary>
+        </indexterm> (Ember object patterns) or
+      <emphasis>event-based</emphasis> (Strophe events).</para>
 
       <para>The first kind of events are those incoming from the network. As
       it was mentioned in <xref linkend="chap-strophe-events" />, Strophe is
       set up with the event handlers attached to various event types. There is
-      not even one synchronous call between the application and the server so
-      that every response is handled with custom callback asynchronously. All
-      callbacks are defined as methods of
-      <computeroutput>StropheAdapter.prototype</computeroutput> object so that
-      they are shared by all <computeroutput>StropheAdapter</computeroutput>
-      instances. <citation>js-enlightnment</citation></para>
+      not even one synchronous call between the application and the server, so
+      that every response is handled by a custom callback asynchronously. All
+      callbacks are defined as the methods of a
+      <computeroutput>StropheAdapter.prototype</computeroutput> object, so
+      that they are shared by all
+      <computeroutput>StropheAdapter</computeroutput> instances.
+      <citation>js-enlightnment</citation></para>
 
-      <para>Incoming chat messages are handled by
+      <para>Incoming chat messages are handled by a
       <computeroutput>chatMessage</computeroutput> method. The message is
-      passed to the method from Strophe library in form of
+      passed to the method from the Strophe library in a form of an
       <computeroutput>Element</computeroutput> object. The method parses the
       message, constructs the Ember model
       <computeroutput>Message</computeroutput> object and tries to assign the
-      message to a contact (the recipient). When the recipient is known (so
-      she is present in the user contact list), new message is appended to the
-      list of messages. Ember automatically updates the view so the message
-      appears in the list immediately.</para>
+      message to a contact (the recipient). When the recipient is known (ergo
+      she is present in the user's contact list), a new message is appended to
+      an existing list of messages. Ember automatically updates the view so
+      the message appears in the list immediately.</para>
 
       <programlisting>var message = App.Message.create({
     to : msg.getAttribute('to'),
@@ -3145,111 +3160,129 @@ var contact = App.contactsController.find(function(item) {
 
 contact.get('messages').pushObject(message);</programlisting>
 
-      <para>The user actions are handled mostly by Ember itself. For example
+      <para>The user actions are handled mostly by Ember itself. For example,
       sending a new message is managed by the controller (described in <xref
-      linkend="sect-ember-controllers" />), which just calls adapter function
-      which actually sends the prepared message object. It is one of the
-      design drawbacks of the application, that there is two-way awareness
-      between the adapter and controllers (sometimes controller calls adapter,
-      sometimes the adapter actively calls controller). This design was chosen
-      for its simplicity and it appeared to be sufficient for the application
-      of Talker's size.</para>
+      linkend="sect-ember-controllers" />), which only calls an adapter
+      function, which actually sends the prepared message object. It is one of
+      the design drawbacks of the application, that there is a two-way
+      awareness between the adapter and the controllers (sometimes a
+      controller calls the adapter, sometimes the adapter actively calls the
+      controller). Such design was chosen for its simplicity and it appeared
+      to be sufficient for the application of Talker's size.</para>
 
       <sect2>
         <title>Notifications<indexterm>
             <primary>notifications</primary>
           </indexterm></title>
 
-        <para>Talker is only a part of bigger system -- Celebrio. The user has
-        to find out when a new message arrives. Therefore, simple mechanism of
-        notifications has been developed and used across the system, not only
-        in Talker. When a new chat message arrives, the application triggers
-        the built-in mechanism and the notification is propagated to the main
-        Celebrio frame using <computeroutput>postMessage</computeroutput>
+        <para>Talker is only a part of a bigger system -- Celebrio. The user
+        has to find out when a new message arrives. Therefore, a simple
+        mechanism of notifications has been developed and used across the
+        system, not only in Talker. When a new chat message arrives, the
+        application triggers a built-in mechanism of notifications and the
+        notification message is propagated to the main Celebrio frame,
+        utilizing the <computeroutput>postMessage</computeroutput>
         API.<footnote>
             <para><ulink
             url="https://developer.mozilla.org/en-US/docs/DOM/window.postMessage">https://developer.mozilla.org/en-US/docs/DOM/window.postMessage</ulink></para>
-          </footnote> Since notifications are not specific only to Talker and
+          </footnote> Since the notifications are not specific to Talker and
         they were not developed as a part of the application, they are not
-        described further here.</para>
+        further described here.</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Logger</title>
 
-      <para>Although JavaScript is very popular language, at least in web
-      applications, there is not common way to log messages. There are two
-      possible reasons. Firstly, JavaScript runs in the web browser and
-      frequent AJAX requests would be necessary to log everything what
-      happens. Secondly, web browser is kind of <quote>hostile</quote>
-      environment, so the system developer cannot rely on the message
-      truthfulness at all. Anyway, it is useful to have some information
-      logged, at least in the development mode, locally to the browser
+      <para>Although JavaScript is a very popular language, at least in web
+      applications, there is no common way to log<indexterm>
+          <primary>logging</primary>
+        </indexterm> events or custom messages. There are two possible
+      reasons: Firstly, JavaScript runs in a web browser and frequent AJAX
+      requests would be necessary to log everything what happens. Secondly, a
+      web browser is kind of a <quote>hostile</quote> environment, so the
+      system developer cannot rely on the message truthfulness at all.
+      Nevertheless, it is useful to have some information logged, at least
+      while developing the application, locally to the browser
       console.<footnote>
-          <para>All current browsers have console.log method implemented,
-          which outputs any message from JavaScript code to the browser
+          <para>All current browsers have the
+          <computeroutput>console.log</computeroutput> method implemented,
+          which outputs a message from the JavaScript code to the browser
           console, accessible to anyone using the browser. The main advantage
-          is the fact that console is hidden from the ordinary users, yet it
-          can easily be accessed by anyone debugging the application or
-          reporting a bug. See API for details: <ulink
+          is the fact that the console is hidden from the ordinary users, yet
+          it can be easily accessed by anyone debugging the application or
+          reporting a bug. See the API for details: <ulink
           url="https://developer.mozilla.org/en/docs/DOM/console.log">https://developer.mozilla.org/en/docs/DOM/console.log</ulink>.</para>
         </footnote></para>
 
-      <para>The main problem with common frequently used
+      <para>The main problem with the frequently used
       <computeroutput>console.log</computeroutput> method is the impossibility
-      of hiding certain kind of messages. In Talker, there are seven different
-      kinds of logs: those related to messages, video, subscriptions,
-      notifications etc. It is impossible to have the output uncluttered
-      without constant commenting and uncommenting
+      of hiding a certain kind of messages. In Talker, there are several
+      different kinds of logs: those related to messages, the video,
+      subscriptions, notifications etc. It is impossible to have the output
+      uncluttered without constant commenting and uncommenting the
       <computeroutput>console.log</computeroutput> calls.</para>
 
-      <para>In order to solve this trouble, logging library Log4js<indexterm>
+      <para>In order to solve this trouble, a logging library Log4js<indexterm>
           <primary>Log4js</primary>
         </indexterm> has been used in the application. It allows to create
       various loggers (with various appenders). Each logger has its own log
-      level set so it outputs only the messages tagged by that level, or
-      higher. Actually, the logger usage is very similar to well known log4j,
-      including formating layouts. There is AJAX appender available in the
-      library so it is possible to send the messages to the server to be
-      stored. This might be useful to log error messages not reproducible in
-      the development environment.</para>
+      level set, so that it outputs only the messages tagged by that level, or
+      higher. Actually, the logger usage is very similar to a well-known
+      log4j<indexterm>
+          <primary>log4j</primary>
+        </indexterm>, including formating layouts. There is an AJAX appender
+      available in Log4js so it is possible to send the messages to the server
+      to be stored permanently. This might be also useful to log the error
+      messages not reproducible in the development environment.</para>
 
       <sect2>
         <title>Setup</title>
 
-        <para>The logger (with console appender) is set up as follows:</para>
+        <para>The logger (with a console appender) is set up as
+        follows:</para>
 
         <programlisting>Log4js.getLogger("message")
       .setLevel(Log4js.Level.INFO)
       .setAppenders([new Log4js.BrowserConsoleAppender()]);</programlisting>
 
-        <para>Originally, the library does not allow chaining the methods so a
-        local variable must be created to set up the logger (or getLogger
-        method must be called multiple times). I believe method chaining is
-        sensible pattern so I reimplemented several methods in the library to
-        support it. Unfortunately, the project is not hosted on GitHub so it
-        is rather difficult to offer the changes back to the community.</para>
+        <para>Originally, the library does not allow chaining methods so a
+        local variable must be created to set up the logger (or the
+        <computeroutput>getLogger</computeroutput> method must be called
+        multiple times). I believe method chaining is a sensible pattern so I
+        reimplemented several methods in the library to get it supported.
+        Unfortunately, the project is not hosted on GitHub so it is rather
+        difficult to offer the changes back to the community.</para>
+
+        <para>Once the logger is initialized, it is stored in the Log4js
+        internal list of loggers. Later on, each logger can be retrieved from
+        that list by calling the same
+        <computeroutput>getLogger</computeroutput> method as during the
+        initialization.</para>
       </sect2>
 
       <sect2>
         <title>Logging</title>
 
-        <para>Logging a message is also rather easy, it might look as the
+        <para>Logging a message is also rather easy; it might look as the
         following example (cut out of
-        <computeroutput>onConnect</computeroutput> method):</para>
+        <computeroutput>onConnect</computeroutput> method in Talker):</para>
 
         <programlisting>App.log.logger.info('Strophe is connected as ' + App.me.jid);
 App.log.logger.debug(this);</programlisting>
 
         <para>Two notes should be mentioned about the code. Firstly, all
-        loggers which have been set up are accessible via
+        loggers which have been set up are accessible not only directly from
+        Log4js object, but also via the
         <computeroutput>App.log</computeroutput> object. It is a wrapper so
-        the used logging library can be changed (and it was changed several
-        times during the development). As long as the logger objects implement
-        common logging methods (such as <computeroutput>info</computeroutput>
-        and <computeroutput>debug</computeroutput>), the application will
-        work.</para>
+        the used logging library (Log4js in our case) can be changed (and it
+        was changed several times during the development). As long as the
+        logger objects implement common logging methods (such as
+        <computeroutput>info</computeroutput> and
+        <computeroutput>debug</computeroutput>), the application will work
+        without the need to change the logging itself.</para>
+
+        <para>TODO odsud</para>
 
         <para>The second thing is logging complex objects such as
         <computeroutput>this</computeroutput>, pointing to the
@@ -5876,6 +5909,29 @@ expect = chai.expect;</programlisting>
 
       <releaseinfo>from <ulink
       url="http://emberjs.com/guides/routing/specifying-a-routes-model/">http://emberjs.com/guides/routing/specifying-a-routes-model/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>domenic-promises</abbrev>
+
+      <authorgroup>
+        <author>
+          <firstname>Domenic</firstname>
+
+          <surname>Denicola</surname>
+        </author>
+      </authorgroup>
+
+      <title>Callbacks, Promises, and Coroutines</title>
+
+      <pubdate>2013 [retrieved 5/20/2013]</pubdate>
+
+      <publisher>
+        <publishername>Slideshare</publishername>
+      </publisher>
+
+      <releaseinfo>from <ulink
+      url="http://www.slideshare.net/domenicdenicola/callbacks-promises-and-coroutines-oh-my-the-evolution-of-asynchronicity-in-javascript">http://www.slideshare.net/domenicdenicola/callbacks-promises-and-coroutines-oh-my-the-evolution-of-asynchronicity-in-javascript</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
