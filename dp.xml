@@ -146,16 +146,18 @@
     <para>As mentioned above, the web browser has become one of the most
     popular platforms. Celebrio, a simple software for the elderly, simulating
     the operating system interface, is a typical example of a rich Internet
-    application. <citation>celebrio-system</citation> All the topics mentioned
-    in the previous paragraph appeared to be very important in the system.
-    When interviewing the elderly people in the Czech Republic, it appeared
-    that almost 90 % of the elderly computer users use the real-time
-    communication (RTC) applications, mostly Skype.
-    <citation>elderly-questionnaires</citation> Interaction with their loved
-    ones is the most desired benefit they expect from the computer. Therefore,
-    creating a real-time application, a text messenger supporting video
-    calling, has become not only a programming challenge but also a business
-    goal.</para>
+    application.<footnote>
+        <para><ulink
+        url="http://www.celebriosoftware.com/celebrio-system">http://www.celebriosoftware.com/celebrio-system</ulink></para>
+      </footnote> All the topics mentioned in the previous paragraph appeared
+    to be very important in the system. When interviewing the elderly people
+    in the Czech Republic, it appeared that almost 90 % of the elderly
+    computer users use the real-time communication (RTC) applications, mostly
+    Skype. <citation>elderly-questionnaires</citation> Interaction with their
+    loved ones is the most desired benefit they expect from the computer.
+    Therefore, creating a real-time application, a text messenger supporting
+    video calling, has become not only a programming challenge but also a
+    business goal.</para>
 
     <para>With regard to the <quote>real-time tendency</quote>, this thesis
     embraces the topic of real-time applications in web browsers, especially
@@ -764,7 +766,7 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
           </footnote> It wraps the WebSocket client functionality performed by
         a user agent (i.e. a web browser). Using the API is very simple. The
         object, which handles all the WS functionality, is created by calling
-        a <computeroutput>WebSocket()</computeroutput> constructor:
+        a <computeroutput>WebSocket</computeroutput> constructor:
         <citation>ws-html5rocks</citation></para>
 
         <programlisting>var connection = new WebSocket(
@@ -813,8 +815,8 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <computeroutput>ArrayBuffer</computeroutput>,
         <computeroutput>ArrayBufferView</computeroutput> or
         <computeroutput>Blob</computeroutput> can be sent via the
-        <computeroutput>send()</computeroutput> method. See the examples
-        below: <citation>ws-html5rocks</citation></para>
+        <computeroutput>send</computeroutput> method. See the examples below:
+        <citation>ws-html5rocks</citation></para>
 
         <programlisting>// Sending a String
 connection.send('string message');
@@ -933,7 +935,7 @@ data: Another line of the event message</programlisting></para>
 }, false);</programlisting>
 
       <para>A connection is closed either by a client by calling
-      <computeroutput>close()</computeroutput> method on the
+      <computeroutput>close</computeroutput> method on the
       <computeroutput>EventSource</computeroutput> object or by a server (when
       all data is sent). However, if a server closes the connection, a client
       attempts to reconnect to the same resource. So, a server cannot close
@@ -1088,7 +1090,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
 });</programlisting>
 
         <para>Closing the connection is rather straightforward -- by invoking
-        <computeroutput>close()</computeroutput> method on the
+        the <computeroutput>close</computeroutput> method on the
         <computeroutput>RTCPeerConnection</computeroutput> object, which has
         been instantiated before as
         <computeroutput>pc</computeroutput>.</para>
@@ -2089,12 +2091,12 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>The whole XMPP protocol is represented by XML elements called
         stanzas, transferred between a client and a server. There are various
         approaches to create an XML document structure in JavaScript. Using
-        jQuery is the most common way to do so. jQuery object, created by
-        jQuery <computeroutput>$()</computeroutput> function, represents XML
+        jQuery is the most common way to do so. The jQuery object, created by
+        jQuery <computeroutput>$</computeroutput> function, represents an XML
         structure tree which can be extended using methods like
-        <computeroutput>append()</computeroutput>,
-        <computeroutput>wrap()</computeroutput> and
-        <computeroutput>after()</computeroutput>.
+        <computeroutput>append</computeroutput>,
+        <computeroutput>wrap</computeroutput> and
+        <computeroutput>after</computeroutput>.
         <citation>jquery-api</citation></para>
 
         <para>Strophe.js comes up with a completely independent XML creator,
@@ -2113,15 +2115,14 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   &lt;/query&gt;
 &lt;/iq&gt;</programlisting>Bijection between the two pieces of code is rather
         obvious. The only catch could be not yet defined
-        <computeroutput>$iq()</computeroutput> function. Similarly as jQuery,
+        <computeroutput>$iq</computeroutput> function. Similarly as jQuery,
         Strophe.js provides shorthand functions
-        <computeroutput>$msg()</computeroutput>,
-        <computeroutput>$pres()</computeroutput>, and
-        <computeroutput>$iq()</computeroutput> for creating all three kinds of
-        stanzas, along with a <computeroutput>$build()</computeroutput>
-        function for making any kind of element. Therefore, creating a
-        presence stanza and sending it using Strophe.js is as simple as
-        follows:</para>
+        <computeroutput>$msg</computeroutput>,
+        <computeroutput>$pres</computeroutput>, and
+        <computeroutput>$iq</computeroutput> for creating all three kinds of
+        stanzas, along with a <computeroutput>$build</computeroutput> function
+        for making any kind of element. Therefore, creating a presence stanza
+        and sending it using Strophe.js is as simple as follows:</para>
 
         <programlisting>this.send($pres().tree());</programlisting>
       </sect2>
@@ -2172,16 +2173,17 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
   exampleMethod: function() { /* ... */ }
 });</programlisting>
 
-      <para>Among all plugin object properties and methods,
-      <computeroutput>init()</computeroutput> is explicitly quoted. That is
-      because an <computeroutput>init()</computeroutput> method is run as the
-      plugin setup automatically by Strophe, after a new connection object has
-      been created. The new connection object is passed to the method as the
-      only parameter. The plugin can save the connection object for later use.
-      <citation>xmpp-in-javascript</citation> When the plugin is initialized,
-      any method (such as <computeroutput>exampleMethod</computeroutput> from
-      the example above) can be invoked using the plugin name property of the
-      connection object, as follows:</para>
+      <para>Among all plugin object properties and methods, the
+      <computeroutput>init</computeroutput> function is explicitly quoted.
+      That is because the <computeroutput>init</computeroutput> method is run
+      as a plugin setup automatically by Strophe, after a new connection
+      object has been created. The new connection object is passed to the
+      method as the only parameter. The plugin can save the connection object
+      for later use. <citation>xmpp-in-javascript</citation> When the plugin
+      is initialized, any method (such as
+      <computeroutput>exampleMethod</computeroutput> from the example above)
+      can be invoked using the plugin name property of the connection object,
+      as follows:</para>
 
       <programlisting>connection.myplugin.exampleMethod();</programlisting>
 
@@ -2300,20 +2302,21 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>Talker offers the benefit of running within Celebrio, the
         <quote>operating system</quote> designed specifically for the elderly.
         The compatibility is limitless within the XMPP network. Unlike many
-        communication tools, it provides text chat and video calling bundled
-        together so the user simply uses it as a <quote>dialogue</quote>
-        application, no matter which way she feels like communicating at the
-        moment.</para>
+        communication tools, it provides a text chat and a video calling
+        platform bundled together, so the user simply uses it as a
+        <quote>dialogue</quote> application, no matter which way she feels
+        like communicating at the moment.</para>
       </sect2>
 
       <sect2>
         <title>Use cases</title>
 
         <para>The use case analysis springs from two information sources. The
-        first one is based on author's own opinion and experience with online
-        communication tools. The other part is supported by user interviews
-        and market research. In other words, the potential customers said what
-        their probable use cases would look like. However, there is no
+        first one is based on an author's own opinion and experience with
+        online communication tools. The other part is patterned on user
+        interviews and the market research, carried out as a part of Celebrio
+        marketing activities. In other words, the potential customers said
+        what their probable use cases would look like. However, there is no
         quantitative data analysis on this topic.</para>
 
         <figure id="talker-uc">
@@ -2326,70 +2329,73 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
           </mediaobject>
         </figure>
 
-        <para>As depicted in <xref linkend="talker-uc" />, Talker use case
+        <para>As depicted in <xref linkend="talker-uc" />, the Talker use case
         analysis is rather simple. There are two actors operating the system,
-        Celebrio user and remote XMPP server. The former uses all GUI
-        application components, i.e. she can display the contact list with
-        current contact present statuses, enter the text chat (which includes
-        sending and receiving new messages) and set up a video call. A contact
-        list, the first application screen, is further described in <xref
-        linkend="chap-contact-list" />. When any of the contacts is clicked
-        at, communication view is displayed so the user can read the incoming
-        messages, send a new message or start a video call. Several
+        a Celebrio user and a remote XMPP server. The former uses all GUI
+        application components, i.e. she can display a contact list with the
+        presence statuses of the contacts in it, enter the text chat (which
+        includes sending and receiving new messages) and set up a video call.
+        A contact list, the first application screen, is further described in
+        <xref linkend="chap-contact-list" />. When any of the contacts is
+        clicked at, communication view is displayed so the user can read the
+        incoming messages, send a new message or start a video call. Several
         application screenshots are pictured in <xref
         linkend="appendix-screenshots" />. TODO are they?</para>
 
         <para>There is one more actor depicted in <xref
-        linkend="talker-uc" />. It is remote XMPP server, communicating with
-        the application indirectly through established connection. When a new
-        message appears on the server, it is pushed to the application and
-        handled as an incoming message. Every new message, received or sent,
-        is appended to the <quote>chat history</quote>, as usual in similar IM
-        clients.</para>
+        linkend="talker-uc" />. It is a remote XMPP server, communicating with
+        the application indirectly through an established connection. When a
+        new message appears on a server, it is pushed to the application and
+        handled as an incoming message. Each new message, either received or
+        sent, is appended to the <quote>chat history</quote>, as it is usual
+        in similar IM clients.</para>
       </sect2>
 
       <sect2 id="sect-choosing-tech">
         <title>Choosing technologies</title>
 
-        <para>The use cases and value proposition imply some technologies and
-        tools that are obvious to be used and also some constraints. At the
-        lowest level, Talker is part of web application and it must run in the
-        web browser environment. With respect to interactivity and real-time
-        behaviour, it must be powered by <emphasis>JavaScript</emphasis>.
-        There are other possibilities such as Adobe Flash<indexterm>
+        <para>The use cases and a value proposition imply certain technologies
+        and tools that are obvious to be used and also some constraints. At
+        the lowest level, Talker is a part of a web application so it must run
+        in a web browser environment. With respect to the interactivity and
+        real-time behaviour, it must be powered by
+        <emphasis>JavaScript</emphasis>. There are other possibilities, such
+        as Adobe Flash<indexterm>
             <primary>Flash</primary>
-          </indexterm> or browser plugins, they however do not play well with
-        various environments.</para>
+          </indexterm> or browser plugins. However, they do not play well with
+        various environments, as mentioned in <xref
+        linkend="chap-high-level-rtc" />.</para>
 
-        <para>XMPP has been chosen as the communication protocol for sending
-        the messages. It is opened, mature and interoperable technology,
-        facilitating just plugging in the new part of world-wide network. XMPP
-        is described in <xref linkend="chap-xmpp" /> and JavaScript XMPP
-        framework in <xref linkend="chap-xmpp-in-javascript" />. Such
-        nontrivial application, as Talker is, deserves fine client-side
-        framework so the connections, states, contact lists and all messages
-        are not only stored in DOM but also managed by JavaScript itself. In
-        the last years, there are many MVC<footnote>
+        <para>XMPP has been chosen as the communication protocol for the
+        messages transmission. It is an opened, mature and interoperable
+        technology. Creating a new XMPP service means just plugging in the new
+        part to a world-wide network. XMPP is described in <xref
+        linkend="chap-xmpp" /> and the used JavaScript XMPP framework in <xref
+        linkend="chap-xmpp-in-javascript" />. Such nontrivial application, as
+        Talker is, deserves a fine client-side framework. Therefore, the
+        connections, states, contact lists and all messages are not only
+        stored in DOM but also managed by JavaScript itself. In the last
+        years, many MVC<footnote>
             <para>MVC stands for Model -- View -- Controller, common
             three-tier architecture. Model is responsible for data layer, View
             stands for presentation layer. The function of controller varies
             from one implementation to another, but it is mostly responsible
             for dispatching the user actions and controlling application flow,
             for example redirecting.</para>
-          </footnote> JavaScript frameworks. When implementing the
-        application, I have tried Backbone, Angular, Knockout and Ember -- all
-        modern MVC JavaScript frameworks. After short period of testing, I
-        chose Ember as the best one. Framework overview, various advantages
-        and also some pitfalls are mentioned in <xref
+          </footnote> JavaScript frameworks have emerged. When implementing
+        the application, I have tried Backbone, Angular, Knockout and Ember --
+        all modern MVC JavaScript frameworks. After a short period of testing,
+        I chose Ember as the best one. The framework overview, various
+        advantages and also some pitfalls are mentioned in <xref
         linkend="chap-ember" />.</para>
 
-        <para>The last important field to be covered are the video calls. On
-        no account did I consider to implement it from scratch. Anyway, there
-        are several handy tools and frameworks which could have been used.
-        After all, I decided to use OpenTok, video call library described in
-        <xref linkend="chap-opentok" />, mostly for its wide compatibility. It
-        even supports WebRTC in its newest version, which is considered to be
-        the future of media applications on web.</para>
+        <para>The last important field to be covered is the video calls
+        platform. On no account did I consider to implement it from scratch.
+        Anyway, there are several handy tools and frameworks which could have
+        been used. After all, I decided to use OpenTok, a video calls library
+        described in <xref linkend="chap-opentok" />, mostly for its wide
+        compatibility. It even supports WebRTC in its newest version, which is
+        considered to be the future of media applications on the web.</para>
       </sect2>
     </sect1>
 
@@ -2398,16 +2404,16 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
       <para>As mentioned in the previous section, Talker is not trivial
       application which could be served by several inline scripts manipulating
-      the DOM. It has to handle states, keep track of all simultaneous chats
-      and dispatch all messages to appropriate contacts. Those reasons led to
-      semi-modular architecture, depicted in <xref
+      the DOM. It has to handle states, keep track of all simultaneous
+      conversations and dispatch all messages to the appropriate contacts.
+      Those reasons led to a semi-modular architecture, depicted in <xref
       linkend="fig-talker-modules" />. Modules inside the grey package
       represent those I directly implemented, the outside ones are the used
       libraries and third party modules, however necessary to run the
       application.</para>
 
       <figure id="fig-talker-modules">
-        <title>Application modules structure</title>
+        <title>An application modules structure</title>
 
         <mediaobject>
           <imageobject>
@@ -2416,43 +2422,45 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         </mediaobject>
       </figure>
 
-      <para>The main application logic is placed inside
-      <computeroutput>App</computeroutput> module. It is implemented as
+      <para>The main application logic is placed inside an
+      <computeroutput>App</computeroutput> module. It is implemented as an
       <computeroutput>Ember.Application</computeroutput> object and it serves
-      as namespace for the rest of the application. Using namespace to wrap
-      the whole application is good practice so the global namespace (i.e.
-      window object) is not polluted. Within the namespace, other Ember-based
-      classes are separated into four parts according to the MVC structure,
-      i.e. models, views and controllers. The last part is router, responsible
-      for handling the application state.</para>
+      as a namespace for the rest of the application. Using the namespace to
+      wrap the whole application is generally a good practice, so the global
+      namespace (i.e. a <computeroutput>window</computeroutput> object) is not
+      polluted. Within the namespace, other Ember-based classes are separated
+      into four parts, according to the MVC structure, i.e. models, views and
+      controllers. The last part is represented by a router, a component
+      responsible for handling the application state.</para>
 
       <sect2>
         <title>Models</title>
 
-        <para>Talker is supposed to handle data: keep the information about
-        the contact list, update it as the contacts sign in and out, keep
+        <para>Talker is supposed to handle data: to keep the information about
+        a contact list, update it as the contacts sign in and out; to keep
         track of the message lists corresponding to individual contacts. All
-        mentioned data manipulation is achieved with models. Model hierarchy
-        is depicted in <xref linkend="fig-models" />. The main two entities,
+        mentioned data manipulation is achieved with
+        <emphasis>models</emphasis>. A model hierarchy is depicted in <xref
+        linkend="fig-models" />. The main two entities,
         <computeroutput>Contact</computeroutput> and
         <computeroutput>Message</computeroutput>, are rather self-explaining.
-        It should be mentioned that messages are stored directly as a property
-        list of each contact. Potential contact removal would erase its
-        messages as well. Class<footnote>
-            <para>When speaking about classes and displaying them at the class
-            diagrams, one should be aware of the fact there are no real
+        It should be mentioned that the messages are stored directly as a list
+        property of each contact. Potential contact removal would erase its
+        messages as well. The class<footnote>
+            <para>When speaking about classes and displaying them in the class
+            diagram, one should be aware of the fact there are no real
             language-based classes in JavaScript. However, Ember provides a
             convenient way to imitate the class behaviour with
             <computeroutput>Ember.Object.extend</computeroutput> method,
             further described in the next section.</para>
           </footnote> <computeroutput>Person</computeroutput> encapsulates the
         properties common for the contacts and the user operating the
-        application. In other words, information about the current user,
+        application. In other words, the information about the current user,
         logged in to the application, is stored in an instance of that
         class.</para>
 
         <figure id="fig-models">
-          <title>Structure of application models</title>
+          <title>A structure of the application models</title>
 
           <mediaobject>
             <imageobject>
@@ -2470,17 +2478,20 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         user traverses the application, various controllers manage the states.
         The structure of controllers bijectively corresponds to the views
         hierarchy (i.e. almost every view has its respective controller and
-        vice versa). Only the former is displayed, see <xref
-        linkend="fig-controllers" />. The main view, contact list, is handled
-        by <computeroutput>ContactsController</computeroutput> instance. When
-        the user enters the conversation, ConversationController takes over
-        the command. TextController and VideoController (with their respective
-        views) are present within the conversation. Calling one or another
-        depends on whether the user interacts with the text part (chat) or the
-        video call.</para>
+        vice versa). Thereby, only the controllers are displayed in <xref
+        linkend="fig-controllers" />, to show the hierarchy structure. The
+        main view, a contact list, is handled by a
+        <computeroutput>ContactsController</computeroutput> instance. When the
+        user enters the conversation,
+        <computeroutput>ConversationController</computeroutput> takes over the
+        command. <computeroutput>TextController</computeroutput> and
+        <computeroutput>VideoController</computeroutput> (with their
+        respective views) are present within the conversation. Calling one or
+        another depends on whether the user interacts with the text part (the
+        chat) or the video calls.</para>
 
         <figure id="fig-controllers">
-          <title>Application views/controllers structure</title>
+          <title>An application views/controllers structure</title>
 
           <mediaobject>
             <imageobject>
@@ -2494,21 +2505,22 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <title>Adapters</title>
 
         <para>There is a considerable amount of application logic not related
-        to the data itself, but comprising connection establishing, managing
-        and triggering correct handlers when any new data comes from the
-        server. As Jon Cairns fittingly notes, models should not contain the
-        unnecessary application logic not directly related to them.
-        <citation>fat-model-skinny-controller</citation> This pieces of code
-        are divided into two <quote>adapter</quote> classes.
+        to the data itself, but comprising the connection establishment, along
+        with managing and triggering the correct handlers when a new data
+        comes from the server. As Jon Cairns fittingly notes in his blog post,
+        models should not contain the unnecessary application logic not
+        directly related to them.
+        <citation>fat-model-skinny-controller</citation> In Talker, such
+        application logic is divided into two <quote>adapter</quote> classes.
         <computeroutput>StropheAdapter</computeroutput> is responsible for
-        creating, keeping up and reacting to the XMPP connection with BOSH
-        server. In other words, it mostly handles the text messages.
-        <computeroutput>OpenTokAdapter</computeroutput> uses OpenTok library
-        to keep track of the video calls. Video adapter object is assigned to
-        every contact because it keeps the state information (session) which
-        is different for each contact. On the other hand,
-        <computeroutput>StropheAdapter</computeroutput> is created and
-        initialized just once for the whole application since it does not
+        creating, keeping up and reacting to an XMPP connection to a BOSH
+        server. In other words, it mostly handles the text messages. On the
+        contrary, <computeroutput>OpenTokAdapter</computeroutput> uses the
+        OpenTok library to keep track of the video calls. The video adapter
+        object is assigned to every contact because it keeps the state
+        information (a session), which is different for each contact. On the
+        other hand, <computeroutput>StropheAdapter</computeroutput> is created
+        and initialized just once for the whole application since it does not
         contain any contact-specific data. The class structure is depicted in
         <xref linkend="fig-adapters" />.</para>
 
@@ -2528,51 +2540,57 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       <title>Ember.js -- JavaScript MVC framework</title>
 
       <para>Talker is a purely client-side-based application, implemented in
-      JavaScript and running in a web browser. As it is mentioned in the
-      technology overview in <xref linkend="sect-choosing-tech" />, Talker
-      implements MVC structure on the client side, in the form of Ember MVC
-      objects. In this section, JavaScript MVC is analysed overall at first,
-      then some features specific to Ember which were used in the
-      implementation are described.</para>
+      JavaScript and running in a web browser. As mentioned in the technology
+      overview in <xref linkend="sect-choosing-tech" />, Talker implements the
+      MVC structure on the client side, in the form of Ember MVC objects. In
+      this section, JavaScript MVC is analysed overall at first, then some
+      features specific to Ember, which were used in the implementation, are
+      described.</para>
 
       <sect2>
         <title>Client-side MVC</title>
 
         <para>First of all, it should be clarified why it is necessary to do
-        MVC in JavaScript. Most of the web technologies running on the server
-        and powering web applications use some kind of MVC<indexterm>
+        MVC in JavaScript. Most of the web technologies running on a server
+        and powering the web applications use some kind of MVC<indexterm>
             <primary>MVC</primary>
           </indexterm>, across all programming languages. It is Rails for
         Ruby; Zend, Nette or Symphony for PHP; Django for Python; Spring MVC
-        or simple servlets with JSPs in Java; ASP.NET MVC for C#/.NET, etc. It
-        appears that three-tier architecture helps the developers to organize
-        the code and the frameworks can do a considerable amount of job
+        or even simple servlets with JSPs in Java; ASP.NET MVC for C#/.NET,
+        etc. It appears that three-tier architecture<indexterm>
+            <primary>three-tier architecture</primary>
+          </indexterm> helps the developers to organize the code. In addition,
+        the frameworks can do a considerable amount of job
         automatically.</para>
 
-        <para>In the years, the approach to web application development
-        changes a bit. As the clients performance increases, interactivity and
-        quick response becomes the most desired benchmark. And here comes
-        JavaScript, which can manage whole application at the client side,
-        only synchronizing data with a server using AJAX requests. It seems
-        this trend of <emphasis>thick client</emphasis> will be stronger and
-        stronger in the next years and the server is going to be transformed
-        only to the proxy in front of database system.
+        <para>In the last couple of years, the approach to a web application
+        development has changed a bit. As the performance of clients
+        increases, the interactivity and a quick response have become the most
+        desired benchmark. And here comes JavaScript, which can manage a whole
+        application at the client side, only synchronizing a data with a
+        server using AJAX requests. It seems this trend of a <emphasis>thick
+        client</emphasis> (sometimes also referred as a <emphasis>fat
+        client</emphasis>) will be increasingly stronger in the next years. A
+        server is going to be transformed only to a proxy in front of a
+        database system.
         <citation>yehuda-talk</citation><citation>new-dev-era</citation></para>
 
-        <para>It is obvious that many tasks previously a server was
-        responsible for are moved to the client, to JavaScript. Above all,
-        JavaScript application handles user actions (such as clicking a button
-        or even typing to an input), rendering HTML snippets (templates) and
-        storing the <quote>temporary</quote> data. Storing the data has become
-        more tricky, because the JavaScript application works as a first level
-        cache which processes all changes but synchronizes with the server
-        only occasionally. Simple example: let there be an input for the user
-        name, bound to the JavaScript model object representing a user.
-        Whenever a new letter appears in the input, JavaScript updates its
-        model object (still on the client side). No sooner has whole user name
-        been entered (either submitted or after a delay) when JavaScript
-        synchronizes it with the server. Whole process schema is depicted in
-        <xref linkend="fig-js-mvc-input" />.</para>
+        <para>It is obvious that many tasks, for which a server was
+        responsible previously, have moved to a client -- to JavaScript. Above
+        all, a JavaScript application handles the user actions (such as
+        clicking a button or even typing to an input), renders HTML snippets
+        (i.e. templates) and stores the <quote>temporary</quote> data, i.e.
+        the data the application currently works with. Storing the data has
+        become a bit tricky, because the JavaScript application works as a
+        first level cache, which processes all changes but synchronizes with
+        the server only occasionally. A simple example: let there be an input
+        for a user name, bound to a JavaScript model object representing a
+        user. Whenever a new letter appears in the input, JavaScript updates
+        its corresponding model object (still on the client side). No sooner
+        has a whole user name been entered (either submitted or after a
+        certain delay) when JavaScript synchronizes it with the server. A
+        schema of the whole process is depicted in <xref
+        linkend="fig-js-mvc-input" />.</para>
 
         <figure id="fig-js-mvc-input">
           <title>Example client-handled input, bound to JavaScript
@@ -2586,16 +2604,16 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         </figure>
 
         <para>The main advantage of such approach is definitely the swiftness.
-        Input changes numbered 1, 2 and 3 are processed immediately at the
-        client. If the browser ran in the offline mode, submitting would store
-        the data to the local storage eventually. Other very important
-        benefit, especially for the application developer, is separation of
-        concerns between individual tiers. The result is much better organized
-        and thus better maintainable than monolithic blend of code containing
-        all aspects of an application at one place.</para>
+        The input changes (numbered 1, 2 and 3) are processed immediately at
+        the client. If a browser ran in an offline mode, submitting would
+        store the data to the local storage eventually. Another very important
+        benefit, especially for an application developer, is the separation of
+        concerns among individual tiers. The result is much better organized
+        and thus better maintainable than a monolithic blend of code,
+        containing all application aspects at one place.</para>
 
         <para>In modern client-side JavaScript MVC frameworks, JavaScript is
-        also responsible for rendering HTML. This topic is set aside to
+        also responsible for rendering HTML. This topic is set aside to a
         separate section in <xref linkend="sect-html-rendering" />.</para>
       </sect2>
 
@@ -2603,23 +2621,24 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <title>Comparison to other frameworks</title>
 
         <para>Ember.js is not the only available JavaScript MVC framework. In
-        fact, there are plenty of similar frameworks, each of them providing
-        slightly different set of tools and asserting slightly different
-        philosophy. I have chosen Ember for Talker for several reasons. The
+        fact, there are plenty of similar frameworks, each of which provides a
+        slightly different set of tools and asserting a slightly different
+        philosophy. I have chosen Ember for Talker due to several reasons. The
         facts in this section may be a little subjective as they are mostly
         just opinions of mine, as author of this thesis and the Talker
-        application. There is actually not much comparison but rather the
+        application. There is actually not very much comparison but rather the
         features specific for Ember are described and explained.</para>
 
         <para>First of all, Ember provides automatic bindings. There are
-        automatic bindings between object properties, so that all computed
+        automatic bindings between the object properties, so that all computed
         properties are automatically updated when the <quote>raw</quote>
         properties, which they are based on, change their values.
         <citation>ember-in-action</citation> The following snippet of code
-        from Talker <computeroutput>Message</computeroutput> object represents
-        such situation: <computeroutput>fromName</computeroutput> attribute
-        represents the contact name and it is based on the contact JID, stored
-        in <computeroutput>from</computeroutput> attribute:</para>
+        from the <computeroutput>Message</computeroutput> object represents
+        such situation: the <computeroutput>fromName</computeroutput>
+        attribute represents a contact name, which is based on the contact
+        JID, stored in the <computeroutput>from</computeroutput>
+        attribute:</para>
 
         <programlisting>App.Message = Ember.Object.extend({
     from : null,
@@ -2628,38 +2647,38 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     }.property('from')
 });</programlisting>
 
-        <para>Bindings are really valuable when
-        <computeroutput>fromName</computeroutput> property value has already
-        been rendered in the template. There is no
-        <computeroutput>render()</computeroutput> function (as it is in
-        Backbone, for instance) to render the template; templates are rendered
-        automatically and updated automatically as well, as the underlying
-        data changes.</para>
+        <para>The binding is really valuable when a value of the
+        <computeroutput>fromName</computeroutput> property has already been
+        rendered in a template. There is no
+        <computeroutput>render</computeroutput> function (as it is in Backbone
+        framework, for instance) to render the template; templates are
+        rendered automatically and updated automatically as well, as the
+        underlying data changes.</para>
 
-        <para>There is a considerable amount of additional work Ember does. It
-        follows the <quote>convention over configuration</quote> rule to the
-        maximum extent, above all other MVC frameworks. For example, when one
-        keeps to the official naming conventions, the framework creates the
-        objects which are necessary and have not been defined, such as a
-        missing controller.</para>
+        <para>There is a considerable amount of additional work which Ember
+        takes care of. The framework follows the <quote>convention over
+        configuration</quote> rule to the maximum extent, above all other MVC
+        frameworks. For instance, when one keeps up to the official naming
+        conventions, the framework creates the objects which are necessary and
+        have not yet been defined, such as a missing controller.</para>
 
-        <para>Ember.js uses templating engine Handlebars, which provides very
-        clean and convenient way to create presentation layer of the
-        application. In my opinion, using dedicated templating engine makes
+        <para>Ember.js uses a templating engine Handlebars, which provides a
+        very clean and convenient way to create a presentation layer of the
+        application. In my opinion, using a dedicated templating engine makes
         the code much more cleaner than using HTML attributes, as for example
-        Knockout.js does. Templating is described in detail in <xref
+        Knockout.js does. Templating is further described in <xref
         linkend="sect-html-rendering" />.</para>
 
-        <para>To sum it up, Ember.js is modern and powerful tool doing a
-        considerable amount of job that programmer does not have to take care
-        about. On the other hand, the learning curve of Ember is told to be
-        one of the steepest and it is rather difficult to make the
+        <para>To sum it up, Ember.js is a modern and powerful tool doing a
+        considerable amount of job that a programmer does not have to take
+        care about. On the other hand, the learning curve of Ember is told to
+        be one of the steepest and it is rather difficult to make the
         <emphasis>second</emphasis> step, after reading the basic tutorials
-        and examples. Fortunately, there is rather active community working on
+        and examples. Fortunately, there is an active community working on
         screencasts<footnote>
             <para><ulink
             url="http://emberwatch.com/">http://emberwatch.com/</ulink></para>
-          </footnote>, documentation and actively answering question on
+          </footnote>, documentation and actively answering questions on
         Twitter and StackOverflow.</para>
       </sect2>
 
@@ -2668,13 +2687,15 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
         <para>Application controllers are responsible for storing the current
         state and mediating the communication between the views and models.
-        <citation>ember-howto</citation> In Ember (and thus in Talker as well)
-        controllers also represent collections of model objects.</para>
+        <citation>ember-howto</citation> In Ember (and thus in Talker as
+        well), the controllers also represent collections of the model
+        objects.</para>
 
         <para>The first function, processing the user actions from the view,
-        is represented by <computeroutput>processMessage</computeroutput>
+        is represented by the <computeroutput>processMessage</computeroutput>
         method in <computeroutput>TextController</computeroutput>. The
-        following snippet is shortened part from Talker source code:</para>
+        following snippet is a shortened part taken from the Talker source
+        code:</para>
 
         <programlisting>App.TextController = Ember.ObjectController.extend({
 
@@ -2689,25 +2710,25 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 });</programlisting>
 
         <para>The method <computeroutput>processMessage</computeroutput> is
-        called from the view object when the message input is submitted. The
-        view just grabs the data from input and sends it to the controller,
-        which creates new <computeroutput>Message</computeroutput> object,
-        sends the message and finally updates the list of messages for the
-        current contact, accessible via
-        <computeroutput>this.get('content')</computeroutput>. Adding
-        <computeroutput>.messages</computeroutput> to the
+        called from the view object, when a message input is submitted. The
+        view just grabs the data from the input and sends it to the
+        controller, which creates a new
+        <computeroutput>Message</computeroutput> object, sends the message and
+        finally updates the list of messages for the current contact,
+        accessible via <computeroutput>this.get('content')</computeroutput>.
+        Adding <computeroutput>.messages</computeroutput> to the
         <quote>selector</quote> points the getter directly to the array of
         messages.<footnote>
-            <para>Actually, the method contains a lot more code such as
+            <para>Actually, the method contains a lot more code such as an
             argument check and return values. They have been omitted in this
             example for clarity and shortness.</para>
           </footnote></para>
 
-        <para>Another example of controller from Talker is not
-        <computeroutput>ObjectController</computeroutput> as in previous
+        <para>Another example of a controller from Talker is not an instance
+        of <computeroutput>ObjectController</computeroutput>, as in previous
         example, but <computeroutput>ArrayController</computeroutput>. It
-        represents the collection of contacts, displayed in the main
-        application view:</para>
+        represents a collection of contacts, displayed in the main application
+        view:</para>
 
         <programlisting>App.contactsController = Ember.ArrayController.create({
 
@@ -2727,36 +2748,38 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 });</programlisting>
 
         <para>The contacts are stored in the
-        <computeroutput>content</computeroutput> attribute, which is Ember
-        convention for naming the actual data set within the
-        <computeroutput>ArrayController</computeroutput>. As it is necessary
-        to render the contacts as pairs in the two-row-view, there is
+        <computeroutput>content</computeroutput> attribute, which is an Ember
+        convention for naming an actual data set within an
+        <computeroutput>ArrayController</computeroutput>. Since it is
+        necessary to render the contacts as pairs in the two-row-view (TODO
+        depicted in screenshot XY), there is the
         <computeroutput>pair</computeroutput> method returning the content
-        reformatted as the array of pairs. Notice that the function is
+        reformatted as an array of pairs. Notice that the function is a
         property of <computeroutput>content.@each</computeroutput>, which
-        means that any update, insert or delete of the content array forces to
-        recalculate pairs as well.</para>
+        means that any update, insertion or deletion of the content array
+        forces the pairs to be recalculated as well.</para>
       </sect2>
 
       <sect2 id="sect-html-rendering">
         <title>Rendering HTML</title>
 
-        <para>Thick JavaScript client is responsible not only for manipulating
-        the data but also for rendering it to the HTML page. Ember is shipped
-        with Handlebars<indexterm>
+        <para>A thick JavaScript client is responsible not only for
+        manipulating the data but also for rendering it to the HTML page.
+        Ember is shipped with Handlebars<indexterm>
             <primary>Handlebars</primary>
           </indexterm> -- a lightweight templating engine. The application is
-        decomposed to the separate views; in case of Talker it is a contact
-        list, the conversation, which consists of another two parts -- text
-        chat and video. The structure basically corresponds with the
-        controller tree in <xref linkend="fig-controllers" />. Additionally,
-        text chat contains theoretically unlimited number of views -- each of
-        them for a single message, either sent or received.</para>
+        decomposed to separate views; in case of Talker, it may be a contact
+        list view or the conversation, which consists of another two parts --
+        a text chat view and a video view. The structure basically corresponds
+        to the controller tree in <xref linkend="fig-controllers" />.
+        Additionally, the text chat contains a theoretically unlimited number
+        of views, each of which for a single message -- either sent or
+        received.</para>
 
-        <para>There are two important parts of the view: the view object
-        itself and its template. To describe the philosophy of presentation
-        layer, <computeroutput>VideoView</computeroutput> is further examined
-        here, as an example:</para>
+        <para>There are two important parts of a view: the view object itself
+        and its template. To describe the philosophy of a presentation layer,
+        <computeroutput>VideoView</computeroutput> is further examined here,
+        as an example:</para>
 
         <programlisting>App.VideoView = Ember.View.extend({
     templateName: 'video',
@@ -2766,25 +2789,26 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     }.property("controller.content.isActive")
 });</programlisting>
 
-        <para>There are two properties in the view object,
+        <para>There are two properties in the view object:
         <computeroutput>templateName</computeroutput> and
         <computeroutput>buttonLabel</computeroutput>. The former just
-        determines the name of template connected to this view. The latter is
-        common method returning one of <computeroutput>stop</computeroutput>
-        or <computeroutput>start</computeroutput> messages, according to the
-        value of property <computeroutput>isActive</computeroutput>, located
-        in the <computeroutput>controller.content</computeroutput> object,
-        pointing to the contact the user is currently talking to. The other
-        important part is the template itself, inserted directly in HTML
-        page:<footnote>
-            <para>Handlebars templates must be compiled by Ember to JavaScript
-            code to be ready to be used. It is possible to let Ember compile
-            the templates in the browser or precompile the templates on the
-            server. However, there is very poor support for doing so in PHP.
-            Therefore, templates are rendered in HTML page and compiled in the
-            browser while developing the application. For production, it is
-            recommended to precompile them using dedicated Node.js module:
-            <ulink
+        determines the name of a template connected to this view. The latter
+        is a common method returning one of
+        <computeroutput>stop</computeroutput> or
+        <computeroutput>start</computeroutput> messages, according to the
+        value of the property <computeroutput>isActive</computeroutput>,
+        located in the <computeroutput>controller.content</computeroutput>
+        object, pointing to the contact the user is currently talking to. The
+        other important part is the template itself, inserted directly in the
+        HTML page:<footnote>
+            <para>Handlebars templates must be compiled by Ember to a
+            JavaScript code to be ready to be used. It is possible to let
+            Ember compile the templates in the browser or precompile the
+            templates on a server. However, there is a very poor support for
+            doing so in PHP. Therefore, templates are rendered in the HTML
+            page and compiled in a browser while application is being
+            developed. For a production, it is recommended to precompile them
+            using the dedicated Node.js module: <ulink
             url="http://handlebarsjs.com/precompilation.html">http://handlebarsjs.com/precompilation.html</ulink>.</para>
           </footnote></para>
 
@@ -2806,20 +2830,20 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
         <para>The template is inserted in a
         <computeroutput>script</computeroutput> element, declaring itself as a
-        handlebars template. The only attribute
+        Handlebars template. The only attribute
         <computeroutput>data-template-name</computeroutput> identifies the
         snippet and connects it to the view object, which specified the same
         value in the <computeroutput>templateName</computeroutput> attribute,
         as shown above. The template can contain any HTML, along with the
-        variables and expressions, both enclosed with the double braces,
-        sometimes called moustaches. In the example of video template, there
-        is <computeroutput>stateMessage</computeroutput> variable queried,
-        which is looked up in the object bound to the template. The object is
-        provided by router (described in <xref linkend="sect-routing" />). In
-        this case, it would be the current contact the user is talking
-        to.</para>
+        variables and expressions, both enclosed in double braces, sometimes
+        referred as <quote>moustaches</quote>. In the example of the video
+        template, there is a <computeroutput>stateMessage</computeroutput>
+        variable queried, which is looked up in the object bound to the
+        template. The object is provided by a router (described in <xref
+        linkend="sect-routing" />). In this case, the context object would be
+        the current contact the user is talking to.</para>
 
-        <para>The second handlebars expression in the template is action.
+        <para>The second Handlebars expression in the template is an action.
         Actions are usually bound to the active elements, such as buttons.
         When the button is clicked, the action is triggered. Ember finds the
         controller responsible for the current state, which would be an
@@ -2827,20 +2851,22 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         case, and calls the method
         <computeroutput>toggleCall</computeroutput>, specified in the template
         expression. Actions can be placed both in the controllers and the
-        views, according to the each of whose nature.</para>
+        views, according to each of whose nature.</para>
 
         <para>Handlebars templates can transform almost any data stored in
-        JavaScript to HTML code so the rendered template corresponds exactly
-        to the application state. It is possible to add classes according to
+        JavaScript to an HTML code so the rendered template corresponds
+        exactly to the current application state. It is also possible to add
+        an HTML <computeroutput>class</computeroutput> attribute, according to
         the values of the object properties. In the following snippet, there
-        is message template, rendered individually for each message in the
-        conversation. The class is assigned to the wrapping div element
-        according to <computeroutput>isFromMe</computeroutput> property. If it
-        is true, <computeroutput>from_me</computeroutput> class attribute is
-        added, <computeroutput>to_me</computeroutput> otherwise. Class
-        <computeroutput>message</computeroutput> is added independently of the
-        properties and it is always present so the block can be styled as
-        message with custom CSS.</para>
+        is a message template, rendered individually for each message in the
+        conversation. The class is assigned to the wrapping
+        <computeroutput>div</computeroutput> element, according to
+        <computeroutput>isFromMe</computeroutput> property. If it evaluates to
+        true, <computeroutput>from_me</computeroutput> class attribute is
+        added, <computeroutput>to_me</computeroutput> otherwise. The
+        <computeroutput>message</computeroutput> class is added independently
+        of the properties and it is always present so the block can be styled
+        as the message with custom CSS.</para>
 
         <programlisting>&lt;script type="text/x-handlebars" data-template-name="message"&gt;
     &lt;div {{bindAttr class="isFromMe:from_me:to_me :message"}}&gt;
@@ -2849,9 +2875,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
     &lt;/div&gt;
 &lt;/script&gt;</programlisting>
 
-        <para>The last two things to be mentioned about templates are
-        iterating and nesting. Have a look at the following example from the
-        main contact list view (altered a bit):</para>
+        <para>The last two things to be mentioned about templates are the
+        topics of iterating and nesting. Have a look at the following example
+        from the main contact list view (altered a bit):</para>
 
         <programlisting>&lt;script type="text/x-handlebars" data-template-name="contact-list"&gt;
     {{#each App.contactsController.pair}}
@@ -2863,14 +2889,14 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 &lt;/script&gt;</programlisting>
 
         <para>When the template is rendered, Ember iterates over the
-        collection of contacts, accessed with
+        collection of contacts, accessed by the
         <computeroutput>pair</computeroutput> method (it was mentioned in
-        <xref linkend="sect-ember-controllers" />). Then, framework takes each
-        contact from the pair and instantiates
+        <xref linkend="sect-ember-controllers" />). Then, the framework takes
+        each contact from the pair and instantiates the
         <computeroutput>ContactView</computeroutput> for it, passing it as a
         current object for the view and rendering the template exactly in the
         place the view expression is stated. Therefore, the list of contacts
-        is rendered, grouped by two inside
+        is rendered, grouped by two inside the
         <computeroutput>pair_wrapper</computeroutput> blocks.</para>
       </sect2>
 
@@ -2879,36 +2905,37 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
         <para>Although HTTP is a stateless protocol, it is common habit to
         build complex stateful applications on the web. The states are
-        simulated by various web pages and the transitions are carried out
-        clicking on the links. All changes are simultaneously displayed in URL
-        bar.</para>
+        simulated by various web pages and the transitions are carried out by
+        clicking the links. All changes are simultaneously displayed in the
+        URL bar.</para>
 
-        <para>The problem is that JavaScript application cannot change the web
-        page, leave one and continue at other. JavaScript would lose its
-        context and whole MVC structure would serve to no purpose. Therefore,
-        most of the JavaScript applications using MVC frameworks run at single
-        web page, no matter how many states they contain. In Ember.js, there
-        is special object called <emphasis>Router</emphasis><indexterm>
+        <para>The problem is that JavaScript application cannot switch from
+        one web page to another, leaving one and continue at the other.
+        JavaScript would lose its context and whole MVC structure would be
+        purposeless. Therefore, most JavaScript applications using MVC
+        frameworks run at a single web page, no matter how many states they
+        contain. In Ember.js, there is a special object called
+        <emphasis>Router</emphasis><indexterm>
             <primary>router</primary>
-          </indexterm>, responsible for transitions between states,
-        dispatching of events and rendering correct templates.<footnote>
-            <para>Ember router API changed a lot since the application was
+          </indexterm>, responsible for transitions between the states,
+        dispatching the events and rendering correct templates.<footnote>
+            <para>The Ember router API changed a lot since the application was
             implemented (it is less than a year, but still). Further in this
             section, the old version of API is described since it is the
-            version used in Talker application. Updating Talker to the newest
-            Ember.js version with new router is one of the possible future
-            tasks.</para>
+            version used in the Talker application. Updating Talker to the
+            newest version of Ember.js, with the new router, is one of the
+            possible future tasks.</para>
           </footnote></para>
 
-        <para>Router contains several states, ordered in a tree structure,
+        <para>The router contains several states, ordered in a tree structure,
         according to the flow of possible user actions. The routes can be
-        nested. The first aspect of router is mapping the states to URLs.
-        Every time the transition takes place, router changes the context
-        (basically renders different template) and it changes URL as well.
-        Since JavaScript can change only URL fragment router does exactly so.
-        And vice versa, when the user types specific URL in the URL bar, the
-        application lets the router choose the matching state and set the
-        context in a similar way.</para>
+        nested. The first task of the router is mapping the application states
+        to URLs. Every time the transition takes place, the router changes the
+        context (it basically renders a different template) and it changes the
+        URL as well. Since JavaScript can change only a URL fragment, the
+        router does exactly so. And vice versa, when the user types a specific
+        URL in the URL bar, the application lets the router choose the
+        matching state and set the context in a similar way.</para>
 
         <programlisting>App.Router = Ember.Router.extend({
 
@@ -2936,19 +2963,21 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 });</programlisting>
 
         <para>Handling the application links is the second responsibility of
-        router. In the example above, there are two link destinations, named
-        by <computeroutput>goTo*</computeroutput> labels. When any element is
-        marked with Handlebars <computeroutput>{{action
-        goTo*}}</computeroutput>, it is transformed into a link leading to the
-        corresponding router state. And the router handles the event by simply
-        transitioning it to one of existing states.</para>
+        the router. In the example above, there are two link destinations,
+        named by <computeroutput>goTo-</computeroutput> labels. When any
+        element is marked with <computeroutput>{{action
+        goTo*}}</computeroutput>, a Handlebars tag, it is transformed into a
+        link leading to the corresponding router state. And the router handles
+        the event by simply transitioning it to one of the existing
+        states.</para>
 
-        <para>Let's have a look at one of the routes in more detail. As
-        mentioned before, router is responsible for creating unique URL for
-        every application state. That usually means serializing the
-        application state to URL when the transition is carried out via link.
-        In the other case, when the URL is typed into URL bar directly, it has
-        to deserialize it and establish correct application state.</para>
+        <para>Let us have a look at one of the routes in a detail. As
+        mentioned before, the router is responsible for creating a unique URL
+        for every application state. That usually means serializing the
+        application state to URL when the transition is carried out via the
+        link. In the other case, when the URL is typed directly into the URL
+        bar, the router has to deserialize the URL and establish the proper
+        application state.</para>
 
         <programlisting>conversation : Ember.Route.extend({
 
@@ -2973,40 +3002,44 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>There are two methods providing such functionality,
         <computeroutput>serialize</computeroutput> and
         <computeroutput>deserialize</computeroutput>. The former picks the
-        unique identifier for current context (contact object) and returns it
-        as <computeroutput>contact_id</computeroutput>. This parameter is used
-        in the route
+        unique identifier for the current context (a contact object) and
+        returns it as <computeroutput>contact_id</computeroutput>. This
+        parameter is used in the route
         <computeroutput>'/conversation/:contact_id'</computeroutput> as a
         dynamic segment, so that actual route would be
         <computeroutput>'/conversation/42'</computeroutput> for example.
-        Deserializing works in exactly opposite way. Ember prepares the URL
-        segment for the router so it is passed as object containing the map of
-        dynamic segments, which would be <computeroutput>{ contact_id : '42'
-        }</computeroutput> in our (example) case. The only job
+        <citation>ember-router</citation> Deserializing works in the exactly
+        opposite way. Ember prepares the URL segment for the router so it is
+        passed as an object containing the map of dynamic segments, which
+        would be <computeroutput>{ contact_id : '42' }</computeroutput> in our
+        (example) case. The only job
         <computeroutput>deserialize</computeroutput> must do is to find the
-        appropriate object (contact with ID 42) and return it as the current
-        context object.</para>
+        appropriate object (a contact with ID 42) and to return it as the
+        current context object.</para>
 
-        <para>The last remarkable aspect of router is choosing the appropriate
-        templates and connecting them together. Basically,
-        <computeroutput>connectOutlets</computeroutput> method tells main
+        <para>The last remarkable aspect of the router is choosing the
+        appropriate templates and connecting them together. Basically, the
+        <computeroutput>connectOutlets</computeroutput> method tells the main
         application controller to <quote>include</quote> the controller
-        responsible for current state, which would be
+        responsible for the current state, which would be a
         <computeroutput>ConversationController</computeroutput> instance in
-        the example above. This is important when rendering the templates.
-        First, main application template is rendered. Then, Ember looks into
-        the template for <computeroutput>{{outlet}}</computeroutput> tag and
-        inserts the conversation template exactly to the place it is found.
-        The last thing, appropriate contact object is passed as the context
-        for the conversation controller (and thus the template as well).
-        Everything described in this paragraph is deduced from one line
-        implementation of <computeroutput>connectOutlets</computeroutput>
-        method in the example above.</para>
+        the example above. This is important when the templates are rendered.
+        First, a main application template is rendered. Then, Ember looks into
+        the template for the <computeroutput>{{outlet}}</computeroutput> tag
+        and it inserts the conversation template exactly to the place it is
+        found. The last thing, the appropriate contact object is passed as the
+        context for the conversation controller (and thus the template as
+        well). Everything described in this paragraph is deduced from the
+        one-line implementation of
+        <computeroutput>connectOutlets</computeroutput> method in the example
+        above.</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Initializing the connection</title>
+
+      <para>TODO odsud</para>
 
       <para>When the user clicks at Talker icon in the Celebrio main menu, a
       request is sent to the server which renders HTML page and sends it along
@@ -3169,7 +3202,7 @@ contact.get('messages').pushObject(message);</programlisting>
       kinds of logs: those related to messages, video, subscriptions,
       notifications etc. It is impossible to have the output uncluttered
       without constant commenting and uncommenting
-      <computeroutput>console.log()</computeroutput> calls.</para>
+      <computeroutput>console.log</computeroutput> calls.</para>
 
       <para>In order to solve this trouble, logging library Log4js<indexterm>
           <primary>Log4js</primary>
@@ -3659,7 +3692,7 @@ var publisher = TB.initPublisher(API_KEY, 'publishing', {
         behavior-driven development (BDD style) and test-driven (TDD). They
         differ only by syntax, their expression power is equal. TDD style
         looks more similar to JUnit or PHPUnit:
-        <citation>chai-tdd</citation></para>
+        <citation>chai-api</citation></para>
 
         <programlisting>assert.include([ 1, 2, 3 ], 3, 'array contains value');
 assert.deepProperty({ tea: { green: 'matcha' }}, 'tea.green', 'matcha');</programlisting>
@@ -3667,7 +3700,7 @@ assert.deepProperty({ tea: { green: 'matcha' }}, 'tea.green', 'matcha');</progra
         <para>On the other hand, BDD provides easy-to-read word chaining,
         resulting to a sentence. The following example (BDD) equals the
         previous one (TDD), only the used style differs:
-        <citation>chai-bdd</citation></para>
+        <citation>chai-api</citation></para>
 
         <programlisting>expect([1,2,3]).to.include(3);
 expect({ tea: { green: 'matcha' }})
@@ -4425,49 +4458,6 @@ expect = chai.expect;</programlisting>
 
       <releaseinfo>from <ulink
       url="http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/">http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/</ulink></releaseinfo>
-    </biblioentry>
-
-    <biblioentry>
-      <abbrev>celebrio-system</abbrev>
-
-      <authorgroup>
-        <author>
-          <firstname>Pavol</firstname>
-
-          <surname>Donko</surname>
-        </author>
-
-        <author>
-          <firstname>Petr</firstname>
-
-          <surname>Kunc</surname>
-        </author>
-
-        <author>
-          <firstname>Martin</firstname>
-
-          <surname>Novák</surname>
-        </author>
-
-        <author>
-          <firstname>Pavel</firstname>
-
-          <surname>Smolka</surname>
-        </author>
-
-        <author>
-          <firstname>Jan</firstname>
-
-          <surname>Volmut</surname>
-        </author>
-      </authorgroup>
-
-      <title>Celebrio System</title>
-
-      <pubdate>2013 [retrieved 2/19/2013]</pubdate>
-
-      <releaseinfo>from <ulink
-      url="http://www.celebriosoftware.com/celebrio-system">http://www.celebriosoftware.com/celebrio-system</ulink></releaseinfo>
     </biblioentry>
 
     <biblioentry>
@@ -5710,7 +5700,7 @@ expect = chai.expect;</programlisting>
     </biblioentry>
 
     <biblioentry>
-      <abbrev>chai-tdd</abbrev>
+      <abbrev>chai-api</abbrev>
 
       <authorgroup>
         <author>
@@ -5720,31 +5710,12 @@ expect = chai.expect;</programlisting>
         </author>
       </authorgroup>
 
-      <title>Chai API - TDD</title>
+      <title>Chai API</title>
 
       <pubdate>2013 [retrieved 5/4/2013]</pubdate>
 
       <releaseinfo>from <ulink
-      url="http://chaijs.com/api/assert/">http://chaijs.com/api/assert/</ulink></releaseinfo>
-    </biblioentry>
-
-    <biblioentry>
-      <abbrev>chai-bdd</abbrev>
-
-      <authorgroup>
-        <author>
-          <firstname>Jake</firstname>
-
-          <surname>Luer</surname>
-        </author>
-      </authorgroup>
-
-      <title>Chai API - BDD</title>
-
-      <pubdate>2013 [retrieved 5/4/2013]</pubdate>
-
-      <releaseinfo>from <ulink
-      url="http://chaijs.com/api/bdd/">http://chaijs.com/api/bdd/</ulink></releaseinfo>
+      url="http://chaijs.com/api/">http://chaijs.com/api/</ulink></releaseinfo>
     </biblioentry>
 
     <biblioentry>
@@ -5888,6 +5859,23 @@ expect = chai.expect;</programlisting>
 
       <releaseinfo>from <ulink
       url="http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/">http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/</ulink></releaseinfo>
+    </biblioentry>
+
+    <biblioentry>
+      <abbrev>ember-router</abbrev>
+
+      <authorgroup>
+        <author>
+          <surname>Tilde, Inc.</surname>
+        </author>
+      </authorgroup>
+
+      <title>Specifying a route's model</title>
+
+      <pubdate>2013 [retrieved 5/21/2013]</pubdate>
+
+      <releaseinfo>from <ulink
+      url="http://emberjs.com/guides/routing/specifying-a-routes-model/">http://emberjs.com/guides/routing/specifying-a-routes-model/</ulink></releaseinfo>
     </biblioentry>
   </bibliography>
 
