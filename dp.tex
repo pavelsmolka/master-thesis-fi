@@ -24,7 +24,7 @@
 \thesisadvisor{doc.
       RNDr. Tomá¹ Pitner, Ph.D.}
 % --------------------------------------------
-\label{idp228288}% --------------------------------------------
+\label{idp228912}% --------------------------------------------
 % Load graphicx package with pdf if needed 
 % --------------------------------------------
 \ifdblatexpdf
@@ -375,7 +375,7 @@ The thesis comprehends the topic of real-time communication in a web browser. Mo
 XMPP, real-time communication, RTC, Celebrio, web browser, HTTP, Comet, JavaScript, WebSockets, BOSH, Ember, Strophe, OpenTok, Talker, server push\end{ThesisKeyWords}
 
 \makeatletter
-\def\dbtolatex@contentsid{idp254944}
+\def\dbtolatex@contentsid{idp195152}
 \def\dbtolatex@@contentsname{\latex@@contentsname}
 \let\latex@@contentsname\contentsname
 \newif\ifdocbooktolatexcontentsname\docbooktolatexcontentsnametrue
@@ -400,13 +400,13 @@ XMPP, real-time communication, RTC, Celebrio, web browser, HTTP, Comet, JavaScri
 
 Millions, billions, trillions. So many and even more messages are exchanged every day between various people in the world. The Internet created a brand new way to communicate and collaborate, even if you are located on the opposite parts of the world. Since the times of Alexander Graham Bell, the accessibility to the communication devices and their simplicity have been incredibly enhanced. Nowadays, almost 2.5 billion people in the world have access to the Internet and, therefore, they are able to use almost limitless communication possibilities it provides. \docbooktolatexcite{internet-usage}{}
 
-However, the manner of Internet usage essentially changed during the first decade of 21$^\textrm{\tiny st}$ century. Using the Internet and using the web browser became almost synonymous. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it is not even possible to use the other Internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp2751360}\begingroup\catcode`\#=12\footnote{
+However, the manner of Internet usage essentially changed during the first decade of 21$^\textrm{\tiny st}$ century. Using the Internet and using the web browser became almost synonymous. People use the web browser as the primary platform to do every single task on the Internet. Sometimes it is not even possible to use the other Internet services without visiting certain web page in the web browser and performing the authentication there.\label{idp2375792}\begingroup\catcode`\#=12\footnote{
 Two examples of such behavior. Wi-fi network in the Student Agency coaches forces the user to visit the entry page in the web browser. The second example, very well known to the students of the Faculty of Informatics at Masaryk University, is the faculty wireless network called wlan\_fi. Every user has to open the web browser and log in with her credentials. It is not possible just to open the terminal or e-mail client and start working online.
-}\endgroup\docbooktolatexmakefootnoteref{idp2751360} Considering the mentioned fact, web browsers have become also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there was a need for common rich applications running within a web browser -- a rich Internet application (RIA) sprang up. \docbooktolatexcite{ria}{} Such popular social networks are built on top of the web browser platform and they are used by more than a billion people in the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from other people. At the beginning of 2013, I~would say that static web is dead -- users prefer interactivity.
+}\endgroup\docbooktolatexmakefootnoteref{idp2375792} Considering the mentioned fact, web browsers have become also the basic platform for the communication tools. Even though the purpose of the world wide web and HTTP protocol was completely different at first (displaying single documents connected via hypertext links), it appeared that there was a need for common rich applications running within a web browser -- a rich Internet application (RIA) sprang up. \docbooktolatexcite{ria}{} Such popular social networks are built on top of the web browser platform and they are used by more than a billion people in the world. \docbooktolatexcite{facebook-usage}{} And the main reason why the social networks are so popular is the real-time stream of news and messages from other people. At the beginning of 2013, I~would say that static web is dead -- users prefer interactivity.
 
-As mentioned above, the web browser has become one of the most popular platforms. Celebrio, a simple software for the elderly, simulating the operating system interface, is a typical example of a rich Internet application.\label{idp4627904}\begingroup\catcode`\#=12\footnote{
+As mentioned above, the web browser has become one of the most popular platforms. Celebrio, a simple software for the elderly, simulating the operating system interface, is a typical example of a rich Internet application.\label{idp3908288}\begingroup\catcode`\#=12\footnote{
 {\textless}\url{http://www.celebriosoftware.com/celebrio-system}{\textgreater}
-}\endgroup\docbooktolatexmakefootnoteref{idp4627904} All the topics mentioned in the previous paragraph appeared to be very important in the system. When interviewing the elderly people in the Czech Republic, it appeared that almost 90 \% of the elderly computer users use the real-time communication (RTC) applications, mostly Skype. \docbooktolatexcite{elderly-questionnaires}{} Interaction with their loved ones is the most desired benefit they expect from the computer. Therefore, creating a real-time application, a text messenger supporting video calling, has become not only a programming challenge but also a business goal.
+}\endgroup\docbooktolatexmakefootnoteref{idp3908288} All the topics mentioned in the previous paragraph appeared to be very important in the system. When interviewing the elderly people in the Czech Republic, it appeared that almost 90 \% of the elderly computer users use the real-time communication (RTC) applications, mostly Skype. \docbooktolatexcite{elderly-questionnaires}{} Interaction with their loved ones is the most desired benefit they expect from the computer. Therefore, creating a real-time application, a text messenger supporting video calling, has become not only a programming challenge but also a business goal.
 
 With regard to the {``}real-time tendency{''}, this thesis embraces the topic of real-time applications in web browsers, especially the text communication tools and the technologies being used to develop them. Among the available solutions, XMPP protocol and OpenTok library (built on WebRTC) have been chosen and a real-time communication application has been designed and developed as a part of this thesis. Both text and multimedia streams are covered, as well as multimedia content transfer (audio and video).
 
@@ -416,17 +416,17 @@ Nevertheless, there are also other RTC solutions not directly based in a web bro
 
 Since the web browser was designed to perform simple request/response interaction, it is not a typical platform for building real-time applications. Thus, there is a need for an extra layer enhancing or even completely replacing the common way HTTP communicates. Within the scope of this thesis, primarily the WebSockets and HTTP long polling approaches are used. The two of them and basic information about several others are covered in \hyperlink{chap-rtc}{Chapter {\ref{chap-rtc}}, {``}Bidirectional communication between a web browser and a server{''}}.
 
-There are many existing real-time chat-based applications on the Internet that could have been used. However, none of them suited our needs perfectly. Celebrio has a very specific graphical user interface (GUI) and there is a need to integrate both text-based chat and video calling. Just to mention, there is the commercial chat module Cometchat\label{idp2311856}\begingroup\catcode`\#=12\footnote{
+There are many existing real-time chat-based applications on the Internet that could have been used. However, none of them suited our needs perfectly. Celebrio has a very specific graphical user interface (GUI) and there is a need to integrate both text-based chat and video calling. Just to mention, there is the commercial chat module Cometchat\label{idp5285440}\begingroup\catcode`\#=12\footnote{
 http://www.cometchat.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp2311856} or even the open project Jappix.\label{idp3361984}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5285440} or even the open project Jappix.\label{idp2198240}\begingroup\catcode`\#=12\footnote{
 https://project.jappix.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp3361984} Video calling web browser applications are provided for example by TokBox Inc.\label{idp3509600}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp2198240} Video calling web browser applications are provided for example by TokBox Inc.\label{idp4455680}\begingroup\catcode`\#=12\footnote{
 http://www.tokbox.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp3509600} Nevertheless, following the rule that {``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch{''}, \docbooktolatexcite{brian-stats-tweet}{} just very generic existing libraries (Strophe.js) and APIs (OpenTok) were used for implementing a brand new application called {\em{Celebrio Talker}}. The general approaches when building web browser based chat application are mentioned in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}JavaScript XMPP client{''}}. Within the programming part of the thesis, the real-time text chat application and the video calling application for Celebrio have been implemented. Celebrio Talker application itself, its architecture and the specific procedures used to create it are described in \hyperlink{chap-talker}{Chapter {\ref{chap-talker}}, {``}Talker -- IM client in a web browser{''}}.
+}\endgroup\docbooktolatexmakefootnoteref{idp4455680} Nevertheless, following the rule that {``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch{''}, \docbooktolatexcite{brian-stats-tweet}{} just very generic existing libraries (Strophe.js) and APIs (OpenTok) were used for implementing a brand new application called {\em{Celebrio Talker}}. The general approaches when building web browser based chat application are mentioned in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}JavaScript XMPP client{''}}. Within the programming part of the thesis, the real-time text chat application and the video calling application for Celebrio have been implemented. Celebrio Talker application itself, its architecture and the specific procedures used to create it are described in \hyperlink{chap-talker}{Chapter {\ref{chap-talker}}, {``}Talker -- IM client in a web browser{''}}.
 
-It has been said that Skype\index{Skype}\label{idp154928}\begingroup\catcode`\#=12\footnote{
+It has been said that Skype\index{Skype}\label{idp5470048}\begingroup\catcode`\#=12\footnote{
 http://www.skype.com/
-}\endgroup\docbooktolatexmakefootnoteref{idp154928} is the most favorite communication tool among the target audience. If it were implemented, the existing customer base could be used and converted to our messaging application. However, there is one big pitfall in this approach. The Skype license strictly prohibits incorporating their software into mobile devices in third party applications. \docbooktolatexcite{skype-license}{} They support only prompting the official Skype client to be opened via Skype URI, which is insufficient for Celebrio since the messaging client has to be built in the system, with the corresponding user interface. \docbooktolatexcite{skype-uri}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp5470048} is the most favorite communication tool among the target audience. If it were implemented, the existing customer base could be used and converted to our messaging application. However, there is one big pitfall in this approach. The Skype license strictly prohibits incorporating their software into mobile devices in third party applications. \docbooktolatexcite{skype-license}{} They support only prompting the official Skype client to be opened via Skype URI, which is insufficient for Celebrio since the messaging client has to be built in the system, with the corresponding user interface. \docbooktolatexcite{skype-uri}{}
 
 % -------------------------------------------------------------
 % Chapter Bidirectional communication between a web browser and a server 
@@ -434,9 +434,9 @@ http://www.skype.com/
 \chapter{Bidirectional communication between a web browser and a server}
 \label{chap-rtc}\hypertarget{chap-rtc}{}%
 
-The very essence of every instant messaging is the bidirectional stream where both sides can immediately {\em{push}} new data and the other side (or more other sides) is promptly notified without the need to perform any manual {\em{pull}} (update) action\index{pull \& push communication}.\label{idp160752}\begingroup\catcode`\#=12\footnote{
+The very essence of every instant messaging is the bidirectional stream where both sides can immediately {\em{push}} new data and the other side (or more other sides) is promptly notified without the need to perform any manual {\em{pull}} (update) action\index{pull \& push communication}.\label{idp4307744}\begingroup\catcode`\#=12\footnote{
 In this thesis, this behaviour is commonly referred as RTC. The {``}real-time part{''} relates mostly to the server part since the application running in the web browser can perform the AJAX request on background anytime and the server receives the request instantly.
-}\endgroup\docbooktolatexmakefootnoteref{idp160752} Such use case requires an appropriate transport layer on top of which the application can send messages via another protocol. When using HTTP, there is a TCP connection opened by the client (web browser) through which the data is sent. However, according to the HTTP protocol\index{HTTP}, the communication is strictly initiated by the client -- HTTP is a request/response protocol. \docbooktolatexcite{rfc-http}{} When the client continuously needs up-to-date information, it must poll the server as frequently as possible. Such approach takes a considerable amount of bandwidth and generates purposeless overhead on the server. So, when one wants to avoid those drawbacks and still make the web browser application communicate in both directions, HTTP protocol must be hacked somehow or another communication channel used. This chapter covers both -- reshaping HTTP in \hyperlink{chap-http-requests}{Section {\ref{chap-http-requests}}} and a brand new approach in \hyperlink{chap-ws}{Section {\ref{chap-ws}}}, bypassing HTTP completely. Unfortunately, every approach brings also some disadvantages. Ultimately, an overview of several higher-level solutions is to be found in \hyperlink{chap-high-level-rtc}{Section {\ref{chap-high-level-rtc}}}, most of which are based on HTTP requests or WebSockets.
+}\endgroup\docbooktolatexmakefootnoteref{idp4307744} Such use case requires an appropriate transport layer on top of which the application can send messages via another protocol. When using HTTP, there is a TCP connection opened by the client (web browser) through which the data is sent. However, according to the HTTP protocol\index{HTTP}, the communication is strictly initiated by the client -- HTTP is a request/response protocol. \docbooktolatexcite{rfc-http}{} When the client continuously needs up-to-date information, it must poll the server as frequently as possible. Such approach takes a considerable amount of bandwidth and generates purposeless overhead on the server. So, when one wants to avoid those drawbacks and still make the web browser application communicate in both directions, HTTP protocol must be hacked somehow or another communication channel used. This chapter covers both -- reshaping HTTP in \hyperlink{chap-http-requests}{Section {\ref{chap-http-requests}}} and a brand new approach in \hyperlink{chap-ws}{Section {\ref{chap-ws}}}, bypassing HTTP completely. Unfortunately, every approach brings also some disadvantages. Ultimately, an overview of several higher-level solutions is to be found in \hyperlink{chap-high-level-rtc}{Section {\ref{chap-high-level-rtc}}}, most of which are based on HTTP requests or WebSockets.
 
 % ------------------------   
 % Section 
@@ -467,7 +467,7 @@ Content-Type: text/html; charset=UTF-8
 
 The very first approach to achieve RTC in a web browser, for a very long time the only one, is hacking HTTP. The idea is very simple. Generally, the client sends an extra request and it is not awaiting an immediate response. Instead, the server keeps the request for some time and sends the data as it comes in the response. There are several techniques to achieve such behaviour, in general called {\em{Comet}}\index{Comet}. Naive approach, consisting of ordinary HTTP requests, along with more advanced techniques of HTTP long polling and HTTP streaming are described in the following sections.
 \subsection{Naive approach to real-time communication with HTTP}
-\label{idp5478736}\hypertarget{idp5478736}{}%
+\label{idp4154000}\hypertarget{idp4154000}{}%
 
 It would be useful to keep an HTTP request opened for a bit longer time in order to perform real-time communication within an opened stream. When simple HTTP is used, however, each request corresponds to exactly one resource retrieved from a server. There is one common misunderstanding about long-lived HTTP requests. Since HTTP 1.1 (actually implemented even before, but not covered in the RFC specification), there is a possibility for the client to claim a persistent TCP\index{TCP} connection to the server, declaring {\texttt{{Connection: Keep-Alive}}} in the request header.\index{HTTP!Keep-Alive} Actually, all connections are considered persistent unless declared otherwise. \docbooktolatexcite{rfc-http}{} Even though the default timeout after which the server closes the connection lasts only several seconds, \docbooktolatexcite{apache-core-features}{} the persistent TCP connection is very useful for delivering various resources (style sheets, scripts, images, etc.) to the client without the unnecessary overhead of creating multiple streams. However, every single transmission within the TCP connection has to be in form of a separate HTTP request/response, always initiated by the client. On no account is the server allowed to push any data without a respective request from the client. Therefore, such TCP connection is of no use to RTC.
 
@@ -478,8 +478,8 @@ The situation is depicted in \hyperlink{fig-http-polling}{Figure {\ref{fig-http-
 \hypertarget{fig-http-polling}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/http-polling}}\hypertarget{idp5497472}{}%
-\label{idp5497472}
+{{\includegraphics[]{vp/http-polling}}\hypertarget{idp4776064}{}%
+\label{idp4776064}
 }
 {{\caption[{Correct HTTP polling with delay}]{{{Correct HTTP polling with delay}}}\label{fig-http-polling}}}
 \end{center}
@@ -490,8 +490,8 @@ The situation is depicted in \hyperlink{fig-http-polling}{Figure {\ref{fig-http-
 \hypertarget{fig-http-polling-wrong}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/http-polling-wrong}}\hypertarget{idp5499984}{}%
-\label{idp5499984}
+{{\includegraphics[]{vp/http-polling-wrong}}\hypertarget{idp3688912}{}%
+\label{idp3688912}
 }
 {{\caption[{Forbidden HTTP response without respective request}]{{{Forbidden HTTP response without respective request}}}\label{fig-http-polling-wrong}}}
 \end{center}
@@ -510,8 +510,8 @@ On the contrary, long polling tries to reduce this load. After receiving the req
 \hypertarget{fig-http-long-polling}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/http-long-polling}}\hypertarget{idp5509760}{}%
-\label{idp5509760}
+{{\includegraphics[]{vp/http-long-polling}}\hypertarget{idp3199536}{}%
+\label{idp3199536}
 }
 {{\caption[{HTTP long polling}]{{{HTTP long polling}}}\label{fig-http-long-polling}}}
 \end{center}
@@ -526,8 +526,8 @@ One of the main drawbacks of long polling is the header overhead. Every chunk of
 \hypertarget{fig-http-overhead}{}%
 \begin{center}
 
-{{\includegraphics[width=420pt]{img/http-overhead}}\hypertarget{idp5517440}{}%
-\label{idp5517440}
+{{\includegraphics[width=420pt]{img/http-overhead}}\hypertarget{idp5359120}{}%
+\label{idp5359120}
 }
 {{\caption[{Comparison of network overhead (HTTP and WebSockets)}]{{{Comparison of network overhead (HTTP and WebSockets)}}}\label{fig-http-overhead}}}
 \end{center}
@@ -544,8 +544,8 @@ HTTP streaming is a slightly different technique than long polling, although the
 \hypertarget{fig-http-streaming}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/http-streaming}}\hypertarget{idp5526032}{}%
-\label{idp5526032}
+{{\includegraphics[]{vp/http-streaming}}\hypertarget{idp4456640}{}%
+\label{idp4456640}
 }
 {{\caption[{HTTP streaming}]{{{HTTP streaming}}}\label{fig-http-streaming}}}
 \end{center}
@@ -578,13 +578,13 @@ Although the World Wide Web with an HTTP request/response scheme has never been 
 
 Similarly as in HTTP, there is an unencrypted version of WebSockets working directly on top of TCP connection. The simplest way to recognize such a connection is WebSocket URI\index{WebSocket!URI}, beginning with {\texttt{{ws://}}}. It should not be used for two reasons. The first one, rather obvious, is security\index{security} -- the communication can be captured during the transmission. Transparent proxy servers are the second reason. If an unencrypted WebSocket connection is used, the browser is unaware of the transparent proxy and as a result, the WebSocket connection is most likely to fail. \docbooktolatexcite{ws-proxy}{}\docbooktolatexcite{definitive-guide-to-ws}{} As opposite, there is a secure way to use WebSockets. WebSockets Secure (WSS)\index{WebSocket!Secure} protocol is standard WS wrapped in TLS tunnel, similarly as HTTP can be transmitted over TLS layer. When using WSS, the URI begins with {\texttt{{wss://}}} and it uses port 443 by default. \docbooktolatexcite{definitive-guide-to-ws}{}
 \subsection{WebSocket handshake\index{WebSocket!handshake}}
-\label{idp5546208}\hypertarget{idp5546208}{}%
+\label{idp5338368}\hypertarget{idp5338368}{}%
 
 WebSockets, as any other multilateral protocol, need to perform a handshake before an actual transmission can occur. During the handshake, a connection is established and both peers acknowledge the properties of the communication.
 
-Since WebSockets emerged as an HTTP supplement, the handshake is initialized by an HTTP request\label{idp5549136}\begingroup\catcode`\#=12\footnote{
+Since WebSockets emerged as an HTTP supplement, the handshake is initialized by an HTTP request\label{idp5225456}\begingroup\catcode`\#=12\footnote{
 According to RFC6455, the protocol is designed to work over the HTTP port 80, as well as 443 to support HTTP proxies. However, the design is not limited to HTTP and the future implementations can use simpler handshake over a dedicated port. \docbooktolatexcite{rfc-ws}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5549136} initialized by a client. The client sends the request as follows: \docbooktolatexcite{rfc-ws}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp5225456} initialized by a client. The client sends the request as follows: \docbooktolatexcite{rfc-ws}{}
 
 \begin{Verbatim}[fontsize=\small]
 GET /chat HTTP/1.1
@@ -612,19 +612,19 @@ The number 101 on the first line of the response stands for the HTTP status code
 
 {\texttt{{Sec-WebSocket-Key}}} is a random secret issued by a client, base64-encoded and added to an initial protocol-switching request. A~server is supposed to concatenate the secret with Globally Unique Identifier (GUID)\index{GUID} "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and hash the result with the SHA-1 algorithm. The result is returned as {\texttt{{Sec-WebSocket-Accept}}} header field, base64-encoded. \docbooktolatexcite{rfc-ws}{} However, a security issue here seems to be in this process. If the initial request is not sent over an encrypted HTTP connection (HTTPS), it can be caught by a third party. Since the server does not authenticate in any way and the algorithm does not contain any server secret, the third party attacker could fake the response and pretend to be the server.
 \subsection{Frames and masking}
-\label{idp5562288}\hypertarget{idp5562288}{}%
+\label{idp2919728}\hypertarget{idp2919728}{}%
 
 All the data sent via the WebSockets protocol is chunked into frames\index{frames}, working similarly to TCP frames. All transmission features are handled by the WebSocket API and the transmission is transparent for the application layer above (for example the JavaScript API) so that every message appears in the same state as it was sent. This means the message, a single portion of WS communication, can be fragmented during the transmission.
 
 There are several special features concerning WS frames, one of the interesting ones is masking\index{masking}. The payload data of every frame sent from a client is XORed by a masking key of a 32-bit size. The purpose of masking is to prevent any third party from picking any part of the payload and reading it. The other goal might be distinguishing a server stream from a client stream instantly since client-to-server frames always {\em{must}} be masked and server-to-client frames {\em{must not}} be masked under any circumstances. In addition, WS peers have to use masking even if the communication is running on top of TLS layer so the {``}encryption{''} function is pointless. \docbooktolatexcite{rfc-ws}{} The security function of masking is also questionable because the masking key is included in a frame header. The only reason is preventing from random cross-protocol attacks. \docbooktolatexcite{pro-html5-programming}{}
 \subsection{WS JavaScript API\index{WebSocket!API}}
-\label{idp5569040}\hypertarget{idp5569040}{}%
+\label{idp2710112}\hypertarget{idp2710112}{}%
 
-Since the WebSocket technology is intended to be used particularly from browser applications, there is a need for an API web developers can use. The most widespread programming language of web browser client applications is JavaScript and so is the WebSocket API created for it. The API consists of one relatively simple JavaScript interface called {\texttt{{WebSocket}}},\label{idp5572224}\begingroup\catcode`\#=12\footnote{
+Since the WebSocket technology is intended to be used particularly from browser applications, there is a need for an API web developers can use. The most widespread programming language of web browser client applications is JavaScript and so is the WebSocket API created for it. The API consists of one relatively simple JavaScript interface called {\texttt{{WebSocket}}},\label{idp3805488}\begingroup\catcode`\#=12\footnote{
 In the older versions of some browsers, the interface was called differently due to the technology immaturity. For instance, Firefox from version 6 to 10 supports WebSockets only as {\texttt{{MozWebSocket}}}. An interesting fact is that Firefox 4 and 5 provides {\texttt{{WebSocket}}} interface as it is, just implementing a different WebSocket protocol version. Since Firefox 11.0, current (RFC 6455) WS protocol version is accessible via {\texttt{{WebSocket}}} interface. \docbooktolatexcite{mozilla-ws}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5572224} \docbooktolatexcite{ws-api}{} placed as a property of {\texttt{{window}}} object.\label{idp5576672}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp3805488} \docbooktolatexcite{ws-api}{} placed as a property of {\texttt{{window}}} object.\label{idp1835904}\begingroup\catcode`\#=12\footnote{
 Properties of {\texttt{{window}}} are accessible in JavaScript directly. Simple test {\texttt{{window.WebSocket === WebSocket}}} returning {\texttt{{true}}} proves it.
-}\endgroup\docbooktolatexmakefootnoteref{idp5576672} It wraps the WebSocket client functionality performed by a user agent (i.e. a web browser). Using the API is very simple. The object, which handles all the WS functionality, is created by calling a {\texttt{{WebSocket}}} constructor: \docbooktolatexcite{ws-html5rocks}{}
+}\endgroup\docbooktolatexmakefootnoteref{idp1835904} It wraps the WebSocket client functionality performed by a user agent (i.e. a web browser). Using the API is very simple. The object, which handles all the WS functionality, is created by calling a {\texttt{{WebSocket}}} constructor: \docbooktolatexcite{ws-html5rocks}{}
 
 \begin{Verbatim}[fontsize=\small]
 var connection = new WebSocket(
@@ -666,20 +666,20 @@ connection.send(file);
 
 To sum it up, using WebSockets became a very simple and elegant way to provide a real-time communication channel between a web browser and a WS server. The main drawback of WS is lack of support not only in the older versions of web browsers but also in the mobile platform browsers. Currently, less than 60 \% of users can make use of the WebSocket full support. \docbooktolatexcite{ws-caniuse}{} Particularly, all versions of Internet Explorer below 10 (which means more than 98 \% of IE users in November 2012) \docbooktolatexcite{ie-statistics}{} do not implement the WebSockets JavaScript API. There are two favourable aspects in favour of WebSockets. Firstly, more and more web browsers add the JavaScript API to support WebSockets. Secondly, the ratio of clients who use an old version of a web browser without the WS support tends to diminish. Nevertheless, if the real-time functionality constitutes the application core functionality, there is a strong need for offering a fallback technology that every browser supports -- usually represented by the HTTP long polling or streaming mechanism, described in \hyperlink{chap-http-requests}{Section {\ref{chap-http-requests}}}.
 \subsection{WebSocket API wrappers}
-\label{idp5601952}\hypertarget{idp5601952}{}%
+\label{idp4810640}\hypertarget{idp4810640}{}%
 
 WebSockets is a powerful technology, yet there are many browsers which do not support it. In that case, when the real-time communication constitutes the core functionality, a fallback (i.e. an alternative technology used when the original is missing) must be defined to substitute the WebSockets. It might be Adobe Flash or the HTTP polling. It would be great not to have to define a fallback in every project again and again. Luckily, there are several API wrappers for this, doing this part of job for the developer automatically.
 
-The basic use case is obvious. Using the wrapper instead of the WS API itself guarantees the developer that a fallback is used when the application runs in an environment without WebSockets. The whole process of choosing the transport technology is transparent and not necessary to be specified. As examples, however not used in Talker application, the projects Socket.IO\label{idp5604272}\begingroup\catcode`\#=12\footnote{
+The basic use case is obvious. Using the wrapper instead of the WS API itself guarantees the developer that a fallback is used when the application runs in an environment without WebSockets. The whole process of choosing the transport technology is transparent and not necessary to be specified. As examples, however not used in Talker application, the projects Socket.IO\label{idp4190432}\begingroup\catcode`\#=12\footnote{
 http://socket.io/
-}\endgroup\docbooktolatexmakefootnoteref{idp5604272} and SockJS should be mentioned.\label{idp5605040}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp4190432} and SockJS should be mentioned.\label{idp2925840}\begingroup\catcode`\#=12\footnote{
 https://github.com/sockjs/sockjs-client
-}\endgroup\docbooktolatexmakefootnoteref{idp5605040}
+}\endgroup\docbooktolatexmakefootnoteref{idp2925840}
 
 % ------------------------   
 % Section 
 \section{Server-sent events\index{Server-sent events}}
-\label{idp5606064}\hypertarget{idp5606064}{}%
+\label{idp4798080}\hypertarget{idp4798080}{}%
 
 The Server-sent events (aka EventSource, from this point referred only as SSE) should in fact not be listed here but in the next section. It is a technology based on the HTTP streaming\index{HTTP!streaming}, described in \hyperlink{chap-http-streaming}{Section {\ref{chap-http-streaming}}} so it is not at the basic {``}zero{''} level. However, SSE are often compared to WebSockets so that the topic is introduced here. SSE have been standardized as part of the HTML5 standard. \docbooktolatexcite{sse-api}{} There is a very brief summary of an SSE API and its usage in this section.
 
@@ -716,15 +716,15 @@ Server-sent events are often compared to WebSockets, though they are much less k
 % ------------------------   
 % Section 
 \section{Media streaming with a WebRTC technology\index{WebRTC}}
-\label{idp5623328}\hypertarget{idp5623328}{}%
+\label{idp3524528}\hypertarget{idp3524528}{}%
 
-Up to here, none of the technologies mentioned was fully suited as a complete solution for a web-browser-based media communication, such as video calling. Although WebSockets are the most advanced approach, it is only a low level API providing a TCP stream. On that account, the web browser developers, with Chromium developers in the vanguard, invented a WebRTC technology. It is an API linking up a user media API (webcam, microphone) with the streaming API for sending the multimedia from a browser to the other communication node.\label{idp5625696}\begingroup\catcode`\#=12\footnote{
+Up to here, none of the technologies mentioned was fully suited as a complete solution for a web-browser-based media communication, such as video calling. Although WebSockets are the most advanced approach, it is only a low level API providing a TCP stream. On that account, the web browser developers, with Chromium developers in the vanguard, invented a WebRTC technology. It is an API linking up a user media API (webcam, microphone) with the streaming API for sending the multimedia from a browser to the other communication node.\label{idp2796448}\begingroup\catcode`\#=12\footnote{
 Apart from the video calling, the WebRTC provides an API for sending the files from one peer to another.
-}\endgroup\docbooktolatexmakefootnoteref{idp5625696}
+}\endgroup\docbooktolatexmakefootnoteref{idp2796448}
 
 While WebSockets serve as an interconnection between a client (a web browser) and a dedicated server, which makes the technology suitable for the {``}server-based{''} protocols such as XMPP, WebRTC provides a real peer-to-peer connection\index{peer-to-peer connection}, directly between two web browsers. That makes WebRTC a perfect tool for implementing the direct media communication, such as the video calls.
 \subsection{Signaling\index{WebRTC!Signaling}}
-\label{idp5628816}\hypertarget{idp5628816}{}%
+\label{idp4329584}\hypertarget{idp4329584}{}%
 
 In fact, a server has to mediate the {``}meta data{''} in WebRTC, such as initializing a connection or negotiating the available media capabilities (such as codecs). This level of communication, exchanging the information about the connection itself, is called {\em{signaling}}\index{signaling}. WebRTC does not take care either about a layer the signaling data is transferred at, or the signaling protocol itself. It can be SIP, XMPP or any other, transferred via XMLHTTPRequest or WebSockets. What is important, signaling is not a part of a WebRTC API. The WebRTC connection itself then concerns only the peers, as shown in \hyperlink{fig-webrtc}{Figure {\ref{fig-webrtc}}}. \docbooktolatexcite{webrtc-signaling}{}
 
@@ -733,15 +733,15 @@ In fact, a server has to mediate the {``}meta data{''} in WebRTC, such as initia
 \hypertarget{fig-webrtc}{}%
 \begin{center}
 
-{{\includegraphics[width=420pt]{img/webrtc}}\hypertarget{idp5635520}{}%
-\label{idp5635520}
+{{\includegraphics[width=420pt]{img/webrtc}}\hypertarget{idp5457200}{}%
+\label{idp5457200}
 }
 {{\caption[{WebRTC communication schema}]{{{WebRTC communication schema}}}\label{fig-webrtc}}}
 \end{center}
 \end{figure}
 
 \subsection{WebRTC API}
-\label{idp5637024}\hypertarget{idp5637024}{}%
+\label{idp2574112}\hypertarget{idp2574112}{}%
 
 WebRTC provides a very high level API abstracting the media device access, a network connection and the process of encoding/decoding the media streams from a programmer. Unfortunately, the WebRTC API is still in the phase of a draft and it has not been standardized yet. \docbooktolatexcite{webrtc-rfc}{} It means that JavaScript objects are prefixed by vendor prefixes, so that there is {\texttt{{webkitRTCPeerConnection}}} instead of {\texttt{{RTCPeerConnection}}} in Chromium.
 
@@ -752,9 +752,9 @@ var config =  {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
 var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection
 \end{Verbatim}
 
-Then, we can send all available ICE\index{ICE}\label{idp5643040}\begingroup\catcode`\#=12\footnote{
+Then, we can send all available ICE\index{ICE}\label{idp4979616}\begingroup\catcode`\#=12\footnote{
 ICE stands for Interactive Connectivity Establishment
-}\endgroup\docbooktolatexmakefootnoteref{idp5643040} candidates to the other peer, via a specified STUN\index{STUN} server. ICE candidate\index{ICE candidate} is basically a possible transport address for the media stream, later validated for the peer-to-peer connectivity. \docbooktolatexcite{ice}{} So, each possible connection address is sent via the previously created {\texttt{{pc}}} object. The process is still in the phase of negotiation, so the sending is up to a signaling service:
+}\endgroup\docbooktolatexmakefootnoteref{idp4979616} candidates to the other peer, via a specified STUN\index{STUN} server. ICE candidate\index{ICE candidate} is basically a possible transport address for the media stream, later validated for the peer-to-peer connectivity. \docbooktolatexcite{ice}{} So, each possible connection address is sent via the previously created {\texttt{{pc}}} object. The process is still in the phase of negotiation, so the sending is up to a signaling service:
 
 \begin{Verbatim}[fontsize=\small]
 pc.onicecandidate = function (event) {
@@ -782,11 +782,11 @@ navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
 
 Closing the connection is rather straightforward -- by invoking the {\texttt{{close}}} method on the {\texttt{{RTCPeerConnection}}} object, which has been instantiated before as {\texttt{{pc}}}.
 \subsection{WebRTC in various environments}
-\label{idp5659040}\hypertarget{idp5659040}{}%
+\label{idp4979360}\hypertarget{idp4979360}{}%
 
-WebRTC is truly a new technology, not yet adopted by many web browsers. And for those which support it, the implementation may differ since the standard has not been fully defined and finished yet. Chromium browser (i.e. Chrome and Chromium) developers were the first to add WebRTC API to their products -- in 2012. At the beginning of 2013, WebRTC API was added also to the newest Firefox builds so that Chrome and Firefox can {``}talk{''} to each other.\label{idp5660816}\begingroup\catcode`\#=12\footnote{
+WebRTC is truly a new technology, not yet adopted by many web browsers. And for those which support it, the implementation may differ since the standard has not been fully defined and finished yet. Chromium browser (i.e. Chrome and Chromium) developers were the first to add WebRTC API to their products -- in 2012. At the beginning of 2013, WebRTC API was added also to the newest Firefox builds so that Chrome and Firefox can {``}talk{''} to each other.\label{idp5577456}\begingroup\catcode`\#=12\footnote{
 Note that in current Firefox version (22, nightly build by the time this thesis part is created), the user has to enable {\texttt{{media.peerconnection.enabled}}} field in {\texttt{{about:config}}} to get WebRTC run.
-}\endgroup\docbooktolatexmakefootnoteref{idp5660816} \docbooktolatexcite{webrtc-interop}{} Opera browser also takes part in this initiative, yet no existing official claim of support has been released. All mentioned browsers used the same back-end implementation, hosted at {\textless}\url{http://www.webrtc.org}{\textgreater}. In theory, this back-end implementation (written in C++) can be built into any application to support WebRTC, not only a web browser.
+}\endgroup\docbooktolatexmakefootnoteref{idp5577456} \docbooktolatexcite{webrtc-interop}{} Opera browser also takes part in this initiative, yet no existing official claim of support has been released. All mentioned browsers used the same back-end implementation, hosted at {\textless}\url{http://www.webrtc.org}{\textgreater}. In theory, this back-end implementation (written in C++) can be built into any application to support WebRTC, not only a web browser.
 
 For the web browsers which do not support WebRTC yet, several attempts have been made to add its functionality via browser plugins. It can be useful as a temporary improvement for the experienced users but one can never rely on the user having the plugin installed. The library providing WebRTC functionality for Safari, Opera, IE and older versions of Firefox is called webrtc4all. \docbooktolatexcite{webrtc4all}{} However, it is still a proprietary solution, adding another prefix ({\texttt{{w4a}}}) to the world of WebRTC JavaScript APIs.
 
@@ -803,19 +803,19 @@ One of the logical reasons why Microsoft does want to intervene in the process o
 
 Actually, there are several other, mostly higher-level solutions for achieving the bidirectional (and thus real-time) communication in a web browser. Some of them use the HTTP requests described above (such as Bayeux), some of them are based on WebSockets (OpenTok) or even WebRTC (OpenTok), and several of them are built completely independently, installed as web browser plugins and thus behaving as separate runtime platforms (Adobe Flash, Google Talk). And, to be precise, some of the frameworks are built on top of the others, for example OpenTok uses Adobe Flash in some cases. See the sections below to understand each of the technologies.
 \subsection{Adobe Flash\index{Flash} and Microsoft Silverlight}
-\label{idp5674240}\hypertarget{idp5674240}{}%
+\label{idp3315440}\hypertarget{idp3315440}{}%
 
-Among all, one of the most widespread technologies is Adobe Flash.\label{idp5676240}\begingroup\catcode`\#=12\footnote{
+Among all, one of the most widespread technologies is Adobe Flash.\label{idp3950816}\begingroup\catcode`\#=12\footnote{
 http://www.adobe.com/software/flash/about/
-}\endgroup\docbooktolatexmakefootnoteref{idp5676240} Apart from the possibility to establish a bidirectional persistent TCP connection, Flash allows the developer to create almost any graphics, animations and user interface with nearly no limits.
+}\endgroup\docbooktolatexmakefootnoteref{idp3950816} Apart from the possibility to establish a bidirectional persistent TCP connection, Flash allows the developer to create almost any graphics, animations and user interface with nearly no limits.
 
 Nevertheless, the disadvantages of Flash are significant. First, Flash is not a native part of any web browser. Until recently, it had to be installed manually as a plugin. Now, it is bundled and shipped with the Chromium-based browsers (Chrome, Chromium), but it is still an external plugin. \docbooktolatexcite{flash-bundled-with-chrome}{} Another drawback of Flash is the lack of support on mobile devices. Apple has been clear about it: iPhones and iPads have never supported Flash technology and it is not likely to change in the future. \docbooktolatexcite{iphone-flash-support}{} Android devices supported Flash at first, but later Adobe quit Google Play. \docbooktolatexcite{android-flash-support}{}
 
-There are many other technologies similar to Adobe Flash, but they all suffer the same pain. Because they are installed as proprietary plugins, a developer can never be sure the application will run in any environment. This concerns the technologies as Microsoft Silverlight\index{Silverlight}\label{idp5680944}\begingroup\catcode`\#=12\footnote{
+There are many other technologies similar to Adobe Flash, but they all suffer the same pain. Because they are installed as proprietary plugins, a developer can never be sure the application will run in any environment. This concerns the technologies as Microsoft Silverlight\index{Silverlight}\label{idp5709136}\begingroup\catcode`\#=12\footnote{
 http://www.microsoft.com/silverlight/
-}\endgroup\docbooktolatexmakefootnoteref{idp5680944} or Adobe AIR\index{AIR}\label{idp5682592}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5709136} or Adobe AIR\index{AIR}\label{idp5710784}\begingroup\catcode`\#=12\footnote{
 http://www.adobe.com/products/air.html
-}\endgroup\docbooktolatexmakefootnoteref{idp5682592} (even though AIR has been intended to be browser-independent platform).
+}\endgroup\docbooktolatexmakefootnoteref{idp5710784} (even though AIR has been intended to be browser-independent platform).
 
 To sum it up, Adobe Flash is often used as a fallback for older browsers, running on non-mobile devices, which do not support WebRTC yet. It has been used as a fallback for the video calls in Talker application. However, creating a new application based on Flash (as a {\em{primary}} technology) in 2013 is not a good idea.
 \subsection{OpenTok video call library}
@@ -829,13 +829,13 @@ Each OpenTok session is identified by a session ID and every user who wants to j
 
 OpenTok library is the tool that has been used for implementing video calls in the Talker application, hence the library API usage is described separately in \hyperlink{chap-video-calling}{Section {\ref{chap-video-calling}}}. The main advantage of OpenTok is a low entry barrier and a simple API that can be used out of the box. On the other hand, it is still a proprietary tool and every application built with OpenTok heavily relies on the third party service. Nevertheless, we have not experienced any serious problems during almost one year running OpenTok in Celebrio.
 \subsection{Bayeux protocol\index{Bayeux}}
-\label{idp5690336}\hypertarget{idp5690336}{}%
+\label{idp5718528}\hypertarget{idp5718528}{}%
 
 Bayeux is one of the higher level protocols designed specifically for the bidirectional communication between a web browser and a server, primarily intended to work on top of HTTP. The idea of communication is almost the same as in case of HTTP long polling. To transfer the messages from a server to a client, the server holds the request and responds only when there is an available message. Sending the data from a client to a server is straightforward, an ordinary HTTP request is sufficient.
 
 Apart from HTTP requests, Bayeux defines the structure for the transmitted data, contained in the body of HTTP requests/responses. Each message has to be in form of JSON, containing structured data such as a channel name, a client ID and of course the transmitted data itself. \docbooktolatexcite{bayeux}{} Although Bayeux provides an interesting way to communicate, it has not been used in this thesis. The main reason for choosing XMPP is its better interoperability with other existing services and ability to easily communicate with the clients not running in a web browser.
 \subsection{SignalR framework\index{SignalR}}
-\label{idp5694352}\hypertarget{idp5694352}{}%
+\label{idp5722544}\hypertarget{idp5722544}{}%
 
 SignalR is a framework taking care of both a client (a web browser) and a server side of the application. SignalR is designed for the .NET platform on a server side, so the web application should be powered by the ASP.NET framework. SignalR abstracts the user from finding out which technology the web browser, in which an application runs, supports. Instead, SignalR provides an API for sending the messages and handling the incoming ones. Internally, it uses WebSockets for establishing the connection. When the WebSocket API is not available (for example in IE9, which is funny considering that SignalR is Microsoft-platform-based technology), it tries Server Sent Events and then falls back on the long polling technique. \docbooktolatexcite{signalr}{} To take it short, SignalR provides an envelope for the client-side WebSockets and HTTP long polling techniques, with ASP.NET API for handling the messages on a server.
 \subsection{Real-time communication tools from Google\index{Google}}
@@ -859,9 +859,9 @@ The new platform will preserve XMPP as an underlying protocol, so it will basica
 \chapter{Extensible Messaging and Presence Protocol}
 \label{chap-xmpp}\hypertarget{chap-xmpp}{}%
 
-Extensible Messaging and Presence Protocol (XMPP) technologies were invented by Jeremie Miller in 1998. \docbooktolatexcite{xmpp-the-definitive-guide}{} It is one of the most widespread technologies for instant messaging (IM),\label{idp5711648}\begingroup\catcode`\#=12\footnote{
+Extensible Messaging and Presence Protocol (XMPP) technologies were invented by Jeremie Miller in 1998. \docbooktolatexcite{xmpp-the-definitive-guide}{} It is one of the most widespread technologies for instant messaging (IM),\label{idp5739680}\begingroup\catcode`\#=12\footnote{
 Actually, the IM client or even the technology itself is sometimes called {``}Instant Messenger{''}. This term is registered as a trademark by AOL company. \docbooktolatexcite{aol-trademarks}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5711648} i.e. exchanging the text or multimedia data between several endpoints. The {``}native{''} implementation of XMPP works right on top of the TCP protocol: XMPP endpoint (called client as it represents the first actor in the client-server architecture) opens a long-lived TCP connection. Then, both the client and the server negotiate and open XML streams, so there is one stream in each direction. \docbooktolatexcite{xmpp-the-definitive-guide}{} When the connection is established, both the client and the server can push any changes as XML elements to the stream and the other side obtains them immediately. The usual XMPP clients are standalone applications able to open a TCP connection and listen to the stream opened by the server.
+}\endgroup\docbooktolatexmakefootnoteref{idp5739680} i.e. exchanging the text or multimedia data between several endpoints. The {``}native{''} implementation of XMPP works right on top of the TCP protocol: XMPP endpoint (called client as it represents the first actor in the client-server architecture) opens a long-lived TCP connection. Then, both the client and the server negotiate and open XML streams, so there is one stream in each direction. \docbooktolatexcite{xmpp-the-definitive-guide}{} When the connection is established, both the client and the server can push any changes as XML elements to the stream and the other side obtains them immediately. The usual XMPP clients are standalone applications able to open a TCP connection and listen to the stream opened by the server.
 
 XMPP stands for communication protocol handling not only sending and receiving the messages, but also presence notification, contact list (roster) management and others. The architecture is distributed and decentralized. There is no central or top level XMPP server. Anyone can run an XMPP server, very similarly as an HTTP or FTP server. Identification and recognition on the network is also similar -- XMPP relies on Domain Name System (DNS), so that every server is identified via string domain name with arbitrary subdomain level (e.g. xmpp.example.com or just example.org). \docbooktolatexcite{xmpp-the-definitive-guide}{}
 
@@ -923,9 +923,9 @@ XMPP solves the potential privacy problem with a subscription\index{XMPP!subscri
 
 Having described XMPP as a communication protocol over TCP, it might be unclear how it is related to the topic of this thesis. XMPP is a nice and mature technology and it would be nice to use it in a web browser, but it does not support communication over HTTP. Fortunately, XMPP offers many extensions (indeed, the first letter X stands for {``}extensible{''}) providing an additional functionality. In fact, we speak about XMPP {\em{Extension Protocols}} and thus they are called XEPs\index{XEP}.
 
-This section briefly describes one of the XEP extensions called BOSH\index{BOSH} (XEP-0124), designed for transferring XMPP over HTTP.\label{idp5757840}\begingroup\catcode`\#=12\footnote{
+This section briefly describes one of the XEP extensions called BOSH\index{BOSH} (XEP-0124), designed for transferring XMPP over HTTP.\label{idp5785312}\begingroup\catcode`\#=12\footnote{
 In fact, there are two more XEPs related to HTTP. First of them, XEP-0025: Jabber HTTP Polling, has been replaced by BOSH. It is obsolete and recommended not to be used any longer. \docbooktolatexcite{xep-0025}{} The other one is XEP-0206: XMPP Over BOSH. It is currently used as a standard but it constitutes just a supplement for BOSH (XEP-0124). XEP-0206 describes mainly the session creation and an authentication process in BOSH. \docbooktolatexcite{xep-0206}{}
-}\endgroup\docbooktolatexmakefootnoteref{idp5757840} \docbooktolatexcite{xep-0124}{} The idea behind this extension is very simple: BOSH uses an HTTP long polling technique (described in \hyperlink{chap-http-long-polling}{Section {\ref{chap-http-long-polling}}}) to imitate a bidirectional TCP communication necessary for XMPP. We can imagine BOSH (itself a protocol) as a middle layer protocol or a wrapper protocol between HTTP (only capable of sending requests from a client to a server) and XMPP (understanding only the XML stanzas). BOSH requests and responses are subset of all conceivable HTTP requests or responses (they include all HTTP features such as an HTTP method in a request or a status code in a response). The constraint defined by BOSH protocol restricts the body part to have a specific structure.
+}\endgroup\docbooktolatexmakefootnoteref{idp5785312} \docbooktolatexcite{xep-0124}{} The idea behind this extension is very simple: BOSH uses an HTTP long polling technique (described in \hyperlink{chap-http-long-polling}{Section {\ref{chap-http-long-polling}}}) to imitate a bidirectional TCP communication necessary for XMPP. We can imagine BOSH (itself a protocol) as a middle layer protocol or a wrapper protocol between HTTP (only capable of sending requests from a client to a server) and XMPP (understanding only the XML stanzas). BOSH requests and responses are subset of all conceivable HTTP requests or responses (they include all HTTP features such as an HTTP method in a request or a status code in a response). The constraint defined by BOSH protocol restricts the body part to have a specific structure.
 
 Each BOSH request or response body should be valid XML, which wraps up XMPP stanzas in a special {\texttt{{\textless{}body/\textgreater{}}}} element. For the purposes of the protocol itself, it is also possible to send just the {\texttt{{body}}} element with no child (XMPP) nodes -- for example when starting a session or reporting an error. So, the XMPP part of the communication is clearly separated from the BOSH part: the former is represented by payload elements inside the {\texttt{{body}}}, the latter consists of {\texttt{{body}}} attributes. Have a look at an example of a BOSH request: \docbooktolatexcite{xep-0124}{}
 \begin{Verbatim}[fontsize=\small]
@@ -959,9 +959,9 @@ BOSH protocol is an important part of the Talker application implemented as a pr
 \section{XMPP over WebSockets}
 \label{chap-xmpp-ws}\hypertarget{chap-xmpp-ws}{}%
 
-Since there is a possibility to transmit arbitrary data from a web browser application to a server via WebSockets, it could be handy to transfer XMPP stanzas using WS as well. Using WebSockets saves a considerable amount of overhead and fixes several issues that can happen with BOSH (for example unreliability of HTTP). It generally works, yet the programmer should be wary of several pitfalls that WebSockets bring. First, a server side must accept a WebSockets connection. Usually, XMPP servers do provide such functionality through addons or modules.\label{idp5779296}\begingroup\catcode`\#=12\footnote{
+Since there is a possibility to transmit arbitrary data from a web browser application to a server via WebSockets, it could be handy to transfer XMPP stanzas using WS as well. Using WebSockets saves a considerable amount of overhead and fixes several issues that can happen with BOSH (for example unreliability of HTTP). It generally works, yet the programmer should be wary of several pitfalls that WebSockets bring. First, a server side must accept a WebSockets connection. Usually, XMPP servers do provide such functionality through addons or modules.\label{idp5806688}\begingroup\catcode`\#=12\footnote{
 Additional module for a Prosody server has been used as well when running the Talker application. The process of the installation includes downloading the module, adding it to the path that Prosody searches for modules. Then, it must be enabled in a configuration file. Moreover, {\texttt{{luajit}}} and {\texttt{{liblua5.1-bitop0}}} packages had to be downloaded for the module to work correctly (assuming Debian/Ubuntu on the server side).
-}\endgroup\docbooktolatexmakefootnoteref{idp5779296} Provided that a WebSocket extension to the XMPP server is running on localhost, using WS to connect to the server is as simple as follows:
+}\endgroup\docbooktolatexmakefootnoteref{idp5806688} Provided that a WebSocket extension to the XMPP server is running on localhost, using WS to connect to the server is as simple as follows:
 
 \begin{Verbatim}[fontsize=\small]
 var ws = new WebSocket("ws://localhost:5280/xmpp-websocket/", "xmpp");
@@ -975,7 +975,7 @@ ws.send(
 
 Probably the most important difference compared to BOSH is that every WebSocket message (i.e. one chunk of incoming or outcoming communication -- can be compared to BOSH request) can contain only one XMPP stanza. \docbooktolatexcite{xmpp-over-websockets}{} It means that a client or a server cannot send more XMPP messages packed together, even if they are available by the time a WS message is sent.
 
-The main drawback of using XMPP over WebSockets is still partial lack of support both in the web browsers (which includes WS support itself and the JavaScript XMPP libraries) and on the XMPP servers. Nevertheless, there is a huge trend of implementing it at all sides.\label{idp5784752}\begingroup\catcode`\#=12\footnote{
+The main drawback of using XMPP over WebSockets is still partial lack of support both in the web browsers (which includes WS support itself and the JavaScript XMPP libraries) and on the XMPP servers. Nevertheless, there is a huge trend of implementing it at all sides.\label{idp5812144}\begingroup\catcode`\#=12\footnote{
 You might want to have a look at some of the current discussions concerning client-side (i.e. JavaScript) libraries:
 
 {\textless}\url{https://github.com/metajack/strophejs/issues/68}{\textgreater}
@@ -983,15 +983,15 @@ You might want to have a look at some of the current discussions concerning clie
 {\textless}\url{https://github.com/metajack/strophejs/pull/95}{\textgreater}
 
 {\textless}\url{http://stackoverflow.com/questions/1850162/}{\textgreater}
-}\endgroup\docbooktolatexmakefootnoteref{idp5784752} Both BOSH and WS require additional plugins to be installed on a server since they are not part of XMPP. The plugins basically handle a connection (or a request, in case of BOSH) and hand over a pure XMPP message to the core XMPP server. In case of BOSH, the request can be sent to the plugin directly when the port is specified, or redirected by default HTTP server. The schema of transitions between the users at one side (using either WS, direct BOSH with specified plugin port or BOSH request to default HTTP port) and a server side is depicted in \hyperlink{fig-xmpp-server-plugins}{Figure {\ref{fig-xmpp-server-plugins}}}.
+}\endgroup\docbooktolatexmakefootnoteref{idp5812144} Both BOSH and WS require additional plugins to be installed on a server since they are not part of XMPP. The plugins basically handle a connection (or a request, in case of BOSH) and hand over a pure XMPP message to the core XMPP server. In case of BOSH, the request can be sent to the plugin directly when the port is specified, or redirected by default HTTP server. The schema of transitions between the users at one side (using either WS, direct BOSH with specified plugin port or BOSH request to default HTTP port) and a server side is depicted in \hyperlink{fig-xmpp-server-plugins}{Figure {\ref{fig-xmpp-server-plugins}}}.
 
 % figure ------------------------------------------------------
 \begin{figure}[hbt]
 \hypertarget{fig-xmpp-server-plugins}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/bosh-ws-xmpp}}\hypertarget{idp5790560}{}%
-\label{idp5790560}
+{{\includegraphics[]{vp/bosh-ws-xmpp}}\hypertarget{idp5817952}{}%
+\label{idp5817952}
 }
 {{\caption[{Communicating to XMPP server with WS and BOSH plugins}]{{{Communicating to XMPP server with WS and BOSH plugins}}}\label{fig-xmpp-server-plugins}}}
 \end{center}
@@ -1000,13 +1000,13 @@ You might want to have a look at some of the current discussions concerning clie
 % ------------------------   
 % Section 
 \section{Jingle -- XMPP media extension\index{XEP}}
-\label{idp5791824}\hypertarget{idp5791824}{}%
+\label{idp5819216}\hypertarget{idp5819216}{}%
 
 Not only can XMPP send the text messages but it also supports transferring various multimedia streams. Audio and video above all, yet it is also possible to send raw binary files. All the functionality related to those {``}advanced{''} transfers is being managed by an XMPP protocol extension (XEP) called Jingle\index{Jingle}. According to the protocol extension, the two parties negotiate a data stream using the standard IQ stanzas (described in \hyperlink{chap-xmpp-stanzas}{Section {\ref{chap-xmpp-stanzas}}}). Then, a stream is established according to the prearranged entries. \docbooktolatexcite{xep-0166}{}
 
-Although Jingle is relatively old and mature XMPP extension, it has not been used in the web browsers for a long time. Web browsers had not supported multimedia transfers due to the troublesome bidirectional communication and a difficult access to multimedia devices (a microphone and a webcam). Ergo, Jingle has not been used in the Talker application either -- the main reason for not using Jingle in the Talker application is the lack of JavaScript libraries supporting it. There is just an unofficial Strophe.js\index{Strophe.js} plugin for Jingle, published by Michael Weibel, not very well maintained and relying on the WebRTC technology\index{WebRTC}.\label{idp5799440}\begingroup\catcode`\#=12\footnote{
+Although Jingle is relatively old and mature XMPP extension, it has not been used in the web browsers for a long time. Web browsers had not supported multimedia transfers due to the troublesome bidirectional communication and a difficult access to multimedia devices (a microphone and a webcam). Ergo, Jingle has not been used in the Talker application either -- the main reason for not using Jingle in the Talker application is the lack of JavaScript libraries supporting it. There is just an unofficial Strophe.js\index{Strophe.js} plugin for Jingle, published by Michael Weibel, not very well maintained and relying on the WebRTC technology\index{WebRTC}.\label{idp5826832}\begingroup\catcode`\#=12\footnote{
 See {\textless}\url{http://candy-chat.github.com/candy-webrtc/}{\textgreater} and {\textless}\url{https://github.com/mweibel/strophejs-plugins/tree/jingle}{\textgreater} for the references.
-}\endgroup\docbooktolatexmakefootnoteref{idp5799440} Therefore, Jingle is not described further in this thesis, it is mentioned here just as an option for the future.
+}\endgroup\docbooktolatexmakefootnoteref{idp5826832} Therefore, Jingle is not described further in this thesis, it is mentioned here just as an option for the future.
 
 Nevertheless, C/C++ Jingle libraries seem to be rather mature and ready to be used in the desktop client applications. Above all, there is a library developed by Google called libjingle\index{libjingle}, supporting multi-user audio/video/file transfers. \docbooktolatexcite{libjingle}{} Google seems to believe that Jingle is the right protocol for developing a multimedia client that can be used by everyone. They even sidelined the original Google Talk VOIP protocol and switched to Jingle as their {``}primary signalling protocol for voice calls{''}, in Gmail, iGoogle and Orkut. \docbooktolatexcite{jingle-is-the-future}{}
 
@@ -1036,8 +1036,8 @@ In this chapter, the two previous topics are connected together. The possibiliti
 \hypertarget{fig-isoosi}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/isoosi}}\hypertarget{idp5823024}{}%
-\label{idp5823024}
+{{\includegraphics[]{vp/isoosi}}\hypertarget{idp5850416}{}%
+\label{idp5850416}
 }
 {{\caption[{Complexity of the communication protocols at application layer}]{{{Complexity of the communication protocols at application layer}}}\label{fig-isoosi}}}
 \end{center}
@@ -1054,17 +1054,17 @@ Throughout this thesis, we assume the application runs in a web browser. After a
 % ------------------------   
 % Section 
 \section{Strophe.js -- JavaScript XMPP library\index{Strophe.js}}
-\label{idp5828384}\hypertarget{idp5828384}{}%
+\label{idp5855776}\hypertarget{idp5855776}{}%
 
-Strophe.js\label{idp5830160}\begingroup\catcode`\#=12\footnote{
+Strophe.js\label{idp5857552}\begingroup\catcode`\#=12\footnote{
 Strophe.js is sometimes referred only as {``}Strophe{''}. However, Strophe is, strictly speaking, a name of the collection of libraries, from which only one is Strophe.js, the JavaScript tool described in this chapter. Nevertheless, within this thesis, both {``}Strophe.js{''} and {``}Strophe{''} refer to the JavaScript part of the library.
-}\endgroup\docbooktolatexmakefootnoteref{idp5830160} is a complex but simple to use JavaScript library for creating an XMPP client in a web browser application, initially created and further maintained by Jack Moffitt. Since XMPP is the protocol powering the Talker application, Strophe.js appeared to be a proper tool for creating it. In fact, Strophe handles the whole {``}transport{''} layer for the application, as it was described in the introduction to this chapter.
+}\endgroup\docbooktolatexmakefootnoteref{idp5857552} is a complex but simple to use JavaScript library for creating an XMPP client in a web browser application, initially created and further maintained by Jack Moffitt. Since XMPP is the protocol powering the Talker application, Strophe.js appeared to be a proper tool for creating it. In fact, Strophe handles the whole {``}transport{''} layer for the application, as it was described in the introduction to this chapter.
 
 Strophe.js uses the BOSH protocol (based on HTTP long polling) for sending messages and receiving updates from a server. There is an unofficial project fork using WebSockets but it has not been accepted by the community yet. The main reason is probably the unfinished standard for handling XMPP stanzas in WebSocket stream, currently available as a draft. \docbooktolatexcite{xmpp-over-websockets}{}
 
 In the following sections, the essential topics concerning Strophe.js are mentioned. It mostly comprises Strophe.js basic usage and philosophy, including using plugins for getting additional functionality beyond the library itself.
 \subsection{New connection}
-\label{idp5835376}\hypertarget{idp5835376}{}%
+\label{idp5862768}\hypertarget{idp5862768}{}%
 
 Since an XMPP client is intended to communicate with various nodes in the Internet, a connection represents the essence of an application. Strophe connects to a BOSH server through which it communicates with the rest of the XMPP world. Its URL is stated as BOSH\_SERVICE variable in the following example. Setting up the connection is simple:
 
@@ -1108,11 +1108,11 @@ connection.attach(jid, sid, rid, onConnect);
 \subsection{Event handling}
 \label{chap-strophe-events}\hypertarget{chap-strophe-events}{}%
 
-Both JavaScript and XMPP are typical fields of using asynchronous processing of incoming events. The idea is simple. Generally, we specify the actions we are interested in and attach the event handlers to each of them. An event handler\index{event handler}, a function or a method, is invoked as soon as the specified action occurs. The event handlers, deferred functions, are called callbacks\index{callback}. Not only Strophe but all other asynchronous libraries (event-based or request/response) in JavaScript are based on callbacks, for example popular jQuery AJAX functions.\label{idp5857712}\begingroup\catcode`\#=12\footnote{
+Both JavaScript and XMPP are typical fields of using asynchronous processing of incoming events. The idea is simple. Generally, we specify the actions we are interested in and attach the event handlers to each of them. An event handler\index{event handler}, a function or a method, is invoked as soon as the specified action occurs. The event handlers, deferred functions, are called callbacks\index{callback}. Not only Strophe but all other asynchronous libraries (event-based or request/response) in JavaScript are based on callbacks, for example popular jQuery AJAX functions.\label{idp5885104}\begingroup\catcode`\#=12\footnote{
 http://api.jquery.com/jQuery.ajax/
-}\endgroup\docbooktolatexmakefootnoteref{idp5857712}\label{idp5858352}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5885104}\label{idp5885744}\begingroup\catcode`\#=12\footnote{
 Nowadays, the callback approach is getting replaced by {``}promises{''}, wrapping asynchronous operations to later resolved objects. Promises are said to be similar to functional {``}monad{''} structures, known from Haskell.
-}\endgroup\docbooktolatexmakefootnoteref{idp5858352}
+}\endgroup\docbooktolatexmakefootnoteref{idp5885744}
 
 When the idea of a callback is clear, applying them to Strophe.js event handling is simple, as depicted in the example below. The first parameter is the callback itself (its name or an anonymous function implemented on site). The {``}areas of concern{''} are specified as the remaining five parameters. The example callback here is triggered every time a chat message comes, i.e. a {\texttt{{message}}} stanza with an attribute {\texttt{{type='chat'}}}. The parameters specified as {\texttt{{null}}} mean that any value of that place is processed by the handler. Therefore, the message sender, which can be specified by the next-to-last argument, can be anyone:
 
@@ -1132,7 +1132,7 @@ onChatMessage = function(msg) {
 
 The last line in the function is a common pattern in Strophe.js the developer must be aware of. Each handler must return {\texttt{{true}}} (or any other value which evaluates to {\texttt{{true}}}) to stay bound to the event. If {\texttt{{false}}} is returned, the handler is unattached and it is not triggered any more. \docbooktolatexcite{xmpp-in-javascript}{} Therefore, {\texttt{{false}}} return values are proper for disposable callbacks, used only once.
 \subsection{Stanza builders}
-\label{idp5869296}\hypertarget{idp5869296}{}%
+\label{idp5896688}\hypertarget{idp5896688}{}%
 
 The whole XMPP protocol is represented by XML elements called stanzas, transferred between a client and a server. There are various approaches to create an XML document structure in JavaScript. Using jQuery is the most common way to do so. The jQuery object, created by jQuery {\texttt{{\$}}} function, represents an XML structure tree which can be extended using methods like {\texttt{{append}}}, {\texttt{{wrap}}} and {\texttt{{after}}}. \docbooktolatexcite{jquery-api}{}
 
@@ -1157,7 +1157,7 @@ Bijection between the two pieces of code is rather obvious. The only catch could
 this.send($pres().tree());
 \end{Verbatim}
 \subsection{Logger}
-\label{idp5881568}\hypertarget{idp5881568}{}%
+\label{idp5908960}\hypertarget{idp5908960}{}%
 
 Strophe.js does not conceal any information about its operation. It contains several logger methods, divided by a log level, mostly used by the library itself (it however can be used by the user code as well). Logging functionality is inserted in the main Strophe object itself. Calling the logger from the library methods is thus simple, however it can hardly be replaced by another logger (all at once), defined by the user. All logger methods point to the ultimate {\texttt{{log}}} method, which just returns by default. The intention of the library authors is providing this method to be overridden by a custom user code. So is done in the Talker application, as described in \hyperlink{chap-talker}{Chapter {\ref{chap-talker}}, {``}Talker -- IM client in a web browser{''}}.
 
@@ -1203,15 +1203,15 @@ connection.roster.registerCallback(presenceListener,
 
 The connection attachment, as described in \hyperlink{strophe-attach}{Section {\ref{strophe-attach}}}, is used in the Talker application. Apart from the security advantages and the possibility of boosting performance by pre-creating the connections, there are also some drawbacks in this approach. The most important one is a need of an XMPP client (or at least a connection manager) implemented in the server-side language, or alternatively running Strophe itself in the server-side JavaScript environment.
 
-There are several available solutions. For example, a Python XMPP connection manager called Punjab\label{idp5900496}\begingroup\catcode`\#=12\footnote{
+There are several available solutions. For example, a Python XMPP connection manager called Punjab\label{idp5927888}\begingroup\catcode`\#=12\footnote{
 https://github.com/twonds/punjab
-}\endgroup\docbooktolatexmakefootnoteref{idp5900496} is well-suited for {``}pre-creating{''} BOSH connections. Speaking of PHP (as it is the language Celebrio is powered by), there is JAXL\label{idp5901776}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5927888} is well-suited for {``}pre-creating{''} BOSH connections. Speaking of PHP (as it is the language Celebrio is powered by), there is JAXL\label{idp5929168}\begingroup\catcode`\#=12\footnote{
 https://github.com/abhinavsingh/JAXL
-}\endgroup\docbooktolatexmakefootnoteref{idp5901776} library which has been used in this project. However, it is not very steady tool. I~have found two bugs in this library, not mentioning its poor documentation. One minor bug fix has already been accepted by the library author to the official branch,\label{idp5902832}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5929168} library which has been used in this project. However, it is not very steady tool. I~have found two bugs in this library, not mentioning its poor documentation. One minor bug fix has already been accepted by the library author to the official branch,\label{idp5930224}\begingroup\catcode`\#=12\footnote{
 https://github.com/abhinavsingh/JAXL/pull/30
-}\endgroup\docbooktolatexmakefootnoteref{idp5902832} the other one is still being opened by the time of finishing this thesis.\label{idp5903696}\begingroup\catcode`\#=12\footnote{
+}\endgroup\docbooktolatexmakefootnoteref{idp5930224} the other one is still being opened by the time of finishing this thesis.\label{idp5931088}\begingroup\catcode`\#=12\footnote{
 https://github.com/abhinavsingh/JAXL/issues/32
-}\endgroup\docbooktolatexmakefootnoteref{idp5903696}Although the latter might not be a real issue, it still prevents from a successful BOSH connection establishment.
+}\endgroup\docbooktolatexmakefootnoteref{idp5931088}Although the latter might not be a real issue, it still prevents from a successful BOSH connection establishment.
 
 % -------------------------------------------------------------
 % Chapter Talker -- IM client in a web browser 
@@ -1226,17 +1226,17 @@ In this chapter, Talker application is described in depth. There are requirement
 % ------------------------   
 % Section 
 \section{Analysis}
-\label{idp5908416}\hypertarget{idp5908416}{}%
+\label{idp5935808}\hypertarget{idp5935808}{}%
 
 Firstly, this section describes the application analysis, i.e. what the requirements are. It includes both the non-functional requirements (such as the platform the application must run on or the system it has to cooperate with) and the probable usage by customers. When the requirements are clear, it must be decided how to implement the desired functionality. That is where the design takes place. The application design springs from the analysis, further decomposes it and clarifies the way it will be implemented. The design part is crucial because the sooner possible glitches are unveiled and fixed the lower the cost is. The last thing which has to be considered and decided is the {``}stack{''} of proper technologies to be used, with regard to the both non-functional requirements and the design complexity.
 \subsection{Value proposition}
-\label{idp5910736}\hypertarget{idp5910736}{}%
+\label{idp5938128}\hypertarget{idp5938128}{}%
 
 The first step when creating a successful application (or even a whole ecosystem of applications such as Celebrio) should start by considering the added customer (or more precisely user) value. The value proposition mainly contemplates the possible market, the users and the benefits they would have from using our application, i.e. Talker. \docbooktolatexcite{value-proposition}{} Our target market is well-defined and rather easy to interview: the elderly people. More than a half of the elderly use (or are willing to use) a real-time communication tool, comprising both text chat and video calls. They prefer it to be interoperable so they can speak to the people not using directly the same software tool as they do.
 
 Talker offers the benefit of running within Celebrio, the {``}operating system{''} designed specifically for the elderly. The compatibility is limitless within the XMPP network. Unlike many communication tools, it provides a text chat and a video calling platform bundled together, so the user simply uses it as a {``}dialogue{''} application, no matter which way she feels like communicating at the moment.
 \subsection{Use cases}
-\label{idp5914688}\hypertarget{idp5914688}{}%
+\label{idp5942080}\hypertarget{idp5942080}{}%
 
 The use case analysis springs from two information sources. The first one is based on an author's own opinion and experience with online communication tools. The other part is patterned on user interviews and the market research, carried out as a part of Celebrio marketing activities. In other words, the potential customers said what their probable use cases would look like. However, there is no quantitative data analysis on this topic.
 
@@ -1245,8 +1245,8 @@ The use case analysis springs from two information sources. The first one is bas
 \hypertarget{talker-uc}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/talker-uc}}\hypertarget{idp5917600}{}%
-\label{idp5917600}
+{{\includegraphics[]{vp/talker-uc}}\hypertarget{idp5944992}{}%
+\label{idp5944992}
 }
 {{\caption[{Talker use case diagram}]{{{Talker use case diagram}}}\label{talker-uc}}}
 \end{center}
@@ -1260,16 +1260,16 @@ There is one more actor depicted in \hyperlink{talker-uc}{Figure {\ref{talker-uc
 
 The use cases and a value proposition imply certain technologies and tools that are obvious to be used and also some constraints. At the lowest level, Talker is a part of a web application so it must run in a web browser environment. With respect to the interactivity and real-time behaviour, it must be powered by {\em{JavaScript}}. There are other possibilities, such as Adobe Flash\index{Flash} or browser plugins. However, they do not play well with various environments, as mentioned in \hyperlink{chap-high-level-rtc}{Section {\ref{chap-high-level-rtc}}}.
 
-XMPP has been chosen as the communication protocol for the messages transmission. It is an opened, mature and interoperable technology. Creating a new XMPP service means just plugging in the new part to a world-wide network. XMPP is described in \hyperlink{chap-xmpp}{Chapter {\ref{chap-xmpp}}, {``}Extensible Messaging and Presence Protocol{''}} and the used JavaScript XMPP framework in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}JavaScript XMPP client{''}}. Such nontrivial application, as Talker is, deserves a fine client-side framework. Therefore, the connections, states, contact lists and all messages are not only stored in DOM but also managed by JavaScript itself. In the last years, many MVC\label{idp5928912}\begingroup\catcode`\#=12\footnote{
+XMPP has been chosen as the communication protocol for the messages transmission. It is an opened, mature and interoperable technology. Creating a new XMPP service means just plugging in the new part to a world-wide network. XMPP is described in \hyperlink{chap-xmpp}{Chapter {\ref{chap-xmpp}}, {``}Extensible Messaging and Presence Protocol{''}} and the used JavaScript XMPP framework in \hyperlink{chap-xmpp-in-javascript}{Chapter {\ref{chap-xmpp-in-javascript}}, {``}JavaScript XMPP client{''}}. Such nontrivial application, as Talker is, deserves a fine client-side framework. Therefore, the connections, states, contact lists and all messages are not only stored in DOM but also managed by JavaScript itself. In the last years, many MVC\label{idp5956304}\begingroup\catcode`\#=12\footnote{
 MVC stands for Model -- View -- Controller, common three-tier architecture. Model is responsible for data layer, View stands for presentation layer. The function of controller varies from one implementation to another, but it is mostly responsible for dispatching the user actions and controlling application flow, for example redirecting.
-}\endgroup\docbooktolatexmakefootnoteref{idp5928912} JavaScript frameworks have emerged. When implementing the application, I~have tried Backbone, Angular, Knockout and Ember -- all modern MVC JavaScript frameworks. After a short period of testing, I~chose Ember as the best one. The framework overview, various advantages and also some pitfalls are mentioned in \hyperlink{chap-ember}{Section {\ref{chap-ember}}}.
+}\endgroup\docbooktolatexmakefootnoteref{idp5956304} JavaScript frameworks have emerged. When implementing the application, I~have tried Backbone, Angular, Knockout and Ember -- all modern MVC JavaScript frameworks. After a short period of testing, I~chose Ember as the best one. The framework overview, various advantages and also some pitfalls are mentioned in \hyperlink{chap-ember}{Section {\ref{chap-ember}}}.
 
 The last important field to be covered is the video calls platform. On no account did I~consider to implement it from scratch. Anyway, there are several handy tools and frameworks which could have been used. After all, I~decided to use OpenTok, a video calls library described in \hyperlink{chap-opentok}{Section {\ref{chap-opentok}}}, mostly for its wide compatibility. It even supports WebRTC in its newest version, which is considered to be the future of media applications on the web.
 
 % ------------------------   
 % Section 
 \section{Application architecture}
-\label{idp5932736}\hypertarget{idp5932736}{}%
+\label{idp5960128}\hypertarget{idp5960128}{}%
 
 As mentioned in the previous section, Talker is not trivial application which could be served by several inline scripts manipulating the DOM. It has to handle states, keep track of all simultaneous conversations and dispatch all messages to the appropriate contacts. Those reasons led to a semi-modular architecture, depicted in \hyperlink{fig-talker-modules}{Figure {\ref{fig-talker-modules}}}. Modules inside the grey package represent those I~directly implemented, the outside ones are the used libraries and third party modules, however necessary to run the application.
 
@@ -1278,8 +1278,8 @@ As mentioned in the previous section, Talker is not trivial application which co
 \hypertarget{fig-talker-modules}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/components-talker}}\hypertarget{idp5936208}{}%
-\label{idp5936208}
+{{\includegraphics[]{vp/components-talker}}\hypertarget{idp5963600}{}%
+\label{idp5963600}
 }
 {{\caption[{An application modules structure}]{{{An application modules structure}}}\label{fig-talker-modules}}}
 \end{center}
@@ -1287,26 +1287,26 @@ As mentioned in the previous section, Talker is not trivial application which co
 
 The main application logic is placed inside an {\texttt{{App}}} module. It is implemented as an {\texttt{{Ember.Application}}} object and it serves as a namespace for the rest of the application. Using the namespace to wrap the whole application is generally a good practice, so the global namespace (i.e. a {\texttt{{window}}} object) is not polluted. Within the namespace, other Ember-based classes are separated into four parts, according to the MVC structure, i.e. models, views and controllers. The last part is represented by a router, a component responsible for handling the application state.
 \subsection{Models}
-\label{idp5940144}\hypertarget{idp5940144}{}%
+\label{idp5967536}\hypertarget{idp5967536}{}%
 
-Talker is supposed to handle data: to keep the information about a contact list, update it as the contacts sign in and out; to keep track of the message lists corresponding to individual contacts. All mentioned data manipulation is achieved with {\em{models}}. A~model hierarchy is depicted in \hyperlink{fig-models}{Figure {\ref{fig-models}}}. The main two entities, {\texttt{{Contact}}} and {\texttt{{Message}}}, are rather self-explaining. It should be mentioned that the messages are stored directly as a list property of each contact. Potential contact removal would erase its messages as well. The class\label{idp5943696}\begingroup\catcode`\#=12\footnote{
+Talker is supposed to handle data: to keep the information about a contact list, update it as the contacts sign in and out; to keep track of the message lists corresponding to individual contacts. All mentioned data manipulation is achieved with {\em{models}}. A~model hierarchy is depicted in \hyperlink{fig-models}{Figure {\ref{fig-models}}}. The main two entities, {\texttt{{Contact}}} and {\texttt{{Message}}}, are rather self-explaining. It should be mentioned that the messages are stored directly as a list property of each contact. Potential contact removal would erase its messages as well. The class\label{idp5971088}\begingroup\catcode`\#=12\footnote{
 When speaking about classes and displaying them in the class diagram, one should be aware of the fact there are no real language-based classes in JavaScript. However, Ember provides a convenient way to imitate the class behaviour with {\texttt{{Ember.Object.extend}}} method, further described in the next section.
-}\endgroup\docbooktolatexmakefootnoteref{idp5943696} {\texttt{{Person}}} encapsulates the properties common for the contacts and the user operating the application. In other words, the information about the current user, logged in to the application, is stored in an instance of that class.
+}\endgroup\docbooktolatexmakefootnoteref{idp5971088} {\texttt{{Person}}} encapsulates the properties common for the contacts and the user operating the application. In other words, the information about the current user, logged in to the application, is stored in an instance of that class.
 
 % figure ------------------------------------------------------
 \begin{figure}[hbt]
 \hypertarget{fig-models}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/cd-app-models}}\hypertarget{idp5947872}{}%
-\label{idp5947872}
+{{\includegraphics[]{vp/cd-app-models}}\hypertarget{idp5975264}{}%
+\label{idp5975264}
 }
 {{\caption[{A structure of the application models}]{{{A structure of the application models}}}\label{fig-models}}}
 \end{center}
 \end{figure}
 
 \subsection{Views and controllers}
-\label{idp5949136}\hypertarget{idp5949136}{}%
+\label{idp5976528}\hypertarget{idp5976528}{}%
 
 All Ember-related issues are described in the section \hyperlink{chap-ember}{Section {\ref{chap-ember}}}, only the structure is mentioned here. As the user traverses the application, various controllers manage the states. The structure of controllers bijectively corresponds to the views hierarchy (i.e. almost every view has its respective controller and vice versa). Thereby, only the controllers are displayed in \hyperlink{fig-controllers}{Figure {\ref{fig-controllers}}}, to show the hierarchy structure. The main view, a contact list, is handled by a {\texttt{{ContactsController}}} instance. When the user enters the conversation, {\texttt{{ConversationController}}} takes over the command. {\texttt{{TextController}}} and {\texttt{{VideoController}}} (with their respective views) are present within the conversation. Calling one or another depends on whether the user interacts with the text part (the chat) or the video calls.
 
@@ -1315,15 +1315,15 @@ All Ember-related issues are described in the section \hyperlink{chap-ember}{Sec
 \hypertarget{fig-controllers}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/cd-app-controllers}}\hypertarget{idp5955808}{}%
-\label{idp5955808}
+{{\includegraphics[]{vp/cd-app-controllers}}\hypertarget{idp5983200}{}%
+\label{idp5983200}
 }
 {{\caption[{An application views/controllers structure}]{{{An application views/controllers structure}}}\label{fig-controllers}}}
 \end{center}
 \end{figure}
 
 \subsection{Adapters}
-\label{idp5957072}\hypertarget{idp5957072}{}%
+\label{idp5984464}\hypertarget{idp5984464}{}%
 
 There is a considerable amount of application logic not related to the data itself, but comprising the connection establishment, along with managing and triggering the correct handlers when a new data comes from the server. As Jon Cairns fittingly notes in his blog post, models should not contain the unnecessary application logic not directly related to them. \docbooktolatexcite{fat-model-skinny-controller}{} In Talker, such application logic is divided into two {``}adapter{''} classes. {\texttt{{StropheAdapter}}} is responsible for creating, keeping up and reacting to an XMPP connection to a BOSH server. In other words, it mostly handles the text messages. On the contrary, {\texttt{{OpenTokAdapter}}} uses the OpenTok library to keep track of the video calls. The video adapter object is assigned to every contact because it keeps the state information (a session), which is different for each contact. On the other hand, {\texttt{{StropheAdapter}}} is created and initialized just once for the whole application since it does not contain any contact-specific data. The class structure is depicted in \hyperlink{fig-adapters}{Figure {\ref{fig-adapters}}}.
 
@@ -1332,8 +1332,8 @@ There is a considerable amount of application logic not related to the data itse
 \hypertarget{fig-adapters}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/cd-adapters}}\hypertarget{idp5963856}{}%
-\label{idp5963856}
+{{\includegraphics[]{vp/cd-adapters}}\hypertarget{idp5991248}{}%
+\label{idp5991248}
 }
 {{\caption[{Connection of the application and adapters}]{{{Connection of the application and adapters}}}\label{fig-adapters}}}
 \end{center}
@@ -1346,7 +1346,7 @@ There is a considerable amount of application logic not related to the data itse
 
 Talker is a purely client-side-based application, implemented in JavaScript and running in a web browser. As mentioned in the technology overview in \hyperlink{sect-choosing-tech}{Section {\ref{sect-choosing-tech}}}, Talker implements the MVC structure on the client side, in the form of Ember MVC objects. In this section, JavaScript MVC is analysed overall at first, then some features specific to Ember, which were used in the implementation, are described.
 \subsection{Client-side MVC}
-\label{idp5967472}\hypertarget{idp5967472}{}%
+\label{idp5994864}\hypertarget{idp5994864}{}%
 
 First of all, it should be clarified why it is necessary to do MVC in JavaScript. Most of the web technologies running on a server and powering the web applications use some kind of MVC\index{MVC}, across all programming languages. It is Rails for Ruby; Zend, Nette or Symphony for PHP; Django for Python; Spring MVC or even simple servlets with JSPs in Java; ASP.NET MVC for C\#/.NET, etc. It appears that three-tier architecture\index{three-tier architecture} helps the developers to organize the code. In addition, the frameworks can do a considerable amount of job automatically.
 
@@ -1359,8 +1359,8 @@ It is obvious that many tasks, for which a server was responsible previously, ha
 \hypertarget{fig-js-mvc-input}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/js-mvc-input}}\hypertarget{idp5977280}{}%
-\label{idp5977280}
+{{\includegraphics[]{vp/js-mvc-input}}\hypertarget{idp6004672}{}%
+\label{idp6004672}
 }
 {{\caption[{Example client-handled input, bound to JavaScript model}]{{{Example client-handled input, bound to JavaScript model}}}\label{fig-js-mvc-input}}}
 \end{center}
@@ -1370,7 +1370,7 @@ The main advantage of such approach is definitely the swiftness. The input chang
 
 In modern client-side JavaScript MVC frameworks, JavaScript is also responsible for rendering HTML. This topic is set aside to a separate section in \hyperlink{sect-html-rendering}{Section {\ref{sect-html-rendering}}}.
 \subsection{Comparison to other frameworks}
-\label{idp5980576}\hypertarget{idp5980576}{}%
+\label{idp6007968}\hypertarget{idp6007968}{}%
 
 Ember.js is not the only available JavaScript MVC framework. In fact, there are plenty of similar frameworks, each of which provides a slightly different set of tools and asserting a slightly different philosophy. I~have chosen Ember for Talker due to several reasons. The facts in this section may be a little subjective as they are mostly just opinions of mine, as author of this thesis and the Talker application. There is actually not very much comparison but rather the features specific for Ember are described and explained.
 
@@ -1391,9 +1391,9 @@ There is a considerable amount of additional work which Ember takes care of. The
 
 Ember.js uses a templating engine Handlebars, which provides a very clean and convenient way to create a presentation layer of the application. In my opinion, using a dedicated templating engine makes the code much more cleaner than using HTML attributes, as for example Knockout.js does. Templating is further described in \hyperlink{sect-html-rendering}{Section {\ref{sect-html-rendering}}}.
 
-To sum it up, Ember.js is a modern and powerful tool doing a considerable amount of job that a programmer does not have to take care about. On the other hand, the learning curve of Ember is told to be one of the steepest and it is rather difficult to make the {\em{second}} step, after reading the basic tutorials and examples. Fortunately, there is an active community working on screencasts\label{idp5991984}\begingroup\catcode`\#=12\footnote{
+To sum it up, Ember.js is a modern and powerful tool doing a considerable amount of job that a programmer does not have to take care about. On the other hand, the learning curve of Ember is told to be one of the steepest and it is rather difficult to make the {\em{second}} step, after reading the basic tutorials and examples. Fortunately, there is an active community working on screencasts\label{idp6019376}\begingroup\catcode`\#=12\footnote{
 {\textless}\url{http://emberwatch.com/}{\textgreater}
-}\endgroup\docbooktolatexmakefootnoteref{idp5991984}, documentation and actively answering questions on Twitter and StackOverflow.
+}\endgroup\docbooktolatexmakefootnoteref{idp6019376}, documentation and actively answering questions on Twitter and StackOverflow.
 \subsection{Controllers}
 \label{sect-ember-controllers}\hypertarget{sect-ember-controllers}{}%
 
@@ -1415,9 +1415,9 @@ App.TextController = Ember.ObjectController.extend({
 });
 \end{Verbatim}
 
-The method {\texttt{{processMessage}}} is called from the view object, when a message input is submitted. The view just grabs the data from the input and sends it to the controller, which creates a new {\texttt{{Message}}} object, sends the message and finally updates the list of messages for the current contact, accessible via {\texttt{{this.get('content')}}}. Adding {\texttt{{.messages}}} to the {``}selector{''} points the getter directly to the array of messages.\label{idp6001728}\begingroup\catcode`\#=12\footnote{
+The method {\texttt{{processMessage}}} is called from the view object, when a message input is submitted. The view just grabs the data from the input and sends it to the controller, which creates a new {\texttt{{Message}}} object, sends the message and finally updates the list of messages for the current contact, accessible via {\texttt{{this.get('content')}}}. Adding {\texttt{{.messages}}} to the {``}selector{''} points the getter directly to the array of messages.\label{idp6029120}\begingroup\catcode`\#=12\footnote{
 Actually, the method contains a lot more code such as an argument check and return values. They have been omitted in this example for clarity and shortness.
-}\endgroup\docbooktolatexmakefootnoteref{idp6001728}
+}\endgroup\docbooktolatexmakefootnoteref{idp6029120}
 
 Another example of a controller from Talker is not an instance of {\texttt{{ObjectController}}}, as in previous example, but {\texttt{{ArrayController}}}. It represents a collection of contacts, displayed in the main application view:
 
@@ -1458,9 +1458,9 @@ App.VideoView = Ember.View.extend({
 });
 \end{Verbatim}
 
-There are two properties in the view object: {\texttt{{templateName}}} and {\texttt{{buttonLabel}}}. The former just determines the name of a template connected to this view. The latter is a common method returning one of {\texttt{{stop}}} or {\texttt{{start}}} messages, according to the value of the property {\texttt{{isActive}}}, located in the {\texttt{{controller.content}}} object, pointing to the contact the user is currently talking to. The other important part is the template itself, inserted directly in the HTML page:\label{idp6019968}\begingroup\catcode`\#=12\footnote{
+There are two properties in the view object: {\texttt{{templateName}}} and {\texttt{{buttonLabel}}}. The former just determines the name of a template connected to this view. The latter is a common method returning one of {\texttt{{stop}}} or {\texttt{{start}}} messages, according to the value of the property {\texttt{{isActive}}}, located in the {\texttt{{controller.content}}} object, pointing to the contact the user is currently talking to. The other important part is the template itself, inserted directly in the HTML page:\label{idp6047360}\begingroup\catcode`\#=12\footnote{
 Handlebars templates must be compiled by Ember to a JavaScript code to be ready to be used. It is possible to let Ember compile the templates in the browser or precompile the templates on a server. However, there is a very poor support for doing so in PHP. Therefore, templates are rendered in the HTML page and compiled in a browser while application is being developed. For a production, it is recommended to precompile them using the dedicated Node.js module: {\textless}\url{http://handlebarsjs.com/precompilation.html}{\textgreater}.
-}\endgroup\docbooktolatexmakefootnoteref{idp6019968}
+}\endgroup\docbooktolatexmakefootnoteref{idp6047360}
 
 \begin{Verbatim}[fontsize=\small]
 <script type="text/x-handlebars" data-template-name="video">
@@ -1514,9 +1514,9 @@ When the template is rendered, Ember iterates over the collection of contacts, a
 
 Although HTTP is a stateless protocol, it is common habit to build complex stateful applications on the web. The states are simulated by various web pages and the transitions are carried out by clicking the links. All changes are simultaneously displayed in the URL bar.
 
-The problem is that JavaScript application cannot switch from one web page to another, leaving one and continue at the other. JavaScript would lose its context and whole MVC structure would be purposeless. Therefore, most JavaScript applications using MVC frameworks run at a single web page, no matter how many states they contain. In Ember.js, there is a special object called {\em{Router}}\index{router}, responsible for transitions between the states, dispatching the events and rendering correct templates.\label{idp6044112}\begingroup\catcode`\#=12\footnote{
+The problem is that JavaScript application cannot switch from one web page to another, leaving one and continue at the other. JavaScript would lose its context and whole MVC structure would be purposeless. Therefore, most JavaScript applications using MVC frameworks run at a single web page, no matter how many states they contain. In Ember.js, there is a special object called {\em{Router}}\index{router}, responsible for transitions between the states, dispatching the events and rendering correct templates.\label{idp6071504}\begingroup\catcode`\#=12\footnote{
 The Ember router API changed a lot since the application was implemented (it is less than a year, but still). Further in this section, the old version of API is described since it is the version used in the Talker application. Updating Talker to the newest version of Ember.js, with the new router, is one of the possible future tasks.
-}\endgroup\docbooktolatexmakefootnoteref{idp6044112}
+}\endgroup\docbooktolatexmakefootnoteref{idp6071504}
 
 The router contains several states, ordered in a tree structure, according to the flow of possible user actions. The routes can be nested. The first task of the router is mapping the application states to URLs. Every time the transition takes place, the router changes the context (it basically renders a different template) and it changes the URL as well. Since JavaScript can change only a URL fragment, the router does exactly so. And vice versa, when the user types a specific URL in the URL bar, the application lets the router choose the matching state and set the context in a similar way.
 
@@ -1580,7 +1580,7 @@ The last remarkable aspect of the router is choosing the appropriate templates a
 % ------------------------   
 % Section 
 \section{Initializing the connection}
-\label{idp6062624}\hypertarget{idp6062624}{}%
+\label{idp6090016}\hypertarget{idp6090016}{}%
 
 When the user clicks at the Talker icon in the Celebrio main menu, a request is sent to the server which generates an HTML page (containing directly HTML as well as the Handlebars templates) and sends it along with all necessary assets, such as JavaScript files and CSS style sheets. When the page is loaded, Talker starts running. First of all, the connection to a remote BOSH server must be established so that the application can communicate with the rest of the world. There are two options to do it: creating a brand new connection or using the existing one, i.e. attaching to the connection as it is described in \hyperlink{strophe-attach}{Section {\ref{strophe-attach}}}.
 
@@ -1591,8 +1591,8 @@ As JavaScript files are loaded, the {\texttt{{App}}} object is defined by Ember 
 \hypertarget{fig-conn-establish}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/conn-establish}}\hypertarget{idp6070960}{}%
-\label{idp6070960}
+{{\includegraphics[]{vp/conn-establish}}\hypertarget{idp6098352}{}%
+\label{idp6098352}
 }
 {{\caption[{Establishing a new BOSH connection from JavaScript}]{{{Establishing a new BOSH connection from JavaScript}}}\label{fig-conn-establish}}}
 \end{center}
@@ -1603,8 +1603,8 @@ As JavaScript files are loaded, the {\texttt{{App}}} object is defined by Ember 
 \hypertarget{fig-conn-attach}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/conn-attach}}\hypertarget{idp6073568}{}%
-\label{idp6073568}
+{{\includegraphics[]{vp/conn-attach}}\hypertarget{idp6100960}{}%
+\label{idp6100960}
 }
 {{\caption[{Establishing a new BOSH connection using a server side XMPP client}]{{{Establishing a new BOSH connection using a server side XMPP client}}}\label{fig-conn-attach}}}
 \end{center}
@@ -1615,7 +1615,7 @@ It is recommended not to send a password to the client, for obvious security rea
 % ------------------------   
 % Section 
 \section{Processing events}
-\label{idp6076048}\hypertarget{idp6076048}{}%
+\label{idp6103440}\hypertarget{idp6103440}{}%
 
 Talker works as a typical asynchronous application. The application mostly consists of various {\em{callbacks}}\index{callback} (i.e. event listeners), attached to different events and awaiting to be triggered within the JavaScript event loop. \docbooktolatexcite{async-javascript}{} It is a common pattern in JavaScript applications, nowadays, \docbooktolatexcite{js-definitive-guide}{} along with the {\em{promises}}\index{promises} pattern, which wraps the event listener function to a later resolved object, which can be further processed even before the event occurs. \docbooktolatexcite{domenic-promises}{}
 
@@ -1641,26 +1641,26 @@ contact.get('messages').pushObject(message);
 
 The user actions are handled mostly by Ember itself. For example, sending a new message is managed by the controller (described in \hyperlink{sect-ember-controllers}{Section {\ref{sect-ember-controllers}}}), which only calls an adapter function, which actually sends the prepared message object. It is one of the design drawbacks of the application, that there is a two-way awareness between the adapter and the controllers (sometimes a controller calls the adapter, sometimes the adapter actively calls the controller). Such design was chosen for its simplicity and it appeared to be sufficient for the application of Talker's size.
 \subsection{Notifications\index{notifications}}
-\label{idp6092560}\hypertarget{idp6092560}{}%
+\label{idp6119952}\hypertarget{idp6119952}{}%
 
-Talker is only a part of a bigger system -- Celebrio. The user has to find out when a new message arrives. Therefore, a simple mechanism of notifications has been developed and used across the system, not only in Talker. When a new chat message arrives, the application triggers a built-in mechanism of notifications and the notification message is propagated to the main Celebrio frame, utilizing the {\texttt{{postMessage}}} API.\label{idp6095424}\begingroup\catcode`\#=12\footnote{
+Talker is only a part of a bigger system -- Celebrio. The user has to find out when a new message arrives. Therefore, a simple mechanism of notifications has been developed and used across the system, not only in Talker. When a new chat message arrives, the application triggers a built-in mechanism of notifications and the notification message is propagated to the main Celebrio frame, utilizing the {\texttt{{postMessage}}} API.\label{idp6122816}\begingroup\catcode`\#=12\footnote{
 {\textless}\url{https://developer.mozilla.org/en-US/docs/DOM/window.postMessage}{\textgreater}
-}\endgroup\docbooktolatexmakefootnoteref{idp6095424} Since the notifications are not specific to Talker and they were not developed as a part of the application, they are not further described here.
+}\endgroup\docbooktolatexmakefootnoteref{idp6122816} Since the notifications are not specific to Talker and they were not developed as a part of the application, they are not further described here.
 
 % ------------------------   
 % Section 
 \section{Logger}
-\label{idp6097280}\hypertarget{idp6097280}{}%
+\label{idp6124672}\hypertarget{idp6124672}{}%
 
-Although JavaScript is a very popular language, at least in web applications, there is no common way to log\index{logging} events or custom messages. There are two possible reasons: Firstly, JavaScript runs in a web browser and frequent AJAX requests would be necessary to log everything what happens. Secondly, a web browser is kind of a {``}hostile{''} environment, so the system developer cannot rely on the message truthfulness at all. Nevertheless, it is useful to have some information logged, at least while developing the application, locally to the browser console.\label{idp6100208}\begingroup\catcode`\#=12\footnote{
+Although JavaScript is a very popular language, at least in web applications, there is no common way to log\index{logging} events or custom messages. There are two possible reasons: Firstly, JavaScript runs in a web browser and frequent AJAX requests would be necessary to log everything what happens. Secondly, a web browser is kind of a {``}hostile{''} environment, so the system developer cannot rely on the message truthfulness at all. Nevertheless, it is useful to have some information logged, at least while developing the application, locally to the browser console.\label{idp6127600}\begingroup\catcode`\#=12\footnote{
 All current browsers have the {\texttt{{console.log}}} method implemented, which outputs a message from the JavaScript code to the browser console, accessible to anyone using the browser. The main advantage is the fact that the console is hidden from the ordinary users, yet it can be easily accessed by anyone debugging the application or reporting a bug. See the API for details: {\textless}\url{https://developer.mozilla.org/en/docs/DOM/console.log}{\textgreater}.
-}\endgroup\docbooktolatexmakefootnoteref{idp6100208}
+}\endgroup\docbooktolatexmakefootnoteref{idp6127600}
 
 The main problem with the frequently used {\texttt{{console.log}}} method is the impossibility of hiding a certain kind of messages. In Talker, there are several different kinds of logs: those related to messages, the video, subscriptions, notifications etc. It is impossible to have the output uncluttered without constant commenting and uncommenting the {\texttt{{console.log}}} calls.
 
 In order to solve this trouble, a logging library Log4js\index{Log4js} has been used in the application. It allows to create various loggers (with various appenders). Each logger has its own log level set, so that it outputs only the messages tagged by that level, or higher. Actually, the logger usage is very similar to a well-known log4j\index{log4j}, including formating layouts. There is an AJAX appender available in Log4js so it is possible to send the messages to the server to be stored permanently. This might be also useful to log the error messages not reproducible in the development environment.
 \subsection{Setup}
-\label{idp6107664}\hypertarget{idp6107664}{}%
+\label{idp6135056}\hypertarget{idp6135056}{}%
 
 The logger (with a console appender) is set up as follows:
 
@@ -1674,7 +1674,7 @@ Originally, the library does not allow chaining methods so a local variable must
 
 Once the logger is initialized, it is stored in the Log4js internal list of loggers. Later on, each logger can be retrieved from that list by calling the same {\texttt{{getLogger}}} method as during the initialization.
 \subsection{Logging}
-\label{idp6112352}\hypertarget{idp6112352}{}%
+\label{idp6139744}\hypertarget{idp6139744}{}%
 
 Logging a message is also rather easy; it might look as the following example (cut out of {\texttt{{onConnect}}} method in Talker):
 
@@ -1704,7 +1704,7 @@ Strophe.Connection {
 
 The list of contacts is an essential part of every instant messaging application. The same applies to Talker, with a tiny modification compared to classical IM clients. Talker has been designed and implemented as a part of Celebrio -- a comprehensive {``}web operating system{''}. The contact list is not managed by Talker itself, it servers to other applications as well. On the other hand, the user can connect an existing third party XMPP account to Celebrio, with its own contact list (a roster). It is crucial to deal with the contacts duplication and to perform appropriate matching of one to the other.
 \subsection{Fetching Celebrio contact list}
-\label{idp6124624}\hypertarget{idp6124624}{}%
+\label{idp6152016}\hypertarget{idp6152016}{}%
 
 As mentioned in the previous paragraph, the contact list base comes from the server-side database. Celebrio asks the user for adding her contacts in the People application, another part of the system. All contacts are stored in a relational database and they available throughout the system, in all applications. One of the properties of a contact entity is its JID. For the needs of Talker, the contacts are filtered on the server so that only those which have a JID filled are returned as the user's contact list.
 
@@ -1714,7 +1714,7 @@ The Ember class {\texttt{{Contact}}} is one of the most voluminous objects in th
 
 In whole Celebrio system, there is a rule that the contacts the user has not added to her contact list (in the People application) do not affect the user in any way. In fact, all messages, updates or invites from unknown contacts are processed by the application, but they are thrown away and not displayed to the user. There is a possibility to easily extend the application to be able to communicate with contacts that have not been added yet. However, it would break the system philosophy. Making such decision is not up to the thesis author.
 \subsection{Matching entries from XMPP roster}
-\label{idp6133360}\hypertarget{idp6133360}{}%
+\label{idp6160752}\hypertarget{idp6160752}{}%
 
 A~contact list retrieved from the Celebrio back-end, as it was described in the previous section, is only an underlying material for building the actual contact list. The other part is the XMPP roster\index{XMPP!roster} (an XMPP contact list), stored at the XMPP server. The roster can possibly contain contacts different from those originating from an internal Celebrio contact list, because the roster can be accessed from other XMPP clients as well.
 
@@ -1727,8 +1727,8 @@ The callback does basically two things, as depicted in \hyperlink{fig-roster-fet
 \hypertarget{fig-roster-fetch}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/roster-fetch}}\hypertarget{idp6141504}{}%
-\label{idp6141504}
+{{\includegraphics[]{vp/roster-fetch}}\hypertarget{idp6168896}{}%
+\label{idp6168896}
 }
 {{\caption[{Matching XMPP roster and Celebrio contact list}]{{{Matching XMPP roster and Celebrio contact list}}}\label{fig-roster-fetch}}}
 \end{center}
@@ -1736,11 +1736,11 @@ The callback does basically two things, as depicted in \hyperlink{fig-roster-fet
 
 The second part (the left side of the picture) of matching contacts works from the opposite direction. The application processes all contacts that have been retrieved from the server and which are not present in the XMPP roster. Then, it sends a subscription request to each such contact, which consists of several steps, but it simply stands for adding a contact to the user's XMPP roster.
 \subsection{Presence and online statuses}
-\label{idp6143600}\hypertarget{idp6143600}{}%
+\label{idp6170992}\hypertarget{idp6170992}{}%
 
-One of the biggest advantages of real-time communication tools is the fact that one can actually see whether her contacts are currently available (i.e. online, logged in) or not. In terms of XMPP and Talker, we speak about {\em{presence}}\index{presence}. Strophe does not provide a convenient way to work with presence, but Roster plugin does.\label{idp6146128}\begingroup\catcode`\#=12\footnote{
+One of the biggest advantages of real-time communication tools is the fact that one can actually see whether her contacts are currently available (i.e. online, logged in) or not. In terms of XMPP and Talker, we speak about {\em{presence}}\index{presence}. Strophe does not provide a convenient way to work with presence, but Roster plugin does.\label{idp6173520}\begingroup\catcode`\#=12\footnote{
 It is the same Roster plugin which handles a roster retrieval and processing, mentioned in the previous section.
-}\endgroup\docbooktolatexmakefootnoteref{idp6146128}
+}\endgroup\docbooktolatexmakefootnoteref{idp6173520}
 
 The presence is processed in a way usual to Strophe: the developer provides a callback related to a certain topic, which is triggered when anything related to that topic happens. The process of binding the callback is described in \hyperlink{chap-strophe-plugins}{Section {\ref{chap-strophe-plugins}}}. When the callback is bound, Strophe watches over presence changes sent in a form of presence stanzas from a server and hands them over to the assigned callback -- {\texttt{{onPresenceChange}}} method -- where the presence change is processed.
 
@@ -1752,7 +1752,7 @@ There is one more glitch about online statuses. XMPP makes it possible for the u
 
 Another possible approach would be sorting online statuses from the most desirable (i.e. online would be the first, then away, ...) and looking for the {``}best{''} one, regardless of the priority. It could actually more correspond to the real state of matters because some clients (such as Google Talk client) set always the highest priority. However, I~decided to keep the rules XMPP protocol sets.
 \subsection{Subscriptions}
-\label{idp6154928}\hypertarget{idp6154928}{}%
+\label{idp6182320}\hypertarget{idp6182320}{}%
 
 Subscribing in XMPP basically addresses adding the contacts to the contact list and asking them to do the same. On the account of the application simplicity, Talker deals with subscriptions automatically. When a new contact (i.e. a new contact added in Celebrio) is found, the subscription request is sent when Talker starts and loads the contact list. In the opposite direction, when a subscription request is received, the application tries to find the appropriate contact and subscribe too. If no such contact is found, information is logged and nothing happens.
 
@@ -1765,19 +1765,19 @@ This approach has one big advantage: the user does not have to respond to subscr
 
 Providing a simple interface for video calls is one of the goals of Talker application. To achieve it, OpenTok library has been used. OpenTok is a high-level library from TokBox company, allowing the developer to embed video calls support to an arbitrary web application. In this section, a basic usage of OpenTok library is described as well as the specifics for Talker implementation. OpenTok consists of a JavaScript part and a server-side SDK, necessary to initialize a session.
 \subsection{Initializing OpenTok session}
-\label{idp6160080}\hypertarget{idp6160080}{}%
+\label{idp6187472}\hypertarget{idp6187472}{}%
 
-Before actually working with the OpenTok JavaScript library, the application must create a session for a new call that is about to be established. Therefore, the JavaScript web application queries a server (with an OpenTok SDK running) to generate one. The server-side SDK connects to the official OpenTok server\label{idp6161344}\begingroup\catcode`\#=12\footnote{
+Before actually working with the OpenTok JavaScript library, the application must create a session for a new call that is about to be established. Therefore, the JavaScript web application queries a server (with an OpenTok SDK running) to generate one. The server-side SDK connects to the official OpenTok server\label{idp6188736}\begingroup\catcode`\#=12\footnote{
 {\textless}\url{http://api.opentok.com/hl}{\textgreater}
-}\endgroup\docbooktolatexmakefootnoteref{idp6161344} and retrieves the session. The reason why the request cannot be sent directly from JavaScript is a security\index{security} -- the server-side SDK proves its identity with a unique API secret, issued along with an API key directly by TokBox and assigned to every OpenTok application. The process of retrieving a session ID is depicted in \hyperlink{fig-opentok-sid}{Figure {\ref{fig-opentok-sid}}}.
+}\endgroup\docbooktolatexmakefootnoteref{idp6188736} and retrieves the session. The reason why the request cannot be sent directly from JavaScript is a security\index{security} -- the server-side SDK proves its identity with a unique API secret, issued along with an API key directly by TokBox and assigned to every OpenTok application. The process of retrieving a session ID is depicted in \hyperlink{fig-opentok-sid}{Figure {\ref{fig-opentok-sid}}}.
 
 % figure ------------------------------------------------------
 \begin{figure}[hbt]
 \hypertarget{fig-opentok-sid}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/opentok-sid}}\hypertarget{idp6165872}{}%
-\label{idp6165872}
+{{\includegraphics[]{vp/opentok-sid}}\hypertarget{idp6193264}{}%
+\label{idp6193264}
 }
 {{\caption[{The process of initializing OpenTok session}]{{{The process of initializing OpenTok session}}}\label{fig-opentok-sid}}}
 \end{center}
@@ -1785,7 +1785,7 @@ Before actually working with the OpenTok JavaScript library, the application mus
 
 Along with the session, a unique token is generated by the server-side SDK. It simply constitutes a hash of the session ID, timestamp, a client role (either publisher or subscriber) and optional user data. Within Talker, the last mentioned field is used for distinguishing free users from the premium ones, i.e. handing over the additional information to the session. To sum it up, the session ID identifies the session (i.e. one call among various number of people, typically two) and a token serves as a specific user identification.
 \subsection{Using OpenTok JavaScript library}
-\label{idp6168128}\hypertarget{idp6168128}{}%
+\label{idp6195520}\hypertarget{idp6195520}{}%
 
 After including the OpenTok JavaScript file into the application, the library is accessible via global {\texttt{{TB}}} object. When the session ID and a token are created for the application instance, the actual call can be established. The session object is created and the application connects to the new session, identifying self with the previously issued token:
 
@@ -1808,7 +1808,7 @@ session.addEventListener("sessionConnected", function (event) {
 
 In this way, every time something happens within the session, the provided callback is triggered.
 \subsection{Interconnection of callers}
-\label{idp6173232}\hypertarget{idp6173232}{}%
+\label{idp6200624}\hypertarget{idp6200624}{}%
 
 Within Talker, the previously described methods are set aside along with the code related to video calls into a separate object -- OpenTokAdapter. The adapter is instantiated for each contact in the application since, theoretically, several video calls can take place independently. Once a video call is established and an OpenTok session is created, the information about the session is sent to the other party so that she can join the call.
 
@@ -1816,7 +1816,7 @@ We decided to use an ordinary XMPP chat message to inform the other side about t
 
 When the application receives an incoming call request (in a form of the link described above), it parses the request link and hence obtains a session ID. The next step is asking the server to generate another unique token, which Talker uses for establishing the call (i.e. connecting to the session, subscribing to the other party stream and publishing its own).
 \subsection{Call states}
-\label{idp6178080}\hypertarget{idp6178080}{}%
+\label{idp6205472}\hypertarget{idp6205472}{}%
 
 Once a call is initiated, it can be either answered or timed out. There are 60 seconds within the other side must respond to the call. If not answered, the video call is hung up. All possible states along with the transition actions are depicted in \hyperlink{fig-call-states}{Figure {\ref{fig-call-states}}}.
 
@@ -1825,15 +1825,15 @@ Once a call is initiated, it can be either answered or timed out. There are 60 s
 \hypertarget{fig-call-states}{}%
 \begin{center}
 
-{{\includegraphics[]{vp/video-calls}}\hypertarget{idp6181264}{}%
-\label{idp6181264}
+{{\includegraphics[]{vp/video-calls}}\hypertarget{idp6208656}{}%
+\label{idp6208656}
 }
 {{\caption[{Video call states}]{{{Video call states}}}\label{fig-call-states}}}
 \end{center}
 \end{figure}
 
 \subsection{Embedding the video element}
-\label{idp6182528}\hypertarget{idp6182528}{}%
+\label{idp6209920}\hypertarget{idp6209920}{}%
 
 If the video call is successfully established, two video elements must be embedded to the page. One for the user of the application to be able to see herself, the other one (the bigger one) for displaying the other call participant. OpenTok provides a convenient way to create a video element. There is an action listener which triggers the following code when the session is connected (i.e. when the application connects to the session identified by given session ID), creating a video element of the caller (it is referred as the video of {``}me{''} in the application):
 
@@ -1852,30 +1852,30 @@ Creating and an automatic disposal of a video element of the other call particip
 % ------------------------   
 % Section 
 \section{Testing}
-\label{idp6188352}\hypertarget{idp6188352}{}%
+\label{idp6215744}\hypertarget{idp6215744}{}%
 
-TODO from here
+Every application is somehow tested during the development. The most popular way of doing so is traversing the application manually, especially in case of web applications. It is definitely the easiest but also not repeatable and thus difficult to scale in large projects. Therefore, automatic tests are often used. There are three kinds of tests concerning web applications. The most widespread are server-side code tests, mostly unit tests. Testing server-side code brings the benefit of a predictable and easily modifiable runtime environment. However, Talker is a client-side application and therefore server-side unit testing is not an option. The other two types of tests, both related to Talker, are JavaScript code (unit) tests and user interface tests with Selenium, both described below.
 
-Every application is tested during the development. Traversing the application manually is common way of testing, especially in case of web applications. It is definitely the easiest but also not repeatable and thus difficult to scale in large projects. Therefore, automatic tests are often used. There are three kinds of tests concerning web applications. The most widespread kind of tests are unit tests concerning the server-side code. Testing server-side code brings the benefit of predictable and easily modifiable runtime environment. However, Talker is client-side application and therefore server-side unit testing is not an option. The other two types of tests, both related to Talker, are JavaScript unit tests and Selenium tests, both described below.
+JavaScript unit testing\index{unit test} is a relatively new technique, definitely younger than classic JUnit tests in Java or PHPUnit in PHP. Earlier, a JavaScript application consisted of several action listeners bound to HTML elements on a web page. However, hardly did the real application logic move to JavaScript when the application code grew bigger. Therefore, it must be tested automatically.
 
-JavaScript unit testing\index{unit testing} is relatively new technique, definitely younger than classic JUnit tests in Java or PHPUnit in PHP. Earlier, the JavaScript consisted of several action listeners bound to the HTML elements on web page. However, hardly did real application logic move to JavaScript when the application code grew bigger. Therefore, it must be tested automatically.
+There are several available solutions for unit testing in JavaScript. Some solutions cover a whole testing {``}stack{''}, such as Jasmine or QUnit. On the other hand, there are tools which separate the problem of testing (setting up the environment and running tests) from assertion, which is responsible for injecting the functions which help with checking whether the tested method behaves correctly and returns correct values. I~believe the separation of concerns is a good pattern overall so I~have used the tools from the second group: Mocha\index{Mocha} and Intern\index{Intern} -- testing frameworks, both using Chai\index{Chai} as the assertion library.
 
-There are several available solutions for unit testing in JavaScript. Some solutions cover whole testing {``}stack{''}, such as Jasmine or QUnit. On the other hand, there are tools which separate the problem of testing (setting up the environment and running tests) from assertion, which is responsible for injecting the functions which help with checking whether the tested method behaves correctly and return correct values. I~believe the separation of concerns is good pattern overall so I~have used the tools from the second group: Mocha\index{Mocha} and Intern\index{Intern} testing frameworks, both using Chai\index{Chai} as the assertion library.
+JavaScript is specific by not having a strictly defined runtime environment. Usually, a client-side JavaScript runs in a web browser interpreter. However, there are also many tools running with Node.js, the JavaScript server-side platform and runtime environment. Since Talker is web-based application, it is crucial to have it tested in the web browser environment. Most of the solutions described below perform the automatic tests in the web browser environment, only plain Mocha tests are run with Node.js.
 
-JavaScript is specific by not having strictly defined the runtime environment. Usually, client-side JavaScript runs in web browser interpreter. However, there are also many tools running with Node.js, JavaScript server-side platform and runtime environment. Since Talker is web-based application, it is crucial to have it tested in web browser environment. All three solutions described below perform the automatic tests with web browser environment.
+As a part of this thesis, Talker code has been tested with the Intern framework, Mocha unit testing library and JsTestDriver framework. In addition, the system tests have been implemented using Selenium framework, to check whether the application works as a whole.
 \subsection{Chai assertion library}
-\label{idp6197680}\hypertarget{idp6197680}{}%
+\label{idp6225472}\hypertarget{idp6225472}{}%
 
-Before the unit testing frameworks can be described, another part of testing must be mentioned. It is assertion, i.e. checking whether the code resulted to the expected values. Both Intern and Mocha, testing frameworks described later on, use assertion library Chai. It provides convenient and easily readable way to check various conditions.
+Before the unit testing frameworks can be described, another part of testing must be mentioned. It is the assertion, i.e. checking whether the code resulted to the expected values. Both Intern and Mocha, testing frameworks described later on (and both used for testing Talker), use the assertion library Chai. It provides a convenient and easily readable way to check various conditions.
 
-There are two assertion styles which can be used with Chai: behavior-driven development (BDD style) and test-driven (TDD). They differ only by syntax, their expression power is equal. TDD style looks more similar to JUnit or PHPUnit: \docbooktolatexcite{chai-api}{}
+There are two assertion styles which can be used with Chai: a behavior-driven development/descriptions (BDD style) and a test-driven ones (TDD). They differ only by syntax, their expression power is equal. TDD style looks similarly to JUnit or PHPUnit: \docbooktolatexcite{chai-api}{}
 
 \begin{Verbatim}[fontsize=\small]
-assert.include([ 1, 2, 3 ], 3, 'array contains value');
+assert.include([ 1, 2, 3 ], 3);
 assert.deepProperty({ tea: { green: 'matcha' }}, 'tea.green', 'matcha');
 \end{Verbatim}
 
-On the other hand, BDD provides easy-to-read word chaining, resulting to a sentence. The following example (BDD) equals the previous one (TDD), only the used style differs: \docbooktolatexcite{chai-api}{}
+On the other hand, BDD provides an easy-to-read word chaining, resulting to a sentence. The following example of BDD equals the previous one (TDD), only the used style differs: \docbooktolatexcite{chai-api}{}
 
 \begin{Verbatim}[fontsize=\small]
 expect([1,2,3]).to.include(3);
@@ -1883,13 +1883,15 @@ expect({ tea: { green: 'matcha' }})
     .to.have.deep.property('green.tea', 'matcha');
 \end{Verbatim}
 \subsection{Unit testing with Intern framework}
-\label{idp6202528}\hypertarget{idp6202528}{}%
+\label{idp6230384}\hypertarget{idp6230384}{}%
 
-Intern is a tool for creating, running and managing JavaScript unit tests, all with minimal need to set up another third party tools and environments. Intern is not yet available as npm\label{idp6203648}\begingroup\catcode`\#=12\footnote{
+Intern is a tool for creating, running and managing JavaScript unit tests, all with a minimal need to set up other third party tools and environments. Intern can be either installed as a npm\label{idp6231504}\begingroup\catcode`\#=12\footnote{
 Node.js package
-}\endgroup\docbooktolatexmakefootnoteref{idp6203648} package \docbooktolatexcite{intern-blog}{} so it has to be installed manually. After the installation, a configuration file must be set up to tell the framework where the tests are and how the testing environment should look like.
+}\endgroup\docbooktolatexmakefootnoteref{idp6231504} package, from the central repository,\label{idp6232272}\begingroup\catcode`\#=12\footnote{
+{\textless}\url{https://npmjs.org/package/intern}{\textgreater}
+}\endgroup\docbooktolatexmakefootnoteref{idp6232272} or built manually (which was the only way to install it until recently). \docbooktolatexcite{intern-blog}{} After the installation, a configuration file must be set up to tell the framework where the tests are and how the testing environment should look like.
 
-Similarly as with Chai, the tests can be implemented in two syntax ways: TDD and BDD. The following examples are actual tests implemented for Talker application, running with Intern, using BDD style. The overall test structure uses Dojo (library Intern depends on, providing define method) and it look as follows:
+Similarly as with Chai, the tests can be implemented in two syntax ways: TDD and BDD. The following examples are snippets from the real tests implemented for Talker, executed with Intern, using BDD style. The overall test structure uses Dojo (a library Intern depends on, providing the {\texttt{{define}}} method) and it looks as follows:
 
 \begin{Verbatim}[fontsize=\small]
 define([
@@ -1919,9 +1921,9 @@ define([
 });
 \end{Verbatim}
 
-First, there are dependencies defined so the framework loads them before the test is executed. Almost all JavaScript files included in the application are defined here to emulate the environment of the application as precisely as possible. The next statement tells BDD style is going to be used. Later on, actual test suites with tests are listed. Each suite can mention {\texttt{{before}}}, {\texttt{{beforeEach}}}, {\texttt{{after}}} and {\texttt{{afterEach}}} functions to be run, similarly as other testing frameworks allow. A~test itself consists of a description label. This label should describe the test aim and hence identify it. Inside the test, any code can be executed as well as assertions can be carried out.
+First, there are dependencies defined, so the framework loads them before the test suite is executed. Almost all JavaScript files included in the application are defined here to emulate the environment of the application as precisely as possible. The next statement tells that the BDD style is going to be used. Later on, actual test suites with tests are listed. Each suite can mention {\texttt{{before}}}, {\texttt{{beforeEach}}}, {\texttt{{after}}} and {\texttt{{afterEach}}} functions to be run, similarly as other testing frameworks allow. A~test itself consists of a description label and a test body, defined as an anonymous function. The label should describe the test aim and hence identify it. Inside the test body function, any code can be executed as well as assertions can be carried out.
 
-JavaScript differs from common programming languages in the way the asynchronous code is executed. JavaScript does not provide multithreading by default \docbooktolatexcite{js-definitive-guide}{}. Hence, the pattern of passing a callback to the asynchronous operation is used instead. Unfortunately, it is nontrivial task to test asynchronous code in JavaScript. Intern provides convenient way to do so using promises pattern. The following example tests that {\texttt{{start}}} method connects the application to XMPP server in 10 seconds, using Chai assertion to check it.
+JavaScript differs from common programming languages in the way the asynchronous code is executed. JavaScript does not provide multithreading by default. \docbooktolatexcite{js-definitive-guide}{} Hence, the pattern of passing a callback to the asynchronous operation is used instead. Unfortunately, it is a nontrivial task to test asynchronous code in JavaScript. Intern provides a convenient way to do so, using the {\em{promises}}\index{promises} pattern. The following example tests that {\texttt{{start}}} method connects the application to an XMPP server in 10 seconds, using Chai assertion to check it.
 
 \begin{Verbatim}[fontsize=\small]
 it('should connect and call onConnection callback', function () {
@@ -1940,15 +1942,15 @@ it('should connect and call onConnection callback', function () {
 });
 \end{Verbatim}
 
-The callback is handed over to start method to be triggered every time the connection status changes. This means it is also triggered if Strophe only performs the authentication or even if the connection fails! Therefore, the promise is resolved (so the test succeeds) only if the correct status is passed as an argument.
+The callback is handed over to the {\texttt{{start}}} method to be triggered every time the connection status changes. This means it is also triggered if Strophe only performs the authentication or even if the connection fails! Therefore, the promise is resolved (so the test succeeds) only if the correct status is passed as an argument.
 
-It has to be admitted that the previous test is not real unit test, mocking all surrounding objects the function interacts with. Considering that the goal of testing is making sure the implemented methods work as expected, being implemented in this way is the easiest and most straightforward way to achieve it. Mocking the libraries and network requests would require substantial architecture changes in the application, leading to inappropriate complexity and problems for anyone to work with it {``}out of the box{''}.
+It has to be admitted that the previous test is not a real unit test, mocking all surrounding objects the function interacts with. Considering that the goal of testing is making sure the implemented methods work as expected, having it implemented like this is the easiest and most straightforward way to achieve the goal. Mocking the libraries and network requests would require substantial architecture changes in the application, leading to an inappropriate complexity and problems for anyone when working with the application {``}out of the box{''}.
 \subsection{Mocha unit tests}
-\label{idp6216096}\hypertarget{idp6216096}{}%
+\label{idp6247680}\hypertarget{idp6247680}{}%
 
-Mocha\index{Mocha} is another framework for creating unit tests in JavaScript. The structure of tests is similar to Intern, Mocha also supports BDD style with {\texttt{{describe}}} and {\texttt{{it}}} keywords. What is different is the way Mocha tests are executed and dependencies are loaded. Mocha is more lightweight than Intern, it is just Node package, not including any configuration files and environment administration.
+Mocha\index{Mocha} is another framework for creating unit tests in JavaScript. The structure of tests is similar to Intern, as well as support for the BDD style with {\texttt{{describe}}} and {\texttt{{it}}} keywords. What makes the difference is the way Mocha tests are executed and the dependencies are loaded. Mocha is more lightweight than Intern, not including any configuration files nor environment administration.
 
-The easiest way to run Mocha is from command line: {\texttt{{mocha test-file.js}}}. However, to be able to use Chai to do assertions, each test file must declare it with Node {\texttt{{require}}} function. The unit test implemented with mocha then looks as the following example -- similar to Intern test:
+The easiest way to run Mocha is from command line: {\texttt{{mocha test-file.js}}}. However, to be able to use Chai to do assertions, each test file must declare it with Node {\texttt{{require}}} function. The unit test implemented with Mocha then looks as the following example -- similarly to the Intern test:
 
 \begin{Verbatim}[fontsize=\small]
 var expect = require('chai').expect;
@@ -1962,11 +1964,13 @@ describe('StropheAdapter', function(){
 });
 \end{Verbatim}
 \subsection{JsTestDriver\index{JsTestDriver} framework}
-\label{idp6222816}\hypertarget{idp6222816}{}%
+\label{idp6254400}\hypertarget{idp6254400}{}%
 
-Running Mocha tests in console with Node brings one huge disadvantage. There is no easy option to load custom JavaScript files which are necessary to perform the test, unless they are packed as npm packages. Therefore, I~used another tool called JsTestDriver to wrap Mocha tests, load dependencies before executing them and also run them in the browser environment.
+Running Mocha tests in a console with Node brings one huge disadvantage. There is no easy option to load custom JavaScript files which are necessary to perform the test, unless they are packed as npm packages. Therefore, I~used another tool called JsTestDriver to wrap Mocha tests, load dependencies before executing them and also run them in the browser environment.
 
-JsTestDriver (JSTD) is a Java library allowing the developers to run the tests in certain environment, according to the specified configuration file. Although it has not originally been intended to be used with Mocha, there is an adapter available which bridges this imperfection. Furthermore, JSTD can be easily run from PHPStorm or WebStorm IDEs (there is a plugin in the IDE especially for JSTD).
+JsTestDriver (JSTD) is a Java library allowing the developers to run the tests in a certain environment, according to a specified configuration file. Although JSTD has not originally been intended to be used with Mocha, there is an available adapter which bridges this imperfection.\label{idp6257440}\begingroup\catcode`\#=12\footnote{
+{\textless}\url{https://github.com/wikidi/mocha-jstd-adapter}{\textgreater}
+}\endgroup\docbooktolatexmakefootnoteref{idp6257440} Furthermore, JSTD can be easily run from PHPStorm or WebStorm IDEs (with a plugin in the IDE, designed specifically for JSTD).
 
 There is a configuration file for JSTD test suite, specifying the scripts to be loaded and test files to be executed, similarly as Intern does. The structure is self-explaining:
 
@@ -1974,7 +1978,7 @@ There is a configuration file for JSTD test suite, specifying the scripts to be 
 load:
   - "lib/mocha.js"
   - "lib/chai.js"
-  - ".../strophe_adapter.js"
+  - "../path/to/../strophe_adapter.js"
 test:
   - "test-file.js"
 \end{Verbatim}
@@ -1986,21 +1990,21 @@ mocha.setup('bdd');
 expect = chai.expect;
 \end{Verbatim}
 
-Although JSTD looks like worthwhile tool, I~had serious problems with keeping it running. Nondeterministic behavior, when the same test (simple test without side effects, network dependencies and so on) sometimes passes and sometimes results in infinite loop never ending the process, makes JSTD almost impossible to be used.
+Although JSTD looks like a worthwhile tool, I~had serious problems with keeping it running. A~nondeterministic behavior, when the same test (a simple test without any side effects, network dependencies and so on) sometimes passes and sometimes results in an infinite loop never ending the process, makes JSTD almost impossible to be used.
 \subsection{Selenium tests\index{Selenium}}
-\label{idp6229472}\hypertarget{idp6229472}{}%
+\label{idp6262272}\hypertarget{idp6262272}{}%
 
-Testing the functionality of individual methods with unit tests or packages with integration tests is usually not sufficient. Even if all functions and methods worked correctly, it is not guaranteed that the application behaves fine as a whole. Therefore, {\em{system testing}} comes in handy.
+Testing the functionality of individual methods with unit tests or packages with integration tests is usually insufficient. Even if all functions and methods worked correctly, it is not guaranteed that the application behaves fine as a whole. Therefore, {\em{system testing}} comes in handy, here in the form of {\em{testing user interface}} actions with the Selenium framework.
 
-Selenium is a system testing framework for web applications. It is also sometimes referred as a user interface testing tool, since it traverses the application from the user's point of view, performing the same actions as user does, directly in a web browser. Therefore, a Selenium test suite is more or less just a set of instructions -- user actions, that are performed in a certain succession (in a web browser environment), written in a custom language. PHP has been chosen for Talker Selenium tests since whole Celebrio back-end is written in PHP.
+Selenium is the user interface testing framework for web applications. It traverses the application from the user's point of view, performing the same actions as user usually does, directly in a web browser. Therefore, a Selenium test suite is more or less just a set of instructions -- user actions, that are performed in a certain succession (in a web browser environment), written in a custom programming language. PHP has been chosen for Talker Selenium tests, since whole Celebrio back-end is written in PHP.
 
-The Selenium framework itself is a Java tool, running on a background. Java basically starts a server, which serves as a proxy and starts a web browser instance. In this web browser instance, Selenium tests are run automatically. Selenium could be compared to an arbitrary macro tool, recording and replaying user actions.
+The Selenium framework itself is a Java tool, running on background. Java basically starts a server, which serves as a proxy and starts a web browser instance. In this web browser instance, Selenium tests are run automatically. Selenium could be compared to an arbitrary macro tool, recording and replaying user actions.
 
-There are two versions of Selenium. The older version, Selenium version 1, sometimes also called Selenium RC, basically {``}injected{''} the tests in the form of JavaScript functions and then ran them using JavaScript as well. On the contrary, Selenium 2, which uses a WebDriver API, drives the browser directly using its built-in support for automation. \docbooktolatexcite{selenium-webdriver}{} Since the version 2 is more lightweight and provides several additional features, it has been used as a testing framework for the UI tests in Talker.
+There are two versions of Selenium. The older version, Selenium 1, sometimes also called Selenium RC, basically {``}injected{''} the tests to a web browser in the form of JavaScript functions and then ran them using JavaScript as well. On the contrary, Selenium 2, which uses a WebDriver API, drives the browser directly using its built-in support for automation. \docbooktolatexcite{selenium-webdriver}{} Since the version 2 is more lightweight and provides several additional features, it has been used as a testing framework for the UI tests in Talker.
 
-The generic tests functionality, common to a whole system, used not only in Talker, is implemented in the {\texttt{{SeleniumBase}}} class. The specific web browser the tests will run in is chosen there, along with several additional actions mutual to all test suites, not only Talker. The other important thing to be handled in the base class is user logging. Each Selenium test runs separately (there is a usual requirement for test independency) so the user has to be logged in before the test enters the application itself. Logging the user is implemented in the same way as the tests are, so that Selenium opens a web page with login screen, it fills in the user credentials and the login button is pressed.
+The generic tests functionality, common to a whole system, used not only in Talker, is implemented in the {\texttt{{SeleniumBase}}} class. The specific web browser the tests will run in is chosen there, along with several additional actions mutual to all test suites, not only Talker. The other important thing to be handled in the base class is logging in a user. Each Selenium test runs separately (there is a usual requirement for test independency) so the user has to be logged in before the test enters the application itself. Logging the user is implemented in the same way as the tests are, so that Selenium opens a web page with the login screen, it fills in the user credentials and the login button is pressed.
 
-When the user is logged in, the application main specifics can be tested. The test suite checks whether the important elements are present on a page. Then, it performs the basic operations such as entering the conversation view and sending a message. The tests are implemented within the {\texttt{{TalkerTest}}} class. An example of a testing method looks as follows:
+When the user is logged in, the main specifics of the application can be tested. The test suite checks whether the important elements are present on a page. Then, it performs basic operations such as entering the conversation view and sending a message. The tests are implemented within the {\texttt{{TalkerTest}}} class. An example of a testing method looks as follows:
 
 \begin{Verbatim}[fontsize=\small]
 public function testConversationRoute() {
@@ -2012,33 +2016,33 @@ public function testConversationRoute() {
 }
 \end{Verbatim}
 
-At the start, the example test method logs the user in and enters the Talker application. In fact, the steps copy the standard user actions. When the application is loaded, a specific element representing an item in the contact list is selected and clicked. In case the element was missing, the test would fail immediately. Finally, the PHPUnit testing and assertion library checks whether the URL has been correctly set to a new one, identifying a conversaion view.
+At the start, the example test method logs the user in and enters the Talker application. In fact, the steps copy the standard user actions. When the application is loaded, a specific element (representing an item in the contact list) is selected and clicked. In case the element was missing, the test would fail immediately. Finally, the PHPUnit testing and assertion library checks whether the URL has been correctly set to a new one, identifying a conversation view.
 
-To keep the tests as much independent as possible, the incoming actions (such as incoming message or answered video call) are not incorporated in the testing suite. Still, the main aim of Selenium test suite is met. Whenever the application code is changed, the test suite ensures that nothing has broken and that the important parts have not changed.
+To keep the tests as much independent as possible, incoming actions (such as an incoming message or an answered video call) are not incorporated in the test suite. Still, the main aim of the Selenium test suite is met. Whenever the application code is changed, the test suite ensures that nothing has broken and that the important parts have not changed.
 
 % -------------------------------------------------------------
 % Chapter Conclusion 
 % ------------------------------------------------------------- 	
 \chapter{Conclusion}
-\label{idp6241872}\hypertarget{idp6241872}{}%
+\label{idp6275024}\hypertarget{idp6275024}{}%
 
 The thesis embraces the topic of real-time communication in a web browser. Several approaches to RTC in a web browser were described, including HTTP polling and WebSockets, in the first, theoretical, part. Several frameworks were mentioned. From the simple ones such as Server-sent events, providing just a thin layer over the HTTP, to the complex solutions (e.g. WebRTC or even OpenTok), serving for video calling right in a web browser.
 
 % ------------------------   
 % Section 
 \section{How the results are used}
-\label{idp6243376}\hypertarget{idp6243376}{}%
+\label{idp6276528}\hypertarget{idp6276528}{}%
 
 It is obvious from the wide range of frameworks, libraries and complete solutions that a web browser turns from a web document reader into a platform that can host almost any kind of application, including real-time ones. Therefore, such an application -- Talker -- has been created. It is a real-time communication application serving as an IM client for Celebrio, a web-based system for the elderly. Talker implements both text chat, using XMPP due to its wide usage and interoperability, and video calls, built with OpenTok framework (using Flash or HTML5 WebRTC).
 
-Talker has been designed, implemented, tested and integrated into Celebrio. It is part of the production version now and actually one of the main reasons users are willing to pay for the system. Hence, the thesis goal has not only been reached but in some parts even extended. Talker is available in the system\label{idp6245632}\begingroup\catcode`\#=12\footnote{
+Talker has been designed, implemented, tested and integrated into Celebrio. It is part of the production version now and actually one of the main reasons users are willing to pay for the system. Hence, the thesis goal has not only been reached but in some parts even extended. Talker is available in the system\label{idp6278784}\begingroup\catcode`\#=12\footnote{
 Production version of the system is running at {\textless}\url{http://system.celebriosoftware.com}{\textgreater}.
-}\endgroup\docbooktolatexmakefootnoteref{idp6245632} so anyone can try it. Nevertheless, several changes have been made recently but they have not been deployed in the system yet. Thus, the latest source code is attached to the thesis. It is not intended to run alone, without the system.
+}\endgroup\docbooktolatexmakefootnoteref{idp6278784} so anyone can try it. Nevertheless, several changes have been made recently but they have not been deployed in the system yet. Thus, the latest source code is attached to the thesis. It is not intended to run alone, without the system.
 
 % ------------------------   
 % Section 
 \section{Future possibilities}
-\label{idp6247552}\hypertarget{idp6247552}{}%
+\label{idp6280704}\hypertarget{idp6280704}{}%
 
 There is still a long way to go until the application is perfect. It can be (and certainly will be) updated in many aspects since all used frameworks still evolve.
 
@@ -2056,410 +2060,410 @@ TODO the possibility of creating independent software component -- probably open
 %  Bibliography - chapter
 %
 % ------------------------------------------- 
-\begin{thebibliography}{123}\hypertarget{idp6253648}{}
+\begin{thebibliography}{123}\hypertarget{idp6286800}{}
 
 % ............. biblioentry 
-\bibitem{android-flash-support}\docbooktolatexbibaux{idp6483072}{android-flash-support}
-\hypertarget{idp6483072}
+\bibitem{android-flash-support}\docbooktolatexbibaux{idp6516224}{android-flash-support}
+\hypertarget{idp6516224}
 Wauters, G.: \emph{Adobe Flash for Android: Gone with barely a whimper}, Digital Trends, 8/17/2012 [retrieved 4/5/2013], from {\textless}\url{http://www.digitaltrends.com/mobile/adobe-flash-for-android-gone-with-barely-a-whimper/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{aol-trademarks}\docbooktolatexbibaux{idp6339344}{aol-trademarks}
-\hypertarget{idp6339344}
+\bibitem{aol-trademarks}\docbooktolatexbibaux{idp6372496}{aol-trademarks}
+\hypertarget{idp6372496}
 AOL Inc.: \emph{AOL Trademark List}, 3/15/2011 [retrieved 2/20/2013], from {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{apache-core-features}\docbooktolatexbibaux{idp6379520}{apache-core-features}
-\hypertarget{idp6379520}
+\bibitem{apache-core-features}\docbooktolatexbibaux{idp6412672}{apache-core-features}
+\hypertarget{idp6412672}
 The Apache Software Foundation: \emph{Apache Core Features}, 2013 [retrieved 2/23/2013], from {\textless}\url{http://httpd.apache.org/docs/2.2/mod/core.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{async-javascript}\docbooktolatexbibaux{idp6282400}{async-javascript}
-\hypertarget{idp6282400}
+\bibitem{async-javascript}\docbooktolatexbibaux{idp6315552}{async-javascript}
+\hypertarget{idp6315552}
 Burnham, T.: \emph{Async JavaScript}, The Pragmatic Programmers, 2012, 978-1-93778-527-7, 104 (3). 
 
 % ............. biblioentry 
-\bibitem{attached-to-strophe}\docbooktolatexbibaux{idp6564176}{attached-to-strophe}
-\hypertarget{idp6564176}
+\bibitem{attached-to-strophe}\docbooktolatexbibaux{idp6597328}{attached-to-strophe}
+\hypertarget{idp6597328}
 Moffitt, J.: \emph{Getting Attached To Strophe}, 8/3/2008 [retrieved 4/15/2013], from {\textless}\url{http://metajack.im/2008/10/03/getting-attached-to-strophe/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{bayeux}\docbooktolatexbibaux{idp6504560}{bayeux}
-\hypertarget{idp6504560}
+\bibitem{bayeux}\docbooktolatexbibaux{idp6537712}{bayeux}
+\hypertarget{idp6537712}
 Russell, A. and Wilkins, G. and Davis, D. and Nesbitt, M.: \emph{The Bayeux Specification}, 2007 [retrieved 4/5/2013], The Dojo Foundation, from {\textless}\url{http://svn.cometd.org/trunk/bayeux/bayeux.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{brian-stats-tweet}\docbooktolatexbibaux{idp6353616}{brian-stats-tweet}
-\hypertarget{idp6353616}
+\bibitem{brian-stats-tweet}\docbooktolatexbibaux{idp6386768}{brian-stats-tweet}
+\hypertarget{idp6386768}
 Staatss, B. (Brianstaats): \emph{{``}If you have to customize 1/5 of a reusable component, its likely better to write it from scratch @trek at \#embercamp{''}}, 2/15/2013 [retrieved 2/23/2013], Tweet. 
 
 % ............. biblioentry 
-\bibitem{chai-api}\docbooktolatexbibaux{idp6590448}{chai-api}
-\hypertarget{idp6590448}
+\bibitem{chai-api}\docbooktolatexbibaux{idp6623600}{chai-api}
+\hypertarget{idp6623600}
 Luer, J.: \emph{Chai API}, 2013 [retrieved 5/4/2013], from {\textless}\url{http://chaijs.com/api/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{definitive-guide-to-html5}\docbooktolatexbibaux{idp6268576}{definitive-guide-to-html5}
-\hypertarget{idp6268576}
+\bibitem{definitive-guide-to-html5}\docbooktolatexbibaux{idp6301728}{definitive-guide-to-html5}
+\hypertarget{idp6301728}
 Freeman, A.: \emph{The Definitive Guide to HTML5}, Apress, 2011, 978-1-4302-3960-4, 1080 (880). 
 
 % ............. biblioentry 
-\bibitem{definitive-guide-to-ws}\docbooktolatexbibaux{idp6261280}{definitive-guide-to-ws}
-\hypertarget{idp6261280}
+\bibitem{definitive-guide-to-ws}\docbooktolatexbibaux{idp6294432}{definitive-guide-to-ws}
+\hypertarget{idp6294432}
 Wang, V. and Salim, F. and Moskovits, P.: \emph{The Definitive Guide to HTML5 WebSocket}, Apress, 2012, 978-1430247401, 210 (140, 156, ). 
 
 % ............. biblioentry 
-\bibitem{domenic-promises}\docbooktolatexbibaux{idp6628160}{domenic-promises}
-\hypertarget{idp6628160}
+\bibitem{domenic-promises}\docbooktolatexbibaux{idp6661312}{domenic-promises}
+\hypertarget{idp6661312}
 Denicola, D.: \emph{Callbacks, Promises, and Coroutines}, 2013 [retrieved 5/20/2013], Slideshare, from {\textless}\url{http://www.slideshare.net/domenicdenicola/callbacks-promises-and-coroutines-oh-my-the-evolution-of-asynchronicity-in-javascript}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp6334240}{elderly-questionnaires}
-\hypertarget{idp6334240}
+\bibitem{elderly-questionnaires}\docbooktolatexbibaux{idp6367392}{elderly-questionnaires}
+\hypertarget{idp6367392}
 Smolka, P. and Novák, M.: \emph{Elderly people and the computers}, 2/11/2013 [retrieved 2/19/2013], from {\textless}\url{http://infogr.am/Seniori-a-pocitace}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ember-howto}\docbooktolatexbibaux{idp6310208}{ember-howto}
-\hypertarget{idp6310208}
+\bibitem{ember-howto}\docbooktolatexbibaux{idp6343360}{ember-howto}
+\hypertarget{idp6343360}
 Bodmer, M.: \emph{Ember.js Application Development How-to}, Packt Publishing, 2013, 978-1-78216-338-1, 40 (16). 
 
 % ............. biblioentry 
-\bibitem{ember-in-action}\docbooktolatexbibaux{idp6305216}{ember-in-action}
-\hypertarget{idp6305216}
+\bibitem{ember-in-action}\docbooktolatexbibaux{idp6338368}{ember-in-action}
+\hypertarget{idp6338368}
 Skeie, J.: \emph{Ember.js in Action}, Manning Publications, 2013, 978-1617291456, 325 (21). 
 
 % ............. biblioentry 
-\bibitem{ember-router}\docbooktolatexbibaux{idp6624432}{ember-router}
-\hypertarget{idp6624432}
+\bibitem{ember-router}\docbooktolatexbibaux{idp6657584}{ember-router}
+\hypertarget{idp6657584}
 Tilde, Inc.: \emph{Specifying a route's model}, 2013 [retrieved 5/21/2013], from {\textless}\url{http://emberjs.com/guides/routing/specifying-a-routes-model/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{facebook-usage}\docbooktolatexbibaux{idp6325792}{facebook-usage}
-\hypertarget{idp6325792}
+\bibitem{facebook-usage}\docbooktolatexbibaux{idp6358944}{facebook-usage}
+\hypertarget{idp6358944}
 Olanoff, D.: \emph{Facebook Announces Monthly Active Users Were At 1.01 Billion As
       Of September 30th}, TechCrunch, 10/23/2012 [retrieved 2/19/2013], from {\textless}\url{http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{fat-model-skinny-controller}\docbooktolatexbibaux{idp6568288}{fat-model-skinny-controller}
-\hypertarget{idp6568288}
+\bibitem{fat-model-skinny-controller}\docbooktolatexbibaux{idp6601440}{fat-model-skinny-controller}
+\hypertarget{idp6601440}
 Cairns, J.: \emph{{``}Fat model, skinny controller{''} is a load of
       rubbish}, 4/11/2013 [retrieved 4/21/2013], from {\textless}\url{http://joncairns.com/2013/04/fat-model-skinny-controller-is-a-load-of-rubbish/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{fb-chat}\docbooktolatexbibaux{idp6350048}{fb-chat}
-\hypertarget{idp6350048}
+\bibitem{fb-chat}\docbooktolatexbibaux{idp6383200}{fb-chat}
+\hypertarget{idp6383200}
 Facebook Developers: \emph{Facebook Chat API}, 2/12/2013 [retrieved 2/20/2013], from http://xmpp.org/about-xmpp/history/ {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{fb-erlang}\docbooktolatexbibaux{idp6356960}{fb-erlang}
-\hypertarget{idp6356960}
+\bibitem{fb-erlang}\docbooktolatexbibaux{idp6390112}{fb-erlang}
+\hypertarget{idp6390112}
 Letuchy, E.: \emph{Facebook Chat}, 5/14/2008 [retrieved 2/23/2013], from {\textless}\url{https://www.facebook.com/note.php?note_id=14218138919}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{flash-bundled-with-chrome}\docbooktolatexbibaux{idp6478384}{flash-bundled-with-chrome}
-\hypertarget{idp6478384}
+\bibitem{flash-bundled-with-chrome}\docbooktolatexbibaux{idp6511536}{flash-bundled-with-chrome}
+\hypertarget{idp6511536}
 Wauters, R.: \emph{Flash Player To Come Bundled With Google Chrome, New Browser
       Plugin API Coming}, TechCrunch, 3/30/2010 [retrieved 4/5/2013], from {\textless}\url{http://techcrunch.com/2010/03/30/flash-player-to-come-bundled-with-google-chrome-new-browser-plugin-api-coming/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{google-closing-xmpp}\docbooktolatexbibaux{idp6453296}{google-closing-xmpp}
-\hypertarget{idp6453296}
+\bibitem{google-closing-xmpp}\docbooktolatexbibaux{idp6486448}{google-closing-xmpp}
+\hypertarget{idp6486448}
 Sullivan, J.: \emph{Google backslides on federated instant messaging, on
       purpose?}, 3/15/2013 [retrieved 3/31/2013], from {\textless}\url{https://www.fsf.org/blogs/sysadmin/google-backslides-on-federated-instant-messaging-on-purpose}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{gtalk}\docbooktolatexbibaux{idp6346480}{gtalk}
-\hypertarget{idp6346480}
+\bibitem{gtalk}\docbooktolatexbibaux{idp6379632}{gtalk}
+\hypertarget{idp6379632}
 Google Developers: \emph{Google Talk Developer Documentation}, 3/23/2012 [retrieved 2/20/2013], from {\textless}\url{https://developers.google.com/talk/talk_developers_home}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ice}\docbooktolatexbibaux{idp6525632}{ice}
-\hypertarget{idp6525632}
+\bibitem{ice}\docbooktolatexbibaux{idp6558784}{ice}
+\hypertarget{idp6558784}
 Rosenberg, J. and Keranen, A. and Lowekamp, B. and Roach, A.: \emph{TCP Candidates with Interactive Connectivity Establishment
       (ICE)}, 5/18/2012 [retrieved 4/6/2013], from {\textless}\url{http://tools.ietf.org/html/draft-ietf-mmusic-ice-tcp-16}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ie-statistics}\docbooktolatexbibaux{idp6421888}{ie-statistics}
-\hypertarget{idp6421888}
+\bibitem{ie-statistics}\docbooktolatexbibaux{idp6455040}{ie-statistics}
+\hypertarget{idp6455040}
 Terabyte Media: \emph{Web Browser Usage Statistics}, 12/2012 [retrieved 3/3/2013], from {\textless}\url{http://www.statowl.com/web_browser_usage_by_version.php?limit\%5B\%5D=ie}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{intern-blog}\docbooktolatexbibaux{idp6586336}{intern-blog}
-\hypertarget{idp6586336}
+\bibitem{intern-blog}\docbooktolatexbibaux{idp6619488}{intern-blog}
+\hypertarget{idp6619488}
 Bouchon, P.: \emph{Meet your newest Intern}, 5/1/2013 [retrieved 5/4/2013], from {\textless}\url{http://www.sitepen.com/blog/2013/05/01/intern-javascript-testing/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{internet-usage}\docbooktolatexbibaux{idp6321840}{internet-usage}
-\hypertarget{idp6321840}
+\bibitem{internet-usage}\docbooktolatexbibaux{idp6354992}{internet-usage}
+\hypertarget{idp6354992}
 Miniwatts Marketing Group: \emph{Internet Users in the World - 2012 Q2}, Internet World Stats, 2/17/2013 [retrieved 2/19/2013], from {\textless}\url{http://www.internetworldstats.com/stats.htm}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{iphone-flash-support}\docbooktolatexbibaux{idp6487600}{iphone-flash-support}
-\hypertarget{idp6487600}
+\bibitem{iphone-flash-support}\docbooktolatexbibaux{idp6520752}{iphone-flash-support}
+\hypertarget{idp6520752}
 Apple Support Team: \emph{Does the iPhone support Flash?}, 2007 [retrieved 4/5/2013], from {\textless}\url{http://www.iphonefaq.org/archives/9730}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{jingle-is-the-future}\docbooktolatexbibaux{idp6474560}{jingle-is-the-future}
-\hypertarget{idp6474560}
+\bibitem{jingle-is-the-future}\docbooktolatexbibaux{idp6507712}{jingle-is-the-future}
+\hypertarget{idp6507712}
 Cridland, D.: \emph{Google: {``}The Future is Jingle{''}}, 6/23/2011 [retrieved 3/31/2013], from {\textless}\url{http://xmpp.org/2011/06/the-future-is-jingle/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{jquery-api}\docbooktolatexbibaux{idp6556496}{jquery-api}
-\hypertarget{idp6556496}
+\bibitem{jquery-api}\docbooktolatexbibaux{idp6589648}{jquery-api}
+\hypertarget{idp6589648}
 The jQuery Foundation: \emph{jQuery API Documentation}, 2013 [retrieved 4/10/2013], from {\textless}\url{http://api.jquery.com/append/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{js-definitive-guide}\docbooktolatexbibaux{idp6273184}{js-definitive-guide}
-\hypertarget{idp6273184}
+\bibitem{js-definitive-guide}\docbooktolatexbibaux{idp6306336}{js-definitive-guide}
+\hypertarget{idp6306336}
 Flanagan, D.: \emph{JavaScript: The Definitive Guide}, O'Reilly Media, 2011, 978-0-596-80552-4, 1100 (320, 322, 333). 
 
 % ............. biblioentry 
-\bibitem{js-enlightnment}\docbooktolatexbibaux{idp6277792}{js-enlightnment}
-\hypertarget{idp6277792}
+\bibitem{js-enlightnment}\docbooktolatexbibaux{idp6310944}{js-enlightnment}
+\hypertarget{idp6310944}
 Lindley, C.: \emph{JavaScript Enlightenment}, O'Reilly Media, 2013, 978-1449342883, 166 (49). 
 
 % ............. biblioentry 
-\bibitem{libjingle}\docbooktolatexbibaux{idp6471376}{libjingle}
-\hypertarget{idp6471376}
+\bibitem{libjingle}\docbooktolatexbibaux{idp6504528}{libjingle}
+\hypertarget{idp6504528}
 Google Developers: \emph{About libjingle}, 3/23/2012 [retrieved 3/31/2013], from {\textless}\url{https://developers.google.com/talk/libjingle/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{mozilla-ws}\docbooktolatexbibaux{idp6407072}{mozilla-ws}
-\hypertarget{idp6407072}
+\bibitem{mozilla-ws}\docbooktolatexbibaux{idp6440224}{mozilla-ws}
+\hypertarget{idp6440224}
 Mozilla Developers: \emph{WebSockets}, 2/4/2013 [retrieved 2/25/2013], from {\textless}\url{https://developer.mozilla.org/en-US/docs/WebSockets}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{new-dev-era}\docbooktolatexbibaux{idp6577408}{new-dev-era}
-\hypertarget{idp6577408}
+\bibitem{new-dev-era}\docbooktolatexbibaux{idp6610560}{new-dev-era}
+\hypertarget{idp6610560}
 Ziadé, T.: \emph{A~new development era (essay)}, 1/25/2013 [retrieved 4/26/2013], from {\textless}\url{http://blog.ziade.org/2013/01/25/a-new-development-era-essay/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{new-hangouts}\docbooktolatexbibaux{idp6619248}{new-hangouts}
-\hypertarget{idp6619248}
+\bibitem{new-hangouts}\docbooktolatexbibaux{idp6652400}{new-hangouts}
+\hypertarget{idp6652400}
 Gallagher, S.: \emph{Hands on with Hangouts, Google's new text and video chat
       architecture}, 5/17/2013 [retrieved 5/20/2013], Ars Technica, from {\textless}\url{http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{opentok-pricing}\docbooktolatexbibaux{idp6598512}{opentok-pricing}
-\hypertarget{idp6598512}
+\bibitem{opentok-pricing}\docbooktolatexbibaux{idp6631664}{opentok-pricing}
+\hypertarget{idp6631664}
 TokBox Inc.: \emph{OpenTok pricing}, 2013 [retrieved 5/6/2013], from {\textless}\url{http://www.tokbox.com/pricing}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{opentok-server-side-lib}\docbooktolatexbibaux{idp6602080}{opentok-server-side-lib}
-\hypertarget{idp6602080}
+\bibitem{opentok-server-side-lib}\docbooktolatexbibaux{idp6635232}{opentok-server-side-lib}
+\hypertarget{idp6635232}
 TokBox Inc.: \emph{OpenTok server-side libraries reference}, 2013 [retrieved 5/6/2013], from {\textless}\url{http://www.tokbox.com/opentok/docs/server/server_side_libraries.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{pro-html5-programming}\docbooktolatexbibaux{idp6293616}{pro-html5-programming}
-\hypertarget{idp6293616}
+\bibitem{pro-html5-programming}\docbooktolatexbibaux{idp6326768}{pro-html5-programming}
+\hypertarget{idp6326768}
 Lubbers, P. and Salim, F. and Albers, B.: \emph{Pro HTML5 Programming}, Apress, 2011, 978-1-4302-3864-5, 352 (165, ...). 
 
 % ............. biblioentry 
-\bibitem{realtime-web-apps}\docbooktolatexbibaux{idp6287392}{realtime-web-apps}
-\hypertarget{idp6287392}
+\bibitem{realtime-web-apps}\docbooktolatexbibaux{idp6320544}{realtime-web-apps}
+\hypertarget{idp6320544}
 Lengstorf, J. and Leggetter, P.: \emph{Realtime Web Apps}, Apress, 2013, 978-1430246206, 400. 
 
 % ............. biblioentry 
-\bibitem{rfc-3921}\docbooktolatexbibaux{idp6581520}{rfc-3921}
-\hypertarget{idp6581520}
+\bibitem{rfc-3921}\docbooktolatexbibaux{idp6614672}{rfc-3921}
+\hypertarget{idp6614672}
 Saint-Andre, P.: \emph{Extensible Messaging and Presence Protocol (XMPP): Instant
       Messaging and Presence}, 2004 [retrieved 5/4/2013], Jabber Software Foundation, from {\textless}\url{http://xmpp.org/rfcs/rfc3921.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{rfc-bidirectional-http}\docbooktolatexbibaux{idp6382704}{rfc-bidirectional-http}
-\hypertarget{idp6382704}
+\bibitem{rfc-bidirectional-http}\docbooktolatexbibaux{idp6415856}{rfc-bidirectional-http}
+\hypertarget{idp6415856}
 Loreto, S. and Saint-Andre, P. and Salsano, S. and Wilkins, G.: \emph{Known Issues and Best Practices for the Use of Long Polling and
       Streaming in Bidirectional HTTP}, 4/2011 [retrieved 2/23/2013], from {\textless}\url{http://www.ietf.org/rfc/rfc6202.txt}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{rfc-http}\docbooktolatexbibaux{idp6367888}{rfc-http}
-\hypertarget{idp6367888}
+\bibitem{rfc-http}\docbooktolatexbibaux{idp6401040}{rfc-http}
+\hypertarget{idp6401040}
 Fielding, R. and Gettis, J. and Mogul, J. and Frystyk, H. and Masinter, L. and Leach, P. and Berners-Lee, T.: \emph{Hypertext Transfer Protocol -- HTTP/1.1}, 6/1999 [retrieved 2/23/2013], from {\textless}\url{http://www.w3.org/Protocols/rfc2616/rfc2616.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{rfc-ws}\docbooktolatexbibaux{idp6390608}{rfc-ws}
-\hypertarget{idp6390608}
+\bibitem{rfc-ws}\docbooktolatexbibaux{idp6423760}{rfc-ws}
+\hypertarget{idp6423760}
 Fette, I. and Melnikov, A.: \emph{The WebSocket Protocol}, 12/2011 [retrieved 2/24/2013], Internet Engineering Task Force (IETF), from {\textless}\url{http://tools.ietf.org/html/rfc6455}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ria}\docbooktolatexbibaux{idp6330480}{ria}
-\hypertarget{idp6330480}
+\bibitem{ria}\docbooktolatexbibaux{idp6363632}{ria}
+\hypertarget{idp6363632}
 Ward, J.: \emph{What is a Rich Internet Application?}, 10/17/2007 [retrieved 2/19/2013], from {\textless}\url{http://www.jamesward.com/2007/10/17/what-is-a-rich-internet-application/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{selenium-webdriver}\docbooktolatexbibaux{idp6615680}{selenium-webdriver}
-\hypertarget{idp6615680}
+\bibitem{selenium-webdriver}\docbooktolatexbibaux{idp6648832}{selenium-webdriver}
+\hypertarget{idp6648832}
 Selenium Project Authors: \emph{Selenium WebDriver}, 5/17/2013 [retrieved 5/19/2013], from {\textless}\url{http://docs.seleniumhq.org/docs/03_webdriver.jsp}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{setting-up-bosh}\docbooktolatexbibaux{idp6446384}{setting-up-bosh}
-\hypertarget{idp6446384}
+\bibitem{setting-up-bosh}\docbooktolatexbibaux{idp6479536}{setting-up-bosh}
+\hypertarget{idp6479536}
 Prosody: \emph{Setting up a BOSH server}, [retrieved 3/10/2013], from {\textless}\url{http://prosody.im/doc/setting_up_bosh}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{signalr}\docbooktolatexbibaux{idp6490784}{signalr}
-\hypertarget{idp6490784}
+\bibitem{signalr}\docbooktolatexbibaux{idp6523936}{signalr}
+\hypertarget{idp6523936}
 Edwards, D.: \emph{SignalR FAQ}, GitHub, 9/7/2012 [retrieved 4/5/2013], from {\textless}\url{https://github.com/SignalR/SignalR/wiki/Faq}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{skype-license}\docbooktolatexbibaux{idp6360528}{skype-license}
-\hypertarget{idp6360528}
+\bibitem{skype-license}\docbooktolatexbibaux{idp6393680}{skype-license}
+\hypertarget{idp6393680}
 Smith, A.: \emph{Does SkypeKit work on Android?}, 8/7/2012 [retrieved 2/23/2013], from {\textless}\url{http://devforum.skype.com/t5/SkypeKit-FAQs/Does-SkypeKit-work-on-Android/m-p/16490/thread-id/78}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{skype-uri}\docbooktolatexbibaux{idp6364704}{skype-uri}
-\hypertarget{idp6364704}
+\bibitem{skype-uri}\docbooktolatexbibaux{idp6397856}{skype-uri}
+\hypertarget{idp6397856}
 Microsoft: \emph{Skype URIs}, 2013 [retrieved 2/23/2013], from {\textless}\url{http://dev.skype.com/skype-uri}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{spammy-invites}\docbooktolatexbibaux{idp6457168}{spammy-invites}
-\hypertarget{idp6457168}
+\bibitem{spammy-invites}\docbooktolatexbibaux{idp6490320}{spammy-invites}
+\hypertarget{idp6490320}
 Gustafsson, P.: \emph{Spammy invites}, 2/13/2013 [retrieved 3/31/2013], from {\textless}\url{http://mail.jabber.org/pipermail/operators/2013-February/001571.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{spammy-invites-update}\docbooktolatexbibaux{idp6594400}{spammy-invites-update}
-\hypertarget{idp6594400}
+\bibitem{spammy-invites-update}\docbooktolatexbibaux{idp6627552}{spammy-invites-update}
+\hypertarget{idp6627552}
 Gustafsson, P.: \emph{Update on spammy invites}, 5/4/2013 [retrieved 5/6/2013], from {\textless}\url{http://mail.jabber.org/pipermail/operators/2013-April/001672.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ssdp-udp}\docbooktolatexbibaux{idp6605808}{ssdp-udp}
-\hypertarget{idp6605808}
+\bibitem{ssdp-udp}\docbooktolatexbibaux{idp6638960}{ssdp-udp}
+\hypertarget{idp6638960}
 Presser, A. and Farrell, L. and Kemp, D. and Lupton, W. and Tsuruyama, S. and Albright, S.: \emph{UPnP Device Architecture}, 10/15/2008 [retrieved 5/6/2013], from {\textless}\url{http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{sse-api}\docbooktolatexbibaux{idp6495120}{sse-api}
-\hypertarget{idp6495120}
+\bibitem{sse-api}\docbooktolatexbibaux{idp6528272}{sse-api}
+\hypertarget{idp6528272}
 Hickson, I.: \emph{Server-Sent Events}, 3/29/2013 [retrieved 4/5/2013], W3C, from {\textless}\url{http://dev.w3.org/html5/eventsource/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{sse-multiline}\docbooktolatexbibaux{idp6499840}{sse-multiline}
-\hypertarget{idp6499840}
+\bibitem{sse-multiline}\docbooktolatexbibaux{idp6532992}{sse-multiline}
+\hypertarget{idp6532992}
 Sharp, R.: \emph{Server-Sent Events}, 1/24/2012 [retrieved 4/5/2013], HTML5Doctor, from {\textless}\url{http://html5doctor.com/server-sent-events/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{strophe-api}\docbooktolatexbibaux{idp6560064}{strophe-api}
-\hypertarget{idp6560064}
+\bibitem{strophe-api}\docbooktolatexbibaux{idp6593216}{strophe-api}
+\hypertarget{idp6593216}
 Moffitt, J.: \emph{Strophe.js API Documentation}, 2013 [retrieved 4/10/2013], from {\textless}\url{http://strophe.im/strophejs/doc/1.0.2/files2/strophe-js.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{value-proposition}\docbooktolatexbibaux{idp6314816}{value-proposition}
-\hypertarget{idp6314816}
+\bibitem{value-proposition}\docbooktolatexbibaux{idp6347968}{value-proposition}
+\hypertarget{idp6347968}
 Barnes, C. and Blake, H. and Pinder, D.: \emph{Creating and Delivering Your Value Proposition: Managing Customer
       Experience for Profit}, Kogan Page Publishers, 2009, 978-0749458591, 232. 
 
 % ............. biblioentry 
-\bibitem{webrtc-ericsson}\docbooktolatexbibaux{idp6538416}{webrtc-ericsson}
-\hypertarget{idp6538416}
+\bibitem{webrtc-ericsson}\docbooktolatexbibaux{idp6571568}{webrtc-ericsson}
+\hypertarget{idp6571568}
 Alund, S.: \emph{Bowser -- The World's First WebRTC-Enabled Mobile Browser}, 10/19/2012 [retrieved 4/6/2013], from {\textless}\url{https://labs.ericsson.com/blog/bowser-the-world-s-first-webrtc-enabled-mobile-browser}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{webrtc-interop}\docbooktolatexbibaux{idp6533120}{webrtc-interop}
-\hypertarget{idp6533120}
+\bibitem{webrtc-interop}\docbooktolatexbibaux{idp6566272}{webrtc-interop}
+\hypertarget{idp6566272}
 Reavy, M. and Lachapelle, S.: \emph{Hello Firefox, this is Chrome calling!}, 2/4/2013 [retrieved 4/6/2013], from {\textless}\url{http://blog.chromium.org/2013/02/hello-firefox-this-is-chrome-calling.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{webrtc-ms}\docbooktolatexbibaux{idp6542704}{webrtc-ms}
-\hypertarget{idp6542704}
+\bibitem{webrtc-ms}\docbooktolatexbibaux{idp6575856}{webrtc-ms}
+\hypertarget{idp6575856}
 Aboba, B. and Thomson, M.: \emph{Customizable, Ubiquitous Real Time Communication over the Web
       (CU-RTC-Web)}, 8/9/2012 [retrieved 4/6/2013], Microsoft, from {\textless}\url{http://html5labs.interoperabilitybridges.com/cu-rtc-web/cu-rtc-web.htm}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{webrtc-rfc}\docbooktolatexbibaux{idp6517072}{webrtc-rfc}
-\hypertarget{idp6517072}
+\bibitem{webrtc-rfc}\docbooktolatexbibaux{idp6550224}{webrtc-rfc}
+\hypertarget{idp6550224}
 Bergkvist, A. and Burnett, D. and Jennings, C. and Narayanan, A.: \emph{WebRTC 1.0: Real-time Communication Between Browsers}, 3/22/2013 [retrieved 4/6/2013], W3C, from {\textless}\url{http://dev.w3.org/2011/webrtc/editor/webrtc.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{webrtc-signaling}\docbooktolatexbibaux{idp6512736}{webrtc-signaling}
-\hypertarget{idp6512736}
+\bibitem{webrtc-signaling}\docbooktolatexbibaux{idp6545888}{webrtc-signaling}
+\hypertarget{idp6545888}
 Dutton, S.: \emph{Getting Started with WebRTC}, 7/23/2012 [retrieved 4/6/2013], HTML5 Rocks, from {\textless}\url{http://www.html5rocks.com/en/tutorials/webrtc/basics/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{webrtc-skype}\docbooktolatexbibaux{idp6548832}{webrtc-skype}
-\hypertarget{idp6548832}
+\bibitem{webrtc-skype}\docbooktolatexbibaux{idp6581984}{webrtc-skype}
+\hypertarget{idp6581984}
 Roettgers, J.: \emph{Scoop: Microsoft bets on WebRTC for Skype's browser
       future}, 6/26/2012 [retrieved 4/6/2013], from {\textless}\url{http://gigaom.com/2012/06/26/skype-webrtc-web-client/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{webrtc4all}\docbooktolatexbibaux{idp6552928}{webrtc4all}
-\hypertarget{idp6552928}
+\bibitem{webrtc4all}\docbooktolatexbibaux{idp6586080}{webrtc4all}
+\hypertarget{idp6586080}
 Doubango Telecom: \emph{webrtc4all}, 2012 [retrieved 4/6/2013], from {\textless}\url{https://code.google.com/p/webrtc4all/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-api}\docbooktolatexbibaux{idp6402352}{ws-api}
-\hypertarget{idp6402352}
+\bibitem{ws-api}\docbooktolatexbibaux{idp6435504}{ws-api}
+\hypertarget{idp6435504}
 Hickson, I.: \emph{The WebSocket API}, 2/9/2013 [retrieved 2/24/2013], W3C, from {\textless}\url{http://dev.w3.org/html5/websockets/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-caniuse}\docbooktolatexbibaux{idp6418704}{ws-caniuse}
-\hypertarget{idp6418704}
+\bibitem{ws-caniuse}\docbooktolatexbibaux{idp6451856}{ws-caniuse}
+\hypertarget{idp6451856}
 StatCounter GlobalStats: \emph{Can I~use Web Sockets?}, 2/2013 [retrieved 3/3/2013], from {\textless}\url{http://caniuse.com/websockets}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-html5rocks}\docbooktolatexbibaux{idp6410256}{ws-html5rocks}
-\hypertarget{idp6410256}
+\bibitem{ws-html5rocks}\docbooktolatexbibaux{idp6443408}{ws-html5rocks}
+\hypertarget{idp6443408}
 Ubl, M. and Kitamura, E.: \emph{Introducing WebSockets: Bringing Sockets to the Web}, 2/13/2012 [retrieved 2/25/2013], from {\textless}\url{http://www.html5rocks.com/en/tutorials/websockets/basics/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-iana}\docbooktolatexbibaux{idp6415520}{ws-iana}
-\hypertarget{idp6415520}
+\bibitem{ws-iana}\docbooktolatexbibaux{idp6448672}{ws-iana}
+\hypertarget{idp6448672}
 IANA: \emph{WebSocket Protocol Registries}, 11/13/2012 [retrieved 2/25/2013], from {\textless}\url{http://www.iana.org/assignments/websocket/websocket.xml}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{ws-proxy}\docbooktolatexbibaux{idp6397248}{ws-proxy}
-\hypertarget{idp6397248}
+\bibitem{ws-proxy}\docbooktolatexbibaux{idp6430400}{ws-proxy}
+\hypertarget{idp6430400}
 Lubbers, P.: \emph{How HTML5 Web Sockets Interact With Proxy Servers}, 3/16/2011 [retrieved 2/24/2013], InfoQ, from {\textless}\url{http://tools.ietf.org/html/rfc6455}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0025}\docbooktolatexbibaux{idp6433488}{xep-0025}
-\hypertarget{idp6433488}
+\bibitem{xep-0025}\docbooktolatexbibaux{idp6466640}{xep-0025}
+\hypertarget{idp6466640}
 Hildebrand, J. and Kaes, C. and Waite, D.: \emph{XEP-0025: Jabber HTTP Polling}, XMPP Standards Foundation, 2009 [retrieved 3/10/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0025.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0124}\docbooktolatexbibaux{idp6425232}{xep-0124}
-\hypertarget{idp6425232}
+\bibitem{xep-0124}\docbooktolatexbibaux{idp6458384}{xep-0124}
+\hypertarget{idp6458384}
 Paterson, I. and Saint-Andre, P. and Smith, D. and Moffit, J.: \emph{XEP-0124: Bidirectional-streams Over Synchronous HTTP
       (BOSH)}, XMPP Standards Foundation, 2010 [retrieved 3/10/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0124.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0166}\docbooktolatexbibaux{idp6460896}{xep-0166}
-\hypertarget{idp6460896}
+\bibitem{xep-0166}\docbooktolatexbibaux{idp6494048}{xep-0166}
+\hypertarget{idp6494048}
 Ludwig, S. and Beda, J. and Saint-Andre, P. and McQueen, R. and Egan, S. and Hildebrand, J.: \emph{XEP-0166: Jingle}, XMPP Standards Foundation, 2009 [retrieved 3/31/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0166.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xep-0206}\docbooktolatexbibaux{idp6440512}{xep-0206}
-\hypertarget{idp6440512}
+\bibitem{xep-0206}\docbooktolatexbibaux{idp6473664}{xep-0206}
+\hypertarget{idp6473664}
 Paterson, I. and Saint-Andre, P.: \emph{XEP-0206: XMPP Over BOSH}, XMPP Standards Foundation, 2010 [retrieved 3/10/2013], from {\textless}\url{http://xmpp.org/extensions/xep-0206.html}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-history}\docbooktolatexbibaux{idp6342912}{xmpp-history}
-\hypertarget{idp6342912}
+\bibitem{xmpp-history}\docbooktolatexbibaux{idp6376064}{xmpp-history}
+\hypertarget{idp6376064}
 The XMPP Standards Foundation: \emph{History of XMPP}, 1/27/2010 [retrieved 2/20/2013], from http://xmpp.org/about-xmpp/history/ {\textless}\url{http://legal.aol.com/trademarks/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-in-javascript}\docbooktolatexbibaux{idp6300528}{xmpp-in-javascript}
-\hypertarget{idp6300528}
+\bibitem{xmpp-in-javascript}\docbooktolatexbibaux{idp6333680}{xmpp-in-javascript}
+\hypertarget{idp6333680}
 Moffitt, J.: \emph{Professional XMPP Programming with JavaScript and jQuery}, John Wiley \& Sons, 2010, 978-0470540718, 432 (58, 380, 402). 
 
 % ............. biblioentry 
-\bibitem{xmpp-over-websockets}\docbooktolatexbibaux{idp6449568}{xmpp-over-websockets}
-\hypertarget{idp6449568}
+\bibitem{xmpp-over-websockets}\docbooktolatexbibaux{idp6482720}{xmpp-over-websockets}
+\hypertarget{idp6482720}
 Moffit, J.: \emph{An XMPP Sub-protocol for WebSocket}, 2/25/2013 [retrieved 3/10/2013], from {\textless}\url{http://datatracker.ietf.org/doc/draft-moffitt-xmpp-over-websocket/}{\textgreater}. 
 
 % ............. biblioentry 
-\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp6253904}{xmpp-the-definitive-guide}
-\hypertarget{idp6253904}
+\bibitem{xmpp-the-definitive-guide}\docbooktolatexbibaux{idp6287056}{xmpp-the-definitive-guide}
+\hypertarget{idp6287056}
 Saint-Andre, P. and Smith, K. and Tronçon, R.: \emph{XMPP: The Definitive Guide}, Sebastopol: O'Reilly, 2009, 978-0-596-52126-4, 310 (7, 13, 14, 16, ). 
 
 % ............. biblioentry 
-\bibitem{yehuda-talk}\docbooktolatexbibaux{idp6572688}{yehuda-talk}
-\hypertarget{idp6572688}
+\bibitem{yehuda-talk}\docbooktolatexbibaux{idp6605840}{yehuda-talk}
+\hypertarget{idp6605840}
 Katz, Y.: \emph{Building Web Applications with Ember.js}, 4/13/2013 [retrieved 4/26/2013], YouTube, from {\textless}\url{http://www.youtube.com/watch?v=u6RFyVN9sNg}{\textgreater}. 
 
 \end{thebibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \setlength\saveparskip\parskip
 \setlength\saveparindent\parindent
-\begin{dbtolatexindex}{idp6633296}{}
+\begin{dbtolatexindex}{idp6666448}{}
 \setlength\tempparskip\parskip \setlength\tempparindent\parindent
 \parskip\saveparskip \parindent\saveparindent
 \noindent \indexspace
