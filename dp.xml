@@ -8,7 +8,7 @@
 -->
 <book lang="en">
   <bookinfo>
-    <title>Real-time Communication \\* in Web Browser</title>
+    <title>isReal-time Communication \\* in Web Browser</title>
 
     <subtitle>Master's thesis</subtitle>
 
@@ -98,6 +98,8 @@
       <keyword>OpenTok</keyword>
 
       <keyword>Talker</keyword>
+
+      <keyword>server push</keyword>
     </keywordset>
   </bookinfo>
 
@@ -3113,7 +3115,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
           <primary>promises</primary>
         </indexterm> pattern, which wraps the event listener function to a
       later resolved object, which can be further processed even before the
-      event occurs. <citation>domenic-promises</citation> </para>
+      event occurs. <citation>domenic-promises</citation></para>
 
       <para>Talker does expect the events<indexterm>
           <primary>events</primary>
@@ -3282,29 +3284,27 @@ App.log.logger.debug(this);</programlisting>
         <computeroutput>debug</computeroutput>), the application will work
         without the need to change the logging itself.</para>
 
-        <para>TODO odsud</para>
-
         <para>The second thing is logging complex objects such as
         <computeroutput>this</computeroutput>, pointing to the
         <computeroutput>Strophe.connection</computeroutput> in the example
         call. Log4js does not provide any layout which would not transform the
         value to string -- [object Object] in our case. This is not very
-        useful -- the developer usually knows there is an object and she just
+        useful. The developer usually knows there is an object and she just
         wants the possibility to inspect it. Therefore, I enhanced the library
         again in order to log complex objects. First of all, the logger
-        outputs a text message saying complex value is about to be logged.
-        Then, the complex value is logged individually without being cast to
+        outputs a text message saying a complex value is about to be logged.
+        Then, the complex value is logged individually, without being cast to
         string. Therefore, it is possible to access it interactively in the
-        console, fold and unfold the nested properties and carry out other
-        inspections. Logging object from the example above thus looks as
-        follows (arrows within the object symbolize the property can be
-        inspected):</para>
+        console, to fold and unfold nested properties and to carry out other
+        inspections. Logging the object from the example above thus looks as
+        follows (arrows inside the object symbolize that the property can be
+        further inspected):</para>
 
         <programlisting>INFO - Strophe is connected as pavel.smolka@jappix.com
 DEBUG - [object Object]
 Strophe.Connection {
- &gt; adapter: StropheAdapter
- &gt; addHandlers: Array[0]
+ -&gt; adapter: StropheAdapter
+ -&gt; addHandlers: Array[0]
  ...
 }</programlisting>
       </sect2>
@@ -3313,88 +3313,92 @@ Strophe.Connection {
     <sect1 id="chap-contact-list">
       <title>Contact list</title>
 
-      <para>The list of contacts is essential part of every instant messaging
-      application. The same applies to Talker, with little modification
-      compared to classical IM clients. Talker has been designed and
-      implemented as the part of Celebrio -- comprehensive <quote>operating
-      system</quote>. The contact list is not managed by Talker itself, it
-      servers to other applications as well. On the other hand, the user can
-      connect existing third party XMPP account to Celebrio, with its own
-      contact list (roster). It is crucial to deal with the contacts
-      duplication and appropriate matching one to another.</para>
+      <para>The list of contacts is an essential part of every instant
+      messaging application. The same applies to Talker, with a tiny
+      modification compared to classical IM clients. Talker has been designed
+      and implemented as a part of Celebrio -- a comprehensive <quote>web
+      operating system</quote>. The contact list is not managed by Talker
+      itself, it servers to other applications as well. On the other hand, the
+      user can connect an existing third party XMPP account to Celebrio, with
+      its own contact list (a roster). It is crucial to deal with the contacts
+      duplication and to perform appropriate matching of one to the
+      other.</para>
 
       <sect2>
         <title>Fetching Celebrio contact list</title>
 
         <para>As mentioned in the previous paragraph, the contact list base
         comes from the server-side database. Celebrio asks the user for adding
-        her contacts in People application, another part of the system. All
-        contacts are stored in a relational database and available through the
-        system, in all applications. One of the properties of the contact
-        entity is JID. For the needs of Talker, the contacts are filtered on
-        the server so that only those which have JID filled are returned as
-        the user contact list.</para>
+        her contacts in the People application, another part of the system.
+        All contacts are stored in a relational database and they available
+        throughout the system, in all applications. One of the properties of a
+        contact entity is its JID. For the needs of Talker, the contacts are
+        filtered on the server so that only those which have a JID filled are
+        returned as the user's contact list.</para>
 
-        <para>Since Talker is JavaScript application, the contacts are passed
-        to JavaScript in JSON format. To avoid an extra request (and thus a
-        delay), contact list is rendered by PHP to the
+        <para>Since Talker is a JavaScript application, the contacts are
+        passed to JavaScript in a JSON format. To avoid an extra request (and
+        thus a delay), contact list is rendered directly by PHP to the
         <computeroutput>&lt;script/&gt;</computeroutput> element in the
-        server-side processed template. Then, when the Ember application is
-        initialized, the array of plain JavaScript objects is transformed to
-        the content of <computeroutput>ArrayController</computeroutput>,
-        specifically <computeroutput>App.contactsController</computeroutput>.
-        After that, the application can easily manage rendering the contact
-        list within Handlebars template and keeping it up-to-date.</para>
+        server-side processed template, during the initial request. Then, when
+        the Ember application is initialized, the array of plain JavaScript
+        objects is transformed to the content of
+        <computeroutput>ArrayController</computeroutput>, specifically
+        <computeroutput>App.contactsController</computeroutput>. After that,
+        the application can easily manage rendering the contact list within a
+        Handlebars template and keeping it up-to-date.</para>
 
-        <para>Ember class <computeroutput>Contact</computeroutput> is one of
-        the most voluminous objects in the application. Every
+        <para>The Ember class <computeroutput>Contact</computeroutput> is one
+        of the most voluminous objects in the application. Each
         <computeroutput>Contact</computeroutput> object contains both the
-        <quote>static</quote> properties from the server (such as contact name
-        or avatar picture) and the dynamic information about current state in
-        the application. The latter category includes the information whether
-        the contact is online or not, its presence status (DND, Away, ...) and
-        also all the messages related to the contact.</para>
+        <quote>static</quote> properties from a server (such as the contact's
+        name or its avatar picture) and the dynamic information about the
+        current state in the application. The latter category includes the
+        information whether the contact is online or not, its presence status
+        (DND, Away, ...) and also all messages related to the contact.</para>
 
-        <para>Within whole Celebrio system, there is a rule that the contacts
-        the user has not added to her contact list (in the People application)
-        do not affect the user in any way. In fact, all messages, updates or
+        <para>In whole Celebrio system, there is a rule that the contacts the
+        user has not added to her contact list (in the People application) do
+        not affect the user in any way. In fact, all messages, updates or
         invites from unknown contacts are processed by the application, but
-        they are thrown away and not displayed to the user. There is an easy
-        possibility to extend the application to be able to communicate with
-        the contacts that have not been added yet. However, it would break the
-        system philosophy and making such decision is not up to the thesis
+        they are thrown away and not displayed to the user. There is a
+        possibility to easily extend the application to be able to communicate
+        with contacts that have not been added yet. However, it would break
+        the system philosophy. Making such decision is not up to the thesis
         author.</para>
       </sect2>
 
       <sect2>
         <title>Matching entries from XMPP roster</title>
 
-        <para>The contact list retrieved from Celebrio back-end, as it was
-        described in the previous section, is only underlying material for
-        building the contact list. The other part is XMPP roster<indexterm>
+        <para>A contact list retrieved from the Celebrio back-end, as it was
+        described in the previous section, is only an underlying material for
+        building the actual contact list. The other part is the XMPP
+        roster<indexterm>
             <primary>XMPP</primary>
 
             <secondary>roster</secondary>
-          </indexterm> (contact list), stored at the XMPP server. The roster
-        can possibly contain different contacts from internal Celebrio contact
-        list, because it can be accessed from other XMPP clients as
-        well.</para>
+          </indexterm> (an XMPP contact list), stored at the XMPP server. The
+        roster can possibly contain contacts different from those originating
+        from an internal Celebrio contact list, because the roster can be
+        accessed from other XMPP clients as well.</para>
 
-        <para>When the application is connected, fetching a roster from XMPP
-        server is one of the first steps. One of Strophe.js plugins (plugins
-        were generally described in <xref linkend="chap-strophe-plugins" />),
-        called characteristically Roster, provides convenient API for this --
-        a callback function is passed to
-        <computeroutput>roster.get</computeroutput> method and executed when
-        the roster is fetched.</para>
+        <para>When the application is connected, fetching a roster from an
+        XMPP server is one of the first steps. One of Strophe.js plugins
+        (plugins were generally described in <xref
+        linkend="chap-strophe-plugins" />), called characteristically Roster,
+        provides a convenient API for such task -- a callback function is
+        passed to the <computeroutput>roster.get</computeroutput> method and
+        executed when the roster is fetched.</para>
 
         <para>The callback does basically two things, as depicted in <xref
-        linkend="fig-roster-fetch" />. The retrieved contacts (those from XMPP
-        roster) are matched to existing contacts retrieved from Celebrio
-        server. Contacts present only in the roster are just logged, the
-        application does not work with them. In other words, the appropriate
-        record in <computeroutput>contactsController</computeroutput> array is
-        found and match to every XMPP contact retrieved in the roster.</para>
+        linkend="fig-roster-fetch" />. The retrieved contacts (those from the
+        XMPP roster) are matched to existing contacts, retrieved previously
+        from the Celebrio server. For each XMPP contact retrieved in the
+        roster, the appropriate record in the
+        <computeroutput>contactsController</computeroutput> array is found and
+        matched. Contacts present only in the roster are just logged, the
+        application does not work with them.</para>
 
         <figure id="fig-roster-fetch">
           <title>Matching XMPP roster and Celebrio contact list</title>
@@ -3406,66 +3410,71 @@ Strophe.Connection {
           </mediaobject>
         </figure>
 
-        <para>The second part (left side of the picture) of matching contacts
-        works from the opposite direction. Application processes all contacts
-        that have been retrieved from the server and which are not in XMPP
-        roster. Then, it sends subscription request, which consists of several
-        steps, but it simply means adding the contact to the XMPP
-        roster.</para>
+        <para>The second part (the left side of the picture) of matching
+        contacts works from the opposite direction. The application processes
+        all contacts that have been retrieved from the server and which are
+        not present in the XMPP roster. Then, it sends a subscription request
+        to each such contact, which consists of several steps, but it simply
+        stands for adding a contact to the user's XMPP roster.</para>
       </sect2>
 
       <sect2>
         <title>Presence and online statuses</title>
 
         <para>One of the biggest advantages of real-time communication tools
-        is the fact that one can see whether his contacts are currently
-        available (i.e. online, logged in) or not. In terms of XMPP and
-        Talker, we speak about <emphasis>presence</emphasis><indexterm>
+        is the fact that one can actually see whether her contacts are
+        currently available (i.e. online, logged in) or not. In terms of XMPP
+        and Talker, we speak about <emphasis>presence</emphasis><indexterm>
             <primary>presence</primary>
-          </indexterm>. Strophe does not provide convenient way to work with
-        presence but Roster plugin does.<footnote>
-            <para>It is the same Roster plugin which handles roster retrieval
-            and processing, mentioned in the previous section.</para>
+          </indexterm>. Strophe does not provide a convenient way to work with
+        presence, but Roster plugin does.<footnote>
+            <para>It is the same Roster plugin which handles a roster
+            retrieval and processing, mentioned in the previous
+            section.</para>
           </footnote></para>
 
-        <para>Presence is processed in a way usual to Strophe: the developer
-        provides a callback to a certain topic, which is triggered when
-        anything related to that topic happens. The process of binding the
-        callback is described in <xref linkend="chap-strophe-plugins" />. When
-        the callback is bound, Strophe watches over the presence changes sent
-        as presence stanzas from server and hands them over to the assigned
-        callback -- <computeroutput>onPresenceChange</computeroutput> method
-        where the presence change is processed.</para>
+        <para>The presence is processed in a way usual to Strophe: the
+        developer provides a callback related to a certain topic, which is
+        triggered when anything related to that topic happens. The process of
+        binding the callback is described in <xref
+        linkend="chap-strophe-plugins" />. When the callback is bound, Strophe
+        watches over presence changes sent in a form of presence stanzas from
+        a server and hands them over to the assigned callback --
+        <computeroutput>onPresenceChange</computeroutput> method -- where the
+        presence change is processed.</para>
 
         <para>The callback function receives two parameters. The first one
-        contains the list of all contacts, the second parameter represents
-        just the information about the contact whose presence has changed.
-        This is a bit tricky because the callback is triggered even if only
-        the presence of the currently logged user changes -- in this case the
-        second parameter (changed) is undefined.</para>
+        contains the list of all contacts, the second parameter represents the
+        information only about the contact whose presence has changed. This is
+        a bit tricky because the callback is triggered even if only the
+        presence of the currently logged in user changes -- in this case the
+        second parameter (i.e. <computeroutput>changed</computeroutput>) is
+        undefined.</para>
 
         <para>The presence is processed in two ways. Firstly, there is basic
-        telling online from offline status. The other part is optional online
-        status specifying the availability (away, DND, ...), contained in
-        <computeroutput>&lt;show&gt;</computeroutput> element of XMPP message.
-        <citation>rfc-3921</citation> The online status is processed as well
-        and the current value is stored for each contact. Unfortunately, the
-        graphic design for showing statuses has not been proposed yet so it is
-        not displayed within the application, yet ready to be.</para>
+        telling online from offline status. The other part is an optional
+        online status specifying the availability (away, DND, ...), contained
+        in the <computeroutput>&lt;show/&gt;</computeroutput> element of an
+        XMPP message. <citation>rfc-3921</citation> The online status is
+        processed as well and the current value is stored for each contact.
+        Unfortunately, the graphic design for showing statuses has not been
+        proposed yet so it is not displayed within the application, yet ready
+        to be.</para>
 
         <para>There is one more glitch about online statuses. XMPP makes it
-        possible for one to be logged in simultaneously from several devices.
-        In such case, each session (called resource in XMPP) should state its
-        priority. By changing the priority appropriately, it is possible to
-        keep the client running at home and yet receive the messages at work
-        by being logged there in with higher priority. In case the contact is
-        logged in at several places (i.e. several pieces of presence
-        information are fetched from the server), Talker finds the resource
-        with highest priority and processes its online status.</para>
+        possible for the user to be logged in simultaneously from several
+        devices. In such case, each session (called a resource in terms of
+        XMPP) should state its priority. By changing the priority
+        appropriately, it is possible to keep the client running at home and
+        yet receive the messages at work by being logged there in with a
+        higher priority. In case the contact is logged in from several places
+        (i.e. several distinct pieces of presence information are fetched from
+        the server), Talker finds the resource with a highest priority and
+        processes its online status.</para>
 
-        <para>Another possible approach would be sorting the online statuses
-        from the most desirable (i.e. online would be the first, then away,
-        ...) and looking for the <quote>best</quote> one, regardless of the
+        <para>Another possible approach would be sorting online statuses from
+        the most desirable (i.e. online would be the first, then away, ...)
+        and looking for the <quote>best</quote> one, regardless of the
         priority. It could actually more correspond to the real state of
         matters because some clients (such as Google Talk client) set always
         the highest priority. However, I decided to keep the rules XMPP
@@ -3476,52 +3485,54 @@ Strophe.Connection {
         <title>Subscriptions</title>
 
         <para>Subscribing in XMPP basically addresses adding the contacts to
-        the contact list and asking them for the same. Due to the simplicity
-        of the application, Talker performs subscriptions automatically. When
-        the new contact (i.e. new contact added in Celebrio system) is found,
+        the contact list and asking them to do the same. On the account of the
+        application simplicity, Talker deals with subscriptions automatically.
+        When a new contact (i.e. a new contact added in Celebrio) is found,
         the subscription request is sent when Talker starts and loads the
-        contact list. In the opposite direction, when the subscription request
+        contact list. In the opposite direction, when a subscription request
         is received, the application tries to find the appropriate contact and
         subscribe too. If no such contact is found, information is logged and
         nothing happens.</para>
 
         <para>This approach has one big advantage: the user does not have to
-        respond to the subscription requests and she does not need to send own
+        respond to subscription requests and she does not need to send own
         requests either. Yet, there is also one disadvantage, basically the
         same thing from the opposite point of view. The user cannot fully
-        control her contact list -- for example refuse subscription request
-        from the contact in roster. We decided for this trade off to make the
-        application as simple as possible.</para>
+        control her contact list -- for example to refuse a subscription
+        request from the contact in the roster. We decided for this trade off
+        to make the application as simple as possible.</para>
       </sect2>
     </sect1>
 
     <sect1 id="chap-video-calling">
-      <title>Video calling</title>
+      <title>Video calls</title>
 
-      <para>Providing simple interface for video calling is one of the goals
+      <para>Providing a simple interface for video calls is one of the goals
       of Talker application. To achieve it, OpenTok library has been used.
-      OpenTok is high-level library from TokBox company, allowing the
+      OpenTok is a high-level library from TokBox company, allowing the
       developer to embed video calls support to an arbitrary web application.
-      In this section, basic usage of OpenTok library is described as well as
-      the specifics for Talker implementation. OpenTok consists of JavaScript
-      part and server-side SDK, necessary to create the session.</para>
+      In this section, a basic usage of OpenTok library is described as well
+      as the specifics for Talker implementation. OpenTok consists of a
+      JavaScript part and a server-side SDK, necessary to initialize a
+      session.</para>
 
       <sect2>
         <title>Initializing OpenTok session</title>
 
-        <para>Before actually working with OpenTok JavaScript library, the
-        application must create a session for the new call that is about to be
-        established. Therefore, the JavaScript web application queries the
-        server (with OpenTok SDK running) to generate one. The server-side SDK
-        connects to official OpenTok server<footnote>
+        <para>Before actually working with the OpenTok JavaScript library, the
+        application must create a session for a new call that is about to be
+        established. Therefore, the JavaScript web application queries a
+        server (with an OpenTok SDK running) to generate one. The server-side
+        SDK connects to the official OpenTok server<footnote>
             <para><ulink
             url="http://api.opentok.com/hl">http://api.opentok.com/hl</ulink></para>
           </footnote> and retrieves the session. The reason why the request
-        cannot be sent directly from JavaScript is security -- server-side SDK
-        proves its identity with unique API secret, issued along with API key
-        directly by TokBox and assigned to every OpenTok application. The
-        process of retrieving session ID is depicted in <xref
-        linkend="fig-opentok-sid" />.</para>
+        cannot be sent directly from JavaScript is a security<indexterm>
+            <primary>security</primary>
+          </indexterm> -- the server-side SDK proves its identity with a
+        unique API secret, issued along with an API key directly by TokBox and
+        assigned to every OpenTok application. The process of retrieving a
+        session ID is depicted in <xref linkend="fig-opentok-sid" />.</para>
 
         <figure id="fig-opentok-sid">
           <title>The process of initializing OpenTok session</title>
@@ -3533,22 +3544,23 @@ Strophe.Connection {
           </mediaobject>
         </figure>
 
-        <para>Along with the session, unique token is generated by server-side
-        SDK. It simply constitutes a hash of session ID, timestamp, client
-        role (publisher or subscriber) and optional user data. Within Talker
-        application, the last mentioned field is used for distinguishing free
-        users from premium, i.e. handing over additional information to the
-        session. To sum it up, Session ID identifies the session (i.e. one
-        call among various number of people, typically 2) and token serves as
-        the specific user identification.</para>
+        <para>Along with the session, a unique token is generated by the
+        server-side SDK. It simply constitutes a hash of the session ID,
+        timestamp, a client role (either publisher or subscriber) and optional
+        user data. Within Talker, the last mentioned field is used for
+        distinguishing free users from the premium ones, i.e. handing over the
+        additional information to the session. To sum it up, the session ID
+        identifies the session (i.e. one call among various number of people,
+        typically two) and a token serves as a specific user
+        identification.</para>
       </sect2>
 
       <sect2>
         <title>Using OpenTok JavaScript library</title>
 
-        <para>After including OpenTok JavaScript file into the application,
-        the library is accessible via global
-        <computeroutput>TB</computeroutput> object. When the session ID and
+        <para>After including the OpenTok JavaScript file into the
+        application, the library is accessible via global
+        <computeroutput>TB</computeroutput> object. When the session ID and a
         token are created for the application instance, the actual call can be
         established. The session object is created and the application
         connects to the new session, identifying self with the previously
@@ -3559,11 +3571,11 @@ var session = TB.initSession(sessionId);
 session.connect(API_KEY, token);</programlisting>
 
         <para>Even though the previous code would establish the connection, no
-        matter what happens with the connection, the application cannot react
-        to it. That is the reason why event handlers must be bound to the
-        session so the application can respond for example to someone
-        connecting to the same session and sending a stream. Binding the event
-        looks as follows:</para>
+        matter what happens with the connection, the application can not
+        respond to it. That is the reason why event handlers must be bound to
+        the session so the application can respond, for example to someone
+        connecting to the same session and sending a stream. Binding an event
+        listener looks as follows:</para>
 
         <programlisting>session.addEventListener("sessionConnected", function (event) {
     subscribeToStreams(event.streams);
@@ -3579,43 +3591,44 @@ session.connect(API_KEY, token);</programlisting>
       <sect2>
         <title>Interconnection of callers</title>
 
-        <para>Within Talker application, the previously described methods are
-        separated along with the code related to video calls into separate
-        object -- OpenTokAdapter. The object is instantiated for each contact
-        in the application since there theoretically several video calls can
-        take place independently. Once a video call is established and an
-        OpenTok session is created, this information is sent to the other
-        party.</para>
+        <para>Within Talker, the previously described methods are set aside
+        along with the code related to video calls into a separate object --
+        OpenTokAdapter. The adapter is instantiated for each contact in the
+        application since, theoretically, several video calls can take place
+        independently. Once a video call is established and an OpenTok session
+        is created, the information about the session is sent to the other
+        party so that she can join the call.</para>
 
-        <para>We decided to use ordinary XMPP chat message to inform the other
-        side about the event because someone using Talker can either
+        <para>We decided to use an ordinary XMPP chat message to inform the
+        other side about the call event, because the user of Talker can either
         communicate with someone else using Talker as well or the other party
         can be connected via any other XMPP client. Therefore, the message
-        informing about video call contains short label
+        informing about a video call contains a short label
         <computeroutput>Celebrio-CALL</computeroutput>, followed by a link.
-        The link contains the information about session and when clicked
-        (assuming the other party uses some ordinary IM client), new Celebrio
-        window is opened and the user can answer the call. This separate
-        window has (almost) nothing to do with Celebrio and it could be
-        implemented as independent application as well. It is just a
-        substitution for the contacts not communicating via Celebrio.</para>
+        The link contains the information about the session and when clicked
+        (in case the other party uses an ordinary IM client, such as Pidgin),
+        a new Celebrio window is opened and the user answers the call. This
+        separate window has (almost) nothing to do with Celebrio and it could
+        be implemented as an independent application as well. It is just a
+        substitution of Talker for the contacts not communicating via
+        Celebrio.</para>
 
-        <para>When the application receives incoming call request (in form of
-        the link described above), it parses the request link and hence
-        obtains session ID. The next step is asking the server to generate
-        another unique token, with which Talker can establish the call (i.e.
-        connect to the session, subscribe to the other party stream and
-        publish its own).</para>
+        <para>When the application receives an incoming call request (in a
+        form of the link described above), it parses the request link and
+        hence obtains a session ID. The next step is asking the server to
+        generate another unique token, which Talker uses for establishing the
+        call (i.e. connecting to the session, subscribing to the other party
+        stream and publishing its own).</para>
       </sect2>
 
       <sect2>
         <title>Call states</title>
 
-        <para>Once the call is initiated, it can be either answered or timed
+        <para>Once a call is initiated, it can be either answered or timed
         out. There are 60 seconds within the other side must respond to the
-        call. Then, the video call session can be of course hung up. All
-        possible states along with the transition actions are depicted in
-        <xref linkend="fig-call-states" />.</para>
+        call. If not answered, the video call is hung up. All possible states
+        along with the transition actions are depicted in <xref
+        linkend="fig-call-states" />.</para>
 
         <figure id="fig-call-states">
           <title>Video call states</title>
@@ -3632,14 +3645,14 @@ session.connect(API_KEY, token);</programlisting>
         <title>Embedding the video element</title>
 
         <para>If the video call is successfully established, two video
-        elements must be embedded to the page. One for the application user to
-        be able to see herself, the other (bigger one) for displaying the
-        other call participant. OpenTok provides a convenient way to create
-        the video element. There is action listener which triggers the
-        following code when the session is connected (i.e. when the
-        application connects to the session identified by given session ID),
-        creating the video element of the caller (video of
-        <quote>me</quote>):</para>
+        elements must be embedded to the page. One for the user of the
+        application to be able to see herself, the other one (the bigger one)
+        for displaying the other call participant. OpenTok provides a
+        convenient way to create a video element. There is an action listener
+        which triggers the following code when the session is connected (i.e.
+        when the application connects to the session identified by given
+        session ID), creating a video element of the caller (it is referred as
+        the video of <quote>me</quote> in the application):</para>
 
         <programlisting>$("#video").append("&lt;div id='publishing'&gt;&lt;/div&gt;")
 var publisher = TB.initPublisher(API_KEY, 'publishing', {
@@ -3647,23 +3660,25 @@ var publisher = TB.initPublisher(API_KEY, 'publishing', {
     height: 80
 });</programlisting>
 
-        <para>The previous piece of code creates a new
-        <computeroutput>#video</computeroutput> element, in which OpenTok
-        embeds the video. Depending on the used library version, either Flash
-        object or HTML5 video element is created with the specified width and
-        height. The reason why the application creates a wrapper element each
-        time a call is established is caused by the library removing both
-        video element <emphasis>and</emphasis> its wrapper when the call is
-        hung up (or dismissed after timeout).</para>
+        <para>The previous piece of code creates a new HTML element
+        (<computeroutput>#publishing</computeroutput>), in which OpenTok
+        embeds the video. Depending on the used library version, either a
+        Flash object or an HTML5 video element is created, with the specified
+        width and height. The reason why the application creates a wrapper
+        element each time a call is established is caused by the library
+        removing both video element <emphasis>and</emphasis> its wrapper, when
+        the call is hung up (or dismissed after the timeout).</para>
 
-        <para>Creating and automatic disposal of a video element of the other
-        call participant is similar, only it is triggered when a new stream is
-        created within the session.</para>
+        <para>Creating and an automatic disposal of a video element of the
+        other call participant is similar, only it is triggered when a new
+        stream is created within the session.</para>
       </sect2>
     </sect1>
 
     <sect1>
       <title>Testing</title>
+
+      <para>TODO from here</para>
 
       <para>Every application is tested during the development. Traversing the
       application manually is common way of testing, especially in case of web
