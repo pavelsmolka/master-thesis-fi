@@ -8,7 +8,7 @@
 -->
 <book lang="en">
   <bookinfo>
-    <title>isReal-time Communication \\* in Web Browser</title>
+    <title>Real-time Communication \\* in Web Browser</title>
 
     <subtitle>Master's thesis</subtitle>
 
@@ -67,7 +67,7 @@
       simple web-based application environment for the elderly. XMPP protocol,
       used in Talker in order to be interconnectible with other instant
       messaging clients, is also mentioned within the thesis, especially with
-      regards to running the XMPP client in web browser.</para>
+      regards to running the XMPP client in a web browser.</para>
     </abstract>
 
     <keywordset>
@@ -621,14 +621,10 @@ and this is the second one
       likely to fail.
       <citation>ws-proxy</citation><citation>definitive-guide-to-ws</citation>
       As opposite, there is a secure way to use WebSockets. WebSockets Secure
-      (WSS)<indexterm>
-          <primary>WebSocket</primary>
-
-          <secondary>Secure</secondary>
-        </indexterm> protocol is standard WS wrapped in TLS tunnel, similarly
-      as HTTP can be transmitted over TLS layer. When using WSS, the URI
-      begins with <computeroutput>wss://</computeroutput> and it uses port 443
-      by default. <citation>definitive-guide-to-ws</citation></para>
+      (WSS) protocol is standard WS wrapped in TLS tunnel, similarly as HTTP
+      can be transmitted over TLS layer. When using WSS, the URI begins with
+      <computeroutput>wss://</computeroutput> and it uses port 443 by default.
+      <citation>definitive-guide-to-ws</citation></para>
 
       <sect2>
         <title>WebSocket handshake<indexterm>
@@ -682,7 +678,7 @@ Connection: Upgrade
 Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
 
         <para>The number 101 on the first line of the response stands for the
-        HTTP status code <computeroutput>Switching Protocols</computeroutput>,
+        HTTP status <computeroutput>Switching Protocols</computeroutput>,
         <citation>rfc-http</citation> which means the server supports
         WebSockets and the connection can be established. Any status code
         other than 101 indicates that the WebSocket handshake has not
@@ -694,8 +690,8 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         protocol-switching request. A server is supposed to concatenate the
         secret with Globally Unique Identifier (GUID)<indexterm>
             <primary>GUID</primary>
-          </indexterm> "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and hash the
-        result with the SHA-1 algorithm. The result is returned as
+          </indexterm> "258EAFA5-E914-47DA- 95CA-C5AB0DC85B11" and to hash the
+        result with SHA-1 algorithm. The result is returned as
         <computeroutput>Sec-WebSocket-Accept</computeroutput> header field,
         base64-encoded. <citation>rfc-ws</citation> However, a security issue
         here seems to be in this process. If the initial request is not sent
@@ -813,9 +809,9 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</programlisting>
         <computeroutput>CLOSED</computeroutput>.</para>
 
         <para>Sending the data to a server is also rather straightforward.
-        Either <computeroutput>DOMString</computeroutput>,
-        <computeroutput>ArrayBuffer</computeroutput>,
-        <computeroutput>ArrayBufferView</computeroutput> or
+        Either <computeroutput>ArrayBufferView</computeroutput>,
+        <computeroutput>DOMString</computeroutput>,
+        <computeroutput>ArrayBuffer</computeroutput> or
         <computeroutput>Blob</computeroutput> can be sent via the
         <computeroutput>send</computeroutput> method. See the examples below:
         <citation>ws-html5rocks</citation></para>
@@ -1086,7 +1082,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
         reference to another video element on the page. The example below
         represents the described situation:</para>
 
-        <programlisting>navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+        <programlisting>navigator.getUserMedia({"audio": true, "video": true}, function(stream) {
     selfView.src = URL.createObjectURL(stream);
     pc.addStream(stream);
 });</programlisting>
@@ -1324,7 +1320,7 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
           </indexterm>, is a tool for creating persistent connections between
         a browser-based client and a server. It simply wraps common Comet
         techniques (i.e. HTTP long polling or streaming) with convenient
-        methods for binding handlers to incoming events, usually messages.
+        methods for binding the handlers to incoming events, usually messages.
         Nevertheless, the Channel API is part of Google App Engine and it is
         intended to be used only within the web applications built on it.
         Although it is possible to use only the client side of the Channel API
@@ -1489,14 +1485,10 @@ var pc = new RTCPeerConnection(config); // webkitRTCPeerConnection</programlisti
 
       <para>Receiving a message stanza is not acknowledged by the recipient so
       the sender has no information whether it has been delivered successfully
-      or not. On the contrary, an IQ stanza <indexterm>
-          <primary>XMPP</primary>
-
-          <secondary>IQ</secondary>
-        </indexterm> can be used in case the sender requires an answer -- it
-      usually constitutes a <emphasis>query</emphasis>. The best example is
-      obtaining a contact list -- in XMPP terms called <emphasis>a
-      roster</emphasis><indexterm>
+      or not. On the contrary, an IQ stanza can be used in case the sender
+      requires an answer -- it usually constitutes a
+      <emphasis>query</emphasis>. The best example is obtaining a contact list
+      -- in XMPP terms called <emphasis>a roster</emphasis><indexterm>
           <primary>XMPP</primary>
 
           <secondary>roster</secondary>
@@ -1965,9 +1957,9 @@ connection.connect(jid, pass, onConnect);</programlisting>
         <para>The last argument stands for a callback function which is
         triggered every time the connection status changes. The status is then
         passed as an argument to the callback function. It must value to one
-        of the <computeroutput>Strophe.Status</computeroutput> enum values,
-        for example <computeroutput>Strophe.Status.CONNECTED</computeroutput>
-        when a connection is established. An example
+        of the <computeroutput>Strophe.Status</computeroutput> enum values.
+        For example, when a connection is established, it would be
+        <computeroutput>Strophe.Status.CONNECTED</computeroutput>. An example
         <computeroutput>onConnect</computeroutput> callback can look as
         follows:</para>
 
@@ -2033,11 +2025,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <para>Both JavaScript and XMPP are typical fields of using
         asynchronous processing of incoming events. The idea is simple.
         Generally, we specify the actions we are interested in and attach the
-        event handlers to each of them. An event handler<indexterm>
-            <primary>event handler</primary>
-          </indexterm>, a function or a method, is invoked as soon as the
-        specified action occurs. The event handlers, deferred functions, are
-        called callbacks<indexterm>
+        event handlers to each of them. An event handler, a function or a
+        method, is invoked as soon as the specified action occurs. The event
+        handlers, deferred functions, are called callbacks<indexterm>
             <primary>callback</primary>
           </indexterm>. Not only Strophe but all other asynchronous libraries
         (event-based or request/response) in JavaScript are based on
@@ -2063,7 +2053,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         which can be specified by the next-to-last argument, can be
         anyone:</para>
 
-        <programlisting>connection.addHandler(onChatMessage, null, 'message', 'chat', null,  null);</programlisting>
+        <programlisting>connection.addHandler(onChatMessage, null, 'message', 'chat', null, null);</programlisting>
 
         <para>A callback function receives an incoming stanza object in a
         Strophe-specific pre-parsed format. Then, the object can be queried
@@ -2157,12 +2147,13 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       section, a general way to use the plugins is described as well as a
       brief overview of several plugins used in the Talker application.</para>
 
-      <para>Each Strophe.js plugin is contained in a separate JavaScript file,
-      included to the application which uses it. The common name convention
-      for a plugin file is
-      <computeroutput>strophe.myplugin.js</computeroutput>.
-      <citation>xmpp-in-javascript</citation> Whole plugin functionality is
-      packed to a JavaScript object and passed to Strophe as follows:</para>
+      <para>Each Strophe plugin is contained in a separate JavaScript file,
+      included to the application which uses it. A common name convention for
+      a plugin file is <computeroutput>strophe.myplugin.js</computeroutput>,
+      where <computeroutput>myplugin</computeroutput> is replaced by the
+      actual plugin name. <citation>xmpp-in-javascript</citation> Whole plugin
+      functionality is packed to a JavaScript object and passed to Strophe as
+      follows:</para>
 
       <programlisting>Strophe.addConnectionPlugin('myplugin',
 {
@@ -2342,7 +2333,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         clicked at, communication view is displayed so the user can read the
         incoming messages, send a new message or start a video call. Several
         application screenshots are pictured in <xref
-        linkend="appendix-screenshots" />. TODO are they?</para>
+        linkend="appendix-screenshots" />.</para>
 
         <para>There is one more actor depicted in <xref
         linkend="talker-uc" />. It is a remote XMPP server, communicating with
@@ -2484,9 +2475,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         linkend="fig-controllers" />, to show the hierarchy structure. The
         main view, a contact list, is handled by a
         <computeroutput>ContactsController</computeroutput> instance. When the
-        user enters the conversation,
-        <computeroutput>ConversationController</computeroutput> takes over the
-        command. <computeroutput>TextController</computeroutput> and
+        user enters the conversation, <computeroutput>Conversation
+        Controller</computeroutput> takes over the command.
+        <computeroutput>TextController</computeroutput> and
         <computeroutput>VideoController</computeroutput> (with their
         respective views) are present within the conversation. Calling one or
         another depends on whether the user interacts with the text part (the
@@ -2693,11 +2684,11 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         well), the controllers also represent collections of the model
         objects.</para>
 
-        <para>The first function, processing the user actions from the view,
-        is represented by the <computeroutput>processMessage</computeroutput>
-        method in <computeroutput>TextController</computeroutput>. The
-        following snippet is a shortened part taken from the Talker source
-        code:</para>
+        <para>The first function, processing user actions from the view, is
+        represented by the method
+        <computeroutput>processMessage</computeroutput>, in
+        <computeroutput>TextController</computeroutput>. The following snippet
+        is a shortened part taken from the Talker source code:</para>
 
         <programlisting>App.TextController = Ember.ObjectController.extend({
 
@@ -2727,10 +2718,10 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
           </footnote></para>
 
         <para>Another example of a controller from Talker is not an instance
-        of <computeroutput>ObjectController</computeroutput>, as in previous
-        example, but <computeroutput>ArrayController</computeroutput>. It
-        represents a collection of contacts, displayed in the main application
-        view:</para>
+        of <computeroutput>ObjectController</computeroutput>, as in the
+        previous example, but
+        <computeroutput>ArrayController</computeroutput>. It represents a
+        collection of contacts, displayed in the main application view:</para>
 
         <programlisting>App.contactsController = Ember.ArrayController.create({
 
@@ -2753,9 +2744,9 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
         <computeroutput>content</computeroutput> attribute, which is an Ember
         convention for naming an actual data set within an
         <computeroutput>ArrayController</computeroutput>. Since it is
-        necessary to render the contacts as pairs in the two-row-view (TODO
-        depicted in screenshot XY), there is the
-        <computeroutput>pair</computeroutput> method returning the content
+        necessary to render the contacts as pairs in the two-row-view
+        (depicted in screenshot <xref linkend="fig-screenshot-1" />), there is
+        the <computeroutput>pair</computeroutput> method returning the content
         reformatted as an array of pairs. Notice that the function is a
         property of <computeroutput>content.@each</computeroutput>, which
         means that any update, insertion or deletion of the content array
@@ -2966,7 +2957,7 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
 
         <para>Handling the application links is the second responsibility of
         the router. In the example above, there are two link destinations,
-        named by <computeroutput>goTo-</computeroutput> labels. When any
+        named by <computeroutput>goTo*</computeroutput> labels. When any
         element is marked with <computeroutput>{{action
         goTo*}}</computeroutput>, a Handlebars tag, it is transformed into a
         link leading to the corresponding router state. And the router handles
@@ -3117,12 +3108,10 @@ connection.attach(jid, sid, rid, onConnect);</programlisting></para>
       later resolved object, which can be further processed even before the
       event occurs. <citation>domenic-promises</citation></para>
 
-      <para>Talker does expect the events<indexterm>
-          <primary>events</primary>
-        </indexterm> to come either from the user (traversing the application,
-      sending a message, ...) or from the network (a response from a BOSH
-      server, an incoming message, ...). Basically, almost everything in
-      Talker is intended to be either
+      <para>Talker does expect the events to come either from the user
+      (traversing the application, sending a message, ...) or from the network
+      (a response from a BOSH server, an incoming message, ...). Basically,
+      almost everything in Talker is intended to be either
       <emphasis>declarative</emphasis><indexterm>
           <primary>declarative programming</primary>
         </indexterm> (Ember object patterns) or
@@ -3284,8 +3273,8 @@ App.log.logger.debug(this);</programlisting>
         <computeroutput>debug</computeroutput>), the application will work
         without the need to change the logging itself.</para>
 
-        <para>The second thing is logging complex objects such as
-        <computeroutput>this</computeroutput>, pointing to the
+        <para>The second note is about logging various complex objects such as
+        <computeroutput>this</computeroutput>, pointing to
         <computeroutput>Strophe.connection</computeroutput> in the example
         call. Log4js does not provide any layout which would not transform the
         value to string -- [object Object] in our case. This is not very
@@ -3329,8 +3318,8 @@ Strophe.Connection {
 
         <para>As mentioned in the previous paragraph, the contact list base
         comes from the server-side database. Celebrio asks the user for adding
-        her contacts in the People application, another part of the system.
-        All contacts are stored in a relational database and they available
+        her contacts in the People application, other part of the system. All
+        contacts are stored in a relational database and they available
         throughout the system, in all applications. One of the properties of a
         contact entity is its JID. For the needs of Talker, the contacts are
         filtered on the server so that only those which have a JID filled are
@@ -4078,7 +4067,7 @@ expect = chai.expect;</programlisting>
 
       <para>There is still a long way to go until the application is perfect.
       It can be (and certainly will be) updated in many aspects since all used
-      frameworks still evolve.</para>
+      frameworks still evolve, as well as Celebrio does.</para>
 
       <para>Version 1.0.0 of Ember.js is about to be released any day now. The
       new version will certainly contain many improvements, both in
@@ -4109,10 +4098,20 @@ expect = chai.expect;</programlisting>
       likely to be. However, the application core could be generalized and
       provided to the community. In that case, adding the XMPP chat and video
       calling to any web application could become just a matter of including
-      <quote>Talker component</quote>.</para>
+      <quote>Talker component</quote>. To do so, several steps would have to
+      occur. Firstly, the user interface would have to be separated from the
+      application logic. Probably only an API would be left for the user to
+      implement his own UI and bind the actions from the application to the
+      certain elements on a page. In addition, it would be necessary to make
+      the contact list independent of Celebrio, probably by using only the
+      XMPP roster.</para>
 
-      <para>TODO the possibility of creating independent software component --
-      probably opensourced</para>
+      <para>To sum it up, Talker is a working application, ready to be further
+      enhanced and improved in the future. I hope it will. I also hope it will
+      serve its users to meet their needs and enjoy the real-time
+      communication in a web browser.</para>
+
+      <para></para>
     </sect1>
   </chapter>
 
@@ -4510,7 +4509,7 @@ expect = chai.expect;</programlisting>
       <pubdate>10/23/2012 [retrieved 2/19/2013]</pubdate>
 
       <releaseinfo>from <ulink
-      url="http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/">http://techcrunch.com/2012/10/23/facebook-announces-monthly-active-users-were-at-1-01-billion-as-of-september-30th/</ulink></releaseinfo>
+      url="http://techcrunch.com/2012/10/23/facebook-announces">http://techcrunch.com/2012/10/23/facebook-announces</ulink></releaseinfo>
     </biblioentry>
 
     <biblioentry>
@@ -5249,7 +5248,7 @@ expect = chai.expect;</programlisting>
       <pubdate>3/30/2010 [retrieved 4/5/2013]</pubdate>
 
       <releaseinfo>from <ulink
-      url="http://techcrunch.com/2010/03/30/flash-player-to-come-bundled-with-google-chrome-new-browser-plugin-api-coming/">http://techcrunch.com/2010/03/30/flash-player-to-come-bundled-with-google-chrome-new-browser-plugin-api-coming/</ulink></releaseinfo>
+      url="http://techcrunch.com/2010/03/30/flash-player">http://techcrunch.com/2010/03/30/flash-player</ulink></releaseinfo>
     </biblioentry>
 
     <biblioentry>
@@ -5928,7 +5927,7 @@ expect = chai.expect;</programlisting>
       </publisher>
 
       <releaseinfo>from <ulink
-      url="http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/">http://arstechnica.com/information-technology/2013/05/hands-on-with-hangouts-googles-new-text-and-video-chat-architecture/</ulink></releaseinfo>
+      url="http://arstechnica.com/information-technology/2013/05/hands-on-with-h/">http://arstechnica.com/information-technology/2013/05/hands-on-with-h/</ulink></releaseinfo>
     </biblioentry>
 
     <biblioentry>
@@ -5974,9 +5973,36 @@ expect = chai.expect;</programlisting>
 
   <index></index>
 
+  <lot></lot>
+
   <appendix id="appendix-screenshots">
     <title>Screenshots of the application</title>
 
-    <para>TODO Some screenshots from Celebrio Talker</para>
+    <para>There are two screenshots of the Talker application in this
+    appendix. The first one depicts the application main view, displaying the
+    list of contacts. As you can see, online contacts are decorated by a green
+    border. The second picture shows the conversation between the application
+    user (administrator account, called Celebrity, has been used) and one of
+    the online users.</para>
+
+    <figure id="fig-screenshot-1">
+      <title>Talker main view, displaying the list of contacts</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="img/screenshot-contact-list.png" width="420pt" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <figure>
+      <title>Screenshot of the conversation view</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="img/screenshot-conversation.png" width="420pt" />
+        </imageobject>
+      </mediaobject>
+    </figure>
   </appendix>
 </book>
